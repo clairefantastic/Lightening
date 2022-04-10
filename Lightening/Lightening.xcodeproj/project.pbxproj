@@ -14,6 +14,7 @@
 		7EA023562800452A00C73205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023542800452A00C73205 /* Main.storyboard */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
 		7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023592800452C00C73205 /* LaunchScreen.storyboard */; };
+		7EB9DAC22802DC2A009B89D0 /* GoogleService-Info (4).plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7EA023572800452C00C73205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA0235A2800452C00C73205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA0235C2800452C00C73205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info (4).plist"; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,7 +50,6 @@
 				2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */,
 				CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -80,6 +81,7 @@
 				7EA023572800452C00C73205 /* Assets.xcassets */,
 				7EA023592800452C00C73205 /* LaunchScreen.storyboard */,
 				7EA0235C2800452C00C73205 /* Info.plist */,
+				7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */,
 			);
 			path = Lightening;
 			sourceTree = "<group>";
@@ -103,6 +105,7 @@
 				7EA023472800452A00C73205 /* Sources */,
 				7EA023482800452A00C73205 /* Frameworks */,
 				7EA023492800452A00C73205 /* Resources */,
+				F90AEDDD2B46DFEB60613A96 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,6 +156,7 @@
 			files = (
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
+				7EB9DAC22802DC2A009B89D0 /* GoogleService-Info (4).plist in Resources */,
 				7EA023562800452A00C73205 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +184,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F90AEDDD2B46DFEB60613A96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lightening/Pods-Lightening-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lightening/Pods-Lightening-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lightening/Pods-Lightening-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
