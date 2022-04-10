@@ -440,6 +440,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - GoogleWebRTC (1.1.31999)
   - "gRPC-C++ (1.28.2)":
     - "gRPC-C++/Implementation (= 1.28.2)"
     - "gRPC-C++/Interface (= 1.28.2)"
@@ -476,6 +477,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - GoogleWebRTC (~> 1.1)
   - SwiftLint
 
 SPEC REPOS:
@@ -491,6 +493,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - GoogleWebRTC
     - "gRPC-C++"
     - gRPC-Core
     - leveldb-library
@@ -510,6 +513,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
@@ -517,6 +521,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 562a1ff63d810ada1379e52b3a98c58eaf01ed7e
+PODFILE CHECKSUM: 4fd379991e7d890448d9794a6e02eae885243c59
 
 COCOAPODS: 1.11.2
