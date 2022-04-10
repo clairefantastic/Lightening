@@ -10,5 +10,6 @@ target 'Lightening' do
   pod 'SwiftLint'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'GoogleWebRTC', '~> 1.1'
 
 end

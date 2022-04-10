@@ -14,7 +14,7 @@
 		7EA023562800452A00C73205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023542800452A00C73205 /* Main.storyboard */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
 		7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023592800452C00C73205 /* LaunchScreen.storyboard */; };
-		7EB9DAC22802DC2A009B89D0 /* GoogleService-Info (4).plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */; };
+		7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		7EA023572800452C00C73205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA0235A2800452C00C73205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA0235C2800452C00C73205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info (4).plist"; sourceTree = "<group>"; };
+		7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +74,9 @@
 		7EA0234D2800452A00C73205 /* Lightening */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9DAC52802E348009B89D0 /* View */,
+				7EB9DAC42802E33C009B89D0 /* Controller */,
+				7EB9DAC32802E323009B89D0 /* Model */,
 				7EA0234E2800452A00C73205 /* AppDelegate.swift */,
 				7EA023502800452A00C73205 /* SceneDelegate.swift */,
 				7EA023522800452A00C73205 /* ViewController.swift */,
@@ -81,9 +84,30 @@
 				7EA023572800452C00C73205 /* Assets.xcassets */,
 				7EA023592800452C00C73205 /* LaunchScreen.storyboard */,
 				7EA0235C2800452C00C73205 /* Info.plist */,
-				7EB9DAC12802DC2A009B89D0 /* GoogleService-Info (4).plist */,
+				7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */,
 			);
 			path = Lightening;
+			sourceTree = "<group>";
+		};
+		7EB9DAC32802E323009B89D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7EB9DAC42802E33C009B89D0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7EB9DAC52802E348009B89D0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B6494955E2310280A84E8C75 /* Frameworks */ = {
@@ -155,8 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
+				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
-				7EB9DAC22802DC2A009B89D0 /* GoogleService-Info (4).plist in Resources */,
 				7EA023562800452A00C73205 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,8 +296,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -288,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -332,6 +358,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -342,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -361,6 +388,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9H6DPAU9ML;
+				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lightening/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -373,6 +401,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ClaireChiou.Lightening;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -390,6 +419,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9H6DPAU9ML;
+				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lightening/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
