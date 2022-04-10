@@ -8,5 +8,7 @@ target 'Lightening' do
   # Pods for Lightening
 
   pod 'SwiftLint'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 
 end
