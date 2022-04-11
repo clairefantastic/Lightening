@@ -14,6 +14,17 @@ class LobbyViewController: UIViewController {
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
     
+    
+    @IBOutlet weak var localSDP: UILabel!
+    
+    @IBOutlet weak var localCandidates: UILabel!
+    
+    @IBOutlet weak var remoteSDP: UILabel!
+    
+    @IBOutlet weak var remoteCandidates: UILabel!
+    
+    @IBOutlet weak var rtcStatus: UILabel!
+    
     private var currentPerson = ""
     private var oppositePerson = ""
     
@@ -30,8 +41,169 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("go")
-
+        self.currentPerson = "eric"
+//        self.oppositePerson = "wayne"
+        self.signalingConnected = false
+        self.hasLocalSdp = false
+        self.hasRemoteSdp = false
+        self.localCandidateCount = 0
+        self.remoteCandidateCount = 0
+        self.signalClient.listenSdp(to: self.currentPerson)
+        self.signalClient.listenCandidate(to: self.currentPerson)
+        self.webRTCClient.delegate = self
+        self.signalClient.delegate = self
     }
+    
+    private var signalingConnected: Bool = false {
+      didSet {
+        DispatchQueue.main.async {
+          if self.signalingConnected {
+            self.rtcStatus?.text = "Connected"
+            self.rtcStatus?.textColor = UIColor.green
+          }
+          else {
+            self.rtcStatus?.text = "Not connected"
+            self.rtcStatus?.textColor = UIColor.red
+          }
+        }
+      }
+    }
+    
+    private var hasLocalSdp: Bool = false {
+      didSet {
+        DispatchQueue.main.async {
+          self.localSDP?.text = self.hasLocalSdp ? "✅" : "❌"
+        }
+      }
+    }
+    
+    private var localCandidateCount: Int = 0 {
+      didSet {
+        DispatchQueue.main.async {
+          self.localCandidates?.text = "\(self.localCandidateCount)"
+        }
+      }
+    }
+    
+    private var hasRemoteSdp: Bool = false {
+      didSet {
+        DispatchQueue.main.async {
+          self.remoteSDP?.text = self.hasRemoteSdp ? "✅" : "❌"
+        }
+      }
+    }
+    
+    private var remoteCandidateCount: Int = 0 {
+      didSet {
+        DispatchQueue.main.async {
+          self.remoteCandidates?.text = "\(self.remoteCandidateCount)"
+        }
+      }
+    }
+    
+    
+    @IBAction func endCall(_ sender: Any) {
+        self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
+        self.webRTCClient.closePeerConnection()
+        
+        self.webRTCClient.createPeerConnection()
+        self.hasLocalSdp = false
+        self.localCandidateCount = 0
+        self.hasRemoteSdp = false
+        self.remoteCandidateCount = 0
+    }
+    
+    
+    @IBAction func offerDidTap(_ sender: Any) {
+        self.webRTCClient.offer { (sdp) in
+          self.hasLocalSdp = true
+            self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+        }
+    }
+    
+    @IBAction func answerDidTap(_ sender: Any) {
+        self.webRTCClient.answer { (localSdp) in
+          self.hasLocalSdp = true
+            
+            self.signalClient.send(sdp: localSdp, from: self.currentPerson, to: self.oppositePerson)
+        }
+    }
+
+    
 }
+
+extension LobbyViewController: SignalClientDelegate {
+    func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
+        print("Received remote sdp")
+        self.webRTCClient.set(remoteSdp: sdp) { (error) in
+          self.hasRemoteSdp = true
+        }
+
+        print("Received sender")
+        self.oppositePerson = sender ?? ""
+        
+    }
+    
+  func signalClientDidConnect(_ signalClient: SignalingClient) {
+    self.signalingConnected = true
+  }
+  
+  func signalClientDidDisconnect(_ signalClient: SignalingClient) {
+    self.signalingConnected = false
+  }
+  
+//  func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription) {
+//    print("Received remote sdp")
+//    self.webRTCClient.set(remoteSdp: sdp) { (error) in
+//      self.hasRemoteSdp = true
+//    }
+//  }
+  
+  func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
+    print("Received remote candidate")
+      self.remoteCandidateCount += 1
+      self.webRTCClient.set(remoteCandidate: candidate)
+  }
+}
+
+extension LobbyViewController: WebRTCClientDelegate {
+  
+  func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
+    print("discovered local candidate")
+    self.localCandidateCount += 1
+    self.signalClient.send(candidate: candidate, to: self.oppositePerson)
+  }
+  
+  func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
+    let textColor: UIColor
+    switch state {
+    case .connected, .completed:
+      textColor = .green
+    case .disconnected:
+      textColor = .orange
+    case .failed, .closed:
+      textColor = .red
+    case .new, .checking, .count:
+      textColor = .black
+    @unknown default:
+      textColor = .black
+    }
+    DispatchQueue.main.async {
+      self.rtcStatus?.text = state.description.capitalized
+      self.rtcStatus?.textColor = textColor
+    }
+  }
+  
+  func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
+    DispatchQueue.main.async {
+      let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
+      let alert = UIAlertController(title: "Message from WebRTC", message: message, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+      self.present(alert, animated: true, completion: nil)
+    }
+  }
+}
+
+
 
 
