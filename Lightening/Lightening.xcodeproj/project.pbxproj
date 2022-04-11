@@ -17,6 +17,7 @@
 		7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */; };
 		7EB9DADF2803D085009B89D0 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DADE2803D085009B89D0 /* Config.swift */; };
 		7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE12803D172009B89D0 /* RTCStates.swift */; };
+		7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7EB9DADE2803D085009B89D0 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		7EB9DAE12803D172009B89D0 /* RTCStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
+		7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				7EB9DAE12803D172009B89D0 /* RTCStates.swift */,
+				7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
+				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
