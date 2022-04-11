@@ -41,8 +41,8 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("go")
-        self.currentPerson = "eric"
-//        self.oppositePerson = "wayne"
+        self.currentPerson = "wayne"
+        self.oppositePerson = "eric"
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
@@ -127,6 +127,11 @@ class LobbyViewController: UIViewController {
             
             self.signalClient.send(sdp: localSdp, from: self.currentPerson, to: self.oppositePerson)
         }
+    }
+    
+    @IBAction private func videoDidTap(_ sender: UIButton) {
+        let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        self.present(vc, animated: true, completion: nil)
     }
 
     
