@@ -22,6 +22,8 @@
 		7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAEA2803D3EC009B89D0 /* SignalingClient.swift */; };
 		7EB9DAF02803D9AD009B89D0 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAEE2803D9AD009B89D0 /* LobbyViewController.swift */; };
 		7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAEF2803D9AD009B89D0 /* LobbyViewController.xib */; };
+		7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */; };
+		7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		7EB9DAEA2803D3EC009B89D0 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		7EB9DAEE2803D9AD009B89D0 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		7EB9DAEF2803D9AD009B89D0 /* LobbyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LobbyViewController.xib; sourceTree = "<group>"; };
+		7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCallViewController.xib; sourceTree = "<group>"; };
+		7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +119,8 @@
 		7EB9DADC2803D041009B89D0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */,
+				7EB9DAEE2803D9AD009B89D0 /* LobbyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -122,8 +128,8 @@
 		7EB9DADD2803D047009B89D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7EB9DAEE2803D9AD009B89D0 /* LobbyViewController.swift */,
 				7EB9DAEF2803D9AD009B89D0 /* LobbyViewController.xib */,
+				7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +224,7 @@
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
+				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +284,7 @@
 				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
 				7EB9DAE92803D321009B89D0 /* WebRTCClient.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
+				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
 				7EB9DAF02803D9AD009B89D0 /* LobbyViewController.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
