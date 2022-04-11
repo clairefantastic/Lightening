@@ -86,6 +86,9 @@
                     <rect key="frame" x="158.5" y="438" width="97" height="31"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="show video"/>
+                    <connections>
+                        <action selector="videoDidTap:" destination="-1" eventType="touchUpInside" id="6CJ-r1-jPL"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpB-2E-AQx">
                     <rect key="frame" x="183.5" y="789.5" width="47" height="20.5"/>
