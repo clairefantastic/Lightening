@@ -19,6 +19,7 @@
 		7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE12803D172009B89D0 /* RTCStates.swift */; };
 		7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */; };
 		7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE52803D27F009B89D0 /* IceCandidate.swift */; };
+		7EB9DAE92803D321009B89D0 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE82803D321009B89D0 /* WebRTCClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		7EB9DAE12803D172009B89D0 /* RTCStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
 		7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
 		7EB9DAE52803D27F009B89D0 /* IceCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
+		7EB9DAE82803D321009B89D0 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		7EA0234D2800452A00C73205 /* Lightening */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9DAE72803D30C009B89D0 /* Services */,
 				7EB9DAE02803D164009B89D0 /* Extensions */,
 				7EB9DADD2803D047009B89D0 /* View */,
 				7EB9DADC2803D041009B89D0 /* Controller */,
@@ -128,6 +131,14 @@
 				7EB9DAE52803D27F009B89D0 /* IceCandidate.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7EB9DAE72803D30C009B89D0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7EB9DAE82803D321009B89D0 /* WebRTCClient.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		B6494955E2310280A84E8C75 /* Frameworks */ = {
@@ -257,6 +268,7 @@
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
 				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
+				7EB9DAE92803D321009B89D0 /* WebRTCClient.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
