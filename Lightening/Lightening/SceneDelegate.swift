@@ -9,8 +9,8 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
-
+    internal var window: UIWindow?
+    private let config = Config.default
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,12 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 
-            let rootVC = LobbyViewController(nibName: String(describing: LobbyViewController.self), bundle: nil)
-            let navController = UINavigationController(rootViewController: rootVC)
+//            let rootVC = LobbyViewController(nibName: String(describing: LobbyViewController.self), bundle: nil)
+//            let navController = UINavigationController(rootViewController: rootVC)
                 
             window = UIWindow(frame: windowScene.coordinateSpace.bounds)
             window?.windowScene = windowScene
-            window?.rootViewController = navController //navController
+//            window?.rootViewController = navController //navController
+            window?.rootViewController = self.buildMainViewController()
             window?.makeKeyAndVisible()
     }
 
@@ -54,6 +55,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+    
+    private func buildMainViewController() -> UIViewController {
+      let signalClient = SignalingClient()
+      let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
+      let mainViewController = LobbyViewController(
+        signalClient: signalClient,
+        webRTCClient: webRTCClient)
+      let navViewController = UINavigationController(rootViewController: mainViewController)
+      return navViewController
     }
 
 
