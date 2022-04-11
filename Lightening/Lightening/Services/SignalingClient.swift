@@ -24,6 +24,8 @@ final class SignalingClient {
   init() {
 
   }
+    
+  var getVolunteerHandler : ((String) -> Void)?
 
   func deleteSdpAndCandidateAndSender(for person: String) {
       Firestore.firestore().collection("visuallyImpaired").document(person).collection(person).document("sdp").delete() { err in
@@ -93,6 +95,23 @@ final class SignalingClient {
       debugPrint("Warning: Could not encode candidate: \(error)")
     }
   }
+    
+    func listenVolunteers() {
+        
+        Firestore.firestore().collection("volunteers").getDocuments {
+            (snapshot, err) in
+            if let err = err {
+                   print("Error getting documents: \(err)")
+               } else {
+                   let randomInt = Int.random(in: 0..<snapshot!.documents.count)
+                   let volunteerName = snapshot!.documents[randomInt].documentID
+                   self.getVolunteerHandler?(volunteerName)
+                   
+
+               }
+        }
+
+    }
 
 
   func listenSdp(to person: String) {

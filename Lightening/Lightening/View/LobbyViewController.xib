@@ -13,9 +13,11 @@
             <connections>
                 <outlet property="localCandidates" destination="gPJ-YI-Dfw" id="gy8-22-9O2"/>
                 <outlet property="localSDP" destination="RM5-cb-vzh" id="VtQ-ZB-tCr"/>
+                <outlet property="muteButton" destination="9gj-GW-IMG" id="IM1-hM-YTz"/>
                 <outlet property="remoteCandidates" destination="9F5-hB-QOD" id="nh2-fq-VX4"/>
                 <outlet property="remoteSDP" destination="bQ1-vz-rKh" id="ga2-bS-pX3"/>
                 <outlet property="rtcStatus" destination="OpB-2E-AQx" id="c6z-OJ-KKb"/>
+                <outlet property="speakerButton" destination="xq9-OQ-17i" id="FOB-3g-sD1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -96,6 +98,27 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="N2P-bP-DG4">
+                    <rect key="frame" x="94" y="499" width="226" height="31"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xq9-OQ-17i">
+                            <rect key="frame" x="0.0" y="0.0" width="77" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Speaker"/>
+                            <connections>
+                                <action selector="speakerDidTap:" destination="-1" eventType="touchUpInside" id="TOd-ka-Vp8"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-GW-IMG">
+                            <rect key="frame" x="149" y="0.0" width="77" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="mute"/>
+                            <connections>
+                                <action selector="muteDidTap:" destination="-1" eventType="touchUpInside" id="dt7-dT-JcM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -104,10 +127,12 @@
                 <constraint firstItem="unu-QH-fAi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="D8T-2O-Aqo"/>
                 <constraint firstItem="MN4-pj-O8W" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EUX-tv-poA"/>
                 <constraint firstItem="ysa-3l-eku" firstAttribute="top" secondItem="unu-QH-fAi" secondAttribute="bottom" constant="60" id="He7-j9-HhX"/>
+                <constraint firstItem="N2P-bP-DG4" firstAttribute="top" secondItem="cyq-hR-N6f" secondAttribute="bottom" constant="30" id="Hn3-U8-4e2"/>
                 <constraint firstItem="OpB-2E-AQx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MpK-V2-Gz0"/>
                 <constraint firstItem="cyq-hR-N6f" firstAttribute="top" secondItem="MN4-pj-O8W" secondAttribute="bottom" constant="31" id="NWC-d4-moP"/>
                 <constraint firstItem="cyq-hR-N6f" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QeN-YP-uy1"/>
                 <constraint firstItem="unu-QH-fAi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="51" id="Ts1-Wj-Li7"/>
+                <constraint firstItem="N2P-bP-DG4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gLo-CS-trE"/>
                 <constraint firstItem="MN4-pj-O8W" firstAttribute="top" secondItem="ysa-3l-eku" secondAttribute="bottom" constant="36" id="lRH-Ut-86G"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OpB-2E-AQx" secondAttribute="bottom" constant="52" id="zdX-uc-kHU"/>
             </constraints>

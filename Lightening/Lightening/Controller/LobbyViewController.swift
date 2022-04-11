@@ -14,6 +14,9 @@ class LobbyViewController: UIViewController {
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
     
+    @IBOutlet weak var speakerButton: UIButton!
+    
+    @IBOutlet weak var muteButton: UIButton!
     
     @IBOutlet weak var localSDP: UILabel!
     
@@ -40,18 +43,24 @@ class LobbyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("go")
+
         self.currentPerson = "wayne"
-        self.oppositePerson = "eric"
+//        self.oppositePerson = "eric"
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
+        self.signalClient.listenVolunteers()
         self.signalClient.listenSdp(to: self.currentPerson)
         self.signalClient.listenCandidate(to: self.currentPerson)
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
+        self.webRTCClient.unmuteAudio()
+        self.signalClient.getVolunteerHandler = { name in
+            self.oppositePerson = name
+        }
+
     }
     
     private var signalingConnected: Bool = false {
@@ -101,6 +110,20 @@ class LobbyViewController: UIViewController {
       }
     }
     
+    private var speakerOn: Bool = false {
+      didSet {
+        let title = "Speaker: \(self.speakerOn ? "On" : "Off" )"
+        self.speakerButton?.setTitle(title, for: .normal)
+      }
+    }
+    
+    private var mute: Bool = false {
+      didSet {
+        let title = "Mute: \(self.mute ? "on" : "off")"
+        self.muteButton?.setTitle(title, for: .normal)
+      }
+    }
+    
     
     @IBAction func endCall(_ sender: Any) {
         self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
@@ -113,12 +136,38 @@ class LobbyViewController: UIViewController {
         self.remoteCandidateCount = 0
     }
     
+    @IBAction private func speakerDidTap(_ sender: UIButton) {
+      if self.speakerOn {
+        self.webRTCClient.speakerOff()
+      }
+      else {
+        self.webRTCClient.speakerOn()
+      }
+      self.speakerOn = !self.speakerOn
+    }
+    
+    @IBAction private func muteDidTap(_ sender: UIButton) {
+      self.mute = !self.mute
+      if self.mute {
+        self.webRTCClient.muteAudio()
+      }
+      else {
+        self.webRTCClient.unmuteAudio()
+      }
+    }
+    
     
     @IBAction func offerDidTap(_ sender: Any) {
-        self.webRTCClient.offer { (sdp) in
-          self.hasLocalSdp = true
-            self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
-        }
+        
+//        self.signalClient.listenVolunteers()
+        
+
+            self.webRTCClient.offer { (sdp) in
+              self.hasLocalSdp = true
+                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+            }
+        
+      
     }
     
     @IBAction func answerDidTap(_ sender: Any) {
