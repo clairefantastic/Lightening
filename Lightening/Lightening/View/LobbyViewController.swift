@@ -17,14 +17,12 @@ class LobbyViewController: UIViewController {
     private var currentPerson = ""
     private var oppositePerson = ""
     
-
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient) {
       self.signalClient = signalClient
       self.webRTCClient = webRTCClient
       super.init(nibName: String(describing: LobbyViewController.self), bundle: Bundle.main)
     }
     
-    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
     }

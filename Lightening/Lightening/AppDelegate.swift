@@ -10,24 +10,15 @@ import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    internal var window: UIWindow?
-    private let config = Config.default
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let rootVC = LobbyViewController(nibName: String(describing: LobbyViewController.self), bundle: nil)
-//
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = rootVC
-//        window?.makeKeyAndVisible()
-//
-//        let window = UIWindow(frame: UIScreen.main.bounds)
-//        window.rootViewController = self.buildMainViewController()
-//        window.makeKeyAndVisible()
-//        self.window = window
         
         FirebaseApp.configure()
+        
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        Firestore.firestore().settings = settings
 
         return true
     }
@@ -46,16 +37,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-//    private func buildMainViewController() -> UIViewController {
-//      let signalClient = SignalingClient()
-//      let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
-//      let mainViewController = LobbyViewController(
-//        signalClient: signalClient,
-//        webRTCClient: webRTCClient)
-//      let navViewController = UINavigationController(rootViewController: mainViewController)
-//      return navViewController
-//    }
-
-
 }
 
