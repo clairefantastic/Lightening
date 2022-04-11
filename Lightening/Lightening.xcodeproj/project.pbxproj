@@ -16,6 +16,7 @@
 		7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023592800452C00C73205 /* LaunchScreen.storyboard */; };
 		7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */; };
 		7EB9DADF2803D085009B89D0 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DADE2803D085009B89D0 /* Config.swift */; };
+		7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAE12803D172009B89D0 /* RTCStates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7EA0235C2800452C00C73205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7EB9DADE2803D085009B89D0 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		7EB9DAE12803D172009B89D0 /* RTCStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 		7EA0234D2800452A00C73205 /* Lightening */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9DAE02803D164009B89D0 /* Extensions */,
 				7EB9DADD2803D047009B89D0 /* View */,
 				7EB9DADC2803D041009B89D0 /* Controller */,
 				7EB9DAC32802E323009B89D0 /* Model */,
@@ -111,6 +114,14 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7EB9DAE02803D164009B89D0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7EB9DAE12803D172009B89D0 /* RTCStates.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B6494955E2310280A84E8C75 /* Frameworks */ = {
@@ -239,6 +250,7 @@
 			files = (
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
+				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
 			);
