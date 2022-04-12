@@ -44,22 +44,19 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentPerson = "wayne"
+        self.currentPerson = "eric"
 //        self.oppositePerson = "eric"
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-        self.signalClient.listenVolunteers()
         self.signalClient.listenSdp(to: self.currentPerson)
         self.signalClient.listenCandidate(to: self.currentPerson)
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         self.webRTCClient.unmuteAudio()
-        self.signalClient.getVolunteerHandler = { name in
-            self.oppositePerson = name
-        }
+   
 
     }
     
@@ -160,12 +157,15 @@ class LobbyViewController: UIViewController {
     @IBAction func offerDidTap(_ sender: Any) {
         
 //        self.signalClient.listenVolunteers()
-        
+//        self.signalClient.getVolunteerHandler = { name in
+//            self.oppositePerson = name
+//            self.webRTCClient.offer { (sdp) in
+//              self.hasLocalSdp = true
+//                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+//            }
+//
+//        }
 
-            self.webRTCClient.offer { (sdp) in
-              self.hasLocalSdp = true
-                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
-            }
         
       
     }
