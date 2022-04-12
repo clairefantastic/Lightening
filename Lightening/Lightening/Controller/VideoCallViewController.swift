@@ -12,7 +12,12 @@ class VideoCallViewController: UIViewController {
     
     @IBOutlet private weak var localVideoView: UIView?
     
+    private let signalClient = SignalingClient()
+    
+    private let signalClientforVolunteer = SignalingClientforVolunteer()
     private let webRTCClient: WebRTCClient
+    
+    let currentPerson = ""
     
     init(webRTCClient: WebRTCClient) {
         self.webRTCClient = webRTCClient
@@ -67,5 +72,16 @@ class VideoCallViewController: UIViewController {
     @IBAction private func backDidTap(_ sender: Any) {
         self.dismiss(animated: true)
     }
-
+    
+    
+    @IBAction func endCall(_ sender: Any) {
+        self.signalClient.deleteSdpAndCandidateAndSender(for: "wayne")
+        self.signalClientforVolunteer.deleteSdpAndCandidateAndSender(for: "eric")
+        self.webRTCClient.closePeerConnection()
+        
+        self.webRTCClient.createPeerConnection()
+        self.dismiss(animated: true)
+        
+    }
+    
 }
