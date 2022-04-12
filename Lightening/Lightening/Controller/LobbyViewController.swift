@@ -44,7 +44,7 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentPerson = "eric"
+        self.currentPerson = "wayne"
 //        self.oppositePerson = "eric"
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -154,17 +154,25 @@ class LobbyViewController: UIViewController {
     }
     
     
+    @IBAction func callDidTap(_ sender: UIButton) {
+        self.signalClient.listenVolunteers()
+        self.signalClient.getVolunteerHandler = { name in
+            self.oppositePerson = name
+            self.webRTCClient.offer { (sdp) in
+                self.hasLocalSdp = true
+                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+            }
+        
+        }
+        var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+       
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+
+    }
+    
     @IBAction func offerDidTap(_ sender: Any) {
         
-//        self.signalClient.listenVolunteers()
-//        self.signalClient.getVolunteerHandler = { name in
-//            self.oppositePerson = name
-//            self.webRTCClient.offer { (sdp) in
-//              self.hasLocalSdp = true
-//                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
-//            }
-//
-//        }
 
         
       
@@ -206,12 +214,6 @@ extension LobbyViewController: SignalClientDelegate {
     self.signalingConnected = false
   }
   
-//  func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription) {
-//    print("Received remote sdp")
-//    self.webRTCClient.set(remoteSdp: sdp) { (error) in
-//      self.hasRemoteSdp = true
-//    }
-//  }
   
   func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
     print("Received remote candidate")
