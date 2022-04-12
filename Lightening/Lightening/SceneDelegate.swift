@@ -59,9 +59,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func buildMainViewController() -> UIViewController {
       let signalClient = SignalingClient()
+      let signalClientforVolunteer = SignalingClientforVolunteer()
       let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
-      let mainViewController = LobbyViewController(
-        signalClient: signalClient,
+      let mainViewController = VolLobbyViewController(
+        signalClientforVolunteer: signalClientforVolunteer,
         webRTCClient: webRTCClient)
       let navViewController = UINavigationController(rootViewController: mainViewController)
       return navViewController
