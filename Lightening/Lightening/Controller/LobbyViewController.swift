@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import WebRTC
+import Firebase
+import FirebaseFirestore
 
 class LobbyViewController: UIViewController {
     
@@ -44,20 +46,21 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentPerson = "wayne"
+        self.currentPerson = "qvDyYlDltZx7XYKRWrxn"
 //        self.oppositePerson = "eric"
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-        self.signalClient.listenSdp(to: self.currentPerson)
-        self.signalClient.listenCandidate(to: self.currentPerson)
+//        self.signalClient.listenSdp(to: self.currentPerson)
+//        self.signalClient.listenCandidate(to: self.currentPerson)
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         
         self.webRTCClient.unmuteAudio()
         self.webRTCClient.speakerOn()
+
    
 
     }
