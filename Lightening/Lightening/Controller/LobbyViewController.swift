@@ -30,7 +30,7 @@ class LobbyViewController: UIViewController {
     
     @IBOutlet weak var rtcStatus: UILabel!
     
-    private var currentPerson = ""
+    var currentPerson = ""
     private var oppositePerson = ""
     
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient) {
@@ -53,8 +53,8 @@ class LobbyViewController: UIViewController {
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-//        self.signalClient.listenSdp(to: self.currentPerson)
-//        self.signalClient.listenCandidate(to: self.currentPerson)
+        self.signalClient.listenSdp(to: self.currentPerson)
+        self.signalClient.listenCandidate(to: self.currentPerson)
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         
@@ -83,7 +83,7 @@ class LobbyViewController: UIViewController {
             self.rtcStatus?.textColor = UIColor.green
               
             var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-              
+              vc.currentPerson = self.currentPerson
               
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
