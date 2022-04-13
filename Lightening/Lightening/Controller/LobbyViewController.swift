@@ -64,7 +64,12 @@ class LobbyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        vc.connectedHandler? = {(connectedStatus) in
+            
+            self.signalingConnected = connectedStatus
         
+        }
     }
     
     private var signalingConnected: Bool = false {
@@ -75,9 +80,11 @@ class LobbyViewController: UIViewController {
             self.rtcStatus?.textColor = UIColor.green
               
             var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-             
+              
+              
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
+              
           }
           else {
             self.rtcStatus?.text = "Not connected"
@@ -241,22 +248,27 @@ extension LobbyViewController: WebRTCClientDelegate {
   
   func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
     let textColor: UIColor
+    
     switch state {
     case .connected, .completed:
       textColor = .green
+        self.signalingConnected = true
     case .disconnected:
       textColor = .orange
+        self.signalingConnected = false
     case .failed, .closed:
       textColor = .red
+        self.signalingConnected = false
     case .new, .checking, .count:
       textColor = .black
+        self.signalingConnected = false
     @unknown default:
       textColor = .black
+        self.signalingConnected = false
     }
     DispatchQueue.main.async {
       self.rtcStatus?.text = state.description.capitalized
       self.rtcStatus?.textColor = textColor
-        self.signalingConnected = true
     }
   }
   
