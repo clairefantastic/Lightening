@@ -55,7 +55,9 @@ class LobbyViewController: UIViewController {
         self.signalClient.listenCandidate(to: self.currentPerson)
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
+        
         self.webRTCClient.unmuteAudio()
+        self.webRTCClient.speakerOn()
    
 
     }
@@ -66,6 +68,11 @@ class LobbyViewController: UIViewController {
           if self.signalingConnected {
             self.rtcStatus?.text = "Connected"
             self.rtcStatus?.textColor = UIColor.green
+              
+            var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+             
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
           }
           else {
             self.rtcStatus?.text = "Not connected"
@@ -164,10 +171,7 @@ class LobbyViewController: UIViewController {
             }
         
         }
-        var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-       
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        
 
     }
     
@@ -247,6 +251,7 @@ extension LobbyViewController: WebRTCClientDelegate {
     DispatchQueue.main.async {
       self.rtcStatus?.text = state.description.capitalized
       self.rtcStatus?.textColor = textColor
+        self.signalingConnected = true
     }
   }
   
