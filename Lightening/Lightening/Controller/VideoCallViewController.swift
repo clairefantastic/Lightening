@@ -19,6 +19,8 @@ class VideoCallViewController: UIViewController {
     
     let currentPerson = ""
     
+    var connectedHandler: ((Bool) -> Void)?
+    
     init(webRTCClient: WebRTCClient) {
         self.webRTCClient = webRTCClient
         super.init(nibName: String(describing: VideoCallViewController.self), bundle: Bundle.main)
@@ -75,13 +77,15 @@ class VideoCallViewController: UIViewController {
     
     
     @IBAction func endCall(_ sender: Any) {
+        self.connectedHandler?(false)
         self.signalClient.deleteSdpAndCandidateAndSender(for: "wayne")
         self.signalClientforVolunteer.deleteSdpAndCandidateAndSender(for: "eric")
         self.webRTCClient.closePeerConnection()
-        
-        self.webRTCClient.createPeerConnection()
-        self.dismiss(animated: true)
 
+        self.webRTCClient.createPeerConnection()
+
+        self.dismiss(animated: true)
+        
         
     }
     
