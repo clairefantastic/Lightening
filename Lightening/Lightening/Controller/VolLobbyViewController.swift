@@ -15,11 +15,7 @@ class VolLobbyViewController: UIViewController {
     
     @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
         didSet {
-            if availableStatusSegmentedControl.selectedSegmentIndex == 0 {
-                //FireBase Status Update
-            } else {
-                
-            }
+            
         }
     }
     
@@ -85,6 +81,16 @@ class VolLobbyViewController: UIViewController {
       }
     }
     
+    
+    @IBAction func changeVolunteerStatus(_ sender: Any) {
+        if availableStatusSegmentedControl.selectedSegmentIndex == 0 {
+            //FireBase Status Update
+            
+            self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
+        } else {
+            self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.unavailable)
+        }
+    }
     
     
     @IBAction func answerDidTap(_ sender: Any) {

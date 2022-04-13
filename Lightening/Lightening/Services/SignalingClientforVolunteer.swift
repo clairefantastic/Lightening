@@ -17,7 +17,18 @@ protocol SignalClientforVolunteerDelegate: AnyObject {
   func signalClient(_ signalClient: SignalingClientforVolunteer, didReceiveCandidate candidate: RTCIceCandidate)
 }
 
+enum VolunteerStatus: Int {
+    
+    case available
+
+    case inCall
+
+    case unavailable
+
+}
+
 final class SignalingClientforVolunteer {
+    
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
   weak var delegate: SignalClientforVolunteerDelegate?
@@ -26,7 +37,21 @@ final class SignalingClientforVolunteer {
 
   }
 
+  func updateStatus(for person: String, status: VolunteerStatus) {
+      
+      switch status {
 
+        case .available, .inCall, .unavailable:
+            Firestore.firestore().collection("volunteers").document(person).setData(["status" : status.rawValue]) { err in
+                if let err = err {
+                    print("Error updating status: \(err)")
+                } else {
+                    print("Volunteer Status Successfully Update!")
+                }
+      
+            }
+        }
+  }
 
   func deleteSdpAndCandidateAndSender(for person: String) {
       Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("sdp").delete() { err in
