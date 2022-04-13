@@ -42,7 +42,7 @@ class VolLobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentPerson = "eric"
+        self.currentPerson = "MhtofzFzWE3alWT2yPbI"
 
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -95,6 +95,8 @@ class VolLobbyViewController: UIViewController {
         }
         
         let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        
+        vc.currentPerson = self.currentPerson
         
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)

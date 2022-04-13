@@ -17,7 +17,7 @@ class VideoCallViewController: UIViewController {
     private let signalClientforVolunteer = SignalingClientforVolunteer()
     private let webRTCClient: WebRTCClient
     
-    let currentPerson = ""
+    var currentPerson = ""
     
     var connectedHandler: ((Bool) -> Void)?
     
@@ -78,8 +78,7 @@ class VideoCallViewController: UIViewController {
     
     @IBAction func endCall(_ sender: Any) {
         self.connectedHandler?(false)
-        self.signalClient.deleteSdpAndCandidateAndSender(for: "wayne")
-        self.signalClientforVolunteer.deleteSdpAndCandidateAndSender(for: "eric")
+        self.signalClient.deleteSdpAndCandidateAndSender(for: "\(currentPerson)")
         self.webRTCClient.closePeerConnection()
 
         self.webRTCClient.createPeerConnection()

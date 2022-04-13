@@ -29,7 +29,7 @@ final class SignalingClientforVolunteer {
 
 
   func deleteSdpAndCandidateAndSender(for person: String) {
-      Firestore.firestore().collection("volunteers").document(person).collection(person).document("sdp").delete() { err in
+      Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("sdp").delete() { err in
       if let err = err {
         print("Error removing firestore sdp: \(err)")
       } else {
@@ -39,7 +39,7 @@ final class SignalingClientforVolunteer {
 
 
 
-      Firestore.firestore().collection("volunteers").document(person).collection(person).document("candidate").collection("candidates").getDocuments { (querySnapshot, err)  in
+      Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("candidate").collection("candidates").getDocuments { (querySnapshot, err)  in
       if let err = err {
         print("Error removing firestore candidate: \(err)")
       } else {
@@ -52,7 +52,7 @@ final class SignalingClientforVolunteer {
       }
     }
 
-      Firestore.firestore().collection("volunteers").document(person).collection(person).document("sender").delete() { err in
+      Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("sender").delete() { err in
       if let err = err {
         print("Error removing firestore sender: \(err)")
       } else {
@@ -65,8 +65,8 @@ final class SignalingClientforVolunteer {
     do {
       let dataMessage = try self.encoder.encode(SessionDescription(from: rtcSdp))
       let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
-      Firestore.firestore().collection("visuallyImpaired").document(person).collection(person).document("sdp").setData(dict) { (err) in
-          Firestore.firestore().collection("visuallyImpaired").document(person).collection(person).document("sender").setData(["sender": sender])
+      Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC").document("sdp").setData(dict) { (err) in
+          Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC").document("sender").setData(["sender": sender])
         if let err = err {
           print("Error send sdp: \(err)")
         } else {
@@ -83,7 +83,7 @@ final class SignalingClientforVolunteer {
     do {
       let dataMessage = try self.encoder.encode(IceCandidate(from: rtcIceCandidate))
       let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
-        Firestore.firestore().collection("visuallyImpaired").document(person).collection(person)
+        Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC")
         .document("candidate")
         .collection("candidates")
         .addDocument(data: dict) { (err) in
@@ -101,7 +101,7 @@ final class SignalingClientforVolunteer {
 
 
   func listenSdp(to person: String) {
-    Firestore.firestore().collection("volunteers").document(person).collection(person).document("sdp")
+    Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("sdp")
       .addSnapshotListener { documentSnapshot, error in
         guard let document = documentSnapshot else {
           print("Error fetching sdp: \(error!)")
@@ -116,7 +116,7 @@ final class SignalingClientforVolunteer {
           let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
           let sessionDescription = try self.decoder.decode(SessionDescription.self, from: jsonData)
             self.delegate?.signalClient(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription, didReceiveSender: nil)
-          Firestore.firestore().collection("volunteers").document(person).collection(person).document("sender")
+          Firestore.firestore().collection("volunteers").document(person).collection("WebRTC").document("sender")
               .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                   print("Error fetching sender: \(error!)")
@@ -141,7 +141,7 @@ final class SignalingClientforVolunteer {
 
   func listenCandidate(to person: String) {
     Firestore.firestore()
-      .collection("volunteers").document(person).collection(person)
+      .collection("volunteers").document(person).collection("WebRTC")
       .document("candidate")
       .collection("candidates")
       .addSnapshotListener { (querySnapshot, err) in
