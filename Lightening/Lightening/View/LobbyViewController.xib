@@ -120,7 +120,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQV-oL-3sU">
-                    <rect key="frame" x="36" y="80" width="342" height="746"/>
+                    <rect key="frame" x="36" y="80" width="342" height="682"/>
                     <color key="backgroundColor" systemColor="systemIndigoColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
@@ -146,7 +146,7 @@
                 <constraint firstItem="BQV-oL-3sU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="36" id="XMj-cD-Yqr"/>
                 <constraint firstItem="N2P-bP-DG4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gLo-CS-trE"/>
                 <constraint firstItem="MN4-pj-O8W" firstAttribute="top" secondItem="ysa-3l-eku" secondAttribute="bottom" constant="36" id="lRH-Ut-86G"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BQV-oL-3sU" secondAttribute="bottom" constant="36" id="tMq-nM-0nL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BQV-oL-3sU" secondAttribute="bottom" constant="100" id="tMq-nM-0nL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OpB-2E-AQx" secondAttribute="bottom" constant="52" id="zdX-uc-kHU"/>
                 <constraint firstItem="BQV-oL-3sU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="zno-Fa-Woe"/>
             </constraints>
