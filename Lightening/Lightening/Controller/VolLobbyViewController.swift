@@ -13,6 +13,16 @@ class VolLobbyViewController: UIViewController {
     
     @IBOutlet private weak var answerButton: UIButton?
     
+    @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
+        didSet {
+            if availableStatusSegmentedControl.selectedSegmentIndex == 0 {
+                //FireBase Status Update
+            } else {
+                
+            }
+        }
+    }
+    
     private let signalClientforVolunteer: SignalingClientforVolunteer
     private let webRTCClient: WebRTCClient
 
@@ -44,6 +54,7 @@ class VolLobbyViewController: UIViewController {
         self.webRTCClient.delegate = self
         self.signalClientforVolunteer.delegate = self
         self.webRTCClient.unmuteAudio()
+        availableStatusSegmentedControl.selectedSegmentIndex = 0
    
 
     }
@@ -73,6 +84,8 @@ class VolLobbyViewController: UIViewController {
       didSet {
       }
     }
+    
+    
     
     @IBAction func answerDidTap(_ sender: Any) {
         self.webRTCClient.answer { (localSdp) in
