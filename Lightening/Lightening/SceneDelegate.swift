@@ -71,3 +71,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+
+let notificationKey = "com.volunteer.receiveCall"
+
+NotificationCenter.default.addObserver(self, selector: #selector(addToCartSuccess), name: NSNotification.Name ("com.user.addToCart.success"), object: nil)
+NotificationCenter.default.post(name: NSNotification.Name ("com.user.addToCart.success"), object: nil)
+
