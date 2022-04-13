@@ -61,9 +61,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let signalClient = SignalingClient()
       let signalClientforVolunteer = SignalingClientforVolunteer()
       let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
-      let mainViewController = LobbyViewController(signalClient: signalClient, webRTCClient: webRTCClient)
-//      let mainViewController = VolLobbyViewController(
-//        signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
+//      let mainViewController = LobbyViewController(signalClient: signalClient, webRTCClient: webRTCClient)
+      let mainViewController = VolLobbyViewController(
+        signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
       let navViewController = UINavigationController(rootViewController: mainViewController)
       return navViewController
     }
@@ -72,8 +72,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 
-let notificationKey = "com.volunteer.receiveCall"
 
-NotificationCenter.default.addObserver(self, selector: #selector(addToCartSuccess), name: NSNotification.Name ("com.user.addToCart.success"), object: nil)
-NotificationCenter.default.post(name: NSNotification.Name ("com.user.addToCart.success"), object: nil)
 

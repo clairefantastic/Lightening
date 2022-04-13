@@ -20,11 +20,16 @@ class VolLobbyViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var ReceiveCallLabel: UILabel!
+    
+    
     private let signalClientforVolunteer: SignalingClientforVolunteer
     private let webRTCClient: WebRTCClient
 
     private var currentPerson = ""
     private var oppositePerson = ""
+    
+    let notificationKey = "com.volunteer.receiveCall"
     
     init(signalClientforVolunteer: SignalingClientforVolunteer, webRTCClient: WebRTCClient) {
       self.signalClientforVolunteer = signalClientforVolunteer
@@ -39,7 +44,7 @@ class VolLobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentPerson = "MhtofzFzWE3alWT2yPbI"
+        self.currentPerson = "giUsyJAOONHf3dNytlZG"
 
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -55,7 +60,20 @@ class VolLobbyViewController: UIViewController {
         availableStatusSegmentedControl.selectedSegmentIndex = 0
         
         self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey), object: nil)
+        
+        ReceiveCallLabel.isHidden = true
+        
+        
+        
 
+    }
+    
+    @objc func notifyIncomingCall() {
+        ReceiveCallLabel.isHidden = false
     }
     
     private var signalingConnected: Bool = false {
@@ -80,7 +98,7 @@ class VolLobbyViewController: UIViewController {
     }
     
     private var remoteCandidateCount: Int = 0 {
-      didSet {
+      didSet { NotificationCenter.default.post(name: NSNotification.Name (notificationKey), object: nil)
       }
     }
     
@@ -137,7 +155,11 @@ extension VolLobbyViewController: SignalClientforVolunteerDelegate {
   func signalClient(_ signalClient: SignalingClientforVolunteer, didReceiveCandidate candidate: RTCIceCandidate) {
     print("Received remote candidate")
       self.remoteCandidateCount += 1
+      
       self.webRTCClient.set(remoteCandidate: candidate)
+      
+      
+       
   }
 }
 
@@ -147,6 +169,7 @@ extension VolLobbyViewController: WebRTCClientDelegate {
     print("discovered local candidate")
     self.localCandidateCount += 1
     self.signalClientforVolunteer.send(candidate: candidate, to: self.oppositePerson)
+      
   }
   
   func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {

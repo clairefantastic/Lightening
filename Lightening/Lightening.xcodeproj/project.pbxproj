@@ -52,6 +52,7 @@
 		7EDBA2C92805E93600C10FA5 /* VolLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolLobbyViewController.swift; sourceTree = "<group>"; };
 		7EDBA2CB2805E9A900C10FA5 /* VolLobbyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolLobbyViewController.xib; sourceTree = "<group>"; };
 		7EDBA2CD2805EDB900C10FA5 /* SignalingClientforVolunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClientforVolunteer.swift; sourceTree = "<group>"; };
+		7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "96115-video-call.json"; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.release.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +112,7 @@
 				7EA023592800452C00C73205 /* LaunchScreen.storyboard */,
 				7EA0235C2800452C00C73205 /* Info.plist */,
 				7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */,
+				7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */,
 			);
 			path = Lightening;
 			sourceTree = "<group>";

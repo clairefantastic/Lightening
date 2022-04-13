@@ -7,7 +7,7 @@
 
 import Foundation
 import WebRTC
-import FirebaseFirestore
+import Firebase
 
 protocol SignalClientDelegate: AnyObject {
   func signalClientDidConnect(_ signalClient: SignalingClient)
