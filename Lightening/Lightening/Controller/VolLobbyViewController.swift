@@ -15,6 +15,7 @@ class VolLobbyViewController: UIViewController {
     
     @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
         didSet {
+            //Must Be here
             
         }
     }
@@ -50,8 +51,10 @@ class VolLobbyViewController: UIViewController {
         self.webRTCClient.delegate = self
         self.signalClientforVolunteer.delegate = self
         self.webRTCClient.unmuteAudio()
+        
         availableStatusSegmentedControl.selectedSegmentIndex = 0
-   
+        
+        self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
 
     }
     
