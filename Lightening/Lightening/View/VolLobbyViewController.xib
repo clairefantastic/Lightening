@@ -39,6 +39,9 @@
                         <segment title="Available"/>
                         <segment title="Unavailable"/>
                     </segments>
+                    <connections>
+                        <action selector="changeVolunteerStatus:" destination="-1" eventType="valueChanged" id="2gK-9c-MzE"/>
+                    </connections>
                 </segmentedControl>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
