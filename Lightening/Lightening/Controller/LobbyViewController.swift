@@ -62,6 +62,11 @@ class LobbyViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
+    
     private var signalingConnected: Bool = false {
       didSet {
         DispatchQueue.main.async {
