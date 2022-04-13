@@ -98,7 +98,7 @@ final class SignalingClient {
     
     func listenVolunteers() {
         
-        Firestore.firestore().collection("volunteers").getDocuments {
+        Firestore.firestore().collection("volunteers").whereField("status", isEqualTo: 0).getDocuments() {
             (snapshot, err) in
             if let err = err {
                    print("Error getting documents: \(err)")
