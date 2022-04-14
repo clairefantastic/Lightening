@@ -9,8 +9,11 @@ import Foundation
 import WebRTC
 
 protocol WebRTCClientDelegate: AnyObject {
+    
   func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
+    
   func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState)
+    
   func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data)
 }
 
@@ -26,9 +29,13 @@ final class WebRTCClient: NSObject {
   }()
   
   weak var delegate: WebRTCClientDelegate?
+    
   private var peerConnection: RTCPeerConnection?
+    
   private let rtcAudioSession =  RTCAudioSession.sharedInstance()
+    
   private let audioQueue = DispatchQueue(label: "audio")
+    
   private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                  kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]
   private var videoCapturer: RTCVideoCapturer?
