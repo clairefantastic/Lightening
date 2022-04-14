@@ -70,4 +70,7 @@ DerivedData/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+# Firebase googleservice-info.plist
+GoogleService-Info.plist
+
 # End of https://www.gitignore.io/api/xcode,macos,cocoapods
