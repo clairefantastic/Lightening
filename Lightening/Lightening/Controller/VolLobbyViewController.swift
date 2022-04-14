@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import AVFoundation
+//import AVFoundation
 import WebRTC
+import Lottie
 
 class VolLobbyViewController: UIViewController {
     
@@ -157,6 +158,7 @@ extension VolLobbyViewController: SignalClientforVolunteerDelegate {
       self.remoteCandidateCount += 1
       
       self.webRTCClient.set(remoteCandidate: candidate)
+      
       
       
        
