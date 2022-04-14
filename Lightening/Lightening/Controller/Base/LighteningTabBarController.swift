@@ -61,7 +61,7 @@ private enum Tab {
         }
     }
 }
-class lighteningTabBarController: UITabBarController {
+class LighteningTabBarController: UITabBarController {
     
     private let tabs: [Tab] = [.lobby, .upload]
     
