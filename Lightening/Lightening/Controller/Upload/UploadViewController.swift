@@ -75,15 +75,12 @@ class UploadViewController: UIViewController {
 extension UploadViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let url = urls.first else { return }
-        
-//            guard asset.isComposable else {
-//                print("Your music is Not Composible")
-//                return
-//            }
 
+        url.startAccessingSecurityScopedResource()
         
         addAudio(audioUrl: url)
-
+        
+        
             
     }
         
@@ -96,60 +93,9 @@ extension UploadViewController: UIDocumentPickerDelegate {
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
 
         print(destinationUrl)
-
-        guard let fileUrl = URL(string: "\(destinationUrl)") else {
-            return
-        }
-        
-
-        
+//
         let fileName = NSUUID().uuidString + ".m4a"
         
-            Storage.storage().reference().child("message_voice").child(fileName).putFile(from: fileUrl, metadata: nil) { (metadata, error) in
-                if error != nil {
-                    print(error ?? "error")
-                }
-        
-        
-//        let metadata = StorageMetadata()
-//            metadata.contentType = "audio/m4a"
-//            let riversRef = Storage.storage().reference().child("message_voice").child("go.m4a")
-//            do {
-//                let audioData = try Data(contentsOf: destinationUrl)
-//                riversRef.putData(audioData, metadata: metadata){ (data, error) in
-//                    if error == nil{
-//                        debugPrint("se guardo el audio")
-//                        riversRef.downloadURL {url, error in
-//                            guard let downloadURL = url else { return }
-//                            debugPrint("el url descargado", downloadURL)
-//                        }
-//                    }
-//                    else {
-//                        if let error = error?.localizedDescription{
-//                            debugPrint("error al cargar imagen", error)
-//                        }
-//                        else {
-//                            debugPrint("error de codigo")
-//                        }
-//                    }
-//                }
-//            } catch {
-//                debugPrint(error.localizedDescription)
-//            }
-            
-            
-            
-//           func getDirectory() -> URL {
-//                    var tempPath = URL(fileURLWithPath: NSTemporaryDirectory())
-//                    let formatter = DateFormatter()
-//                    formatter.dateFormat = "yyyy-MM-dd-hh-mm-ss"
-//                    let stringDate = formatter.string(from: Date())
-//                    tempPath.appendPathComponent(String.localizedStringWithFormat("output-%@.mp4", stringDate))
-//                    return tempPath
-//            }
-
-            
-//            // to check if it exists before downloading it
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
             print("The file already exists at path")
 //            self.playMusic(url: destinationUrl)
@@ -158,19 +104,42 @@ extension UploadViewController: UIDocumentPickerDelegate {
             do {
 
                 // if the file doesn't exist you can use NSURLSession.sharedSession to download the data asynchronously
-            URLSession.shared.downloadTask(with: audioUrl, completionHandler: { (location, response, error) -> Void in
-                guard let location = location, error == nil else { return }
+                URLSession.shared.downloadTask(with: audioUrl, completionHandler: { (location, response, error) -> Void in
+                guard let location = location, error == nil else {
+                    return
+                }
                 do {
                         // after downloading your file you need to move it to your destination url
                     try FileManager.default.moveItem(at: location, to: destinationUrl)
 //                    self.playMusic(url: destinationUrl)
                     print("File moved to documents folder")
+               
+                    audioUrl.stopAccessingSecurityScopedResource()
+                    
+                    Storage.storage().reference().child("message_voice").child(fileName).putFile(from: destinationUrl.absoluteURL, metadata: nil) { (metadata, error) in
+                        if error != nil {
+                            print(error ?? "error")
+                        } else {
+                            Storage.storage().reference().child("message_voice").child(fileName).downloadURL { (url, error) in
+                                guard let downloadURL = url else {
+                                  // Uh-oh, an error occurred!
+                                  return
+                                }
+                                print(downloadURL)
+                            }
+                        }
+                    }
+                    
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
-            }).resume()
+                }).resume()
+            }
         }
-    }
+        
+     
+            
+//            // to check if it exists before downloading it
     
 //    func playMusic(url: URL) {
 //        do {
@@ -182,23 +151,6 @@ extension UploadViewController: UIDocumentPickerDelegate {
 //        }
 //    }
     
-    func handleAudioSendWith(url: String) {
-        guard let fileUrl = URL(string: url) else {
-            return
-        }
-        let fileName = NSUUID().uuidString + ".m4a"
-
-        Storage.storage().reference().child("message_voice").child(fileName).putFile(from: fileUrl, metadata: nil) { (metadata, error) in
-            if error != nil {
-                print(error ?? "error")
-            }
-
-//            if let downloadUrl = metadata?.downloadURL()?.absoluteString {
-//                print(downloadUrl)
-//                let values: [String : Any] = ["audioUrl": downloadUrl]
-//                self.sendMessageWith(properties: values)
-//            }
-        }
     }
                 
 }
@@ -206,5 +158,3 @@ extension UploadViewController: UIDocumentPickerDelegate {
 
 
 
-}
-}
