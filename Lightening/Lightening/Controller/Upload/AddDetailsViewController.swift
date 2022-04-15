@@ -9,7 +9,7 @@ import UIKit
 
 class AddDetailsViewController: UIViewController {
     
-    private var tableView = UITableView() 
+    private var tableView = UITableView()
     
     private let datas: [AddDetailsCategory] = [
         .title, .description

@@ -20,8 +20,8 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJV-4l-PEX">
                         <rect key="frame" x="16" y="16" width="42" height="21"/>
+                        <color key="backgroundColor" red="0.9528910518" green="0.5860534906" blue="0.24156045910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please enter..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-qd-CZl">
@@ -35,7 +35,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
-                <color key="backgroundColor" red="0.9528910518" green="0.5860534906" blue="0.24156045910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Mu9-qd-CZl" secondAttribute="trailing" constant="16" id="7op-4w-oEC"/>
                     <constraint firstAttribute="bottom" secondItem="Mu9-qd-CZl" secondAttribute="bottom" constant="16" id="MC9-OL-Ug9"/>
