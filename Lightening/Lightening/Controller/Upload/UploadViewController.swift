@@ -76,12 +76,14 @@ extension UploadViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let url = urls.first else { return }
         
-        
-        addAudio(audioUrl: url)
 //            guard asset.isComposable else {
 //                print("Your music is Not Composible")
 //                return
 //            }
+
+        
+        addAudio(audioUrl: url)
+
             
     }
         
@@ -89,19 +91,21 @@ extension UploadViewController: UIDocumentPickerDelegate {
             // then lets create your document folder url
         
         let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            
+
             // lets create your destination file url
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
-        
+
         print(destinationUrl)
-        
+
         guard let fileUrl = URL(string: "\(destinationUrl)") else {
             return
         }
         
+
+        
         let fileName = NSUUID().uuidString + ".m4a"
         
-            Storage.storage().reference().child("message_voice").child(fileName).putFile(from: destinationUrl, metadata: nil) { (metadata, error) in
+            Storage.storage().reference().child("message_voice").child(fileName).putFile(from: fileUrl, metadata: nil) { (metadata, error) in
                 if error != nil {
                     print(error ?? "error")
                 }
@@ -150,9 +154,9 @@ extension UploadViewController: UIDocumentPickerDelegate {
             print("The file already exists at path")
 //            self.playMusic(url: destinationUrl)
         } else {
-            
+
             do {
-              
+
                 // if the file doesn't exist you can use NSURLSession.sharedSession to download the data asynchronously
             URLSession.shared.downloadTask(with: audioUrl, completionHandler: { (location, response, error) -> Void in
                 guard let location = location, error == nil else { return }
@@ -196,7 +200,9 @@ extension UploadViewController: UIDocumentPickerDelegate {
 //            }
         }
     }
+                
 }
+
 
 
 
