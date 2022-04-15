@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		507B431CE111D2D733E5EBFB /* Pods_Lightening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
+		7E44B7A4280912C300CF24AC /* AddDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A2280912C300CF24AC /* AddDetailsCell.swift */; };
+		7E44B7A5280912C300CF24AC /* AddDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7A3280912C300CF24AC /* AddDetailsCell.xib */; };
 		7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* LighteningTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
+		7E44B7A2280912C300CF24AC /* AddDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsCell.swift; sourceTree = "<group>"; };
+		7E44B7A3280912C300CF24AC /* AddDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsCell.xib; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* LighteningTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,15 @@
 				CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7E44B79B2809123500CF24AC /* AddDetailsCell */ = {
+			isa = PBXGroup;
+			children = (
+				7E44B7A2280912C300CF24AC /* AddDetailsCell.swift */,
+				7E44B7A3280912C300CF24AC /* AddDetailsCell.xib */,
+			);
+			path = AddDetailsCell;
 			sourceTree = "<group>";
 		};
 		7E498D532808173E00389D1C /* Base */ = {
@@ -173,6 +186,7 @@
 		7EB9DADD2803D047009B89D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E44B79B2809123500CF24AC /* AddDetailsCell */,
 				7EB9DAEF2803D9AD009B89D0 /* LobbyViewController.xib */,
 				7EDBA2CB2805E9A900C10FA5 /* VolLobbyViewController.xib */,
 				7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */,
@@ -276,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E44B7A5280912C300CF24AC /* AddDetailsCell.xib in Resources */,
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
@@ -334,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E44B7A4280912C300CF24AC /* AddDetailsCell.swift in Sources */,
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
