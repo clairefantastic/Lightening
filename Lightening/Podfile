@@ -12,5 +12,6 @@ target 'Lightening' do
   pod 'Firebase/Firestore'
   pod 'GoogleWebRTC', '~> 1.1'
   pod 'lottie-ios'
+  pod 'Firebase/Storage'
 
 end
