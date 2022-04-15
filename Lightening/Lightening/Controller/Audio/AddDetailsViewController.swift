@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddDescriptionViewController: UIViewController {
+class AddDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
