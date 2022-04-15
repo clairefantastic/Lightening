@@ -7,8 +7,13 @@
 
 import UIKit
 
-class AddDetailsContentCell: UITableViewCell {
+class AddDetailsContentCell: AddDetailsBasicCell, UITextViewDelegate {
 
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    @IBOutlet weak var contentTextView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,6 +25,14 @@ class AddDetailsContentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func layoutCell(category: String) {
+
+        categoryLabel.text = category
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+    }
     
     
 }

@@ -44,6 +44,8 @@ class UploadViewController: UIViewController {
         selectFileButton.isEnabled = true
         
         selectFileButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
+        
+        selectFileButton.addTarget(self, action: #selector(pushAddDetailsPage), for: .touchUpInside)
     }
     
     @objc func importFile(_ sender: UIButton) {
@@ -65,6 +67,14 @@ class UploadViewController: UIViewController {
         if let popoverController = documentPicker.popoverPresentationController {
             popoverController.sourceView = self.view
         }
+    }
+    
+    @objc func pushAddDetailsPage(_ sender: UIButton) {
+        
+        let addDetailsViewController = AddDetailsViewController()
+        
+        navigationController?.pushViewController(addDetailsViewController, animated: true)
+        
     }
     
     
