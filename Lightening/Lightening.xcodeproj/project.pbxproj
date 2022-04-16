@@ -18,6 +18,15 @@
 		7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B6280977C500CF24AC /* BasicTableView.swift */; };
 		7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B82809AEB800CF24AC /* Audio.swift */; };
 		7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */; };
+		7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */; };
+		7E44B7C2280AED7B00CF24AC /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C1280AED7B00CF24AC /* GalleryView.swift */; };
+		7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */; };
+		7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */; };
+		7E44B7CD280B002A00CF24AC /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7CB280B002A00CF24AC /* GalleryTableViewCell.swift */; };
+		7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7CC280B002A00CF24AC /* GalleryTableViewCell.xib */; };
+		7E44B7D1280B036200CF24AC /* AudioListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7CF280B036100CF24AC /* AudioListCollectionViewCell.swift */; };
+		7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7D0280B036100CF24AC /* AudioListCollectionViewCell.xib */; };
+		7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */; };
 		7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* LighteningTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -54,6 +63,15 @@
 		7E44B7B6280977C500CF24AC /* BasicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableView.swift; sourceTree = "<group>"; };
 		7E44B7B82809AEB800CF24AC /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentsion.swift"; sourceTree = "<group>"; };
+		7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E44B7C1280AED7B00CF24AC /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
+		7E44B7CB280B002A00CF24AC /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GalleryTableViewCell.swift; path = Lightening/View/Base/GalleryTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		7E44B7CC280B002A00CF24AC /* GalleryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GalleryTableViewCell.xib; path = Lightening/View/Base/GalleryTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		7E44B7CF280B036100CF24AC /* AudioListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E44B7D0280B036100CF24AC /* AudioListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListCollectionViewCell.xib; sourceTree = "<group>"; };
+		7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* LighteningTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,8 +125,11 @@
 		7E44B7A62809154F00CF24AC /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				7E44B7CB280B002A00CF24AC /* GalleryTableViewCell.swift */,
+				7E44B7CC280B002A00CF24AC /* GalleryTableViewCell.xib */,
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
 				7E44B7B6280977C500CF24AC /* BasicTableView.swift */,
+				7E44B7C1280AED7B00CF24AC /* GalleryView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -130,6 +151,31 @@
 				7E44B7B82809AEB800CF24AC /* Audio.swift */,
 			);
 			path = Upload;
+			sourceTree = "<group>";
+		};
+		7E44B7BE280AEA0300CF24AC /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */,
+			);
+			path = Discovery;
+			sourceTree = "<group>";
+		};
+		7E44B7C5280AF13300CF24AC /* Third Party Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */,
+			);
+			path = "Third Party Wrapper";
+			sourceTree = "<group>";
+		};
+		7E44B7C8280AFD9200CF24AC /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				7E44B7CF280B036100CF24AC /* AudioListCollectionViewCell.swift */,
+				7E44B7D0280B036100CF24AC /* AudioListCollectionViewCell.xib */,
+			);
+			path = Discovery;
 			sourceTree = "<group>";
 		};
 		7E498D532808173E00389D1C /* Base */ = {
@@ -180,6 +226,7 @@
 		7EA0234D2800452A00C73205 /* Lightening */ = {
 			isa = PBXGroup;
 			children = (
+				7E44B7C5280AF13300CF24AC /* Third Party Wrapper */,
 				7EB9DAE72803D30C009B89D0 /* Services */,
 				7EB9DAE02803D164009B89D0 /* Extensions */,
 				7EB9DADD2803D047009B89D0 /* View */,
@@ -210,6 +257,7 @@
 		7EB9DADC2803D041009B89D0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7E44B7BE280AEA0300CF24AC /* Discovery */,
 				7E498D572808184500389D1C /* Upload */,
 				7E498D56280817F300389D1C /* VideoCall */,
 				7E498D532808173E00389D1C /* Base */,
@@ -220,6 +268,7 @@
 		7EB9DADD2803D047009B89D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E44B7C8280AFD9200CF24AC /* Discovery */,
 				7E44B7A72809159F00CF24AC /* Upload */,
 				7E44B7A62809154F00CF24AC /* Base */,
 				7EB9DAEF2803D9AD009B89D0 /* LobbyViewController.xib */,
@@ -236,7 +285,9 @@
 				7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */,
 				7EB9DAE52803D27F009B89D0 /* IceCandidate.swift */,
 				7E44B7B42809751300CF24AC /* UITableView+Extension.swift */,
+				7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */,
 				7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */,
+				7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -329,8 +380,10 @@
 			files = (
 				7E44B7AD2809187C00CF24AC /* AddDetailsContentCell.xib in Resources */,
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
+				7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
+				7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
 				7EDBA2CC2805E9A900C10FA5 /* VolLobbyViewController.xib in Resources */,
@@ -388,17 +441,21 @@
 			files = (
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
+				7E44B7D1280B036200CF24AC /* AudioListCollectionViewCell.swift in Sources */,
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
 				7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */,
+				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EDBA2CA2805E93600C10FA5 /* VolLobbyViewController.swift in Sources */,
+				7E44B7CD280B002A00CF24AC /* GalleryTableViewCell.swift in Sources */,
 				7E44B7B328096FE800CF24AC /* AddDetailsCategory.swift in Sources */,
 				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
 				7EB9DAE92803D321009B89D0 /* WebRTCClient.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
 				7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */,
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientforVolunteer.swift in Sources */,
+				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
@@ -408,8 +465,11 @@
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */,
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
+				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
+				7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* UploadManager.swift in Sources */,
+				7E44B7C2280AED7B00CF24AC /* GalleryView.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

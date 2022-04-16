@@ -10,6 +10,8 @@ import UIKit
 private enum Tab {
 
     case lobby
+    
+    case discovery
 
     case upload
 
@@ -27,6 +29,8 @@ private enum Tab {
 
         case .lobby: controller = VolLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
+            
+        case .discovery: controller = DiscoveryViewController()
         
         case .upload: controller = UploadViewController()
 
@@ -49,6 +53,13 @@ private enum Tab {
                 image: UIImage(systemName: "video"),
                 selectedImage: UIImage(systemName: "video")
             )
+            
+        case .discovery:
+            return UITabBarItem(
+                title: nil,
+                image: UIImage(systemName: "rectangle.grid.2x2"),
+                selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
+            )
         
         case .upload:
             return UITabBarItem(
@@ -63,7 +74,7 @@ private enum Tab {
 }
 class LighteningTabBarController: UITabBarController {
     
-    private let tabs: [Tab] = [.lobby, .upload]
+    private let tabs: [Tab] = [.lobby, .discovery, .upload]
     
     var trolleyTabBarItem: UITabBarItem!
     

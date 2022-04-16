@@ -15,5 +15,6 @@ target 'Lightening' do
   pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift', '8.3.0-beta'
   pod 'IQKeyboardManagerSwift'
+  pod 'Kingfisher'
 
 end

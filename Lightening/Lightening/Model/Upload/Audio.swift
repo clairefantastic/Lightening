@@ -19,6 +19,6 @@ struct Audio: Codable {
     
     var description: String?
     
-//    let cover: String
+    var cover: String?
     
 }
