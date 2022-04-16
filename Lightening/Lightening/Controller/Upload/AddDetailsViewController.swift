@@ -6,16 +6,25 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AddDetailsViewController: UIViewController {
     
     private var tableView = UITableView()
     
-    private let datas: [AddDetailsCategory] = [
-        .title, .description
-    ]
+//    private let datas: [AddDetailsCategory] = [
+//        .title, .description
+//    ]
+    
+    private let categories = ["title", "description"]
     
     private var audio: Audio?
+    
+    var audioTitle: String?
+    
+    var audioDescription: String?
+    
+    var localurl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +67,11 @@ class AddDetailsViewController: UIViewController {
         
         let uploadButton = UIButton()
         
-        self.view.addSubview(uploadButton)
+        view.addSubview(uploadButton)
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -80,60 +89,38 @@ class AddDetailsViewController: UIViewController {
 
     }
     
-    private func mappingCellWtih(payment: String, at indexPath: IndexPath) -> UITableViewCell {
-        
-        guard
-            let inputCell = tableView.dequeueReusableCell(
-                withIdentifier: "AddDetailsContentCell",
-                for: indexPath
-            ) as? AddDetailsContentCell
-        else {
-                
-                return UITableViewCell()
-        }
-        
-        inputCell.delegate = self
-        
-        return inputCell
-    }
-    
     @objc func uploadFile(_ sender: UIButton) {
-        
-        let uploadViewController = UploadViewController()
-        
-        uploadViewController.getFileHandler = { [weak self] documentUrl in
     
-            UploadManager.shared.addAudio(audioUrl: documentUrl) { [weak self] downloadUrl in
+        guard let localurl = localurl else {
+            return
+        }
+
+        UploadManager.shared.addAudio(audioUrl: localurl) { [weak self] downloadUrl in
                 
-                self?.audio = Audio(audioUrl: downloadUrl, title: self?.title ?? "")
+            self?.audio = Audio(audioUrl: downloadUrl, title: self?.audioTitle ?? "", description: self?.audioDescription ?? "")
                 
-                guard let publishAudio = self?.audio else {
+            guard let publishAudio = self?.audio else {
                     return
-                }
+            }
                 
-                UploadManager.shared.publishAudio(audio: publishAudio) { result in
-                    switch result {
+            UploadManager.shared.publishAudio(audio: publishAudio) { result in
+                switch result {
                     
-                    case .success:
+                case .success:
                         
-                        print("onTapPublish, success")
+                    print("onTapPublish, success")
 
                         
-                    case .failure(let error):
+                case .failure(let error):
                         
-                        print("publishArticle.failure: \(error)")
-                    }
-                    
+                    print("publishArticle.failure: \(error)")
                 }
-                
-                
+                    
             }
-            
-            
         
         }
+        
     }
-    
     
 }
 
@@ -141,26 +128,44 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return datas.count
+        return 2
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return datas[indexPath.row].cellForIndexPath(indexPath, tableView: tableView)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
+                
+        else { return UITableViewCell() }
+        
+        cell.delegate = self
+        
+        cell.categoryLabel.text = categories[indexPath.row]
+        
+        return cell
+        
     }
-    
     
 }
 
 extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
     
     func endEditing(_ cell: AddDetailsContentCell) {
+    
+        guard let tappedIndexPath = tableView.indexPath(for: cell) else { return }
         
-        let title = cell.contentTextView.text
+        if tappedIndexPath.row == 0 {
+            
+            audioTitle = cell.contentTextView?.text
+            
+        } else {
+            
+            audioDescription = cell.contentTextView?.text
+            
+        }
+        
         
     }
-    
     
     
 }

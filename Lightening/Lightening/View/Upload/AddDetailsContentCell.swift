@@ -10,6 +10,7 @@ import UIKit
 protocol AddDetailsTableViewCellDelegate: AnyObject {
     
     func endEditing(_ cell: AddDetailsContentCell)
+    
 }
 
 class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
@@ -25,6 +26,9 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         // Initialization code
         
         layoutTextView()
+        
+        contentTextView.delegate = self
+        
     }
     
     private func layoutTextView() {
@@ -35,16 +39,11 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         
     }
     
-    func layoutCell(category: String) {
-
-        categoryLabel.text = category
-    
-    }
-    
     func textViewDidEndEditing(_ textView: UITextView) {
         
         delegate?.endEditing(self)
+        
     }
     
-    
 }
+
