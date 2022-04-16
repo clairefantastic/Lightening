@@ -23,6 +23,16 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        layoutTextView()
+    }
+    
+    private func layoutTextView() {
+        
+        contentTextView.layer.borderColor = UIColor.black.cgColor
+        
+        contentTextView.layer.borderWidth = 1
+        
     }
     
     func layoutCell(category: String) {
