@@ -17,6 +17,7 @@
 		7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B42809751300CF24AC /* UITableView+Extension.swift */; };
 		7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B6280977C500CF24AC /* BasicTableView.swift */; };
 		7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B82809AEB800CF24AC /* Audio.swift */; };
+		7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */; };
 		7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* LighteningTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		7E44B7B42809751300CF24AC /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7B6280977C500CF24AC /* BasicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableView.swift; sourceTree = "<group>"; };
 		7E44B7B82809AEB800CF24AC /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentsion.swift"; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* LighteningTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +236,7 @@
 				7EB9DAE32803D1E0009B89D0 /* SessionDescription.swift */,
 				7EB9DAE52803D27F009B89D0 /* IceCandidate.swift */,
 				7E44B7B42809751300CF24AC /* UITableView+Extension.swift */,
+				7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				7ED920FA28070E4C00DD892A /* userType.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */,
+				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* UploadManager.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
