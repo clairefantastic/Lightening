@@ -13,6 +13,8 @@ class UploadViewController: UIViewController {
     
     private let uploadManager = UploadManager()
     
+    var getFileHandler : ((URL) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,9 +73,6 @@ class UploadViewController: UIViewController {
     
     @objc func pushAddDetailsPage(_ sender: UIButton) {
         
-        let addDetailsViewController = AddDetailsViewController()
-        
-        navigationController?.pushViewController(addDetailsViewController, animated: true)
         
     }
     
@@ -85,7 +84,14 @@ extension UploadViewController: UIDocumentPickerDelegate {
         
         guard let url = urls.first else { return }
         
-        uploadManager.addAudio(audioUrl: url)
+        getFileHandler?(url)
+        
+        let addDetailsViewController = AddDetailsViewController()
+        
+        navigationController?.pushViewController(addDetailsViewController, animated: true)
+        
+        
+//        uploadManager.addAudio(audioUrl: url)
         
     }
                 

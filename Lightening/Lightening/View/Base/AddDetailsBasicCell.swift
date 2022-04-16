@@ -7,14 +7,16 @@
 
 import UIKit
 
-class AddDetailsBasicCell: UITableViewCell {
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    func layoutCell(category: String) {
-
-    }
-
-}
+//class AddDetailsBasicCell: UITableViewCell {
+//    
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//    }
+//
+//    func layoutCell(category: String) {
+//
+//    }
+//    
+//    func textViewde
+//
+//}

@@ -34,21 +34,21 @@ enum AddDetailsCategory: String {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier(), for: indexPath)
 
-        guard let basicCell = cell as? AddDetailsBasicCell else { return cell }
+        guard let addContentCell = cell as? AddDetailsContentCell else { return cell }
 
         switch self {
         
         case .title:
             
-            basicCell.layoutCell(category: rawValue)
-        
+            addContentCell.layoutCell(category: rawValue)
+            
         case .description:
 
-            basicCell.layoutCell(category: rawValue)
+            addContentCell.layoutCell(category: rawValue)
 
         }
         
-        return basicCell
+        return addContentCell
     }
 
 }

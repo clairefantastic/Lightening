@@ -9,9 +9,17 @@ import Foundation
 
 import FirebaseStorage
 
+import FirebaseFirestore
+
+import FirebaseFirestoreSwift
+
 class UploadManager {
     
-    func addAudio(audioUrl: URL) {
+    static let shared = UploadManager()
+    
+    lazy var db = Firestore.firestore()
+    
+    func addAudio(audioUrl: URL, completion: @escaping (URL)-> Void ) {
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
         
@@ -50,6 +58,7 @@ class UploadManager {
                                   // Uh-oh, an error occurred!
                                   return
                                 }
+                                completion(downloadURL)
                                 print(downloadURL)
                             }
                         }
@@ -61,9 +70,29 @@ class UploadManager {
                 }).resume()
             }
         }
-            
-
     
     }
+    
+    func publishAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let document = db.collection("audioFiles").document()
+//        article.createdTime = Date().millisecondsSince1970
+        do {
+           try document.setData(from: audio) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+        }
+     
+    }
+    
     
 }

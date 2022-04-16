@@ -7,8 +7,14 @@
 
 import UIKit
 
-class AddDetailsContentCell: AddDetailsBasicCell, UITextViewDelegate {
+protocol AddDetailsTableViewCellDelegate: AnyObject {
+    
+    func endEditing(_ cell: AddDetailsContentCell)
+}
 
+class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
+    
+    weak var delegate: AddDetailsTableViewCellDelegate?
     
     @IBOutlet weak var categoryLabel: UILabel!
     
@@ -18,20 +24,16 @@ class AddDetailsContentCell: AddDetailsBasicCell, UITextViewDelegate {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
-    override func layoutCell(category: String) {
+    func layoutCell(category: String) {
 
         categoryLabel.text = category
+    
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
+        delegate?.endEditing(self)
     }
     
     
