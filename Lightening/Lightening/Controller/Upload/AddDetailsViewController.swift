@@ -95,7 +95,7 @@ class AddDetailsViewController: UIViewController {
             return
         }
 
-        UploadManager.shared.addAudio(audioUrl: localurl) { [weak self] downloadUrl in
+        AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
                 
             self?.audio = Audio(audioUrl: downloadUrl, title: self?.audioTitle ?? "", description: self?.audioDescription ?? "")
                 
@@ -103,7 +103,7 @@ class AddDetailsViewController: UIViewController {
                     return
             }
                 
-            UploadManager.shared.publishAudio(audio: publishAudio) { result in
+            AudioManager.shared.publishAudioFile(audio: publishAudio) { result in
                 switch result {
                     
                 case .success:

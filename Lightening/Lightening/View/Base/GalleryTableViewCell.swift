@@ -18,6 +18,14 @@ class GalleryTableViewCell: UITableViewCell {
         }
     }
     
+    var datas: [Audio] = [] {
+        
+        didSet {
+            
+            galleryCollectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,6 +33,8 @@ class GalleryTableViewCell: UITableViewCell {
         galleryCollectionView.dataSource = self
         
         galleryCollectionView.registerCellWithNib(identifier: String(describing: AudioListCollectionViewCell.self), bundle: nil)
+        
+        fetchData()
         
 //        UICollectionViewFlowLayout().scrollDirection = .horizontal
     }
@@ -35,19 +45,42 @@ class GalleryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func fetchData() {
+        AudioManager.shared.fetchAudioFiles { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audioFiles):
+                
+                self?.datas = audioFiles
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
+
+    }
+    
 }
 
 extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
+        return datas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AudioListCollectionViewCell.self), for: indexPath) as? AudioListCollectionViewCell else { return UICollectionViewCell() }
         
+      
         cell.audioCoverImageView.contentMode = .scaleAspectFill
+        
         cell.audioCoverImageView.image = UIImage(named: "dog")
-        cell.audioTitleLabel?.text = "good"
+        
+        cell.audioTitleLabel?.text = datas[indexPath.row].title
+
         cell.audioAuthorLabel?.text = "Claire"
         
         return cell

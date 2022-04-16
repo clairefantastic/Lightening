@@ -11,7 +11,7 @@ import AVFoundation
 
 class UploadViewController: UIViewController {
     
-    private let uploadManager = UploadManager()
+    private let uploadManager = AudioManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,15 +11,6 @@ class DiscoveryViewController: UIViewController {
     
     private var tableView = UITableView()
     
-//    private var galleryView = GalleryView() {
-//
-//        didSet {
-//
-//
-//            galleryView.recommedDelegate = self
-//        }
-//    }
-    
     var audio: Audio? {
 
         didSet {
@@ -30,7 +21,6 @@ class DiscoveryViewController: UIViewController {
             
 
 //            galleryView.datas = audio.cover
-            // MARK: - Change data source for recommend
             
         }
     }
@@ -43,12 +33,6 @@ class DiscoveryViewController: UIViewController {
         view.addSubview(tableView)
         
         setupTableView()
-        
-//        tableView.addSubview(galleryView)
-        
-//        galleryView.frame.size.height = CGFloat(Int(UIScreen.main.bounds.width / 3.0 / 375.0 * 500.0))
-//
-//        galleryView.delegate = self
 
     }
     
@@ -100,8 +84,11 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource {
                 return "Nature"
             case 1:
                 return "City"
+            case 2:
+                return "Pet"
             default:
                 return nil
+            
         }
     }
     

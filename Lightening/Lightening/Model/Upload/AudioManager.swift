@@ -13,13 +13,13 @@ import FirebaseFirestore
 
 import FirebaseFirestoreSwift
 
-class UploadManager {
+class AudioManager {
     
-    static let shared = UploadManager()
+    static let shared = AudioManager()
     
     lazy var db = Firestore.firestore()
     
-    func addAudio(audioUrl: URL, completion: @escaping (URL)-> Void ) {
+    func addAudioFile(audioUrl: URL, completion: @escaping (URL)-> Void ) {
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
         
@@ -73,7 +73,7 @@ class UploadManager {
     
     }
     
-    func publishAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishAudioFile(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document()
 //        article.createdTime = Date().millisecondsSince1970
@@ -93,6 +93,37 @@ class UploadManager {
         }
      
     }
+    
+    func fetchAudioFiles(completion: @escaping (Result<[Audio], Error>) -> Void) {
+        
+        db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
+            
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    var audiofiles = [Audio]()
+                    
+                    for document in querySnapshot!.documents {
+
+                        do {
+                            if let audiofile = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
+                                audiofiles.append(audiofile)
+                            }
+                            
+                        } catch {
+                            
+                            completion(.failure(error))
+//                            completion(.failure(FirebaseError.documentError))
+                        }
+                    }
+                    
+                    completion(.success(audiofiles))
+                }
+        }
+    }
+    
     
     
 }
