@@ -114,7 +114,7 @@ class AddDetailsViewController: UIViewController {
 
         AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
                 
-            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "", cover: self?.audioCover ?? "")
+            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "", cover: self?.audioCover ?? "", createdTime: Date().timeIntervalSince1970)
                 
             guard let publishAudio = self?.audio else {
                     return

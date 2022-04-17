@@ -21,4 +21,6 @@ struct Audio: Codable {
     
     var cover: String?
     
+    var createdTime: Double
+    
 }

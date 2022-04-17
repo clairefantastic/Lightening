@@ -82,7 +82,7 @@ class AudioManager {
     func publishAudioFile(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document()
-//        article.createdTime = Date().millisecondsSince1970
+        
         do {
            try document.setData(from: audio) { error in
                 
@@ -102,7 +102,7 @@ class AudioManager {
     
     func fetchAudioFiles(completion: @escaping (Result<[Audio], Error>) -> Void) {
         
-        db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
+        db.collection("audioFiles").order(by: "createdTime", descending: true).getDocuments() { (querySnapshot, error) in
             
                 if let error = error {
                     
