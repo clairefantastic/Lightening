@@ -21,6 +21,8 @@ class VideoCallViewController: UIViewController {
     
     var connectedHandler: ((Bool) -> Void)?
     
+    let notificationKey2 = "com.volunteer.endCall"
+    
     init(webRTCClient: WebRTCClient) {
         self.webRTCClient = webRTCClient
         super.init(nibName: String(describing: VideoCallViewController.self), bundle: Bundle.main)
@@ -82,8 +84,12 @@ class VideoCallViewController: UIViewController {
         self.webRTCClient.closePeerConnection()
 
         self.webRTCClient.createPeerConnection()
+        
+        NotificationCenter.default.post(name: NSNotification.Name (notificationKey2), object: nil)
 
         self.dismiss(animated: true)
+        
+        
         
         
     }

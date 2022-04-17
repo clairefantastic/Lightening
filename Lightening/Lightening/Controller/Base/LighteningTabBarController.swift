@@ -76,19 +76,35 @@ class LighteningTabBarController: UITabBarController {
     
     private let tabs: [Tab] = [.lobby, .discovery, .upload]
     
-    var trolleyTabBarItem: UITabBarItem!
+    var lobbyTabBarItem: UITabBarItem!
     
-//    var orderObserver: NSKeyValueObservation!
+    var videoCallObserver: NSKeyValueObservation!
+    
+    let notificationKey1 = "com.volunteer.receiveCall"
+    
+    let notificationKey2 = "com.volunteer.endCall"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         viewControllers = tabs.map({ $0.controller() })
 
-//        trolleyTabBarItem = viewControllers?[2].tabBarItem
-//
-//        trolleyTabBarItem.badgeColor = .brown
+        lobbyTabBarItem = viewControllers?[2].tabBarItem
 
+        lobbyTabBarItem.badgeColor = .red
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(endCall), name: NSNotification.Name (notificationKey2), object: nil)
+
+    }
+    
+    @objc func notifyIncomingCall() {
+        self.lobbyTabBarItem.badgeValue = "1"
+    }
+    
+    @objc func endCall() {
+        self.lobbyTabBarItem.badgeValue = nil
     }
 
 }
