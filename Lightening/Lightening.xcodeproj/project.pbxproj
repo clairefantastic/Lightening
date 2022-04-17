@@ -27,6 +27,10 @@
 		7E44B7D1280B036200CF24AC /* AudioListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7CF280B036100CF24AC /* AudioListCollectionViewCell.swift */; };
 		7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7D0280B036100CF24AC /* AudioListCollectionViewCell.xib */; };
 		7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */; };
+		7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D5280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.swift */; };
+		7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7D6280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.xib */; };
+		7E44B7DB280BED5000CF24AC /* SelectTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D9280BED5000CF24AC /* SelectTopicCollectionViewCell.swift */; };
+		7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7DA280BED5000CF24AC /* SelectTopicCollectionViewCell.xib */; };
 		7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* LighteningTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -72,6 +76,10 @@
 		7E44B7CF280B036100CF24AC /* AudioListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E44B7D0280B036100CF24AC /* AudioListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		7E44B7D5280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsTopicTableViewCell.swift; sourceTree = "<group>"; };
+		7E44B7D6280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsTopicTableViewCell.xib; sourceTree = "<group>"; };
+		7E44B7D9280BED5000CF24AC /* SelectTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTopicCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E44B7DA280BED5000CF24AC /* SelectTopicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTopicCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* LighteningTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +147,10 @@
 			children = (
 				7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */,
 				7E44B7AB2809187C00CF24AC /* AddDetailsContentCell.xib */,
+				7E44B7D5280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.swift */,
+				7E44B7D6280BEAAC00CF24AC /* AddDetailsTopicTableViewCell.xib */,
+				7E44B7D9280BED5000CF24AC /* SelectTopicCollectionViewCell.swift */,
+				7E44B7DA280BED5000CF24AC /* SelectTopicCollectionViewCell.xib */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -382,8 +394,10 @@
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
 				7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
+				7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */,
+				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
 				7EDBA2CC2805E9A900C10FA5 /* VolLobbyViewController.xib in Resources */,
@@ -446,6 +460,7 @@
 				7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
+				7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EDBA2CA2805E93600C10FA5 /* VolLobbyViewController.swift in Sources */,
 				7E44B7CD280B002A00CF24AC /* GalleryTableViewCell.swift in Sources */,
@@ -464,6 +479,7 @@
 				7ED920FA28070E4C00DD892A /* userType.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */,
+				7E44B7DB280BED5000CF24AC /* SelectTopicCollectionViewCell.swift in Sources */,
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,

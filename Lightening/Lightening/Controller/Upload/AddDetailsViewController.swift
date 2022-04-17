@@ -16,7 +16,7 @@ class AddDetailsViewController: UIViewController {
 //        .title, .description
 //    ]
     
-    private let categories = ["title", "description"]
+    private let categories = ["title", "description", "topic"]
     
     private var audio: Audio?
     
@@ -56,6 +56,12 @@ class AddDetailsViewController: UIViewController {
             String(describing: AddDetailsContentCell.self),
                                          bundle: nil
         )
+        
+        tableView.registerCellWithNib(identifier:
+            String(describing: AddDetailsTopicTableViewCell.self),
+                                         bundle: nil
+        )
+        
         tableView.dataSource = self
 
         tableView.delegate = self
@@ -128,22 +134,36 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return 3
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
-                
-        else { return UITableViewCell() }
-        
-        cell.delegate = self
-        
-        cell.categoryLabel.text = categories[indexPath.row]
-        
-        return cell
-        
+        if indexPath.row <= 1 {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
+                    
+            else { return UITableViewCell() }
+            
+            cell.delegate = self
+            
+            cell.categoryLabel.text = categories[indexPath.row]
+            
+            return cell
+            
+        } else {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
+                    
+            else { return UITableViewCell() }
+            
+            cell.categoryLabel.text = categories[indexPath.row]
+            
+            return cell
+            
+        }
+    
     }
     
 }

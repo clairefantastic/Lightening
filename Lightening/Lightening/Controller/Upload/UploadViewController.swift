@@ -37,7 +37,7 @@ class UploadViewController: UIViewController {
         
         NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        selectFileButton.backgroundColor = .black
+        selectFileButton.backgroundColor = .systemIndigo
         
         selectFileButton.setTitle("Select File", for: .normal)
         
