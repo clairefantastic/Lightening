@@ -92,7 +92,7 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
       
         cell.audioCoverImageView.contentMode = .scaleAspectFill
 
-        cell.audioCoverImageView.image = UIImage(named: "dog")
+        cell.audioCoverImageView.image = UIImage(named: datas[indexPath.row].cover ?? "dog") ?? UIImage(named: "dog")
         
         cell.audioTitleLabel?.text = datas[indexPath.row].title
     

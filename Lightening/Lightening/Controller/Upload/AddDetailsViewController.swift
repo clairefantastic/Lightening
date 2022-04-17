@@ -16,7 +16,9 @@ class AddDetailsViewController: UIViewController {
 //        .title, .description
 //    ]
     
-    private let categories = ["title", "description", "topic"]
+    private let categories = ["title", "description", "topic", "cover image"]
+    
+    private let image = ["nature", "city", "pet"]
     
     private var audio: Audio?
     
@@ -27,6 +29,8 @@ class AddDetailsViewController: UIViewController {
     var audioTopic: String?
     
     var localurl: URL?
+    
+    var audioCover: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +68,11 @@ class AddDetailsViewController: UIViewController {
                                          bundle: nil
         )
         
+        tableView.registerCellWithNib(identifier:
+            String(describing: AddDetailsCoverTableViewCell.self),
+                                         bundle: nil
+        )
+        
         tableView.dataSource = self
 
         tableView.delegate = self
@@ -79,7 +88,7 @@ class AddDetailsViewController: UIViewController {
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -30).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -105,7 +114,7 @@ class AddDetailsViewController: UIViewController {
 
         AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
                 
-            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "")
+            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "", cover: self?.audioCover ?? "")
                 
             guard let publishAudio = self?.audio else {
                     return
@@ -136,7 +145,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return 4
         
     }
     
@@ -154,7 +163,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        } else {
+        } else if indexPath.row == 2{
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
             
@@ -167,6 +176,18 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
+        } else {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsCoverTableViewCell.self)", for: indexPath) as? AddDetailsCoverTableViewCell
+            
+                    
+            else { return UITableViewCell() }
+            
+            cell.categoryLabel.text = categories[indexPath.row]
+            
+            cell.delegate = self
+            
+            return cell
         }
     
     }
@@ -174,6 +195,11 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
+    
+    func didSelectCover(_ index: Int) {
+        audioCover = image[index]
+    }
+    
     
     func didSelectTopic(_ button: UIButton) {
         audioTopic = button.titleLabel?.text

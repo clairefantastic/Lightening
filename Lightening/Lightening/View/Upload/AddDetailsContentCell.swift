@@ -13,6 +13,8 @@ protocol AddDetailsTableViewCellDelegate: AnyObject {
     
     func didSelectTopic(_ button: UIButton)
     
+    func didSelectCover(_ index: Int)
+    
 }
 
 class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
