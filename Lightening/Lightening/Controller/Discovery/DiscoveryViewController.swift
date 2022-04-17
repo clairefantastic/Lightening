@@ -7,6 +7,8 @@
 
 import UIKit
 
+import AVFoundation
+
 class DiscoveryViewController: UIViewController {
     
     private var tableView = UITableView()
@@ -18,7 +20,6 @@ class DiscoveryViewController: UIViewController {
             guard let audio = audio
                   
             else { return }
-            
 
 //            galleryView.datas = audio.cover
             
@@ -33,7 +34,48 @@ class DiscoveryViewController: UIViewController {
         view.addSubview(tableView)
         
         setupTableView()
+        
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+//        }
+//        catch {
+//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+//        }
 
+    }
+    
+    func layoutButton() {
+        let selectFileButton = UIButton()
+        
+        self.view.addSubview(selectFileButton)
+        
+        selectFileButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -30).isActive = true
+        
+        NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: selectFileButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        selectFileButton.backgroundColor = .systemIndigo
+        
+        selectFileButton.setTitle("Play Music", for: .normal)
+        
+        selectFileButton.isEnabled = true
+        
+        selectFileButton.addTarget(self, action: #selector(playmusic), for: .touchUpInside)
+        
+    }
+    
+    @objc func playmusic() {
+        var player = AVPlayer()
+        let playerItem = AVPlayerItem(url: NSURL(fileURLWithPath: "https://firebasestorage.googleapis.com:443/v0/b/lightening-626ce.appspot.com/o/message_voice%2F40262EFA-8CA4-4519-9CE3-CD86377007E0.m4a?alt=media&token=edef9285-8bdf-42df-9a61-1d3bf100bcdc") as URL)
+        player = try AVPlayer(playerItem:playerItem)
+        player.play()
+        
+        
     }
     
     private func setupTableView() {

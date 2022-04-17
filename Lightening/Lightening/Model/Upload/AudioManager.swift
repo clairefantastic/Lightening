@@ -6,12 +6,10 @@
 //
 
 import Foundation
-
 import FirebaseStorage
-
 import FirebaseFirestore
-
 import FirebaseFirestoreSwift
+import AVFoundation
 
 class AudioManager {
     
@@ -19,9 +17,17 @@ class AudioManager {
     
     lazy var db = Firestore.firestore()
     
+    var player: AVPlayer!
+    
     func addAudioFile(audioUrl: URL, completion: @escaping (URL)-> Void ) {
+        
+        var audiooPlayer: AVPlayer?
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
+        
+        let playerItem = AVPlayerItem(url: audioUrl)
+        
+        audiooPlayer = AVPlayer(playerItem: playerItem)
         
         let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             // lets create your destination file url
@@ -31,7 +37,7 @@ class AudioManager {
         
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
             print("The file already exists at path")
-//            self.playMusic(url: destinationUrl)
+            audiooPlayer?.play()
         } else {
 
             do {
@@ -124,6 +130,35 @@ class AudioManager {
         }
     }
     
+    func playAudioFile(url: URL) {
+        
+        let asset = AVAsset(url: url)
+        do {
+            let playerItem = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: playerItem)
+            player.volume = 100.0
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+//    func downloadFileFromURL(url:NSURL){
+//
+//        var downloadTask:URLSessionDownloadTask
+//        downloadTask = URLSession.shared.downloadTask(with: url as URL, completionHandler: { [weak self](URL, response, error) -> Void in
+//            guard let URL = URL else { return }
+////            self?.playAudioFile(url: URL)
+//            self?.addAudioFile(audioUrl: URL) {_ in
+//
+//            }
+//        })
+//
+//        downloadTask.resume()
+//
+//    }
+    
     
     
 }
+

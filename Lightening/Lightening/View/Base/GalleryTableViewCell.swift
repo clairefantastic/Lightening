@@ -63,6 +63,15 @@ class GalleryTableViewCell: UITableViewCell {
 
     }
     
+    func playAudio(indexPath: IndexPath) {
+//        AudioManager.shared.downloadFileFromURL(url: datas[indexPath.row].audioUrl as NSURL)
+        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
+//        var sound = Sound()
+//        sound.playSounds(url: datas[indexPath.row].audioUrl)
+    }
+    
+    
+    
 }
 
 extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -85,6 +94,12 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        playAudio(indexPath: indexPath)
+    }
+    
+    
     
     
 }
