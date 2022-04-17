@@ -24,6 +24,8 @@ class AddDetailsViewController: UIViewController {
     
     var audioDescription: String?
     
+    var audioTopic: String?
+    
     var localurl: URL?
     
     override func viewDidLoad() {
@@ -103,7 +105,7 @@ class AddDetailsViewController: UIViewController {
 
         AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
                 
-            self?.audio = Audio(audioUrl: downloadUrl, title: self?.audioTitle ?? "", description: self?.audioDescription ?? "")
+            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "")
                 
             guard let publishAudio = self?.audio else {
                     return
@@ -155,10 +157,13 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
+            
                     
             else { return UITableViewCell() }
             
             cell.categoryLabel.text = categories[indexPath.row]
+            
+            cell.delegate = self
             
             return cell
             
@@ -169,6 +174,11 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
+    
+    func didSelectTopic(_ button: UIButton) {
+        audioTopic = button.titleLabel?.text
+    }
+    
     
     func endEditing(_ cell: AddDetailsContentCell) {
     

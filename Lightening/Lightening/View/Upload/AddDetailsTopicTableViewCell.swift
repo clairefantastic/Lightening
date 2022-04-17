@@ -8,6 +8,8 @@
 import UIKit
 
 class AddDetailsTopicTableViewCell: UITableViewCell {
+    
+    weak var delegate: AddDetailsTableViewCellDelegate?
 
     @IBOutlet weak var categoryLabel: UILabel!
     
@@ -30,6 +32,13 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @objc func selectTopic(_ sender: UIButton) {
+        
+        sender.isSelected = true
+        
+        delegate?.didSelectTopic(sender)
+    }
+    
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -39,12 +48,19 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectTopicCollectionViewCell.self), for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectTopicCollectionViewCell.self), for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
       
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
         
+        cell.topicButton.titleLabel?.textColor = .black
+        
+        cell.topicButton.setTitle(topicArray[indexPath.row], for: .selected)
+        
+        cell.topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
+        
         cell.topicButton.layer.borderWidth = 1
         cell.topicButton.layer.borderColor = UIColor.black.cgColor
+        
         
         return cell
     }

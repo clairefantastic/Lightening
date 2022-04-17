@@ -11,6 +11,8 @@ protocol AddDetailsTableViewCellDelegate: AnyObject {
     
     func endEditing(_ cell: AddDetailsContentCell)
     
+    func didSelectTopic(_ button: UIButton)
+    
 }
 
 class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {

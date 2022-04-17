@@ -15,6 +15,7 @@ class GalleryTableViewCell: UITableViewCell {
             let layoutObject = UICollectionViewFlowLayout()
             
             layoutObject.scrollDirection = .horizontal
+            
         }
     }
     
@@ -23,20 +24,24 @@ class GalleryTableViewCell: UITableViewCell {
         didSet {
             
             galleryCollectionView.reloadData()
+            
         }
     }
+    
+    var sectionIndex: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         galleryCollectionView.delegate = self
+        
         galleryCollectionView.dataSource = self
         
         galleryCollectionView.registerCellWithNib(identifier: String(describing: AudioListCollectionViewCell.self), bundle: nil)
         
         fetchData()
         
-//        UICollectionViewFlowLayout().scrollDirection = .horizontal
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -44,6 +49,7 @@ class GalleryTableViewCell: UITableViewCell {
  
         // Configure the view for the selected state
     }
+    
     
     func fetchData() {
         AudioManager.shared.fetchAudioFiles { [weak self] result in
@@ -63,39 +69,40 @@ class GalleryTableViewCell: UITableViewCell {
 
     }
     
+    
+    
     func playAudio(indexPath: IndexPath) {
-//        AudioManager.shared.downloadFileFromURL(url: datas[indexPath.row].audioUrl as NSURL)
+        
         AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
-//        var sound = Sound()
-//        sound.playSounds(url: datas[indexPath.row].audioUrl)
+
     }
-    
-    
     
 }
 
 extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
         return datas.count
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AudioListCollectionViewCell.self), for: indexPath) as? AudioListCollectionViewCell else { return UICollectionViewCell() }
-        
+        guard let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AudioListCollectionViewCell.self), for: indexPath) as? AudioListCollectionViewCell else { return UICollectionViewCell() }
       
         cell.audioCoverImageView.contentMode = .scaleAspectFill
-        
+
         cell.audioCoverImageView.image = UIImage(named: "dog")
         
         cell.audioTitleLabel?.text = datas[indexPath.row].title
-
+    
         cell.audioAuthorLabel?.text = "Claire"
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
         playAudio(indexPath: indexPath)
     }
     
