@@ -107,34 +107,43 @@ class AddDetailsViewController: UIViewController {
     }
     
     @objc func uploadFile(_ sender: UIButton) {
+        
+        print("Upload file")
+        
+        guard let count = self.navigationController?.viewControllers.count else { return }
     
+        if let preController = self.navigationController?.viewControllers[count - 2] {
+
+            self.navigationController?.popToViewController(preController, animated: true)
+        }
+        
         guard let localurl = localurl else {
             return
         }
 
         AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
-                
+
             self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "", cover: self?.audioCover ?? "", createdTime: Date().timeIntervalSince1970)
-                
+
             guard let publishAudio = self?.audio else {
                     return
             }
-                
+
             AudioManager.shared.publishAudioFile(audio: publishAudio) { result in
                 switch result {
-                    
+
                 case .success:
-                        
+
                     print("onTapPublish, success")
 
-                        
+
                 case .failure(let error):
-                        
+
                     print("publishArticle.failure: \(error)")
                 }
-                    
+
             }
-        
+
         }
         
     }

@@ -83,10 +83,23 @@ class AudioPlayerViewController: UIViewController {
 class AudioPlayerView: UIView {
     
     
+    @IBOutlet weak var playButton: UIButton!
+    
     let nibName = "AudioPlayerView"
+    
+    var selectedAudioIndex: Int = 0
+    
+    var datas: [Audio] = [] {
+        
+        didSet {
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
+        fetchData()
     }
     
     override init(frame: CGRect) {
@@ -109,6 +122,31 @@ class AudioPlayerView: UIView {
         let nib = UINib(nibName: nibName, bundle: nil)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
+    
+    
+    func fetchData() {
+        AudioManager.shared.fetchAudioFiles { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audioFiles):
+                
+                self?.datas = audioFiles
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
+
+    }
+    
+    @objc func playAudio(_ sender: UIButton) {
+        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
+        
+    }
+    
     
 }
 

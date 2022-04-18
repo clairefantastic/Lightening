@@ -114,6 +114,8 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource {
             
             let audioPlayerView = AudioPlayerView()
             
+            audioPlayerView.selectedAudioIndex = index
+            
             audioPlayerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 60, width: UIScreen.main.bounds.width, height: 80)
             audioPlayerView.backgroundColor?.withAlphaComponent(0)
             self?.view.addSubview(audioPlayerView)

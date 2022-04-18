@@ -105,7 +105,7 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         self.openAudioPlayerHandler?(indexPath.row)
-//        playAudio(indexPath: indexPath)
+        playAudio(indexPath: indexPath)
     }
     
     
