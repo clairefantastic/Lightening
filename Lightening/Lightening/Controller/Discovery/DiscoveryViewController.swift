@@ -158,15 +158,19 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        fetchData()
         configureCollectionView()
         configureLayout()
-        applySnapshot(animatingDifferences: false)
+        
+        
     }
     
     private func configureCollectionView() {
             
         view.addSubview(collectionView)
-            
+         
+        collectionView.backgroundView?.backgroundColor = .white
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
             
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -182,8 +186,35 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
     
     }
+    func fetchData() {
+        AudioManager.shared.fetchAudioFiles() { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audioFiles):
+                
+                self?.sections[0].audios.append(contentsOf: audioFiles.filter { $0.topic == "Nature"})
+                
+                self?.sections[1].audios.append(contentsOf: audioFiles.filter { $0.topic == "City"})
+                
+                self?.sections[2].audios.append(contentsOf: audioFiles.filter { $0.topic == "Pet"})
+                
+                self?.sections[3].audios.append(contentsOf: audioFiles.filter { $0.topic == "Others"})
+                self?.applySnapshot(animatingDifferences: false)
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
+    }
     
-    func makeDataSource() -> DataSource {
+    
+    
+    
+    
+    private func makeDataSource() -> DataSource {
       // 1
       let dataSource = DataSource(
         collectionView: collectionView,
@@ -213,7 +244,7 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
       return dataSource
     }
     
-    func applySnapshot(animatingDifferences: Bool = true) {
+    private func applySnapshot(animatingDifferences: Bool = true) {
       // 2
       var snapshot = Snapshot()
       // 3
