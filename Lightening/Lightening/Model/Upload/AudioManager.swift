@@ -20,14 +20,8 @@ class AudioManager {
     var player: AVPlayer!
     
     func addAudioFile(audioUrl: URL, completion: @escaping (URL)-> Void ) {
-        
-        var audiooPlayer: AVPlayer?
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
-        
-        let playerItem = AVPlayerItem(url: audioUrl)
-        
-        audiooPlayer = AVPlayer(playerItem: playerItem)
         
         let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             // lets create your destination file url
@@ -37,7 +31,7 @@ class AudioManager {
         
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
             print("The file already exists at path")
-            audiooPlayer?.play()
+//            audiooPlayer?.play()
         } else {
 
             do {

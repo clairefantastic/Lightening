@@ -64,7 +64,7 @@ class VolLobbyViewController: UIViewController {
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey), object: nil)
+//      
         
         ReceiveCallLabel.isHidden = true
         

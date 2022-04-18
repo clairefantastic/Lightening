@@ -109,6 +109,18 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GalleryTableViewCell.self)) as? GalleryTableViewCell else {
             return UITableViewCell()
         }
+        
+        cell.openAudioPlayerHandler = { [weak self] index in
+            
+            let audioPlayerView = AudioPlayerView()
+            
+            audioPlayerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 60, width: UIScreen.main.bounds.width, height: 80)
+            audioPlayerView.backgroundColor?.withAlphaComponent(0)
+            self?.view.addSubview(audioPlayerView)
+            
+            UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: {[self] in audioPlayerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 130, width: UIScreen.main.bounds.width, height: 80)}, completion: {_ in print("Audio Player Shown")})
+            
+        }
 
         return cell
     }

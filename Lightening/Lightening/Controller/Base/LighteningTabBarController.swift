@@ -89,7 +89,7 @@ class LighteningTabBarController: UITabBarController {
 
         viewControllers = tabs.map({ $0.controller() })
 
-        lobbyTabBarItem = viewControllers?[2].tabBarItem
+        lobbyTabBarItem = viewControllers?[0].tabBarItem
 
         lobbyTabBarItem.badgeColor = .red
         

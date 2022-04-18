@@ -9,6 +9,7 @@ import UIKit
 
 class GalleryTableViewCell: UITableViewCell {
 
+    var openAudioPlayerHandler: ((Int) -> ())?
     
     @IBOutlet weak var galleryCollectionView: UICollectionView! {
         didSet {
@@ -102,8 +103,9 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-        playAudio(indexPath: indexPath)
+        
+        self.openAudioPlayerHandler?(indexPath.row)
+//        playAudio(indexPath: indexPath)
     }
     
     
