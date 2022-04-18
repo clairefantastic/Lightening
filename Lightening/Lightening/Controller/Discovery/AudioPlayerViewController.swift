@@ -73,7 +73,7 @@ class AudioPlayerViewController: UIViewController {
     
     @objc func playAudioFile(_ sender: Any) {
         
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
+        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl!)
         
     }
 
@@ -143,7 +143,7 @@ class AudioPlayerView: UIView {
     }
     
     @objc func playAudio(_ sender: UIButton) {
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
+        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl!)
         
     }
     

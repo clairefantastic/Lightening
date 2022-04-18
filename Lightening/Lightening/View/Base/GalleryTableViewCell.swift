@@ -74,7 +74,7 @@ class GalleryTableViewCell: UITableViewCell {
     
     func playAudio(indexPath: IndexPath) {
         
-        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
+        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl!)
 
     }
     
@@ -97,7 +97,7 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.audioTitleLabel?.text = datas[indexPath.row].title
     
-        cell.audioAuthorLabel?.text = "Claire"
+//        cell.audioAuthorLabel?.text = "Claire"
         
         return cell
     }

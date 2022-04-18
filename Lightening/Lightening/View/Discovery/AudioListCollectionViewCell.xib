@@ -61,11 +61,6 @@
                 <constraint firstItem="tkh-Sk-VU4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="zly-K5-oKH"/>
             </constraints>
             <size key="customSize" width="314" height="275"/>
-            <connections>
-                <outlet property="audioAuthorLabel" destination="XpF-rF-EFg" id="Fkp-90-HI0"/>
-                <outlet property="audioCoverImageView" destination="JMU-ix-Sfi" id="fQ1-i6-6fV"/>
-                <outlet property="audioTitleLabel" destination="LQv-12-9gO" id="v9C-Qv-T2x"/>
-            </connections>
             <point key="canvasLocation" x="85.507246376811594" y="36.495535714285715"/>
         </collectionViewCell>
     </objects>

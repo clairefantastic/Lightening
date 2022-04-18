@@ -13,7 +13,6 @@ enum AudioTopic {
     
     case city
     
-    case animal
-    
-    case others
+    case pet
+
 }

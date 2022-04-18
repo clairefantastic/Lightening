@@ -9,18 +9,18 @@ import Foundation
 
 import FirebaseFirestoreSwift
 
-struct Audio: Codable {
+struct Audio: Codable, Hashable {
     
-    var audioUrl: URL
+    var audioUrl: URL?
     
     var topic: String?
     
-    var title: String
+    var title: String?
     
     var description: String?
     
     var cover: String?
     
-    var createdTime: Double
+    var createdTime: Double?
     
 }
