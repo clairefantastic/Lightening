@@ -5,7 +5,7 @@
 //  Created by claire on 2022/4/11.
 //
 
-import Foundation
+import AVFoundation
 import WebRTC
 
 protocol WebRTCClientDelegate: AnyObject {

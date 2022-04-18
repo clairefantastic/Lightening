@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window = UIWindow(frame: windowScene.coordinateSpace.bounds)
             window?.windowScene = windowScene
 //            window?.rootViewController = navController //navController
+            
             window?.rootViewController = self.buildMainViewController()
             window?.makeKeyAndVisible()
     }
@@ -61,10 +62,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let signalClient = SignalingClient()
       let signalClientforVolunteer = SignalingClientforVolunteer()
       let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
+        
 //      let mainViewController = LobbyViewController(signalClient: signalClient, webRTCClient: webRTCClient)
+//
+//      let navViewController = UINavigationController(rootViewController: mainViewController)
+        
+        
       let mainViewController = VolLobbyViewController(
         signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
-      let navViewController = UINavigationController(rootViewController: mainViewController)
+      let tabBarController = LighteningTabBarController()
+      let navViewController = UINavigationController(rootViewController: tabBarController)
+     
       return navViewController
     }
 

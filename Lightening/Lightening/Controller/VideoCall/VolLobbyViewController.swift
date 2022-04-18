@@ -30,7 +30,7 @@ class VolLobbyViewController: UIViewController {
     private var currentPerson = ""
     private var oppositePerson = ""
     
-    let notificationKey = "com.volunteer.receiveCall"
+    let notificationKey1 = "com.volunteer.receiveCall"
     
     init(signalClientforVolunteer: SignalingClientforVolunteer, webRTCClient: WebRTCClient) {
       self.signalClientforVolunteer = signalClientforVolunteer
@@ -64,7 +64,7 @@ class VolLobbyViewController: UIViewController {
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey), object: nil)
+//      
         
         ReceiveCallLabel.isHidden = true
         
@@ -98,8 +98,10 @@ class VolLobbyViewController: UIViewController {
       }
     }
     
-    private var remoteCandidateCount: Int = 0 {
-      didSet { NotificationCenter.default.post(name: NSNotification.Name (notificationKey), object: nil)
+    var remoteCandidateCount: Int = 0 {
+      didSet {
+          
+          NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
       }
     }
     

@@ -352,6 +352,9 @@ PODS:
   - Firebase/Firestore (8.12.1):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 8.12.1)
+  - Firebase/Storage (8.12.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 8.12.0)
   - FirebaseAnalytics (8.12.0):
     - FirebaseAnalytics/AdIdSupport (= 8.12.0)
     - FirebaseCore (~> 8.0)
@@ -392,11 +395,16 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
+  - FirebaseFirestoreSwift (8.3.0-beta):
+    - FirebaseFirestore (~> 8.0)
   - FirebaseInstallations (8.12.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseStorage (8.12.0):
+    - FirebaseCore (~> 8.0)
+    - GTMSessionFetcher/Core (~> 1.5)
   - GoogleAppMeasurement (8.12.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.12.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -465,6 +473,9 @@ PODS:
     - BoringSSL-GRPC (= 0.0.7)
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
+  - GTMSessionFetcher/Core (1.7.1)
+  - IQKeyboardManagerSwift (6.5.9)
+  - Kingfisher (7.1.2)
   - leveldb-library (1.22.1)
   - lottie-ios (3.3.0)
   - nanopb (2.30908.0):
@@ -478,7 +489,11 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
+  - FirebaseFirestoreSwift (= 8.3.0-beta)
   - GoogleWebRTC (~> 1.1)
+  - IQKeyboardManagerSwift
+  - Kingfisher
   - lottie-ios
   - SwiftLint
 
@@ -491,13 +506,18 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFirestore
+    - FirebaseFirestoreSwift
     - FirebaseInstallations
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
     - GoogleWebRTC
     - "gRPC-C++"
     - gRPC-Core
+    - GTMSessionFetcher
+    - IQKeyboardManagerSwift
+    - Kingfisher
     - leveldb-library
     - lottie-ios
     - nanopb
@@ -512,19 +532,24 @@ SPEC CHECKSUMS:
   FirebaseCore: 8138de860a90ca7eec5e324da5788fb0ebf1d93c
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
   FirebaseFirestore: dfeb58916ee3ae0ef2453d4849a683672705920c
+  FirebaseFirestoreSwift: 6434b5b8dde96977cfc5e409dba46141783cefbf
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
+  FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
+  GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 20807f6603e357f75432e23b0403ceb2c20c51f4
+PODFILE CHECKSUM: 73a7949cee749b3b0bb64ad397a559c0e9ea04c9
 
 COCOAPODS: 1.11.2
