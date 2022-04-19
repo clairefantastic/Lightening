@@ -86,6 +86,12 @@ class AudioPlayerView: UIView {
     
     @IBOutlet weak var playPauseButton: UIButton!
     
+    @IBOutlet weak var audioImageView: UIImageView!
+    
+    @IBOutlet weak var audioTitleLabel: UILabel!
+    
+    @IBOutlet weak var audioAuthorLabel: UILabel!
+    
     var player: AVPlayer!
     
     var timer = Timer()
@@ -96,7 +102,20 @@ class AudioPlayerView: UIView {
     
     var selectedAudioIndexPath: IndexPath?
     
-    var audioFiles: [Section]?
+    var audioFiles: [Section]? {
+        
+        didSet {
+            
+            guard let selectedAudioIndexPath = selectedAudioIndexPath else {
+                return
+            }
+
+            audioImageView?.image = UIImage(named: audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].cover ?? "")
+            audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
+            audioAuthorLabel?.text = "Claire"
+            
+        }
+    }
     
     var datas: [Audio] = [] {
         
