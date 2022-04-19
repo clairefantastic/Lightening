@@ -137,21 +137,6 @@ class AudioManager {
         }
     }
     
-//    func downloadFileFromURL(url:NSURL){
-//
-//        var downloadTask:URLSessionDownloadTask
-//        downloadTask = URLSession.shared.downloadTask(with: url as URL, completionHandler: { [weak self](URL, response, error) -> Void in
-//            guard let URL = URL else { return }
-////            self?.playAudioFile(url: URL)
-//            self?.addAudioFile(audioUrl: URL) {_ in
-//
-//            }
-//        })
-//
-//        downloadTask.resume()
-//
-//    }
-    
     
     
 }

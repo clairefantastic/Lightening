@@ -72,7 +72,7 @@ class UploadViewController: UIViewController {
         
         recordButton.isEnabled = true
         
-//        recordButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
+        recordButton.addTarget(self, action: #selector(showRecordPage), for: .touchUpInside)
         
     }
     
@@ -95,6 +95,13 @@ class UploadViewController: UIViewController {
         if let popoverController = documentPicker.popoverPresentationController {
             popoverController.sourceView = self.view
         }
+    }
+    
+    @objc func showRecordPage(_ sender: UIButton) {
+        
+        let recordViewController = RecordViewController()
+        
+        navigationController?.pushViewController(recordViewController, animated: true)
     }
     
     
