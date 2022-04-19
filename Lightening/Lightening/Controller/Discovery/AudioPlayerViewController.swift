@@ -134,7 +134,8 @@ class AudioPlayerView: UIView {
     }
     
     @IBAction func dismissPlayer() {
-        self.removeFromSuperview()
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0001, options: .curveEaseInOut, animations: {  self.frame = CGRect(x: 0, y: 1000, width: UIScreen.main.bounds.width, height: 80)}, completion: {_ in print("Audio Player dismiss")})
     }
         
     
