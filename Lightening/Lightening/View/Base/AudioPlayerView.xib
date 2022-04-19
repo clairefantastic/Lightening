@@ -41,6 +41,9 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system" title=""/>
+                            <connections>
+                                <action selector="dismissPlayer" destination="-1" eventType="touchUpInside" id="Kth-x3-ah6"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
