@@ -74,7 +74,7 @@ class GalleryTableViewCell: UITableViewCell {
     
     func playAudio(indexPath: IndexPath) {
         
-        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl!)
+        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
 
     }
     

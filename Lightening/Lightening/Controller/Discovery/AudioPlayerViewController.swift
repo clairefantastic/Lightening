@@ -73,7 +73,7 @@ class AudioPlayerViewController: UIViewController {
     
     @objc func playAudioFile(_ sender: Any) {
         
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl!)
+        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
         
     }
 
@@ -87,7 +87,9 @@ class AudioPlayerView: UIView {
     
     let nibName = "AudioPlayerView"
     
-    var selectedAudioIndex: Int = 0
+    var selectedAudioIndexPath: IndexPath?
+    
+    var audioFiles: [Section]?
     
     var datas: [Audio] = [] {
         
@@ -98,8 +100,8 @@ class AudioPlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
-        fetchData()
+        playButton.isUserInteractionEnabled = true
+        playButton.isEnabled = true
     }
     
     override init(frame: CGRect) {
@@ -123,30 +125,14 @@ class AudioPlayerView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
-    
-    func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
-            
-            switch result {
-            
-            case .success(let audioFiles):
-                
-                self?.datas = audioFiles
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-            
+    @IBAction func playAudio() {
+        guard let selectedAudioIndexPath = selectedAudioIndexPath else {
+            return
         }
-
-    }
-    
-    @objc func playAudio(_ sender: UIButton) {
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl!)
         
+        AudioManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
     }
-    
+        
     
 }
 

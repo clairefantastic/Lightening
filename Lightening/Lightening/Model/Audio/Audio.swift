@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct Audio: Codable, Hashable {
     
-    var audioUrl: URL?
+    var audioUrl: URL
     
     var topic: String?
     

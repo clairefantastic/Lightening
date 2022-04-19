@@ -266,6 +266,15 @@ extension DiscoveryViewController {
     guard let audio = dataSource.itemIdentifier(for: indexPath) else {
       return
     }
+      
+      let audioPlayerView = AudioPlayerView()
+      audioPlayerView.selectedAudioIndexPath = indexPath
+      audioPlayerView.audioFiles = sections
+      audioPlayerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 60, width: UIScreen.main.bounds.width, height: 80)
+      audioPlayerView.backgroundColor?.withAlphaComponent(0)
+      view.addSubview(audioPlayerView)
+      UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: {  audioPlayerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 130, width: UIScreen.main.bounds.width, height: 80)}, completion: {_ in print("Audio Player Shown")})
+      
     
   }
 }

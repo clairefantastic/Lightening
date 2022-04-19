@@ -23,6 +23,9 @@
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="play" catalog="system" title=""/>
+                    <connections>
+                        <action selector="playAudio" destination="-1" eventType="touchUpInside" id="bQj-yI-p2y"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
