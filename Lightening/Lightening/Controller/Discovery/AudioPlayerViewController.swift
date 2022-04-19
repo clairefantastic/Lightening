@@ -54,7 +54,7 @@ class AudioPlayerViewController: UIViewController {
     
     
     func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
+        PublishManager.shared.fetchAudioFiles { [weak self] result in
             
             switch result {
             
@@ -74,7 +74,7 @@ class AudioPlayerViewController: UIViewController {
     
     @objc func playAudioFile(_ sender: Any) {
         
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
+        PublishManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
         
     }
 

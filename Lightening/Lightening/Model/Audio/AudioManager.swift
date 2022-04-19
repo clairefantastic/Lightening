@@ -1,143 +1,150 @@
 //
-//  UploadManager.swift
+//  AudioManager.swift
 //  Lightening
 //
-//  Created by claire on 2022/4/15.
+//  Created by claire on 2022/4/19.
 //
 
-import Foundation
-import FirebaseStorage
-import FirebaseFirestore
-import FirebaseFirestoreSwift
+import UIKit
 import AVFoundation
 
-class AudioManager {
-    
-    static let shared = AudioManager()
-    
-    lazy var db = Firestore.firestore()
-    
-    var player: AVPlayer!
-    
-    func addAudioFile(audioUrl: URL, completion: @escaping (URL)-> Void ) {
-            // then lets create your document folder url
-        audioUrl.startAccessingSecurityScopedResource()
-        
-        let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            // lets create your destination file url
-        let destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
-//
-        let fileName = NSUUID().uuidString + ".m4a"
-        
-        if FileManager.default.fileExists(atPath: destinationUrl.path) {
-            print("The file already exists at path")
-//            audiooPlayer?.play()
-        } else {
+enum AudioManagerState {
+    case granted
+    case denied
+    case undetermined
+    case error(Error)
+}
 
+protocol AudioManagerDelegate: AnyObject {
+    func recorderAndPlayer(_ manager: AudioManager, withStates state: AudioManagerState)
+    func recorderAndPlayer(_ recoder: AudioRecorder, withStates state: AudioRecorderState)
+    func recorderAndPlayer(_ player: AudioPlayer, withStates state: AudioPlayerState)
+}
+
+class AudioManager: NSObject {
+    
+    private var fileManager: AudioFileManager
+    var delegate: AudioManagerDelegate?
+    
+    private var recorder: AudioRecorder?
+    private var player: AudioPlayer?
+    
+    var localUrl: URL?
+    
+    var isRecording: Bool {
+        return self.recorder?.isRecording ?? false
+    }
+    
+    var isPlaying: Bool {
+        return self.player?.isPlaying ?? false
+    }
+
+    init(withFileManager fileManager: AudioFileManager) {
+        self.fileManager = fileManager
+        super.init()
+    }
+    
+    func newRecording(fileManager: AudioFileManager) {
+        self.fileManager = fileManager
+        recorder?.doStop()
+        player?.doStop()
+        self.initialize()
+    }
+    
+    func checkRecordPermission() {
+        let recordPermission = AVAudioSession.sharedInstance().recordPermission
+        switch recordPermission {
+        case .granted:
+            DispatchQueue.main.async {
+                self.delegate?.recorderAndPlayer(self, withStates: .granted)
+                self.initialize()
+            }
+            break
+        case .denied:
+            DispatchQueue.main.async {
+                self.delegate?.recorderAndPlayer(self, withStates: .denied)
+            }
+            break
+        case .undetermined:
+            self.requestForRecordPermission()
+            break
+        @unknown default:
+            self.requestForRecordPermission()
+            break
+        }
+    }
+    
+    private func requestForRecordPermission() {
+        let session = AVAudioSession.sharedInstance()
+        DispatchQueue.global(qos: .userInitiated).async {
             do {
-
-                // if the file doesn't exist you can use NSURLSession.sharedSession to download the data asynchronously
-                URLSession.shared.downloadTask(with: audioUrl, completionHandler: { (location, response, error) -> Void in
-                guard let location = location, error == nil else {
-                    return
+                try session.setCategory(AVAudioSession.Category.playAndRecord)
+                try session.setActive(true, options: .notifyOthersOnDeactivation)
+                try session.overrideOutputAudioPort(.speaker)
+                try session.setActive(true)
+                session.requestRecordPermission { [weak self] (allowed) in
+                    self?.checkRecordPermission()
                 }
-                do {
-                        // after downloading your file you need to move it to your destination url
-                    try FileManager.default.moveItem(at: location, to: destinationUrl)
-//                    self.playMusic(url: destinationUrl)
-                    print("File moved to documents folder")
-               
-                    audioUrl.stopAccessingSecurityScopedResource()
-                    
-                    Storage.storage().reference().child("message_voice").child(fileName).putFile(from: destinationUrl.absoluteURL, metadata: nil) { (metadata, error) in
-                        if error != nil {
-                            print(error ?? "error")
-                        } else {
-                            Storage.storage().reference().child("message_voice").child(fileName).downloadURL { (url, error) in
-                                guard let downloadURL = url else {
-                                  // Uh-oh, an error occurred!
-                                  return
-                                }
-                                completion(downloadURL)
-                                print(downloadURL)
-                            }
-                        }
-                    }
-                    
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
-                }).resume()
-            }
-        }
-    
-    }
-    
-    func publishAudioFile(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
-        
-        let document = db.collection("audioFiles").document()
-        
-        do {
-           try document.setData(from: audio) { error in
-                
-                if let error = error {
-                    
-                    completion(.failure(error))
-                } else {
-                    
-                    completion(.success("Success"))
+            } catch {
+                DispatchQueue.main.async {
+                    self.delegate?.recorderAndPlayer(self, withStates: .error(error))
                 }
             }
-        } catch {
-            
         }
-     
     }
     
-    func fetchAudioFiles(completion: @escaping (Result<[Audio], Error>) -> Void) {
+    private func initialize() {
+        self.recorder = AudioRecorder(withFileManager: fileManager)
+        self.player = AudioPlayer(withFileManager: fileManager)
         
-        db.collection("audioFiles").order(by: "createdTime", descending: true).getDocuments() { (querySnapshot, error) in
-            
-                if let error = error {
-                    
-                    completion(.failure(error))
-                } else {
-                    
-                    var audiofiles = [Audio]()
-                    
-                    for document in querySnapshot!.documents {
-
-                        do {
-                            if let audiofile = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
-                                audiofiles.append(audiofile)
-                            }
-                            
-                        } catch {
-                            
-                            completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
-                        }
-                    }
-                    
-                    completion(.success(audiofiles))
-                }
+        self.recorder?.recorderStateChangeHandler = { state in
+            self.delegate?.recorderAndPlayer(self.recorder!, withStates: state)
         }
-    }
-    
-    func playAudioFile(url: URL) {
         
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            player.volume = 100.0
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
+        self.player?.playerStateChangeHandler = { state in
+            self.delegate?.recorderAndPlayer(self.player!, withStates: state)
+        }
+        
+        self.recorder?.setupRecorder() { localUrl in
+            self.localUrl = localUrl
         }
     }
     
+    func recordStart() {
+        self.player?.doStop()
+        self.recorder?.doRecord()
+    }
     
+    func pauseRecording() {
+        self.recorder?.doPause()
+    }
     
+    func resumeRecording() {
+        self.player?.doStop()
+        self.recorder?.doResume()
+    }
+    
+    func stopRecording() {
+        self.recorder?.doStop()
+        self.player?.preparePlay()
+    }
+    
+    func startPlayer() {
+        self.recorder?.doStop()
+        self.player?.doPlay()
+    }
+    
+    func pausePlaying() {
+        self.player?.doPause()
+    }
+    
+    func resumePlayer() {
+        self.recorder?.doStop()
+        self.player?.doPlay()
+    }
+    
+    func stopPlaying() {
+        self.player?.doStop()
+    }
 }
 

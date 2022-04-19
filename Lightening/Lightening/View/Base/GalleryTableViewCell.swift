@@ -53,7 +53,7 @@ class GalleryTableViewCell: UITableViewCell {
     
     
     func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
+        PublishManager.shared.fetchAudioFiles { [weak self] result in
             
             switch result {
             
@@ -74,7 +74,7 @@ class GalleryTableViewCell: UITableViewCell {
     
     func playAudio(indexPath: IndexPath) {
         
-        AudioManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
+        PublishManager.shared.playAudioFile(url: datas[indexPath.row].audioUrl)
 
     }
     

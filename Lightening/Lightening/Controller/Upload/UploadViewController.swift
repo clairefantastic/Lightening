@@ -11,7 +11,7 @@ import AVFoundation
 
 class UploadViewController: UIViewController {
     
-    private let uploadManager = AudioManager()
+    private let uploadManager = PublishManager()
     
     private let selectFileButton = UIButton()
     
@@ -110,13 +110,25 @@ class UploadViewController: UIViewController {
 extension UploadViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
+        
+        
         guard let url = urls.first else { return }
         
-        let addDetailsViewController = AddDetailsViewController()
+        PublishManager.shared.getSelectedFileLocalUrl(audioUrl: url) { [weak self] localUrl in
+            
+            DispatchQueue.main.async {
+                
+                let addDetailsViewController = AddDetailsViewController()
+                
+                addDetailsViewController.localurl = localUrl
+                
+                self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
+            }
+            
+            
+        }
         
-        addDetailsViewController.localurl = url
         
-        navigationController?.pushViewController(addDetailsViewController, animated: true)
         
         
 //        uploadManager.addAudio(audioUrl: url)
@@ -125,17 +137,6 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 
 }
 
-//            // to check if it exists before downloading it
-    
-//    func playMusic(url: URL) {
-//        do {
-//            let audioPlayer = try AVAudioPlayer(contentsOf: url)
-//            audioPlayer.prepareToPlay()
-//            audioPlayer.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
 
 
 

@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		507B431CE111D2D733E5EBFB /* Pods_Lightening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */; };
-		7E272FF4280EB5490096DB72 /* RecordV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF3280EB5490096DB72 /* RecordV.swift */; };
 		7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF5280EB55F0096DB72 /* RecordViewController.swift */; };
+		7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF7280EED7B0096DB72 /* AudioManager.swift */; };
+		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
+		7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */; };
+		7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
 		7E44B7AD2809187C00CF24AC /* AddDetailsContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7AB2809187C00CF24AC /* AddDetailsContentCell.xib */; };
-		7E44B7B1280966A200CF24AC /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B0280966A100CF24AC /* AudioManager.swift */; };
+		7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B0280966A100CF24AC /* PublishManager.swift */; };
 		7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B42809751300CF24AC /* UITableView+Extension.swift */; };
 		7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B6280977C500CF24AC /* BasicTableView.swift */; };
 		7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B82809AEB800CF24AC /* Audio.swift */; };
@@ -69,13 +72,16 @@
 
 /* Begin PBXFileReference section */
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
-		7E272FF3280EB5490096DB72 /* RecordV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordV.swift; sourceTree = "<group>"; };
 		7E272FF5280EB55F0096DB72 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		7E272FF7280EED7B0096DB72 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileManager.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
 		7E44B7AB2809187C00CF24AC /* AddDetailsContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsContentCell.xib; sourceTree = "<group>"; };
-		7E44B7B0280966A100CF24AC /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		7E44B7B0280966A100CF24AC /* PublishManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishManager.swift; sourceTree = "<group>"; };
 		7E44B7B42809751300CF24AC /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7B6280977C500CF24AC /* BasicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableView.swift; sourceTree = "<group>"; };
 		7E44B7B82809AEB800CF24AC /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -236,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				7E498D582808188300389D1C /* UploadViewController.swift */,
-				7E272FF3280EB5490096DB72 /* RecordV.swift */,
 				7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */,
 			);
 			path = Upload;
@@ -288,7 +293,11 @@
 				7E44B7B82809AEB800CF24AC /* Audio.swift */,
 				7EB3F501280D740800C6E385 /* Section.swift */,
 				7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */,
-				7E44B7B0280966A100CF24AC /* AudioManager.swift */,
+				7E44B7B0280966A100CF24AC /* PublishManager.swift */,
+				7E272FF7280EED7B0096DB72 /* AudioManager.swift */,
+				7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */,
+				7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */,
+				7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -495,12 +504,14 @@
 			files = (
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
+				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
 				7E44B7D1280B036200CF24AC /* AudioListCollectionViewCell.swift in Sources */,
 				7EA023532800452A00C73205 /* ViewController.swift in Sources */,
 				7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */,
 				7EB3F502280D740900C6E385 /* Section.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
+				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
 				7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
@@ -524,14 +535,15 @@
 				7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */,
 				7ED920FA28070E4C00DD892A /* userType.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
-				7E272FF4280EB5490096DB72 /* RecordV.swift in Sources */,
 				7E44B7B7280977C500CF24AC /* BasicTableView.swift in Sources */,
 				7E44B7DB280BED5000CF24AC /* SelectTopicCollectionViewCell.swift in Sources */,
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
+				7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */,
+				7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */,
 				7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */,
-				7E44B7B1280966A200CF24AC /* AudioManager.swift in Sources */,
+				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7E44B7C2280AED7B00CF24AC /* GalleryView.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
