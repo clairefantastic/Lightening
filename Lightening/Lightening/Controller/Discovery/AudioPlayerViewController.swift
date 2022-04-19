@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AudioPlayerViewController: UIViewController {
     
@@ -83,9 +84,15 @@ class AudioPlayerViewController: UIViewController {
 class AudioPlayerView: UIView {
     
     
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playPauseButton: UIButton!
     
-    let nibName = "AudioPlayerView"
+    var player: AVPlayer!
+    
+    var timer = Timer()
+    
+    private var isPlaying = false
+    
+    private let nibName = "AudioPlayerView"
     
     var selectedAudioIndexPath: IndexPath?
     
@@ -100,8 +107,8 @@ class AudioPlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        playButton.isUserInteractionEnabled = true
-        playButton.isEnabled = true
+        playPauseButton.isUserInteractionEnabled = true
+        playPauseButton.isEnabled = true
     }
     
     override init(frame: CGRect) {
@@ -125,13 +132,50 @@ class AudioPlayerView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
-    @IBAction func playAudio() {
+    func setPlayer(url: URL) {
+        
+        let asset = AVAsset(url: url)
+        do {
+            let playerItem = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: playerItem)
+            player.volume = 100.0
+//            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        print("Video Finished")
+        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    @IBAction func playPauseAudio(_ sender: UIButton) {
+        
         guard let selectedAudioIndexPath = selectedAudioIndexPath else {
             return
         }
         
-        AudioPlayerManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+        setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+        
+        if isPlaying {
+            player.pause()
+            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            isPlaying = false
+
+        } else {
+            player.play()
+            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            isPlaying = true
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+
+      
+        
+//        AudioPlayerManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
     }
+    
     
     @IBAction func dismissPlayer() {
         

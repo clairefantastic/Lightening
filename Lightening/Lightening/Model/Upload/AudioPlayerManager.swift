@@ -25,4 +25,21 @@ class AudioPlayerManager {
             print(error.localizedDescription)
         }
     }
+    
+    func pauseAudioFile(url: URL) {
+        
+        let asset = AVAsset(url: url)
+        do {
+            let playerItem = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: playerItem)
+            player.volume = 100.0
+            player.pause()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    
+    
 }
