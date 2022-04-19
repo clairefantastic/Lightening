@@ -130,7 +130,7 @@ class AudioPlayerView: UIView {
             return
         }
         
-        AudioManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+        AudioPlayerManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
     }
     
     @IBAction func dismissPlayer() {
