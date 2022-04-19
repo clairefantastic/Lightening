@@ -12,20 +12,18 @@
             <connections>
                 <outlet property="audioAuthorLabel" destination="6qh-S7-MRS" id="s5p-Lc-MU0"/>
                 <outlet property="audioImageView" destination="zE8-j8-lhf" id="z4Y-kJ-hOM"/>
+                <outlet property="audioProgressSlider" destination="QNV-uj-5jp" id="NbQ-cD-w8j"/>
                 <outlet property="audioTitleLabel" destination="bIH-xK-PC6" id="1B0-aQ-Lkc"/>
                 <outlet property="playPauseButton" destination="79K-QE-e9Y" id="48A-rT-K7H"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="613" height="337"/>
+            <rect key="frame" x="0.0" y="0.0" width="577" height="303"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-F3-kcj">
-                    <rect key="frame" x="0.0" y="299" width="613" height="4"/>
-                </progressView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="dnZ-mk-zCw">
-                    <rect key="frame" x="462" y="153" width="115" height="31"/>
+                    <rect key="frame" x="426" y="136" width="115" height="31"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79K-QE-e9Y">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="31"/>
@@ -48,7 +46,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ibK-uA-TUp">
-                    <rect key="frame" x="24" y="138.5" width="115" height="60"/>
+                    <rect key="frame" x="24" y="121.5" width="115" height="60"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zE8-j8-lhf">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -84,18 +82,29 @@
                         <constraint firstItem="Ef5-KO-Xg4" firstAttribute="top" secondItem="ibK-uA-TUp" secondAttribute="top" id="u3z-oC-SRd"/>
                     </constraints>
                 </stackView>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QNV-uj-5jp">
+                    <rect key="frame" x="-2" y="189.5" width="581" height="80.5"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="thumbTintColor" white="0.27160395408163263" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="changeAudioProgress:" destination="-1" eventType="valueChanged" id="Sir-4n-gAn"/>
+                    </connections>
+                </slider>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jqD-F3-kcj" secondAttribute="bottom" id="1q5-7c-il0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="QNV-uj-5jp" secondAttribute="bottom" id="4l1-pT-bT3"/>
+                <constraint firstItem="QNV-uj-5jp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9yf-FO-hnh"/>
                 <constraint firstItem="ibK-uA-TUp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="Cru-KO-Gig"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="QNV-uj-5jp" secondAttribute="trailing" id="Zau-YV-OVU"/>
+                <constraint firstItem="QNV-uj-5jp" firstAttribute="top" secondItem="ibK-uA-TUp" secondAttribute="bottom" constant="8" id="a81-4T-TZM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dnZ-mk-zCw" secondAttribute="trailing" constant="36" id="dyr-iW-sVI"/>
                 <constraint firstItem="dnZ-mk-zCw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="h7b-Mo-aLD"/>
                 <constraint firstItem="ibK-uA-TUp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iDn-Zg-hZx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="281.8840579710145" y="-104.79910714285714"/>
+            <point key="canvasLocation" x="255.79710144927537" y="-116.18303571428571"/>
         </view>
     </objects>
     <resources>

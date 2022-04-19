@@ -92,6 +92,8 @@ class AudioPlayerView: UIView {
     
     @IBOutlet weak var audioAuthorLabel: UILabel!
     
+    @IBOutlet weak var audioProgressSlider: UISlider!
+    
     var player: AVPlayer!
     
     var timer = Timer()
@@ -116,6 +118,11 @@ class AudioPlayerView: UIView {
             
             setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
             
+            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
+                    let currentTime = CMTimeGetSeconds(self.player.currentTime())
+                    self.audioProgressSlider?.value = Float(currentTime)
+            })
+            
         }
     }
     
@@ -128,8 +135,8 @@ class AudioPlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        playPauseButton.isUserInteractionEnabled = true
-        playPauseButton.isEnabled = true
+        
+
     }
     
     override init(frame: CGRect) {
@@ -160,44 +167,34 @@ class AudioPlayerView: UIView {
             let playerItem = AVPlayerItem(asset: asset)
             let duration = playerItem.asset.duration
             let seconds = CMTimeGetSeconds(duration)
+            audioProgressSlider?.minimumValue = 0
+            audioProgressSlider?.maximumValue = Float(seconds)
+            audioProgressSlider?.isContinuous = true
+            
             player = AVPlayer(playerItem: playerItem)
             player.volume = 100.0
 //            player.play()
         } catch let error {
             print(error.localizedDescription)
         }
+        
+    
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
-    
-
-    // 抓取 playItem 的 duration
-    
-    // 把 duration 轉為我們歌曲的總時間（秒數）。
-    
-    // 把我們的歌曲總時長顯示到我們的 Label 上。
-//    songLengthLabel.text = formatConversion(time: seconds)
-//    songProgressSlider!.minimumValue = 0
-    // 更新 Slider 的 maximumValue。
-//    songProgressSlider!.maximumValue = Float(seconds)
-    // 這裡看個人需求，如果想要拖動後才更新進度，那就設為 false；如果想要直接更新就設為 true，預設為 true。
-//    songProgressSlider!.isContinuous = true
     
     
     @objc func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+        let targetTime: CMTime = CMTimeMake(value: Int64(0), timescale: 1)
+        player?.seek(to: targetTime)
     }
     
     
     
     @IBAction func playPauseAudio(_ sender: UIButton) {
-        
-        player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: DispatchQueue.main, using: { (CMTime) in
-            if self.player.currentItem?.status == .readyToPlay {
-                let currentTime = CMTimeGetSeconds(self.player.currentTime())
-        
-//        self.currentTimeLabel.text = self.formatConversion(time: currentTime)
-         }
-        })
         
         if isPlaying {
             
@@ -212,17 +209,19 @@ class AudioPlayerView: UIView {
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             
             isPlaying = true
-            
 
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
 
-      
-        
-//        AudioPlayerManager.shared.playAudioFile(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+
     }
     
+    @IBAction func changeAudioProgress(_ sender: Any) {
+        
+        let seconds = Int64(audioProgressSlider.value)
+        let targetTime: CMTime = CMTimeMake(value: seconds, timescale: 1)
+
+        player?.seek(to: targetTime)
+    }
     
     @IBAction func dismissPlayer() {
         
