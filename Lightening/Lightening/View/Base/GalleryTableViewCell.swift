@@ -97,7 +97,7 @@ extension GalleryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.audioTitleLabel?.text = datas[indexPath.row].title
     
-        cell.audioAuthorLabel?.text = "Claire"
+//        cell.audioAuthorLabel?.text = "Claire"
         
         return cell
     }

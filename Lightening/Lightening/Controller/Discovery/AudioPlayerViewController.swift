@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AudioPlayerViewController: UIViewController {
     
@@ -83,11 +84,47 @@ class AudioPlayerViewController: UIViewController {
 class AudioPlayerView: UIView {
     
     
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playPauseButton: UIButton!
     
-    let nibName = "AudioPlayerView"
+    @IBOutlet weak var audioImageView: UIImageView!
     
-    var selectedAudioIndex: Int = 0
+    @IBOutlet weak var audioTitleLabel: UILabel!
+    
+    @IBOutlet weak var audioAuthorLabel: UILabel!
+    
+    @IBOutlet weak var audioProgressSlider: UISlider!
+    
+    var player: AVPlayer!
+    
+    var timer = Timer()
+    
+    private var isPlaying = false
+    
+    private let nibName = "AudioPlayerView"
+    
+    var selectedAudioIndexPath: IndexPath?
+    
+    var audioFiles: [Section]? {
+        
+        didSet {
+            
+            guard let selectedAudioIndexPath = selectedAudioIndexPath else {
+                return
+            }
+
+            audioImageView?.image = UIImage(named: audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].cover ?? "")
+            audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
+            audioAuthorLabel?.text = "Claire"
+            
+            setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+            
+            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
+                    let currentTime = CMTimeGetSeconds(self.player.currentTime())
+                    self.audioProgressSlider?.value = Float(currentTime)
+            })
+            
+        }
+    }
     
     var datas: [Audio] = [] {
         
@@ -98,8 +135,8 @@ class AudioPlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
-        fetchData()
+        
+
     }
     
     override init(frame: CGRect) {
@@ -123,30 +160,74 @@ class AudioPlayerView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
-    
-    func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
+    func setPlayer(url: URL) {
+        
+        let asset = AVAsset(url: url)
+        do {
+            let playerItem = AVPlayerItem(asset: asset)
+            let duration = playerItem.asset.duration
+            let seconds = CMTimeGetSeconds(duration)
+            audioProgressSlider?.minimumValue = 0
+            audioProgressSlider?.maximumValue = Float(seconds)
+            audioProgressSlider?.isContinuous = true
             
-            switch result {
-            
-            case .success(let audioFiles):
-                
-                self?.datas = audioFiles
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-            
+            player = AVPlayer(playerItem: playerItem)
+            player.volume = 100.0
+//            player.play()
+        } catch let error {
+            print(error.localizedDescription)
         }
+        
+    
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        print("Video Finished")
+        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+        let targetTime: CMTime = CMTimeMake(value: Int64(0), timescale: 1)
+        player?.seek(to: targetTime)
+    }
+    
+    
+    
+    @IBAction func playPauseAudio(_ sender: UIButton) {
+        
+        if isPlaying {
+            
+            player.pause()
+            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            
+            isPlaying = false
+
+        } else {
+            
+            player.play()
+            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            
+            isPlaying = true
+
+        }
+
 
     }
     
-    @objc func playAudio(_ sender: UIButton) {
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
+    @IBAction func changeAudioProgress(_ sender: Any) {
         
+        let seconds = Int64(audioProgressSlider.value)
+        let targetTime: CMTime = CMTimeMake(value: seconds, timescale: 1)
+
+        player?.seek(to: targetTime)
     }
     
+    @IBAction func dismissPlayer() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0001, options: .curveEaseInOut, animations: {  self.frame = CGRect(x: 0, y: 1000, width: UIScreen.main.bounds.width, height: 80)}, completion: {_ in print("Audio Player dismiss")})
+    }
+        
     
 }
 
