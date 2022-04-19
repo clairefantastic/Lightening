@@ -110,13 +110,6 @@ class AddDetailsViewController: UIViewController {
         
         print("Upload file")
         
-        guard let count = self.navigationController?.viewControllers.count else { return }
-    
-        if let preController = self.navigationController?.viewControllers[count - 2] {
-
-            self.navigationController?.popToViewController(preController, animated: true)
-        }
-        
         guard let localurl = localurl else {
             return
         }
@@ -141,10 +134,18 @@ class AddDetailsViewController: UIViewController {
 
                     print("publishArticle.failure: \(error)")
                 }
+                
+                guard let count = self?.navigationController?.viewControllers.count else { return }
+            
+                if let preController = self?.navigationController?.viewControllers[count - 2] {
+
+                    self?.navigationController?.popToViewController(preController, animated: true)
+                }
 
             }
 
         }
+        
         
     }
     

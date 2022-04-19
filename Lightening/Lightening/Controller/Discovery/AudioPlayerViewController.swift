@@ -114,6 +114,8 @@ class AudioPlayerView: UIView {
             audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
             audioAuthorLabel?.text = "Claire"
             
+            setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+            
         }
     }
     
@@ -156,6 +158,8 @@ class AudioPlayerView: UIView {
         let asset = AVAsset(url: url)
         do {
             let playerItem = AVPlayerItem(asset: asset)
+            let duration = playerItem.asset.duration
+            let seconds = CMTimeGetSeconds(duration)
             player = AVPlayer(playerItem: playerItem)
             player.volume = 100.0
 //            player.play()
@@ -164,28 +168,52 @@ class AudioPlayerView: UIView {
         }
     }
     
+
+    // 抓取 playItem 的 duration
+    
+    // 把 duration 轉為我們歌曲的總時間（秒數）。
+    
+    // 把我們的歌曲總時長顯示到我們的 Label 上。
+//    songLengthLabel.text = formatConversion(time: seconds)
+//    songProgressSlider!.minimumValue = 0
+    // 更新 Slider 的 maximumValue。
+//    songProgressSlider!.maximumValue = Float(seconds)
+    // 這裡看個人需求，如果想要拖動後才更新進度，那就設為 false；如果想要直接更新就設為 true，預設為 true。
+//    songProgressSlider!.isContinuous = true
+    
+    
     @objc func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
+    
+    
     @IBAction func playPauseAudio(_ sender: UIButton) {
         
-        guard let selectedAudioIndexPath = selectedAudioIndexPath else {
-            return
-        }
+        player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: DispatchQueue.main, using: { (CMTime) in
+            if self.player.currentItem?.status == .readyToPlay {
+                let currentTime = CMTimeGetSeconds(self.player.currentTime())
         
-        setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+//        self.currentTimeLabel.text = self.formatConversion(time: currentTime)
+         }
+        })
         
         if isPlaying {
+            
             player.pause()
             sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            
             isPlaying = false
 
         } else {
+            
             player.play()
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            
             isPlaying = true
+            
+
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
