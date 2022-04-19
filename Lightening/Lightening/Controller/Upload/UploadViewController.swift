@@ -18,18 +18,18 @@ class UploadViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        layoutButton()
+        layoutSelectFileButton()
         
     }
     
-    func layoutButton() {
+    func layoutSelectFileButton() {
         let selectFileButton = UIButton()
         
         self.view.addSubview(selectFileButton)
         
         selectFileButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: selectFileButton, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
         
         NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -45,7 +45,6 @@ class UploadViewController: UIViewController {
         
         selectFileButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
         
-        selectFileButton.addTarget(self, action: #selector(pushAddDetailsPage), for: .touchUpInside)
     }
     
     @objc func importFile(_ sender: UIButton) {
@@ -67,11 +66,6 @@ class UploadViewController: UIViewController {
         if let popoverController = documentPicker.popoverPresentationController {
             popoverController.sourceView = self.view
         }
-    }
-    
-    @objc func pushAddDetailsPage(_ sender: UIButton) {
-        
-        
     }
     
     
