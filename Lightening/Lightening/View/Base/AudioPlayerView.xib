@@ -44,14 +44,17 @@
                         </button>
                     </subviews>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ibK-uA-TUp">
-                    <rect key="frame" x="48" y="64" width="168" height="128"/>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ibK-uA-TUp">
+                    <rect key="frame" x="48" y="64" width="183" height="128"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zE8-j8-lhf">
-                            <rect key="frame" x="0.0" y="0.0" width="113" height="128"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zE8-j8-lhf">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="zE8-j8-lhf" secondAttribute="height" multiplier="1:1" id="wx8-0O-TqO"/>
+                            </constraints>
                         </imageView>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ef5-KO-Xg4">
-                            <rect key="frame" x="137" y="0.0" width="31" height="37"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ef5-KO-Xg4">
+                            <rect key="frame" x="152" y="0.0" width="31" height="37"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIH-xK-PC6">
                                     <rect key="frame" x="0.0" y="0.0" width="31" height="14.5"/>
