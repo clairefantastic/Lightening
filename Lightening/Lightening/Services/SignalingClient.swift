@@ -76,7 +76,8 @@ final class SignalingClient {
     func send(sdp rtcSdp: RTCSessionDescription, from sender: String, to person: String) {
     do {
       let dataMessage = try self.encoder.encode(SessionDescription(from: rtcSdp))
-      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
+      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any]
+        guard let dict = dict else { return }
       db.collection("volunteers").document(person).collection("WebRTC").document("sdp").setData(dict) { (err) in
           self.db.collection("volunteers").document(person).collection("WebRTC").document("sender").setData(["sender": sender])
         if let err = err {
@@ -85,8 +86,7 @@ final class SignalingClient {
           print("Sdp sent!")
         }
       }
-    }
-    catch {
+    } catch {
       debugPrint("Warning: Could not encode sdp: \(error)")
     }
   }
@@ -94,7 +94,8 @@ final class SignalingClient {
   func send(candidate rtcIceCandidate: RTCIceCandidate, to person: String) {
     do {
       let dataMessage = try self.encoder.encode(IceCandidate(from: rtcIceCandidate))
-      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
+        guard let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any] else { return }
+    
         db.collection("volunteers").document(person).collection("WebRTC")
         .document("candidate")
         .collection("candidates")
@@ -105,8 +106,7 @@ final class SignalingClient {
             print("Candidate sent!")
           }
       }
-    }
-    catch {
+    } catch {
       debugPrint("Warning: Could not encode candidate: \(error)")
     }
   }
@@ -127,7 +127,6 @@ final class SignalingClient {
         }
 
     }
-
 
   func listenSdp(to person: String) {
     db.collection("visuallyImpaired").document(person).collection("WebRTC").document("sdp")
@@ -160,8 +159,7 @@ final class SignalingClient {
                 self.delegate?.signalClient(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription, didReceiveSender: document.data()?["sender"] as? String)
             }
           }
-       }
-        catch {
+       } catch {
           debugPrint("Warning: Could not decode sdp data: \(error)")
           return
         }
@@ -184,8 +182,7 @@ final class SignalingClient {
               let jsonData = try JSONSerialization.data(withJSONObject: documents.first!.data(), options: .prettyPrinted)
               let iceCandidate = try self.decoder.decode(IceCandidate.self, from: jsonData)
               self.delegate?.signalClient(self, didReceiveCandidate: iceCandidate.rtcIceCandidate)
-            }
-            catch {
+            } catch {
               debugPrint("Warning: Could not decode candidate data: \(error)")
               return
             }
@@ -194,12 +191,4 @@ final class SignalingClient {
     }
   }
 }
-
-
-
-
-
-
-
-
 

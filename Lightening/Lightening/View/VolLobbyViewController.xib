@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolLobbyViewController" customModule="Lightening" customModuleProvider="target">
             <connections>
-                <outlet property="ReceiveCallLabel" destination="oj5-af-U98" id="X4h-la-EBh"/>
                 <outlet property="availableStatusSegmentedControl" destination="fgQ-h5-sl4" id="efA-IX-pZ1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yP2-gq-Mwg"/>
             </connections>
@@ -44,12 +43,6 @@
                         <action selector="changeVolunteerStatus:" destination="-1" eventType="valueChanged" id="2gK-9c-MzE"/>
                     </connections>
                 </segmentedControl>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj5-af-U98">
-                    <rect key="frame" x="160.5" y="645" width="93" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -57,10 +50,8 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Gsf-P6-bBa" secondAttribute="trailing" constant="36" id="9Ze-uv-m5C"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Gsf-P6-bBa" secondAttribute="bottom" constant="60" id="T3j-Qk-0vW"/>
                 <constraint firstItem="fgQ-h5-sl4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="a82-OQ-kAw"/>
-                <constraint firstItem="Gsf-P6-bBa" firstAttribute="top" secondItem="oj5-af-U98" secondAttribute="bottom" constant="36" id="g16-qF-n76"/>
                 <constraint firstItem="fgQ-h5-sl4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="36" id="gF4-yn-nYF"/>
                 <constraint firstItem="Gsf-P6-bBa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="36" id="uhu-Em-fFX"/>
-                <constraint firstItem="oj5-af-U98" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zfO-fj-XOk"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="83.705357142857139"/>
         </view>

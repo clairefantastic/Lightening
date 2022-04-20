@@ -43,10 +43,12 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = selectCoverCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectCoverCollectionViewCell.self), for: indexPath) as? SelectCoverCollectionViewCell else { return UICollectionViewCell() }
+        let nibName = "SelectCoverCollectionViewCell"
+        
+        guard let cell = selectCoverCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectCoverCollectionViewCell else { return UICollectionViewCell() }
+        
         
         cell.coverImageView?.image = UIImage(named: "\(coverArray[indexPath.row])")
-        
         
         return cell
     }
@@ -55,8 +57,6 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
         
         delegate?.didSelectCover(indexPath.row)
     }
-
-    
 }
 
 extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -74,7 +74,4 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
-    
-
 }
-

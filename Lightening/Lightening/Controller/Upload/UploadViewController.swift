@@ -103,14 +103,11 @@ class UploadViewController: UIViewController {
         
         navigationController?.pushViewController(recordViewController, animated: true)
     }
-    
-    
+
 }
 
 extension UploadViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        
-        
         
         guard let url = urls.first else { return }
         
@@ -120,24 +117,16 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 
                 let addDetailsViewController = AddDetailsViewController()
                 
-                addDetailsViewController.localurl = localUrl
+                addDetailsViewController.localUrl = localUrl
                 
                 self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
             }
             
-            
         }
-        
-        
-        
         
 //        uploadManager.addAudio(audioUrl: url)
         
     }
                 
 }
-
-
-
-
 

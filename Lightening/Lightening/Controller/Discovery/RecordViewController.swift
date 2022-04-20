@@ -188,7 +188,7 @@ class RecordViewController: UIViewController {
         
         let addDetailsViewController = AddDetailsViewController()
         
-        addDetailsViewController.localurl = audioManager.localUrl
+        addDetailsViewController.localUrl = audioManager.localUrl
         
         navigationController?.pushViewController(addDetailsViewController, animated: true)
     }

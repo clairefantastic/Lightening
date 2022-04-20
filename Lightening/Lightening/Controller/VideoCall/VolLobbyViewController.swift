@@ -6,7 +6,8 @@
 //
 
 import UIKit
-//import AVFoundation
+// import AVFoundation
+
 import WebRTC
 import Lottie
 
@@ -16,14 +17,9 @@ class VolLobbyViewController: UIViewController {
     
     @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
         didSet {
-            //Must Be here
-            
+            // Must Be here
         }
     }
-    
-    @IBOutlet weak var ReceiveCallLabel: UILabel!
-    
-    
     private let signalClientforVolunteer: SignalingClientforVolunteer
     private let webRTCClient: WebRTCClient
 
@@ -61,20 +57,6 @@ class VolLobbyViewController: UIViewController {
         availableStatusSegmentedControl.selectedSegmentIndex = 0
         
         self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
-        
-        
-        
-//      
-        
-        ReceiveCallLabel.isHidden = true
-        
-        
-        
-
-    }
-    
-    @objc func notifyIncomingCall() {
-        ReceiveCallLabel.isHidden = false
     }
     
     private var signalingConnected: Bool = false {
@@ -100,23 +82,18 @@ class VolLobbyViewController: UIViewController {
     
     var remoteCandidateCount: Int = 0 {
       didSet {
-          
           NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
       }
     }
-    
-    
+
     @IBAction func changeVolunteerStatus(_ sender: Any) {
         if availableStatusSegmentedControl.selectedSegmentIndex == 0 {
-            //FireBase Status Update
-            
+            // FireBase Status Update
             self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
         } else {
             self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.unavailable)
         }
     }
-    
-    
     @IBAction func answerDidTap(_ sender: Any) {
         self.webRTCClient.answer { (localSdp) in
           self.hasLocalSdp = true
@@ -124,15 +101,13 @@ class VolLobbyViewController: UIViewController {
             self.signalClientforVolunteer.send(sdp: localSdp, from: self.currentPerson, to: self.oppositePerson)
         }
         
-        let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
+
+        videoCallViewController.currentPerson = self.currentPerson
         
-        vc.currentPerson = self.currentPerson
-        
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        videoCallViewController.modalPresentationStyle = .fullScreen
+        self.present(videoCallViewController, animated: true, completion: nil)
     }
-    
-    
 }
 
 extension VolLobbyViewController: SignalClientforVolunteerDelegate {
@@ -160,9 +135,7 @@ extension VolLobbyViewController: SignalClientforVolunteerDelegate {
       self.remoteCandidateCount += 1
       
       self.webRTCClient.set(remoteCandidate: candidate)
-      
-      
-      
+    
        
   }
 }
@@ -202,8 +175,3 @@ extension VolLobbyViewController: WebRTCClientDelegate {
     }
   }
 }
-
-
-
-
-

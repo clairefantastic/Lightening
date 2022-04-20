@@ -23,4 +23,13 @@ struct Audio: Codable, Hashable {
     
     var createdTime: Double?
     
+    var location: Location?
+
+}
+
+struct Location: Codable, Hashable {
+    
+    var latitude: Double?
+    
+    var longitude: Double?
 }

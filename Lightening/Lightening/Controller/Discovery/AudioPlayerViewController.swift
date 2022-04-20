@@ -104,27 +104,42 @@ class AudioPlayerView: UIView {
     
     var selectedAudioIndexPath: IndexPath?
     
-    var audioFiles: [Section]? {
+    var audioFile: Audio? {
         
         didSet {
-            
-            guard let selectedAudioIndexPath = selectedAudioIndexPath else {
-                return
-            }
-
-            audioImageView?.image = UIImage(named: audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].cover ?? "")
-            audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
+            audioImageView?.image = UIImage(named: self.audioFile?.cover ?? "")
+            audioTitleLabel?.text = self.audioFile?.title
             audioAuthorLabel?.text = "Claire"
             
-            setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
-            
+            setPlayer(url: (self.audioFile?.audioUrl)!)
             player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
                     let currentTime = CMTimeGetSeconds(self.player.currentTime())
                     self.audioProgressSlider?.value = Float(currentTime)
             })
-            
         }
     }
+    
+//    var audioFiles: [Section]? {
+//
+//        didSet {
+//
+//            guard let selectedAudioIndexPath = selectedAudioIndexPath else {
+//                return
+//            }
+//
+//            audioImageView?.image = UIImage(named: audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].cover ?? "")
+//            audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
+//            audioAuthorLabel?.text = "Claire"
+//
+//            setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
+//
+//            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
+//                    let currentTime = CMTimeGetSeconds(self.player.currentTime())
+//                    self.audioProgressSlider?.value = Float(currentTime)
+//            })
+//
+//        }
+//    }
     
     var datas: [Audio] = [] {
         
@@ -192,8 +207,6 @@ class AudioPlayerView: UIView {
         player?.seek(to: targetTime)
     }
     
-    
-    
     @IBAction func playPauseAudio(_ sender: UIButton) {
         
         if isPlaying {
@@ -211,8 +224,6 @@ class AudioPlayerView: UIView {
             isPlaying = true
 
         }
-
-
     }
     
     @IBAction func changeAudioProgress(_ sender: Any) {
@@ -225,7 +236,9 @@ class AudioPlayerView: UIView {
     
     @IBAction func dismissPlayer() {
         
-        UIView.animate(withDuration: 0.5, delay: 0.0001, options: .curveEaseInOut, animations: {  self.frame = CGRect(x: 0, y: 1000, width: UIScreen.main.bounds.width, height: 80)}, completion: {_ in print("Audio Player dismiss")})
+        UIView.animate(withDuration: 0.5, delay: 0.0001, options: .curveEaseInOut, animations: {  self.frame = CGRect(x: 0, y: 1000, width: UIScreen.width, height: 80)}, completion: {_ in })
+        
+        
     }
         
     

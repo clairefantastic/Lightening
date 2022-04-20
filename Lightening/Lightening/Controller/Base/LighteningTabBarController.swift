@@ -67,8 +67,6 @@ private enum Tab {
                 image: UIImage(systemName: "arrow.up.heart"),
                 selectedImage: UIImage(systemName: "arrow.up.heart")
             )
-
-        
         }
     }
 }
