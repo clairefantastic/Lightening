@@ -16,7 +16,7 @@ class AddDetailsViewController: UIViewController {
 //        .title, .description
 //    ]
     
-    private let categories = ["title", "description", "topic", "cover image"]
+    private let categories = ["title", "description", "topic", "cover image", "pin on map"]
     
     private let image = ["nature", "city", "pet"]
     
@@ -70,6 +70,11 @@ class AddDetailsViewController: UIViewController {
         
         tableView.registerCellWithNib(identifier:
             String(describing: AddDetailsCoverTableViewCell.self),
+                                         bundle: nil
+        )
+        
+        tableView.registerCellWithNib(identifier:
+            String(describing: AddDetailsLocationCell.self),
                                          bundle: nil
         )
         
@@ -155,7 +160,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 4
+        return 5
         
     }
     
@@ -173,7 +178,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        } else if indexPath.row == 2{
+        } else if indexPath.row == 2 {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
             
@@ -186,7 +191,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        } else {
+        } else if indexPath.row == 3 {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsCoverTableViewCell.self)", for: indexPath) as? AddDetailsCoverTableViewCell
             
@@ -196,6 +201,18 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.categoryLabel.text = categories[indexPath.row]
             
             cell.delegate = self
+            
+            return cell
+            
+        } else {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsLocationCell.self)", for: indexPath) as? AddDetailsLocationCell
+                    
+            else { return UITableViewCell() }
+            
+            cell.categoryLabel.text = categories[indexPath.row]
+            
+//            cell.delegate = self
             
             return cell
         }

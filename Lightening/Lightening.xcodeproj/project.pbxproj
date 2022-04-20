@@ -15,6 +15,8 @@
 		7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */; };
 		7E273001280FAB840096DB72 /* SelectLocationMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273000280FAB840096DB72 /* SelectLocationMapView.xib */; };
 		7E273003280FABB60096DB72 /* SelectLocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273002280FABB60096DB72 /* SelectLocationMapView.swift */; };
+		7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */; };
+		7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -79,6 +81,8 @@
 		7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileManager.swift; sourceTree = "<group>"; };
 		7E273000280FAB840096DB72 /* SelectLocationMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectLocationMapView.xib; sourceTree = "<group>"; };
 		7E273002280FABB60096DB72 /* SelectLocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationMapView.swift; sourceTree = "<group>"; };
+		7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsLocationCell.swift; sourceTree = "<group>"; };
+		7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsLocationCell.xib; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 				7E44B7E0280C4B8300CF24AC /* AddDetailsCoverTableViewCell.xib */,
 				7E44B7D9280BED5000CF24AC /* SelectTopicCollectionViewCell.swift */,
 				7E44B7DA280BED5000CF24AC /* SelectTopicCollectionViewCell.xib */,
+				7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */,
+				7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 			files = (
 				7E44B7E2280C4B8300CF24AC /* AddDetailsCoverTableViewCell.xib in Resources */,
 				7E44B7AD2809187C00CF24AC /* AddDetailsContentCell.xib in Resources */,
+				7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */,
 				7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */,
 				7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
@@ -547,6 +554,7 @@
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7E44B7DB280BED5000CF24AC /* SelectTopicCollectionViewCell.swift in Sources */,
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
+				7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */,
