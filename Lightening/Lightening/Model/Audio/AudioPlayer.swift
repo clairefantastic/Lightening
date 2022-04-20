@@ -94,6 +94,7 @@ class AudioPlayer: NSObject {
             guard let player = self?.player else { return }
             let progress = player.currentTime / player.duration
             print(progress)
+            
         })
 
         RunLoop.main.add(timer!, forMode: .common)

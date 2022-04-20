@@ -35,7 +35,7 @@ class RecordViewController: UIViewController {
         
         layoutPlayerButton()
         
-        layoutresetButton()
+        layoutResetButton()
         
         layoutFinishRecordingButton()
         
@@ -130,7 +130,7 @@ class RecordViewController: UIViewController {
         }
     }
     
-    func layoutresetButton() {
+    func layoutResetButton() {
         
         self.view.addSubview(resetButton)
         
