@@ -210,7 +210,9 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.determineCurrentLocation()
             
-            self.audio.location = cell.location
+            cell.locationHandler = { [weak self] currentLocation in
+                self?.audio.location = currentLocation
+            }
             
             return cell
         }

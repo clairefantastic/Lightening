@@ -21,6 +21,8 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
     
     var currentLocationStr = "Current location"
     
+    var locationHandler: ((Location) -> Void)?
+    
     var location: Location?
     
     override func awakeFromNib() {
@@ -64,8 +66,7 @@ extension AddDetailsLocationCell {
             
         mapView.addAnnotation(mkAnnotation)
         
-        location?.latitude = mUserLocation.coordinate.latitude
-        location?.longitude = mUserLocation.coordinate.longitude
+        locationHandler?(Location(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude))
         
     }
     
