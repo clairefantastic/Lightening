@@ -13,8 +13,6 @@
 		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
 		7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */; };
 		7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */; };
-		7E273001280FAB840096DB72 /* SelectLocationMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273000280FAB840096DB72 /* SelectLocationMapView.xib */; };
-		7E273003280FABB60096DB72 /* SelectLocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273002280FABB60096DB72 /* SelectLocationMapView.swift */; };
 		7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */; };
 		7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
@@ -79,8 +77,6 @@
 		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileManager.swift; sourceTree = "<group>"; };
-		7E273000280FAB840096DB72 /* SelectLocationMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectLocationMapView.xib; sourceTree = "<group>"; };
-		7E273002280FABB60096DB72 /* SelectLocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationMapView.swift; sourceTree = "<group>"; };
 		7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsLocationCell.swift; sourceTree = "<group>"; };
 		7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsLocationCell.xib; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
@@ -162,15 +158,6 @@
 				CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		7E272FFF280FAA800096DB72 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				7E273000280FAB840096DB72 /* SelectLocationMapView.xib */,
-				7E273002280FABB60096DB72 /* SelectLocationMapView.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		7E44B7A62809154F00CF24AC /* Base */ = {
@@ -338,7 +325,6 @@
 		7EB9DADD2803D047009B89D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7E272FFF280FAA800096DB72 /* Map */,
 				7E44B7C8280AFD9200CF24AC /* Discovery */,
 				7E44B7A72809159F00CF24AC /* Upload */,
 				7E44B7A62809154F00CF24AC /* Base */,
@@ -462,7 +448,6 @@
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
-				7E273001280FAB840096DB72 /* SelectLocationMapView.xib in Resources */,
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
 				7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */,
 				7EDBA2CC2805E9A900C10FA5 /* VolLobbyViewController.xib in Resources */,
@@ -542,7 +527,6 @@
 				7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */,
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientforVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
-				7E273003280FABB60096DB72 /* SelectLocationMapView.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
