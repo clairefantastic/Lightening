@@ -9,13 +9,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
     
     private let mapView = MKMapView()
     
     private let locationManager = CLLocationManager()
     
-    private var audioAnnotations: [MKPointAnnotation] = []
+    private var audioAnnotations: [AudioAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +38,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 }
 
-extension MapViewController {
+extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let mUserLocation:CLLocation = locations[0] as CLLocation
+        let mUserLocation: CLLocation = locations[0] as CLLocation
 
         let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
         let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -54,9 +54,13 @@ extension MapViewController {
             case .success(let audioFiles):
                 
                 audioFiles.forEach { audioFile in
-                    self?.audioAnnotations.append(MKPointAnnotation(__coordinate: CLLocationCoordinate2DMake(audioFile.location?.latitude ?? 0.0, audioFile.location?.longitude ?? 0.0),
-                        title: audioFile.title,
-                        subtitle: "Claire"))
+                    
+                    self?.audioAnnotations.append(AudioAnnotation(title: audioFile.title, locationName: "Claire",
+                                                                  discipline: "good",
+                                                                  coordinate: CLLocationCoordinate2DMake(audioFile.location?.latitude ?? 0.0, audioFile.location?.longitude ?? 0.0)))
+//                    self?.audioAnnotations.append(MKPointAnnotation(__coordinate: ,
+//                        title: audioFile.title,
+//                        subtitle: "Claire"))
                     
                 }
                 
@@ -74,19 +78,39 @@ extension MapViewController {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error - locationManager: \(error.localizedDescription)")
     }
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("viewForAnnotation \(annotation.title)")
-        let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
-        if(pinView == nil) {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView!.canShowCallout = true
-            pinView!.animatesDrop = true
-        }
-        return pinView
-    }
 
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(
+        _ mapView: MKMapView,
+        viewFor annotation: MKAnnotation
+      ) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? AudioAnnotation else {
+          return nil
+        }
+        // 3
+        let identifier = "audio"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(
+          withIdentifier: identifier) as? MKMarkerAnnotationView {
+          dequeuedView.annotation = annotation
+          view = dequeuedView
+        } else {
+          // 5
+          view = MKMarkerAnnotationView(
+            annotation: annotation,
+            reuseIdentifier: identifier)
+          view.canShowCallout = true
+          view.calloutOffset = CGPoint(x: -5, y: 5)
+          view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+          
+        }
+        return view
+      }
 }
 
 extension MapViewController {
