@@ -10,20 +10,19 @@ import MapKit
 class AudioAnnotation: NSObject, MKAnnotation {
   let title: String?
   let locationName: String?
-  let discipline: String?
   let coordinate: CLLocationCoordinate2D
+  let audioUrl: URL?
 
   init(
     title: String?,
     locationName: String?,
-    discipline: String?,
-    coordinate: CLLocationCoordinate2D
+    coordinate: CLLocationCoordinate2D,
+    audioUrl: URL?
   ) {
     self.title = title
     self.locationName = locationName
-    self.discipline = discipline
     self.coordinate = coordinate
-
+    self.audioUrl = audioUrl
     super.init()
   }
 

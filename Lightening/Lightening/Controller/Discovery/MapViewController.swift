@@ -17,6 +17,8 @@ class MapViewController: UIViewController {
     
     private var audioAnnotations: [AudioAnnotation] = []
     
+    private var audioFiles: [Audio] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,14 +55,12 @@ extension MapViewController: CLLocationManagerDelegate {
             
             case .success(let audioFiles):
                 
+                self?.audioFiles = audioFiles
+                
                 audioFiles.forEach { audioFile in
                     
                     self?.audioAnnotations.append(AudioAnnotation(title: audioFile.title, locationName: "Claire",
-                                                                  discipline: "good",
-                                                                  coordinate: CLLocationCoordinate2DMake(audioFile.location?.latitude ?? 0.0, audioFile.location?.longitude ?? 0.0)))
-//                    self?.audioAnnotations.append(MKPointAnnotation(__coordinate: ,
-//                        title: audioFile.title,
-//                        subtitle: "Claire"))
+                        coordinate: CLLocationCoordinate2DMake(audioFile.location?.latitude ?? 0.0, audioFile.location?.longitude ?? 0.0), audioUrl: audioFile.audioUrl))
                     
                 }
                 
@@ -107,10 +107,23 @@ extension MapViewController: MKMapViewDelegate {
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
           view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-          
+        
         }
         return view
       }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let annotation = view.annotation as? AudioAnnotation
+        let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
+        let playerView = AudioPlayerView()
+        playerView.audioFile = audioFile[0]
+        playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
+        playerView.backgroundColor?.withAlphaComponent(0)
+        mapView.addSubview(playerView)
+        UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: { playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)}, completion: {_ in })
+        
+    }
+    
 }
 
 extension MapViewController {

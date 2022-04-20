@@ -134,9 +134,10 @@ extension DiscoveryViewController {
     }
       
       let playerView = AudioPlayerView()
-      playerView.selectedAudioIndexPath = indexPath
-      playerView.audioFiles = sections
-      playerView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 80, width: UIScreen.main.bounds.width, height: 80)
+      playerView.audioFile = sections[indexPath.section].audios[indexPath.row]
+//      playerView.selectedAudioIndexPath = indexPath
+//      playerView.audioFiles = sections
+      playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
       playerView.backgroundColor?.withAlphaComponent(0)
       view.addSubview(playerView)
       UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: { playerView.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)}, completion: {_ in })
