@@ -23,7 +23,7 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
         selectTopicCollectionView.delegate = self
         selectTopicCollectionView.dataSource = self
         
-        selectTopicCollectionView.registerCellWithNib(identifier: String(describing: SelectTopicCollectionViewCell.self), bundle: nil)
+        selectTopicCollectionView.registerCellWithNib(identifier: "SelectTopicCollectionViewCell", bundle: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,7 +48,7 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let nibName = "SelectionTopicCollectionViewCell"
+        let nibName = "SelectTopicCollectionViewCell"
         guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
       
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)

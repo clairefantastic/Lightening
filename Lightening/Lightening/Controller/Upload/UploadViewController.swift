@@ -117,7 +117,7 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 
                 let addDetailsViewController = AddDetailsViewController()
                 
-                addDetailsViewController.localurl = localUrl
+                addDetailsViewController.localUrl = localUrl
                 
                 self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
             }

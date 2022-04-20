@@ -20,19 +20,9 @@ class AddDetailsViewController: UIViewController {
     
     private let image = ["nature", "city", "pet"]
     
-    private var audio: Audio?
+    private var audio = Audio(audioUrl: URL(fileURLWithPath: ""), topic: "", title: "", description: "", cover: "", createdTime: 0.0, location: Location(latitude: 0.0, longitude: 0.0))
     
-    var audioTitle: String = ""
-    
-    var audioDescription: String = ""
-    
-    var audioTopic: String = ""
-    
-    var localurl: URL?
-    
-    var audioCover: String = ""
-    
-    var createdTime = Date().timeIntervalSince1970
+    var localUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +34,6 @@ class AddDetailsViewController: UIViewController {
         layoutButton()
     }
 
-    
     private func setupTableView() {
         
         view.addSubview(tableView)
@@ -84,8 +73,7 @@ class AddDetailsViewController: UIViewController {
         tableView.dataSource = self
 
         tableView.delegate = self
-        
-
+    
     }
     
     private func layoutButton() {
@@ -118,13 +106,22 @@ class AddDetailsViewController: UIViewController {
         
         print("Upload file")
         
-        guard let localurl = localurl else {
+        guard let localUrl = localUrl else {
             return
         }
 
-        PublishManager.shared.getFileRemoteUrl(destinationUrl: localurl) { [weak self] downloadUrl in
+        PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
+            
+            self?.audio.audioUrl = downloadUrl
+            
+            self?.audio.createdTime = Date().timeIntervalSince1970
 
-            self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic, title: self?.audioTitle, description: self?.audioDescription, cover: self?.audioCover, createdTime: self?.createdTime)
+//            self?.audio = Audio(audioUrl: downloadUrl,
+//                                topic: self?.audioTopic,
+//                                title: self?.audioTitle,
+//                                description: self?.audioDescription,
+//                                cover: self?.audioCover,
+//                                createdTime: self?.createdTime)
 
             guard let publishAudio = self?.audio else {
                     return
@@ -136,8 +133,7 @@ class AddDetailsViewController: UIViewController {
                 case .success:
 
                     print("onTapPublish, success")
-
-
+                    
                 case .failure(let error):
 
                     print("publishArticle.failure: \(error)")
@@ -153,7 +149,6 @@ class AddDetailsViewController: UIViewController {
             }
             
         }
-        
         
     }
     
@@ -185,7 +180,6 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
             
-                    
             else { return UITableViewCell() }
             
             cell.categoryLabel.text = categories[indexPath.row]
@@ -216,6 +210,8 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.determineCurrentLocation()
             
+            self.audio.location = cell.location
+            
             return cell
         }
     
@@ -226,11 +222,13 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
 extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
     
     func didSelectCover(_ index: Int) {
-        audioCover = image[index]
+        
+        audio.cover = image[index]
     }
     
     func didSelectTopic(_ button: UIButton) {
-        audioTopic = button.titleLabel?.text ?? ""
+        
+        audio.topic = button.titleLabel?.text
     }
 
     func endEditing(_ cell: AddDetailsContentCell) {
@@ -239,11 +237,11 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
         
         if tappedIndexPath.row == 0 {
             
-            audioTitle = cell.contentTextView?.text ?? ""
+            audio.title = cell.contentTextView?.text
             
         } else {
             
-            audioDescription = cell.contentTextView?.text ?? ""
+            audio.description = cell.contentTextView?.text
             
         }
     }

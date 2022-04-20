@@ -21,6 +21,8 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
     
     var currentLocationStr = "Current location"
     
+    var location: Location?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -57,9 +59,14 @@ extension AddDetailsLocationCell {
         mapView.setRegion(mRegion, animated: true)
         
         let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
-            mkAnnotation.coordinate = CLLocationCoordinate2DMake(mUserLocation.coordinate.latitude, mUserLocation.coordinate.longitude)
-            mkAnnotation.title = self.setUsersClosestLocation(mLattitude: mUserLocation.coordinate.latitude, mLongitude: mUserLocation.coordinate.longitude)
-            mapView.addAnnotation(mkAnnotation)
+        mkAnnotation.coordinate = CLLocationCoordinate2DMake(mUserLocation.coordinate.latitude, mUserLocation.coordinate.longitude)
+        mkAnnotation.title = self.setUsersClosestLocation(mLattitude: mUserLocation.coordinate.latitude, mLongitude: mUserLocation.coordinate.longitude)
+            
+        mapView.addAnnotation(mkAnnotation)
+        
+        location?.latitude = mUserLocation.coordinate.latitude
+        location?.longitude = mUserLocation.coordinate.longitude
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -72,7 +79,6 @@ extension AddDetailsLocationCell {
 
         geoCoder.reverseGeocodeLocation(location) {
             (placemarks, error) -> Void in
-
             if let mPlacemark = placemarks{
                 if let dict = mPlacemark[0].addressDictionary as? [String: Any] {
 //                    if let Name = dict["Name"] as? String{
@@ -87,4 +93,3 @@ extension AddDetailsLocationCell {
     }
 
 }
-
