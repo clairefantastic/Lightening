@@ -27,6 +27,7 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
         
         mapView.delegate = self
