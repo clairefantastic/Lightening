@@ -7,11 +7,10 @@
 
 import Foundation
 
-enum userType {
+enum UserType {
     
     case visuallyImpaired
     
     case volunteer
     
 }
-

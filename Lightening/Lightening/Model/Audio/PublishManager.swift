@@ -145,7 +145,4 @@ class PublishManager {
         }
     }
     
-    
-    
 }
-

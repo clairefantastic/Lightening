@@ -66,7 +66,7 @@ class AudioRecorder: NSObject {
         guard let recorder = recorder else { return }
         
         if recorder.isRecording {
-            currentTimeInterval = currentTimeInterval + 0.1
+            currentTimeInterval += 0.1
             let min = Int(currentTimeInterval / 60)
             let hr = Int(min / 60)
             let sec = Int(currentTimeInterval.truncatingRemainder(dividingBy: 60))

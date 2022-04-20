@@ -89,7 +89,8 @@ final class SignalingClientforVolunteer {
     func send(sdp rtcSdp: RTCSessionDescription, from sender: String, to person: String) {
     do {
       let dataMessage = try self.encoder.encode(SessionDescription(from: rtcSdp))
-      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
+      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any]
+        guard let dict = dict else { return }
       Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC").document("sdp").setData(dict) { (err) in
           Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC").document("sender").setData(["sender": sender])
         if let err = err {
@@ -98,8 +99,7 @@ final class SignalingClientforVolunteer {
           print("Sdp sent!")
         }
       }
-    }
-    catch {
+    } catch {
       debugPrint("Warning: Could not encode sdp: \(error)")
     }
   }
@@ -107,7 +107,8 @@ final class SignalingClientforVolunteer {
   func send(candidate rtcIceCandidate: RTCIceCandidate, to person: String) {
     do {
       let dataMessage = try self.encoder.encode(IceCandidate(from: rtcIceCandidate))
-      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as! [String: Any]
+      let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any]
+        guard let dict = dict else { return }
         Firestore.firestore().collection("visuallyImpaired").document(person).collection("WebRTC")
         .document("candidate")
         .collection("candidates")

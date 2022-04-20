@@ -111,8 +111,8 @@ extension AudioPlayer: AVAudioPlayerDelegate {
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        if let e = error {
-            self.playerStateChangeHandler?(.failed(e))
+        if let error = error {
+            self.playerStateChangeHandler?(.failed(error))
         } else {
             doStop()
         }

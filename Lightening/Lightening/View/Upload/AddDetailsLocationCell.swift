@@ -74,12 +74,12 @@ extension AddDetailsLocationCell {
             (placemarks, error) -> Void in
 
             if let mPlacemark = placemarks{
-                if let dict = mPlacemark[0].addressDictionary as? [String: Any]{
-                    if let Name = dict["Name"] as? String{
-                        if let City = dict["City"] as? String{
-                            self.currentLocationStr = Name + ", " + City
-                        }
-                    }
+                if let dict = mPlacemark[0].addressDictionary as? [String: Any] {
+//                    if let Name = dict["Name"] as? String{
+//                        if let City = dict["City"] as? String{
+//                            self.currentLocationStr = Name + ", " + City
+//                        }
+//                    }
                 }
             }
         }

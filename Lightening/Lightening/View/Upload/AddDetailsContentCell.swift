@@ -50,4 +50,3 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     }
     
 }
-

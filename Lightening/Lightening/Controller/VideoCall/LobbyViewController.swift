@@ -142,8 +142,7 @@ class LobbyViewController: UIViewController {
         self.muteButton?.setTitle(title, for: .normal)
       }
     }
-    
-    
+
     @IBAction func endCall(_ sender: Any) {
         self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
         self.webRTCClient.closePeerConnection()
@@ -158,8 +157,7 @@ class LobbyViewController: UIViewController {
     @IBAction private func speakerDidTap(_ sender: UIButton) {
       if self.speakerOn {
         self.webRTCClient.speakerOff()
-      }
-      else {
+      } else {
         self.webRTCClient.speakerOn()
       }
       self.speakerOn = !self.speakerOn
@@ -169,13 +167,11 @@ class LobbyViewController: UIViewController {
       self.mute = !self.mute
       if self.mute {
         self.webRTCClient.muteAudio()
-      }
-      else {
+      } else {
         self.webRTCClient.unmuteAudio()
       }
     }
-    
-    
+
     @IBAction func callDidTap(_ sender: UIButton) {
         self.signalClient.listenVolunteers()
         self.signalClient.getVolunteerHandler = { name in
@@ -186,15 +182,9 @@ class LobbyViewController: UIViewController {
             }
         
         }
-        
-
     }
     
     @IBAction func offerDidTap(_ sender: Any) {
-        
-
-        
-      
     }
     
     @IBAction func answerDidTap(_ sender: Any) {
@@ -206,11 +196,9 @@ class LobbyViewController: UIViewController {
     }
     
     @IBAction private func videoDidTap(_ sender: UIButton) {
-        let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-        self.present(vc, animated: true, completion: nil)
+        let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
+        self.present(videoCallViewController, animated: true, completion: nil)
     }
-
-    
 }
 
 extension LobbyViewController: SignalClientDelegate {

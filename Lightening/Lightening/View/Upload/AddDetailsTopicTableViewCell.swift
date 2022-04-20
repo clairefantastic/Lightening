@@ -48,7 +48,8 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectTopicCollectionViewCell.self), for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
+        let nibName = "SelectionTopicCollectionViewCell"
+        guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
       
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
         
@@ -69,7 +70,6 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
         
     }
 
-    
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -87,8 +87,4 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
-    
-
 }
-
-
