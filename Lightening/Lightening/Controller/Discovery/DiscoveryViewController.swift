@@ -11,6 +11,8 @@ import AVFoundation
 
 class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     
+    private let mapButton = UIButton()
+    
     private var sections = Section.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -29,6 +31,8 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
         fetchData()
         configureCollectionView()
         configureLayout()
+        
+        layoutMapButton()
         
     }
     
@@ -181,4 +185,30 @@ extension DiscoveryViewController {
       self.collectionView.collectionViewLayout.invalidateLayout()
     }, completion: nil)
   }
+}
+
+extension DiscoveryViewController {
+    
+    private func layoutMapButton() {
+        
+        self.view.addSubview(mapButton)
+        
+        mapButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: mapButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        NSLayoutConstraint(item: mapButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: mapButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: mapButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
+        
+        mapButton.setImage(UIImage(systemName: "map"), for: .normal)
+        
+        mapButton.addTarget(self, action: #selector(pushMapPage), for: .touchUpInside)
+    }
+    
+    @objc func pushMapPage(_ sender: UIButton) {
+        
+    }
 }
