@@ -16,6 +16,7 @@
 		7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */; };
 		7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */; };
 		7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */; };
+		7E27300C281006760096DB72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300B281006750096DB72 /* MapViewController.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -81,6 +82,7 @@
 		7E273004280FB06C0096DB72 /* AddDetailsLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsLocationCell.swift; sourceTree = "<group>"; };
 		7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsLocationCell.xib; sourceTree = "<group>"; };
 		7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		7E27300B281006750096DB72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */,
+				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
 				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 			);
@@ -533,6 +536,7 @@
 				7EB3F502280D740900C6E385 /* Section.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
+				7E27300C281006760096DB72 /* MapViewController.swift in Sources */,
 				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
 				7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
