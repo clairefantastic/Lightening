@@ -10,11 +10,11 @@ import AVFoundation
 
 class AddDetailsViewController: UIViewController {
     
-    private var tableView = UITableView()
-    
-//    private let datas: [AddDetailsCategory] = [
-//        .title, .description
-//    ]
+    private var tableView = UITableView() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     private let categories = ["title", "description", "topic", "cover image", "pin on map"]
     
@@ -41,6 +41,7 @@ class AddDetailsViewController: UIViewController {
         
         layoutButton()
     }
+
     
     private func setupTableView() {
         
@@ -212,7 +213,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.categoryLabel.text = categories[indexPath.row]
             
-//            cell.delegate = self
+            cell.determineCurrentLocation()
             
             return cell
         }

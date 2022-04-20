@@ -24,7 +24,6 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        determineCurrentLocation()
         
         mapView.delegate = self
 
@@ -36,7 +35,7 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
         // Configure the view for the selected state
     }
     
-    private func determineCurrentLocation() {
+    func determineCurrentLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
