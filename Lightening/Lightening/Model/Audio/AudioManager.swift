@@ -26,8 +26,8 @@ class AudioManager: NSObject {
     private var fileManager: AudioFileManager
     var delegate: AudioManagerDelegate?
     
-    private var recorder: AudioRecorder?
-    private var player: AudioPlayer?
+    var recorder: AudioRecorder?
+    var player: AudioPlayer?
     
     var localUrl: URL?
     

@@ -17,14 +17,11 @@ class RecordViewController: UIViewController {
     
     private let finishRecordingButton = UIButton()
     
+    private let timerLabel = UILabel()
+    
     var localUrl: URL?
     
     var audioManager: AudioManager = AudioManager(withFileManager: AudioFileManager(withFileName: nil))
-        
-//        didSet {
-//            localUrl = AudioManager(withFileManager: AudioFileManager(withFileName: nil)).localUrl ?? URL(fileURLWithPath: "")
-//        }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +38,27 @@ class RecordViewController: UIViewController {
         layoutresetButton()
         
         layoutFinishRecordingButton()
+        
+        layoutTimeLabel()
+    }
+    
+    func layoutTimeLabel() {
+        
+        self.view.addSubview(timerLabel)
+        
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: timerLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
+        
+        NSLayoutConstraint(item: timerLabel, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: timerLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: timerLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        timerLabel.text = "Start Time"
+        
+        timerLabel.textColor = .systemIndigo
     }
     
     func layoutRecordButton() {
@@ -70,6 +88,11 @@ class RecordViewController: UIViewController {
     @objc func recordAudio(_ sender: UIButton) {
         if !self.audioManager.isRecording {
             self.audioManager.recordStart()
+            self.audioManager.recorder?.timeIntervalHandler = { [weak self] currentTime in
+                let min = Int(currentTime / 60)
+                let sec = Int(currentTime.truncatingRemainder(dividingBy: 60))
+                self?.timerLabel.text = String(format: "%02d:%02d", min, sec)
+            }
         } else {
             self.audioManager.stopRecording()
         }

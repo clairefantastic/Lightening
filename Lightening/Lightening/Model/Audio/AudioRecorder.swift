@@ -66,7 +66,7 @@ class AudioRecorder: NSObject {
         guard let recorder = recorder else { return }
         
         if recorder.isRecording {
-            currentTimeInterval = currentTimeInterval + 0.01
+            currentTimeInterval = currentTimeInterval + 0.1
             let min = Int(currentTimeInterval / 60)
             let hr = Int(min / 60)
             let sec = Int(currentTimeInterval.truncatingRemainder(dividingBy: 60))
@@ -89,7 +89,8 @@ class AudioRecorder: NSObject {
             try AVAudioSession.sharedInstance().setActive(true)
             recorder.record()
             currentTimeInterval = 0.0
-            meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
+            meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
+           
             recorderStateChangeHandler?(.recording)
         } catch {
             recorderStateChangeHandler?(.failed(error))
@@ -127,7 +128,7 @@ class AudioRecorder: NSObject {
         }
 
         recorder?.record()
-        meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
+        meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
         recorderStateChangeHandler?(.recording)
     }
 }
@@ -142,8 +143,8 @@ extension AudioRecorder: AVAudioRecorderDelegate {
     }
     
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-        if let e = error {
-            recorderStateChangeHandler?(.failed(e))
+        if let error = error {
+            recorderStateChangeHandler?(.failed(error))
         } else {
             doStop()
         }
