@@ -114,15 +114,15 @@ class AddDetailsViewController: UIViewController {
             return
         }
 
-        AudioManager.shared.addAudioFile(audioUrl: localurl) { [weak self] downloadUrl in
-
+        PublishManager.shared.getFileRemoteUrl(destinationUrl: localurl) { [weak self] downloadUrl in
+            
             self?.audio = Audio(audioUrl: downloadUrl, topic: self?.audioTopic ?? "", title: self?.audioTitle ?? "", description: self?.audioDescription ?? "", cover: self?.audioCover ?? "", createdTime: Date().timeIntervalSince1970)
 
             guard let publishAudio = self?.audio else {
                     return
             }
-
-            AudioManager.shared.publishAudioFile(audio: publishAudio) { result in
+            
+            PublishManager.shared.publishAudioFile(audio: publishAudio) { result in
                 switch result {
 
                 case .success:
@@ -143,7 +143,7 @@ class AddDetailsViewController: UIViewController {
                 }
 
             }
-
+            
         }
         
         

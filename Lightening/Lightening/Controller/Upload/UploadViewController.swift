@@ -11,25 +11,30 @@ import AVFoundation
 
 class UploadViewController: UIViewController {
     
-    private let uploadManager = AudioManager()
+    private let uploadManager = PublishManager()
+    
+    private let selectFileButton = UIButton()
+    
+    private let recordButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
         
-        layoutButton()
+        layoutSelectFileButton()
+        
+        layoutRecordButton()
         
     }
     
-    func layoutButton() {
-        let selectFileButton = UIButton()
+    func layoutSelectFileButton() {
         
         self.view.addSubview(selectFileButton)
         
         selectFileButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: selectFileButton, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
         
         NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -45,7 +50,30 @@ class UploadViewController: UIViewController {
         
         selectFileButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
         
-        selectFileButton.addTarget(self, action: #selector(pushAddDetailsPage), for: .touchUpInside)
+    }
+    
+    func layoutRecordButton() {
+        
+        self.view.addSubview(recordButton)
+        
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: recordButton, attribute: .bottom, relatedBy: .equal, toItem: self.selectFileButton, attribute: .top, multiplier: 1, constant: -60).isActive = true
+        
+        NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        recordButton.backgroundColor = .systemIndigo
+        
+        recordButton.setTitle("Record", for: .normal)
+        
+        recordButton.isEnabled = true
+        
+        recordButton.addTarget(self, action: #selector(showRecordPage), for: .touchUpInside)
+        
     }
     
     @objc func importFile(_ sender: UIButton) {
@@ -69,9 +97,11 @@ class UploadViewController: UIViewController {
         }
     }
     
-    @objc func pushAddDetailsPage(_ sender: UIButton) {
+    @objc func showRecordPage(_ sender: UIButton) {
         
+        let recordViewController = RecordViewController()
         
+        navigationController?.pushViewController(recordViewController, animated: true)
     }
     
     
@@ -80,13 +110,25 @@ class UploadViewController: UIViewController {
 extension UploadViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
+        
+        
         guard let url = urls.first else { return }
         
-        let addDetailsViewController = AddDetailsViewController()
+        PublishManager.shared.getSelectedFileLocalUrl(audioUrl: url) { [weak self] localUrl in
+            
+            DispatchQueue.main.async {
+                
+                let addDetailsViewController = AddDetailsViewController()
+                
+                addDetailsViewController.localurl = localUrl
+                
+                self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
+            }
+            
+            
+        }
         
-        addDetailsViewController.localurl = url
         
-        navigationController?.pushViewController(addDetailsViewController, animated: true)
         
         
 //        uploadManager.addAudio(audioUrl: url)
@@ -95,17 +137,6 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 
 }
 
-//            // to check if it exists before downloading it
-    
-//    func playMusic(url: URL) {
-//        do {
-//            let audioPlayer = try AVAudioPlayer(contentsOf: url)
-//            audioPlayer.prepareToPlay()
-//            audioPlayer.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
 
 
 

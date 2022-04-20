@@ -187,7 +187,7 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     
     }
     func fetchData() {
-        AudioManager.shared.fetchAudioFiles() { [weak self] result in
+        PublishManager.shared.fetchAudioFiles() { [weak self] result in
             
             switch result {
             
