@@ -18,6 +18,7 @@
 		7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */; };
 		7E27300C281006760096DB72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300B281006750096DB72 /* MapViewController.swift */; };
 		7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300E28100FD30096DB72 /* LocationManager.swift */; };
+		7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2730102810271E0096DB72 /* AudioAnnotation.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -85,6 +86,7 @@
 		7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		7E27300B281006750096DB72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E27300E28100FD30096DB72 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7E2730102810271E0096DB72 /* AudioAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnnotation.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				7E27300E28100FD30096DB72 /* LocationManager.swift */,
+				7E2730102810271E0096DB72 /* AudioAnnotation.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */,
+				7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */,
 				7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */,
 				7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */,
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,

@@ -210,5 +210,8 @@ extension DiscoveryViewController {
     
     @objc func pushMapPage(_ sender: UIButton) {
         
+        let mapViewController = MapViewController()
+        
+        navigationController?.pushViewController(mapViewController, animated: true)
     }
 }
