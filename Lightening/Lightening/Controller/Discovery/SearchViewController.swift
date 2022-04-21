@@ -108,7 +108,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let playerView = AudioPlayerView()
-        playerView.audioFile = filteredAudioFiles[indexPath.row]
+        playerView.audio = filteredAudioFiles[indexPath.row]
         playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         playerView.backgroundColor?.withAlphaComponent(0)
         view.addSubview(playerView)

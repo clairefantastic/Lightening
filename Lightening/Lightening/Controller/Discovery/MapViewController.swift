@@ -116,7 +116,7 @@ extension MapViewController: MKMapViewDelegate {
         let annotation = view.annotation as? AudioAnnotation
         let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
         let playerView = AudioPlayerView()
-        playerView.audioFile = audioFile[0]
+        playerView.audio = audioFile[0]
         playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         playerView.backgroundColor?.withAlphaComponent(0)
         mapView.addSubview(playerView)

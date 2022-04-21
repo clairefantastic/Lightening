@@ -30,7 +30,7 @@ class AudioPlayerView: UIView {
     
     var selectedAudioIndexPath: IndexPath?
     
-    var audioFile: Audio? {
+    var audio: Audio? {
         
         didSet {
             
@@ -38,11 +38,11 @@ class AudioPlayerView: UIView {
             tapGestureRecognizer.numberOfTapsRequired = 2
             self.addGestureRecognizer(tapGestureRecognizer)
             
-            audioImageView?.image = UIImage(named: self.audioFile?.cover ?? "")
-            audioTitleLabel?.text = self.audioFile?.title
+            audioImageView?.image = UIImage(named: self.audio?.cover ?? "")
+            audioTitleLabel?.text = self.audio?.title
             audioAuthorLabel?.text = "Claire"
             
-            setPlayer(url: (self.audioFile?.audioUrl)!)
+            setPlayer(url: (self.audio?.audioUrl)!)
             player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
                     let currentTime = CMTimeGetSeconds(self.player.currentTime())
                     self.audioProgressSlider?.value = Float(currentTime)
@@ -51,7 +51,17 @@ class AudioPlayerView: UIView {
     }
     
     @objc func didTapView() {
+        let audioDescriptionViewController = AudioDescriptionViewController()
         
+        audioDescriptionViewController.
+        
+        audioDescriptionViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: height)
+        self.addSubview(audioDescriptionViewController.view)
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0001,
+                       options: .curveEaseInOut,
+                       animations: { audioDescriptionViewController.view.frame = CGRect(x: 0, y: 0, width: width, height: height)},
+                       completion: {_ in })
     }
     
     override init(frame: CGRect) {
@@ -93,12 +103,10 @@ class AudioPlayerView: UIView {
             print(error.localizedDescription)
         }
         
-    
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
-    
-    
+
     @objc func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)

@@ -138,7 +138,7 @@ extension DiscoveryViewController {
     }
       
       let playerView = AudioPlayerView()
-      playerView.audioFile = sections[indexPath.section].audios[indexPath.row]
+      playerView.audio = sections[indexPath.section].audios[indexPath.row]
 //      playerView.selectedAudioIndexPath = indexPath
 //      playerView.audioFiles = sections
       playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
