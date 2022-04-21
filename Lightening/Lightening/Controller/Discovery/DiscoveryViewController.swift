@@ -13,7 +13,7 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
-    private let searchButton = UIBarButtonItem()
+    private let searchButton = UIButton()
     
     private var sections = Section.allSections
     
@@ -35,6 +35,7 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
+        layoutBarButton()
         layoutMapButton()
         
     }
@@ -225,16 +226,33 @@ extension DiscoveryViewController {
     private func layoutBarItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(pushSearchPage))
-        searchButton.image = UIImage(systemName: "magnifyingglass")
-        
-        navigationItem.rightBarButtonItem = searchButton
 
+    }
+    
+    private func layoutBarButton() {
+        
+        self.view.addSubview(searchButton)
+        
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: searchButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
+        
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        
+        searchButton.addTarget(self, action: #selector(pushSearchPage), for: .touchUpInside)
     }
     
     @objc func pushSearchPage(_ sender: UIBarButtonItem) {
         
-//        let searchViewController = SearchViewController()
+        let searchViewController = SearchViewController()
         
-//        navigationController?.pushViewController(searchViewController, animated: true)
+        navigationController?.pushViewController(searchViewController, animated: true)
+    
     }
 }
