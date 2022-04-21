@@ -33,6 +33,11 @@ class AudioPlayerView: UIView {
     var audioFile: Audio? {
         
         didSet {
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+            tapGestureRecognizer.numberOfTapsRequired = 2
+            self.addGestureRecognizer(tapGestureRecognizer)
+            
             audioImageView?.image = UIImage(named: self.audioFile?.cover ?? "")
             audioTitleLabel?.text = self.audioFile?.title
             audioAuthorLabel?.text = "Claire"
@@ -45,8 +50,7 @@ class AudioPlayerView: UIView {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    @objc func didTapView() {
         
     }
     
