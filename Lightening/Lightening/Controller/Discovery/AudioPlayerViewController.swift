@@ -8,78 +8,6 @@
 import UIKit
 import AVFoundation
 
-class AudioPlayerViewController: UIViewController {
-    
-    var selectedAudioIndex: Int = 0
-    
-    var datas: [Audio] = [] {
-        
-        didSet {
-            
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.clear
-        
-        layoutButton()
-        
-        fetchData()
-    }
-    
-    func layoutButton() {
-        let playerButton = UIButton()
-        
-        self.view.addSubview(playerButton)
-        
-        playerButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: playerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        playerButton.setImage(UIImage(systemName: "play"), for: .normal)
-        
-        playerButton.isEnabled = true
-        
-        playerButton.addTarget(self, action: #selector(playAudioFile), for: .touchUpInside)
-    
-    }
-    
-    
-    func fetchData() {
-        PublishManager.shared.fetchAudioFiles { [weak self] result in
-            
-            switch result {
-            
-            case .success(let audioFiles):
-                
-                self?.datas = audioFiles
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-            
-        }
-
-    }
-    
-    
-    @objc func playAudioFile(_ sender: Any) {
-        
-        PublishManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
-        
-    }
-
-}
-
 class AudioPlayerView: UIView {
     
     @IBOutlet weak var playPauseButton: UIButton!
@@ -114,35 +42,6 @@ class AudioPlayerView: UIView {
                     let currentTime = CMTimeGetSeconds(self.player.currentTime())
                     self.audioProgressSlider?.value = Float(currentTime)
             })
-        }
-    }
-    
-//    var audioFiles: [Section]? {
-//
-//        didSet {
-//
-//            guard let selectedAudioIndexPath = selectedAudioIndexPath else {
-//                return
-//            }
-//
-//            audioImageView?.image = UIImage(named: audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].cover ?? "")
-//            audioTitleLabel?.text = audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].title
-//            audioAuthorLabel?.text = "Claire"
-//
-//            setPlayer(url: (audioFiles?[selectedAudioIndexPath.section].audios[selectedAudioIndexPath.row].audioUrl)!)
-//
-//            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
-//                    let currentTime = CMTimeGetSeconds(self.player.currentTime())
-//                    self.audioProgressSlider?.value = Float(currentTime)
-//            })
-//
-//        }
-//    }
-    
-    var datas: [Audio] = [] {
-        
-        didSet {
-            
         }
     }
     
