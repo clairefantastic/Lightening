@@ -32,10 +32,6 @@ class AudioPlayerView: UIView {
         
         didSet {
             
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-            tapGestureRecognizer.numberOfTapsRequired = 2
-            self.addGestureRecognizer(tapGestureRecognizer)
-            
             audioImageView.image = UIImage(named: self.audio?.cover ?? "")
             audioTitleLabel.text = self.audio?.title
             audioAuthorLabel.text = "Claire"
@@ -46,18 +42,6 @@ class AudioPlayerView: UIView {
                 self.audioProgressSlider.value = Float(currentTime)
             })
         }
-    }
-    
-    @objc func didTapView() {
-        let audioDescriptionViewController = AudioDescriptionViewController()
-        
-        audioDescriptionViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: height)
-        self.addSubview(audioDescriptionViewController.view)
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0001,
-                       options: .curveEaseInOut,
-                       animations: { audioDescriptionViewController.view.frame = CGRect(x: 0, y: 0, width: width, height: height)},
-                       completion: {_ in })
     }
     
     override init(frame: CGRect) {
@@ -232,4 +216,3 @@ extension AudioPlayerView {
         
     }
 }
-
