@@ -9,25 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    private var tableView = UITableView() {
-        
-        didSet {
-//            tableView.delegate = self
-//
-//            tableView.dataSource = self
-        }
-    }
-    
-    private func setUpTableView() {
-        
-        tableView.separatorStyle = .none
-        
-        tableView.registerCellWithNib(identifier:
-            String(describing: SearchResultTableViewCell.self),
-                                         bundle: nil
-        )
-    
-    }
+    private var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,21 +44,38 @@ extension SearchViewController {
         
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
+    
+    private func setUpTableView() {
+        
+        tableView.separatorStyle = .none
+        
+        tableView.registerCellWithNib(identifier:
+            String(describing: SearchResultTableViewCell.self),
+                                         bundle: nil
+        )
+        
+        tableView.delegate = self
+
+        tableView.dataSource = self
+    
+    }
 }
 
-//extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//    }
-//
-//
-//
-//}
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultTableViewCell.self)", for: indexPath) as? SearchResultTableViewCell
+        else { return UITableViewCell() }
+        
+        return cell
+
+    }
+}
 
 extension SearchViewController: UISearchResultsUpdating {
     
@@ -84,5 +83,3 @@ extension SearchViewController: UISearchResultsUpdating {
         
     }
 }
-
-

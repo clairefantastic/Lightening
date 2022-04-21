@@ -26,4 +26,12 @@ class SearchResultTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    var audio: Audio? {
+      didSet {
+          searchResultImageView?.image = UIImage(named: audio?.cover ?? "")
+          searchResultTitleLabel?.text = audio?.title
+          searchResultAuthorLabel?.text = "Claire"
+      }
+    }
+    
 }
