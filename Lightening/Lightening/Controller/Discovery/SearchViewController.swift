@@ -9,6 +9,10 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    private var audioFiles: [Audio]?
+    
+    private var filteredAudioFiles: [Audio] = []
+    
     private var tableView = UITableView()
     
     override func viewDidLoad() {
@@ -25,6 +29,26 @@ class SearchViewController: UIViewController {
         layoutTableView()
         
         setUpTableView()
+        
+        fetchData()
+    }
+    
+    private func fetchData() {
+        
+        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audioFiles):
+                
+                self?.audioFiles = audioFiles
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
     }
 }
 
@@ -64,13 +88,16 @@ extension SearchViewController {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        
+        return self.filteredAudioFiles.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultTableViewCell.self)", for: indexPath) as? SearchResultTableViewCell
         else { return UITableViewCell() }
+        
+        cell.audio = filteredAudioFiles[indexPath.row]
         
         return cell
 
@@ -81,5 +108,13 @@ extension SearchViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         
+        if let searchText = searchController.searchBar.text,
+                   searchText.isEmpty == false  {
+            self.filteredAudioFiles = audioFiles?.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
+                } else {
+                    self.filteredAudioFiles = []
+                }
+        self.tableView.reloadData()
+                
     }
 }
