@@ -29,6 +29,9 @@ class AudioPlayerViewController: UIViewController {
         playerView.setUpPlayPauseButton()
         playerView.layoutProgressSlider()
         addPlayerView()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        tapGestureRecognizer.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(tapGestureRecognizer)
         
     }
     
@@ -37,5 +40,21 @@ class AudioPlayerViewController: UIViewController {
         self.view.stickSubView(playerView)
     }
     
+    @objc func didTapView() {
+        let audioDescriptionViewController = AudioDescriptionViewController()
+        
+        audioDescriptionViewController.audio = audio
+    
+        navigationController?.pushViewController(audioDescriptionViewController, animated: true)
+        
+//        addChild(audioDescriptionViewController)
+//        audioDescriptionViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: height)
+//        self.view.addSubview(audioDescriptionViewController.view)
+//        UIView.animate(withDuration: 0.25,
+//                       delay: 0.0001,
+//                       options: .curveEaseInOut,
+//                       animations: { audioDescriptionViewController.view.frame = CGRect(x: 0, y: 0, width: width, height: height)},
+//                       completion: {_ in })
+    }
+    
 }
-
