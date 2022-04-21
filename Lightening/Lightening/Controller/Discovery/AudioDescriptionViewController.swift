@@ -2,7 +2,7 @@
 //  AudioDescriptionViewController.swift
 //  Lightening
 //
-//  Created by claire on 2022/4/21.
+//  Created by claire on 2022/4/22.
 //
 
 import UIKit
@@ -33,6 +33,8 @@ class AudioDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = .white
         
         layoutAudioAuthorLabel()
         
@@ -92,6 +94,5 @@ extension AudioDescriptionViewController {
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
     }
-    
     
 }
