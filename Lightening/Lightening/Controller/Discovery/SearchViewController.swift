@@ -53,6 +53,8 @@ class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         layoutTableView()
     }
 }
@@ -65,7 +67,7 @@ extension SearchViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
