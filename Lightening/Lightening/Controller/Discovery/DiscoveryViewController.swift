@@ -13,6 +13,8 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
+    private let searchButton = UIBarButtonItem()
+    
     private var sections = Section.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -28,10 +30,11 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         fetchData()
         configureCollectionView()
         configureLayout()
-        
+        layoutBarItem()
         layoutMapButton()
         
     }
@@ -214,5 +217,24 @@ extension DiscoveryViewController {
         let mapViewController = MapViewController()
         
         navigationController?.pushViewController(mapViewController, animated: true)
+    }
+}
+
+extension DiscoveryViewController {
+    
+    private func layoutBarItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(pushSearchPage))
+        searchButton.image = UIImage(systemName: "magnifyingglass")
+        
+        navigationItem.rightBarButtonItem = searchButton
+
+    }
+    
+    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
+        
+//        let searchViewController = SearchViewController()
+        
+//        navigationController?.pushViewController(searchViewController, animated: true)
     }
 }
