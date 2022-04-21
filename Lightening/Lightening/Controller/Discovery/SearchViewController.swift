@@ -13,7 +13,7 @@ class SearchViewController: UIViewController {
         
         didSet {
 //            tableView.delegate = self
-//            
+//
 //            tableView.dataSource = self
         }
     }
@@ -23,22 +23,7 @@ class SearchViewController: UIViewController {
         tableView.separatorStyle = .none
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsContentCell.self),
-                                         bundle: nil
-        )
-        
-        tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsTopicTableViewCell.self),
-                                         bundle: nil
-        )
-        
-        tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsCoverTableViewCell.self),
-                                         bundle: nil
-        )
-        
-        tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsLocationCell.self),
+            String(describing: SearchResultTableViewCell.self),
                                          bundle: nil
         )
     
@@ -56,6 +41,8 @@ class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         layoutTableView()
+        
+        setUpTableView()
     }
 }
 
