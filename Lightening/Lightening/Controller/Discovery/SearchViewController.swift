@@ -11,7 +11,19 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let searchController = UISearchController()
+        
+        searchController.searchResultsUpdater = self
+        
         navigationItem.searchController = searchController
+        
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }
