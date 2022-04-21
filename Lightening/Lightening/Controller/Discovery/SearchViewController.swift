@@ -104,6 +104,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
 
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let playerView = AudioPlayerView()
+        playerView.audioFile = filteredAudioFiles[indexPath.row]
+        playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
+        playerView.backgroundColor?.withAlphaComponent(0)
+        view.addSubview(playerView)
+        UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: { playerView.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)}, completion: {_ in })
+        
+    }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
