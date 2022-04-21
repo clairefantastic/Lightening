@@ -225,7 +225,7 @@ extension DiscoveryViewController {
     
     private func layoutBarItem() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(pushSearchPage))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage)
 
     }
     
