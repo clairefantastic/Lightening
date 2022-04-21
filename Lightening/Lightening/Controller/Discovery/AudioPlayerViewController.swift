@@ -8,6 +8,13 @@
 import UIKit
 import AVFoundation
 
+class AudioPlayerViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
 class AudioPlayerView: UIView {
     
     @IBOutlet weak var playPauseButton: UIButton!
@@ -52,8 +59,6 @@ class AudioPlayerView: UIView {
     
     @objc func didTapView() {
         let audioDescriptionViewController = AudioDescriptionViewController()
-        
-        audioDescriptionViewController.
         
         audioDescriptionViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: height)
         self.addSubview(audioDescriptionViewController.view)
