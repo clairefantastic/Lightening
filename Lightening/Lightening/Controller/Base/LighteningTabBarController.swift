@@ -27,12 +27,12 @@ private enum Tab {
 
         switch self {
 
-        case .lobby: controller = VolLobbyViewController(
-            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
+        case .lobby: controller = UINavigationController(rootViewController: VolLobbyViewController(
+            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
-        case .discovery: controller = DiscoveryViewController()
+        case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
         
-        case .upload: controller = UploadViewController()
+        case .upload: controller = UINavigationController(rootViewController: UploadViewController())
 
         }
 

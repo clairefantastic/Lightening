@@ -13,6 +13,8 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
+    private let searchButton = UIButton()
+    
     private var sections = Section.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -28,10 +30,12 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         fetchData()
         configureCollectionView()
         configureLayout()
-        
+        layoutBarItem()
+        layoutBarButton()
         layoutMapButton()
         
     }
@@ -214,5 +218,41 @@ extension DiscoveryViewController {
         let mapViewController = MapViewController()
         
         navigationController?.pushViewController(mapViewController, animated: true)
+    }
+}
+
+extension DiscoveryViewController {
+    
+    private func layoutBarItem() {
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
+
+    }
+    
+    private func layoutBarButton() {
+        
+        self.view.addSubview(searchButton)
+        
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: searchButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: searchButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
+        
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        
+        searchButton.addTarget(self, action: #selector(pushSearchPage), for: .touchUpInside)
+    }
+    
+    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
+        
+        let searchViewController = SearchViewController()
+        
+        navigationController?.pushViewController(searchViewController, animated: true)
+    
     }
 }

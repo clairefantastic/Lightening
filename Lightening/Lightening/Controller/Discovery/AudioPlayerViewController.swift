@@ -78,11 +78,9 @@ class AudioPlayerViewController: UIViewController {
         
     }
 
-    
 }
 
 class AudioPlayerView: UIView {
-    
     
     @IBOutlet weak var playPauseButton: UIButton!
     
@@ -151,7 +149,6 @@ class AudioPlayerView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-
     }
     
     override init(frame: CGRect) {
@@ -238,9 +235,6 @@ class AudioPlayerView: UIView {
         
         UIView.animate(withDuration: 0.5, delay: 0.0001, options: .curveEaseInOut, animations: {  self.frame = CGRect(x: 0, y: 1000, width: UIScreen.width, height: 80)}, completion: {_ in })
         
-        
     }
-        
     
 }
-
