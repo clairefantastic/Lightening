@@ -15,17 +15,19 @@ class SearchViewController: UIViewController {
     
     private var tableView = UITableView()
     
+    private let searchController = UISearchController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let searchController = UISearchController()
         
         searchController.searchResultsUpdater = self
         
         navigationItem.searchController = searchController
         
-        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.obscuresBackgroundDuringPresentation = false
         
+        navigationItem.hidesSearchBarWhenScrolling = false
+    
         layoutTableView()
         
         setUpTableView()
