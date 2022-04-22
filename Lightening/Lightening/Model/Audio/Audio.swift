@@ -24,6 +24,8 @@ struct Audio: Codable, Hashable {
     var createdTime: Double?
     
     var location: Location?
+    
+    var comments: Comment?
 
 }
 
@@ -32,4 +34,14 @@ struct Location: Codable, Hashable {
     var latitude: Double?
     
     var longitude: Double?
+}
+
+struct Comment: Codable, Hashable {
+    
+    var authorImage: String?
+    
+    var authorName: String?
+    
+    var text: String
+    
 }
