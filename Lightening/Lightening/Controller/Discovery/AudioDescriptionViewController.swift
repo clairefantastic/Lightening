@@ -18,6 +18,18 @@ class AudioDescriptionViewController: UIViewController {
     private let sendOutTextButton = UIButton()
     
     private let enterCommentTextField = UITextField()
+//
+//    var comments = ["hi", "hiii", "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"]
+    
+    var comments: [Comment] = [] {
+        
+        didSet {
+            
+            commentsTableView.reloadData()
+        }
+    }
+    
+    private let commentsTableView = UITableView()
     
     var audio: Audio? {
         
@@ -27,11 +39,35 @@ class AudioDescriptionViewController: UIViewController {
             audioAuthorLabel.text = "Claire"
             audioDescriptionLabel.text = self.audio?.description
             
-//            setPlayer(url: (self.audio?.audioUrl)!)
-//            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
-//                    let currentTime = CMTimeGetSeconds(self.player.currentTime())
-//                    self.audioProgressSlider?.value = Float(currentTime)
-//            })
+            guard let audio = audio else { return }
+            
+            PublishManager.shared.fetchAudioID(audio: audio) {
+                [weak self] result in
+                
+                    switch result {
+                    
+                    case .success(let documentId):
+                        
+                        PublishManager.shared.fetchAudioComments(documentId: documentId) { [weak self] result in
+                            
+                            switch result {
+                                
+                            case .success(let comments):
+                                self?.comments = comments
+                                
+                            case .failure(let error):
+                                print("fetchData.failure: \(error)")
+                            }
+                            
+                        }
+                        
+                    case .failure(let error):
+                        
+                        print("fetchData.failure: \(error)")
+            
+                }
+            }
+        
         }
     }
     
@@ -53,6 +89,11 @@ class AudioDescriptionViewController: UIViewController {
         layoutEnterCommentTextField()
         
         setUpEnterCommentTextField()
+        
+        layoutCommentsTableView()
+        
+        setUpCommentsTableView()
+        
     }
     
 }
@@ -132,7 +173,6 @@ extension AudioDescriptionViewController {
     
     @objc func sendOutText() {
         
-        
     }
     
     private func layoutEnterCommentTextField() {
@@ -157,4 +197,56 @@ extension AudioDescriptionViewController {
         enterCommentTextField.layer.borderColor = UIColor.black.cgColor
     }
     
+    private func layoutCommentsTableView() {
+        
+        self.view.addSubview(commentsTableView)
+        
+        commentsTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: commentsTableView, attribute: .top, relatedBy: .equal, toItem: audioDescriptionLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: commentsTableView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: commentsTableView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: commentsTableView, attribute: .bottom, relatedBy: .equal, toItem: enterCommentTextField, attribute: .top, multiplier: 1, constant: -16).isActive = true
+        
+    }
+    
+    private func setUpCommentsTableView() {
+        
+        commentsTableView.separatorStyle = .none
+        
+        commentsTableView.registerCellWithNib(identifier:
+            String(describing: CommentTableViewCell.self),
+                                         bundle: nil
+        )
+        
+        commentsTableView.delegate = self
+        
+        commentsTableView.dataSource = self
+    }
+    
+}
+
+extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = commentsTableView.dequeueReusableCell(withIdentifier: "\(CommentTableViewCell.self)", for: indexPath) as? CommentTableViewCell
+        else { return UITableViewCell() }
+        cell.comment = comments[indexPath.row]
+        return cell
+    }
+    
+    
+}
+
+extension AudioDescriptionViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        enterCommentTextField.text
+    }
 }
