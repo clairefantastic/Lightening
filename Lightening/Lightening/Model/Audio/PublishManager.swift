@@ -177,6 +177,27 @@ class PublishManager {
             }
         }
     }
+    
+    func publishComments(documentId: String, comment: Comment, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let document = db.collection("audioFiles").document(documentId).collection("comments").document()
+        
+        do {
+           try document.setData(from: comment) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+        }
+     
+    }
     func playAudioFile(url: URL) {
         
         let asset = AVAsset(url: url)

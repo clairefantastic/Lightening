@@ -29,6 +29,8 @@ class AudioDescriptionViewController: UIViewController {
         }
     }
     
+    var audioFileDocumentId: String?
+    
     private let commentsTableView = UITableView()
     
     var audio: Audio? {
@@ -47,6 +49,8 @@ class AudioDescriptionViewController: UIViewController {
                     switch result {
                     
                     case .success(let documentId):
+                        
+                        self?.audioFileDocumentId = documentId
                         
                         PublishManager.shared.fetchAudioComments(documentId: documentId) { [weak self] result in
                             
@@ -173,6 +177,21 @@ extension AudioDescriptionViewController {
     
     @objc func sendOutText() {
         
+        enterCommentTextField.text = ""
+        
+        PublishManager.shared.publishComments(documentId: audioFileDocumentId ?? "",
+                                              comment: Comment(authorImage: "", authorName: "Claire", text: enterCommentTextField.text ?? "")) { [weak self] result in
+            
+            switch result {
+            case .success(let success):
+                self?.comments.append(Comment(authorImage: "", authorName: "Claire", text: self?.enterCommentTextField.text ?? ""))
+            case .failure(let error):
+                print("publishComments.failure: \(error)")
+            }
+            
+        }
+        
+        
     }
     
     private func layoutEnterCommentTextField() {
@@ -244,9 +263,3 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
     
 }
 
-extension AudioDescriptionViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        enterCommentTextField.text
-    }
-}
