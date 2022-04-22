@@ -15,6 +15,10 @@ class AudioDescriptionViewController: UIViewController {
     
     private let audioDescriptionLabel = UILabel()
     
+    private let sendOutTextButton = UIButton()
+    
+    private let enterCommentTextField = UITextField()
+    
     var audio: Audio? {
         
         didSet {
@@ -41,6 +45,14 @@ class AudioDescriptionViewController: UIViewController {
         layoutAudioTitleLabel()
         
         layoutAudioDescriptionLabel()
+        
+        layoutSendOutTextButton()
+        
+        setUpSendOutTextButton()
+        
+        layoutEnterCommentTextField()
+        
+        setUpEnterCommentTextField()
     }
     
 }
@@ -93,6 +105,56 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
+    }
+    
+    private func layoutSendOutTextButton() {
+        
+        self.view.addSubview(sendOutTextButton)
+        
+        sendOutTextButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: sendOutTextButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        NSLayoutConstraint(item: sendOutTextButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -24).isActive = true
+        
+        NSLayoutConstraint(item: sendOutTextButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: sendOutTextButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+    }
+    
+    private func setUpSendOutTextButton() {
+        
+        sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        
+        sendOutTextButton.addTarget(self, action: #selector(sendOutText), for: .touchUpInside)
+        
+    }
+    
+    @objc func sendOutText() {
+        
+        
+    }
+    
+    private func layoutEnterCommentTextField() {
+        
+        self.view.addSubview(enterCommentTextField)
+        
+        enterCommentTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: enterCommentTextField, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -24).isActive = true
+        
+        NSLayoutConstraint(item: enterCommentTextField, attribute: .trailing, relatedBy: .equal, toItem: sendOutTextButton, attribute: .leading, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: enterCommentTextField, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: enterCommentTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+    }
+    
+    private func setUpEnterCommentTextField() {
+        
+        enterCommentTextField.layer.borderWidth = 1
+        
+        enterCommentTextField.layer.borderColor = UIColor.black.cgColor
     }
     
 }
