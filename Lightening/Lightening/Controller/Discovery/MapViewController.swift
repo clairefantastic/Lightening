@@ -115,12 +115,19 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation = view.annotation as? AudioAnnotation
         let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
-        let playerView = AudioPlayerView()
-        playerView.audioFile = audioFile[0]
-        playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
-        playerView.backgroundColor?.withAlphaComponent(0)
-        mapView.addSubview(playerView)
-        UIView.animate(withDuration: 0.25, delay: 0.0001, options: .curveEaseInOut, animations: { playerView.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)}, completion: {_ in })
+        
+        let audioPlayerViewController = AudioPlayerViewController()
+        audioPlayerViewController.audio = audioFile[0]
+        addChild(audioPlayerViewController)
+        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
+        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
+        view.addSubview(audioPlayerViewController.view)
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0001,
+                       options: .curveEaseInOut,
+                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
+                       completion: {_ in })
+        
         
     }
     

@@ -47,7 +47,6 @@
 		7E44B7E5280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */; };
 		7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */; };
 		7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */; };
-		7E44B7EE280CE75100CF24AC /* AudioPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7ED280CE75100CF24AC /* AudioPlayerView.xib */; };
 		7E498D552808175400389D1C /* LighteningTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* LighteningTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -55,6 +54,8 @@
 		7EA023532800452A00C73205 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023522800452A00C73205 /* ViewController.swift */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
 		7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023592800452C00C73205 /* LaunchScreen.storyboard */; };
+		7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */; };
+		7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F422811D81E0071D197 /* AudioPlayerView.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -118,7 +119,6 @@
 		7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCoverCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
-		7E44B7ED280CE75100CF24AC /* AudioPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioPlayerView.xib; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* LighteningTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +128,8 @@
 		7EA023572800452C00C73205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA0235A2800452C00C73205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA0235C2800452C00C73205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDescriptionViewController.swift; sourceTree = "<group>"; };
+		7EA73F422811D81E0071D197 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -189,8 +191,8 @@
 				7E44B7CB280B002A00CF24AC /* GalleryTableViewCell.swift */,
 				7E44B7CC280B002A00CF24AC /* GalleryTableViewCell.xib */,
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
-				7E44B7ED280CE75100CF24AC /* AudioPlayerView.xib */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
+				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -221,6 +223,7 @@
 				7E2730122810E6260096DB72 /* SearchViewController.swift */,
 				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
+				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
 				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 			);
 			path = Discovery;
@@ -475,7 +478,6 @@
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */,
-				7E44B7EE280CE75100CF24AC /* AudioPlayerView.xib in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
@@ -561,11 +563,13 @@
 				7EB3F502280D740900C6E385 /* Section.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
+				7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */,
 				7E27300C281006760096DB72 /* MapViewController.swift in Sources */,
 				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
 				7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
+				7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
 				7EDBA2CA2805E93600C10FA5 /* VolLobbyViewController.swift in Sources */,
 				7E44B7CD280B002A00CF24AC /* GalleryTableViewCell.swift in Sources */,
