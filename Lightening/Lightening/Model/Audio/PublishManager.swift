@@ -132,6 +132,51 @@ class PublishManager {
         }
     }
     
+    func fetchAudioID(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments() { (querySnapshot, error) in
+            
+                if let error = error {
+                    
+                    completion(.failure(error))
+                    
+                } else {
+                    
+                    completion(.success(querySnapshot!.documents[0].documentID))
+                    
+                }
+        }
+    }
+    
+    func fetchAudioComments(documentId: String, completion: @escaping (Result<[Comment], Error>) -> Void) {
+        
+        db.collection("audioFiles").document(documentId).collection("comments").getDocuments() { (querySnapshot, error) in
+            
+            if let error = error {
+                
+                completion(.failure(error))
+            } else {
+                
+                var comments = [Comment]()
+                
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
+                            comments.append(comment)
+                        }
+                        
+                    } catch {
+                        
+                        completion(.failure(error))
+//                            completion(.failure(FirebaseError.documentError))
+                    }
+                }
+                
+                completion(.success(comments))
+            }
+        }
+    }
     func playAudioFile(url: URL) {
         
         let asset = AVAsset(url: url)
