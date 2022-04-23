@@ -37,7 +37,7 @@ private enum Tab {
         case .upload: controller = UINavigationController(rootViewController: UploadViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: UploadViewController())
+            UINavigationController(rootViewController: ProfileViewController())
 
         }
 
