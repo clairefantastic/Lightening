@@ -12,6 +12,8 @@ class AudioPlayerView: UIView {
     
     private let playPauseButton = UIButton()
     
+    private let heartButton = UIButton()
+    
     private let audioImageView = UIImageView()
     
     private let audioTitleLabel = UILabel()
@@ -27,6 +29,8 @@ class AudioPlayerView: UIView {
     var timer = Timer()
     
     private var isPlaying = false
+    
+    private var isliked = false
     
     var audio: Audio? {
         
@@ -214,5 +218,43 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioProgressSlider, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 2, constant: 80).isActive = true
         
+    }
+    
+    func layoutHeartButton() {
+       
+        addSubview(heartButton)
+        
+        heartButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: heartButton, attribute: .trailing, relatedBy: .equal, toItem: playPauseButton, attribute: .leading, multiplier: 1, constant: -24).isActive = true
+        
+        NSLayoutConstraint(item: heartButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: heartButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: heartButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
+    }
+    
+    func setUpHeartButton() {
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        
+        heartButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
+    }
+    
+    @objc func likeAudio(_ sender: UIButton) {
+        
+        if isliked {
+            
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+            isliked = false
+
+        } else {
+            
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            isliked = true
+
+        }
     }
 }

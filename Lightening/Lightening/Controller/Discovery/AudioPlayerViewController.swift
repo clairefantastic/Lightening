@@ -28,6 +28,8 @@ class AudioPlayerViewController: UIViewController {
         playerView.layoutPlayPauseButton()
         playerView.setUpPlayPauseButton()
         playerView.layoutProgressSlider()
+        playerView.layoutHeartButton()
+        playerView.setUpHeartButton()
         addPlayerView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         tapGestureRecognizer.numberOfTapsRequired = 2
