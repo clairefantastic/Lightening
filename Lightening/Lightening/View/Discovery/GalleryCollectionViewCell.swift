@@ -9,7 +9,6 @@ import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell {
 
-    
     @IBOutlet weak var audioCoverImageView: UIImageView!
     
     @IBOutlet weak var audioTitleLabel: UILabel!
