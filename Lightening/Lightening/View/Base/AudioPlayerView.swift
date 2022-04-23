@@ -12,7 +12,7 @@ class AudioPlayerView: UIView {
     
     private let playPauseButton = UIButton()
     
-    private let heartButton = UIButton()
+    private let likeButton = UIButton()
     
     private let audioImageView = UIImageView()
     
@@ -220,25 +220,25 @@ extension AudioPlayerView {
         
     }
     
-    func layoutHeartButton() {
+    func layoutLikeButton() {
        
-        addSubview(heartButton)
+        addSubview(likeButton)
         
-        heartButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: heartButton, attribute: .trailing, relatedBy: .equal, toItem: playPauseButton, attribute: .leading, multiplier: 1, constant: -24).isActive = true
+        NSLayoutConstraint(item: likeButton, attribute: .trailing, relatedBy: .equal, toItem: playPauseButton, attribute: .leading, multiplier: 1, constant: -24).isActive = true
         
-        NSLayoutConstraint(item: heartButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: likeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
-        NSLayoutConstraint(item: heartButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: likeButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
-        NSLayoutConstraint(item: heartButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
+        NSLayoutConstraint(item: likeButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
     }
     
-    func setUpHeartButton() {
-        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+    func setUpLikeButton() {
+        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         
-        heartButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
     }
     
     @objc func likeAudio(_ sender: UIButton) {
