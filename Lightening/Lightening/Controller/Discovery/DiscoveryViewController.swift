@@ -13,8 +13,6 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
-    private let searchButton = UIButton()
-    
     private var sections = Section.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
