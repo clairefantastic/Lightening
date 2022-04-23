@@ -12,7 +12,20 @@ class AudioPlayerViewController: UIViewController {
     
     let playerView = AudioPlayerView()
     
-    private var isliked = false
+    private var isLiked = false {
+        
+        didSet {
+            
+            if isLiked == true {
+                
+                playerView.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                
+                playerView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+            
+        }
+    }
     
     var audio: Audio? {
         didSet {
@@ -40,6 +53,31 @@ class AudioPlayerViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        PublishManager.shared.fetchLikedAudio(userId: "giUsyJAOONHf3dNytlZG") {
+            [weak self] result in
+                
+                switch result {
+                
+                case .success(let audioFiles):
+                    
+                    guard let audio = self?.audio else {
+                        return
+                    }
+
+                    if audioFiles.contains(audio) {
+                        
+                        self?.isLiked = true
+                    }
+            
+                case .failure(let error):
+                    
+                    print("fetchData.failure: \(error)")
+                }
+                
+            }
+    }
+    
     private func addPlayerView() {
         
         self.view.stickSubView(playerView)
@@ -58,7 +96,7 @@ class AudioPlayerViewController: UIViewController {
         
         guard let audio = audio else { return }
         
-        if isliked {
+        if isLiked {
             
             PublishManager.shared.deleteLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
                 [weak self] result in
@@ -72,9 +110,7 @@ class AudioPlayerViewController: UIViewController {
                 }
             }
             
-            sender.setImage(UIImage(systemName: "heart"), for: .normal)
-            
-            isliked = false
+            isLiked = false
         } else {
         
             PublishManager.shared.publishLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
@@ -89,9 +125,7 @@ class AudioPlayerViewController: UIViewController {
                 }
             }
             
-            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            
-            isliked = true
+            isLiked = true
 
         }
     }
