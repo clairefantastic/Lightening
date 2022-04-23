@@ -11,7 +11,7 @@ import WebRTC
 import Firebase
 import FirebaseFirestore
 
-class LobbyViewController: UIViewController {
+class LobbyViewController: BaseViewController {
     
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient

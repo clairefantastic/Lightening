@@ -9,7 +9,7 @@ import UIKit
 
 import AVFoundation
 
-class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
+class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
@@ -29,7 +29,6 @@ class DiscoveryViewController: UIViewController, UICollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         fetchData()
         configureCollectionView()

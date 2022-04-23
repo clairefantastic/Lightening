@@ -11,7 +11,7 @@ import UIKit
 import WebRTC
 import Lottie
 
-class VolLobbyViewController: UIViewController {
+class VolLobbyViewController: BaseViewController {
     
     @IBOutlet private weak var answerButton: UIButton?
     

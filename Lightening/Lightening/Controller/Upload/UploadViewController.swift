@@ -9,7 +9,7 @@ import UIKit
 
 import AVFoundation
 
-class UploadViewController: UIViewController {
+class UploadViewController: BaseViewController {
     
     private let uploadManager = PublishManager()
     
@@ -19,8 +19,6 @@ class UploadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
         
         layoutSelectFileButton()
         

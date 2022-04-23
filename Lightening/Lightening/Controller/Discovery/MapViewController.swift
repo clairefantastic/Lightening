@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: BaseViewController {
     
     private let mapView = MKMapView()
     

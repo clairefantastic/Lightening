@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordViewController: UIViewController {
+class RecordViewController: BaseViewController {
     
     private let recordButton = UIButton()
     
@@ -28,8 +28,6 @@ class RecordViewController: UIViewController {
         
         audioManager.delegate = self
         audioManager.checkRecordPermission()
-        
-        view.backgroundColor = .white
         
         layoutRecordButton()
         

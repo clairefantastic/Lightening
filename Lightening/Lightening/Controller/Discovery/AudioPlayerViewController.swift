@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class AudioPlayerViewController: UIViewController {
+class AudioPlayerViewController: BaseViewController {
     
     let playerView = AudioPlayerView()
     
@@ -34,7 +34,7 @@ class AudioPlayerViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        
         playerView.layoutImageView()
         playerView.layoutTitleLabel()
         playerView.layoutAuthorLabel()

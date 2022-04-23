@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AudioDescriptionViewController: UIViewController {
+class AudioDescriptionViewController: BaseViewController {
     
     private let audioTitleLabel = UILabel()
     
@@ -77,8 +77,6 @@ class AudioDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
         
         layoutAudioAuthorLabel()
         
