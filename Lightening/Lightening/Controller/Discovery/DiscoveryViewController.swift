@@ -37,6 +37,8 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         
         view.stickSubView(collectionView)
         
+        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
         collectionView.delegate = self
@@ -140,7 +142,7 @@ extension DiscoveryViewController {
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             let size = NSCollectionLayoutSize(
                 widthDimension: NSCollectionLayoutDimension.fractionalWidth(1/3),
-                heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 280 : 300)
+                heightDimension: NSCollectionLayoutDimension.absolute(190)
             )
             let itemCount = isPhone ? 1 : 3
             let item = NSCollectionLayoutItem(layoutSize: size)
