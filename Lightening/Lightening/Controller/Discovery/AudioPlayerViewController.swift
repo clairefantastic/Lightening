@@ -12,6 +12,8 @@ class AudioPlayerViewController: UIViewController {
     
     let playerView = AudioPlayerView()
     
+    private var isliked = false
+    
     var audio: Audio? {
         didSet {
             playerView.audio = audio
@@ -31,6 +33,7 @@ class AudioPlayerViewController: UIViewController {
         playerView.layoutLikeButton()
         playerView.setUpLikeButton()
         addPlayerView()
+        playerView.likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         tapGestureRecognizer.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -49,6 +52,23 @@ class AudioPlayerViewController: UIViewController {
     
         navigationController?.pushViewController(audioDescriptionViewController, animated: true)
 
+    }
+    
+    @objc func likeAudio(_ sender: UIButton) {
+        
+        if isliked {
+            
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+            isliked = false
+
+        } else {
+            
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            isliked = true
+
+        }
     }
     
 }

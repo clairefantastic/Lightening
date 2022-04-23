@@ -12,7 +12,7 @@ class AudioPlayerView: UIView {
     
     private let playPauseButton = UIButton()
     
-    private let likeButton = UIButton()
+    let likeButton = UIButton()
     
     private let audioImageView = UIImageView()
     
@@ -29,8 +29,6 @@ class AudioPlayerView: UIView {
     var timer = Timer()
     
     private var isPlaying = false
-    
-    private var isliked = false
     
     var audio: Audio? {
         
@@ -237,24 +235,8 @@ extension AudioPlayerView {
     
     func setUpLikeButton() {
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        
-        likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
+    
     }
     
-    @objc func likeAudio(_ sender: UIButton) {
-        
-        if isliked {
-            
-            sender.setImage(UIImage(systemName: "heart"), for: .normal)
-            
-            isliked = false
-
-        } else {
-            
-            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            
-            isliked = true
-
-        }
-    }
+    
 }
