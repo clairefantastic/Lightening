@@ -12,6 +12,8 @@ class AudioPlayerView: UIView {
     
     private let playPauseButton = UIButton()
     
+    let likeButton = UIButton()
+    
     private let audioImageView = UIImageView()
     
     private let audioTitleLabel = UILabel()
@@ -215,4 +217,25 @@ extension AudioPlayerView {
         NSLayoutConstraint(item: audioProgressSlider, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 2, constant: 80).isActive = true
         
     }
+    
+    func layoutLikeButton() {
+       
+        addSubview(likeButton)
+        
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: likeButton, attribute: .trailing, relatedBy: .equal, toItem: playPauseButton, attribute: .leading, multiplier: 1, constant: -24).isActive = true
+        
+        NSLayoutConstraint(item: likeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: likeButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: likeButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
+    }
+    
+    func setUpLikeButton() {
+        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+    
+    }
+        
 }
