@@ -16,11 +16,10 @@ class SectionHeaderReusableView: UICollectionReusableView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(
-            ofSize: UIFont.preferredFont(forTextStyle: .title3).pointSize,
-            weight: .bold)
+        
+        label.font = UIFont(name: "American Typewriter Bold", size: 20)
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = .label
+        label.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(
@@ -30,7 +29,9 @@ class SectionHeaderReusableView: UICollectionReusableView {
   
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
         addSubview(titleLabel)
         if UIDevice.current.userInterfaceIdiom == .pad {
             NSLayoutConstraint.activate([
@@ -43,9 +44,11 @@ class SectionHeaderReusableView: UICollectionReusableView {
         } else {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(
-                    equalTo: readableContentGuide.leadingAnchor),
+                    equalTo: leadingAnchor,
+                    constant: 16),
                 titleLabel.trailingAnchor.constraint(
-                    lessThanOrEqualTo: readableContentGuide.trailingAnchor)
+                    lessThanOrEqualTo: trailingAnchor,
+                    constant: -16)
             ])
         }
         NSLayoutConstraint.activate([
