@@ -13,15 +13,15 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     
     private let mapButton = UIButton()
     
-    private var sections = Section.allSections
+    private var sections = DiscoverySection.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     private lazy var dataSource = makeDataSource()
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Audio>
+    typealias DataSource = UICollectionViewDiffableDataSource<DiscoverySection, Audio>
     
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Audio>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DiscoverySection, Audio>
     
     override func viewDidLoad() {
         super.viewDidLoad()

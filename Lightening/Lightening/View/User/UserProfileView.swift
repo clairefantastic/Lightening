@@ -9,7 +9,7 @@ import UIKit
 
 class UserProfileView: UIView {
     
-    func centreArcPerpendicular(text str: String, context: CGContext, radius radius: CGFloat, angle theta: CGFloat, colour colour: UIColor, font: UIFont, clockwise: Bool){
+    func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
         let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
         let letter = characters.count
@@ -54,7 +54,7 @@ class UserProfileView: UIView {
         return 2 * asin(chord / (2 * radius))
     }
 
-    func centre(text str: String, context: CGContext, radius radius: CGFloat, angle theta: CGFloat, colour colour: UIColor, font: UIFont, slantAngle: CGFloat) {
+    func centre(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, slantAngle: CGFloat) {
         // *******************************************************
         // This draws the String str centred at the position
         // specified by the polar coordinates (r, theta)
@@ -76,7 +76,7 @@ class UserProfileView: UIView {
         // Calculate the width of the text
         let offset = str.size(withAttributes: attributes)
         // Move the origin by half the size of the text
-        context.translateBy (x: -offset.width / 2, y: -offset.height / 2) // Move the origin to the centre of the text (negating the y-axis manually)
+        context.translateBy(x: -offset.width / 2, y: -offset.height / 2) // Move the origin to the centre of the text (negating the y-axis manually)
         // Draw the text
         str.draw(at: CGPoint(x: 0, y: 0), withAttributes: attributes)
         // Restore the context
@@ -93,11 +93,22 @@ class UserProfileView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         let size = self.bounds.size
 
-        context.translateBy (x: size.width / 2, y: size.height / 2)
-        context.scaleBy (x: 1, y: -1)
+        context.translateBy(x: size.width / 2, y: size.height / 2)
+        context.scaleBy(x: 1, y: -1)
 
-        centreArcPerpendicular(text: "H  e  l  l  o   C  l  a  i  r  e", context: context, radius: 60, angle: -30, colour: UIColor.black, font: UIFont.systemFont(ofSize: 16), clockwise: true)
-        centreArcPerpendicular(text: "C  a  r  p  e   D  i  e  m", context: context, radius: 60, angle: CGFloat(-M_PI_2), colour: UIColor.black, font: UIFont.systemFont(ofSize: 16), clockwise: false)
+        centreArcPerpendicular(text: "H  e  l  l  o   C  l  a  i  r  e",
+                               context: context, radius: 60,
+                               angle: -30,
+                               colour: UIColor.black,
+                               font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
+                               clockwise: true)
+        centreArcPerpendicular(text: "C  a  r  p  e   D  i  e  m",
+                               context: context,
+                               radius: 60,
+                               angle: 29.7,
+                               colour: UIColor.black,
+                               font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
+                               clockwise: false)
 //        centre(text: "Hello flat world", context: context, radius: 0, angle: 0 , colour: UIColor.yellow, font: UIFont.systemFont(ofSize: 16), slantAngle: CGFloat(M_PI_4))
     }
 }
