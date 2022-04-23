@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class AddDetailsViewController: UIViewController {
+class AddDetailsViewController: BaseViewController {
     
     private var tableView = UITableView() {
         didSet {
@@ -26,8 +26,6 @@ class AddDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
         
         setupTableView()
         

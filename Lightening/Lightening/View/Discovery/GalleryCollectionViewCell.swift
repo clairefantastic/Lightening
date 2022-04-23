@@ -9,7 +9,6 @@ import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell {
 
-    
     @IBOutlet weak var audioCoverImageView: UIImageView!
     
     @IBOutlet weak var audioTitleLabel: UILabel!
@@ -18,6 +17,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         // Initialization code
     }
     

@@ -1,41 +1,38 @@
 //
-//  DiscoveryViewController.swift
+//  ProfileViewController.swift
 //  Lightening
 //
-//  Created by claire on 2022/4/16.
+//  Created by claire on 2022/4/23.
 //
 
 import UIKit
 
-import AVFoundation
-
-class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
+class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     
-    private let mapButton = UIButton()
+    let userProfileView = UserProfileView()
     
-    private var sections = DiscoverySection.allSections
+    private var sections = ProfileSection.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     private lazy var dataSource = makeDataSource()
     
-    typealias DataSource = UICollectionViewDiffableDataSource<DiscoverySection, Audio>
+    typealias DataSource = UICollectionViewDiffableDataSource<ProfileSection, Audio>
     
-    typealias Snapshot = NSDiffableDataSourceSnapshot<DiscoverySection, Audio>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<ProfileSection, Audio>
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addUserProfileView()
         fetchData()
         configureCollectionView()
         configureLayout()
-        layoutBarItem()
-        layoutMapButton()
+        
     }
     
     private func configureCollectionView() {
         
-        view.stickSubView(collectionView)
+        view.stickSubView(collectionView, inset: UIEdgeInsets(top: 260, left: 0, bottom: 0, right: 0))
         
         collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
@@ -45,19 +42,12 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     }
     
     private func fetchData() {
-        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+        PublishManager.shared.fetchLikedAudio(userId: "giUsyJAOONHf3dNytlZG") { [weak self] result in
             switch result {
                 
             case .success(let audioFiles):
                 
-                self?.sections[0].audios.append(contentsOf: audioFiles.filter { $0.topic == "Nature"})
-                
-                self?.sections[1].audios.append(contentsOf: audioFiles.filter { $0.topic == "City"})
-                
-                self?.sections[2].audios.append(contentsOf: audioFiles.filter { $0.topic == "Pet"})
-                
-                self?.sections[3].audios.append(contentsOf: audioFiles.filter { $0.topic == "Others"})
-                
+                self?.sections[1].audios = audioFiles
                 self?.applySnapshot(animatingDifferences: false)
                 
             case .failure(let error):
@@ -92,7 +82,7 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
-            view?.titleLabel.text = section.topic
+            view?.titleLabel.text = section.category
             return view
         }
         return dataSource
@@ -112,7 +102,17 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     }
 }
 
-extension DiscoveryViewController {
+extension ProfileViewController {
+    
+    private func addUserProfileView() {
+        
+        self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
+        
+        userProfileView.backgroundColor =  UIColor.hexStringToUIColor(hex: "#D65831")
+    }
+}
+
+extension ProfileViewController {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -132,7 +132,7 @@ extension DiscoveryViewController {
     }
 }
 
-extension DiscoveryViewController {
+extension ProfileViewController {
     
     private func configureLayout() {
         collectionView.register(SectionHeaderReusableView.self,
@@ -171,49 +171,5 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutMapButton() {
-        
-        self.view.addSubview(mapButton)
-        
-        mapButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: mapButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        mapButton.setImage(UIImage(systemName: "map"), for: .normal)
-        
-        mapButton.addTarget(self, action: #selector(pushMapPage), for: .touchUpInside)
-    }
-    
-    @objc func pushMapPage(_ sender: UIButton) {
-        
-        let mapViewController = MapViewController()
-        
-        navigationController?.pushViewController(mapViewController, animated: true)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutBarItem() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
-    }
-    
-    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
-        
-        let searchViewController = SearchViewController()
-        
-        navigationController?.pushViewController(searchViewController, animated: true)
     }
 }

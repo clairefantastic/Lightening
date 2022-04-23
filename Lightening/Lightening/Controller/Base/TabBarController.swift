@@ -14,6 +14,8 @@ private enum Tab {
     case discovery
 
     case upload
+    
+    case profile
 
     func controller() -> UIViewController {
 
@@ -33,6 +35,9 @@ private enum Tab {
         case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
         
         case .upload: controller = UINavigationController(rootViewController: UploadViewController())
+            
+        case .profile: controller =
+            UINavigationController(rootViewController: ProfileViewController())
 
         }
 
@@ -67,14 +72,21 @@ private enum Tab {
                 image: UIImage(systemName: "arrow.up.heart"),
                 selectedImage: UIImage(systemName: "arrow.up.heart")
             )
+        
+        case .profile:
+            return UITabBarItem(
+                title: nil,
+                image: UIImage(systemName: "person.circle"),
+                selectedImage: UIImage(systemName: "person.circle.fill")
+            )
             
         }
         
     }
 }
-class LighteningTabBarController: UITabBarController {
+class TabBarController: UITabBarController {
     
-    private let tabs: [Tab] = [.lobby, .discovery, .upload]
+    private let tabs: [Tab] = [.lobby, .discovery, .upload, .profile]
     
     var lobbyTabBarItem: UITabBarItem!
     
