@@ -198,6 +198,27 @@ class PublishManager {
         }
      
     }
+    
+    func publishLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+
+        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+        
+        do {
+           try document.setData(from: audio) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+        }
+
+    }
     func playAudioFile(url: URL) {
         
         let asset = AVAsset(url: url)

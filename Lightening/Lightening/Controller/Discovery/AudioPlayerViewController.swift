@@ -61,8 +61,21 @@ class AudioPlayerViewController: UIViewController {
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
             
             isliked = false
-
         } else {
+            
+            guard let audio = audio else { return }
+            
+            PublishManager.shared.publishLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+                [weak self] result in
+                
+                switch result {
+            
+                case .success(_):
+                    print("Successfully like this audio!")
+                case .failure(_):
+                    print("Fail to like this audio")
+                }
+            }
             
             sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             
