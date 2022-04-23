@@ -34,7 +34,6 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
-        layoutBarButton()
         layoutMapButton()
         
     }
@@ -229,25 +228,6 @@ extension DiscoveryViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
 
-    }
-    
-    private func layoutBarButton() {
-        
-        self.view.addSubview(searchButton)
-        
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: searchButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
-        
-        NSLayoutConstraint(item: searchButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: searchButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: searchButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        
-        searchButton.addTarget(self, action: #selector(pushSearchPage), for: .touchUpInside)
     }
     
     @objc func pushSearchPage(_ sender: UIBarButtonItem) {
