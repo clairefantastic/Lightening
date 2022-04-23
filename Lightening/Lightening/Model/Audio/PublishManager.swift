@@ -219,6 +219,24 @@ class PublishManager {
         }
 
     }
+    
+    func deleteLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+
+        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+
+           document.delete() { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        }
+
+    
     func playAudioFile(url: URL) {
         
         let asset = AVAsset(url: url)

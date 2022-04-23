@@ -56,15 +56,27 @@ class AudioPlayerViewController: UIViewController {
     
     @objc func likeAudio(_ sender: UIButton) {
         
+        guard let audio = audio else { return }
+        
         if isliked {
+            
+            PublishManager.shared.deleteLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+                [weak self] result in
+                
+                switch result {
+            
+                case .success(_):
+                    print("Successfully unlike this audio!")
+                case .failure(_):
+                    print("Fail to unlike this audio")
+                }
+            }
             
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
             
             isliked = false
         } else {
-            
-            guard let audio = audio else { return }
-            
+        
             PublishManager.shared.publishLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
                 [weak self] result in
                 
