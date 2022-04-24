@@ -20,7 +20,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qIz-xz-LzT">
                         <rect key="frame" x="16" y="16" width="445" height="232"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZO-RD-hKq">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZO-RD-hKq">
                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QZO-RD-hKq" secondAttribute="height" multiplier="1:1" id="XXp-3y-Wr9"/>
