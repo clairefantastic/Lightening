@@ -128,7 +128,6 @@ extension MapViewController: MKMapViewDelegate {
                        animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
                        completion: {_ in })
         
-        
     }
     
 }
