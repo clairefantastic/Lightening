@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class AudioPlayerViewController: BaseViewController {
+class AudioPlayerViewController: UIViewController {
     
     let playerView = AudioPlayerView()
     
@@ -34,12 +34,13 @@ class AudioPlayerViewController: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
         playerView.layoutImageView()
-        playerView.layoutTitleLabel()
-        playerView.layoutAuthorLabel()
+        playerView.configureTitleLabel()
+        playerView.configureAuthorLabel()
         playerView.layoutDismissButton()
         playerView.setUpDismissButton()
+        playerView.dismissButton.addTarget(self, action: #selector(dismissAudioPlayer), for: .touchUpInside)
         playerView.layoutPlayPauseButton()
         playerView.setUpPlayPauseButton()
         playerView.layoutProgressSlider()
@@ -51,6 +52,10 @@ class AudioPlayerViewController: BaseViewController {
         tapGestureRecognizer.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
+    }
+    
+    @objc func dismissAudioPlayer() {
+        self.view.removeFromSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {

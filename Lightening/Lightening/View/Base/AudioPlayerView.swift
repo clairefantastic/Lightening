@@ -22,7 +22,7 @@ class AudioPlayerView: UIView {
     
     private let audioProgressSlider = UISlider()
     
-    private let dismissButton = UIButton()
+    let dismissButton = UIButton()
     
     var player: AVPlayer!
     
@@ -105,7 +105,7 @@ extension AudioPlayerView {
         
     }
     
-    func layoutTitleLabel() {
+    func configureTitleLabel() {
         
         addSubview(audioTitleLabel)
         
@@ -113,15 +113,21 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .leading, relatedBy: .equal, toItem: audioImageView, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: audioTitleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: audioTitleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 18).isActive = true
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
         
+        audioTitleLabel.font = UIFont(name: "American Typewriter", size: 16)
+        
+        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
+        audioTitleLabel.numberOfLines = 0
+        
     }
     
-    func layoutAuthorLabel() {
+    func configureAuthorLabel() {
         
         addSubview(audioAuthorLabel)
         
@@ -134,6 +140,10 @@ extension AudioPlayerView {
         NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 18).isActive = true
         
         NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
+        
+        audioAuthorLabel.font = UIFont(name: "American Typewriter", size: 14)
+        
+        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
     }
     
@@ -150,16 +160,14 @@ extension AudioPlayerView {
         NSLayoutConstraint(item: dismissButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: dismissButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
+        
     }
     
     func setUpDismissButton() {
+        
         dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         
-        dismissButton.addTarget(self, action: #selector(dismissPlayer), for: .touchUpInside)
-    }
-    
-    @objc func dismissPlayer() {
-    
+        dismissButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
     }
     
     func layoutPlayPauseButton() {
@@ -179,6 +187,7 @@ extension AudioPlayerView {
     
     func setUpPlayPauseButton() {
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playPauseButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
         playPauseButton.addTarget(self, action: #selector(playPauseAudio), for: .touchUpInside)
     }
@@ -216,6 +225,10 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioProgressSlider, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 2, constant: 80).isActive = true
         
+        audioProgressSlider.thumbTintColor = .clear
+        
+        audioProgressSlider.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        
     }
     
     func layoutLikeButton() {
@@ -235,6 +248,7 @@ extension AudioPlayerView {
     
     func setUpLikeButton() {
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        likeButton.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
     
     }
         
