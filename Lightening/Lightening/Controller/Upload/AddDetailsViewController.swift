@@ -10,13 +10,15 @@ import AVFoundation
 
 class AddDetailsViewController: BaseViewController {
     
+    private let uploadButton = UIButton()
+    
     private var tableView = UITableView() {
         didSet {
             tableView.reloadData()
         }
     }
     
-    private let categories = ["title", "description", "topic", "cover image", "pin on map"]
+    private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
     
     private let image = ["nature", "city", "pet"]
     
@@ -29,7 +31,12 @@ class AddDetailsViewController: BaseViewController {
         
         setupTableView()
         
-        layoutButton()
+        layoutUploadButton()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        uploadButton.layer.cornerRadius = uploadButton.frame.height / 2
     }
 
     private func setupTableView() {
@@ -68,15 +75,15 @@ class AddDetailsViewController: BaseViewController {
                                          bundle: nil
         )
         
+        tableView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        
         tableView.dataSource = self
 
         tableView.delegate = self
     
     }
     
-    private func layoutButton() {
-        
-        let uploadButton = UIButton()
+    private func layoutUploadButton() {
         
         view.addSubview(uploadButton)
         
@@ -86,13 +93,17 @@ class AddDetailsViewController: BaseViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = .systemIndigo
+        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         uploadButton.setTitle("Upload File", for: .normal)
+        
+        uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
         uploadButton.isEnabled = true
         
