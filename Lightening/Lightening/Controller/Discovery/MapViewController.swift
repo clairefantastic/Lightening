@@ -117,6 +117,7 @@ extension MapViewController: MKMapViewDelegate {
         let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
         
         let audioPlayerViewController = AudioPlayerViewController()
+        addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
         addChild(audioPlayerViewController)
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
