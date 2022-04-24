@@ -17,6 +17,8 @@ class UploadViewController: BaseViewController {
     
     private let recordButton = UIButton()
     
+    private var animationView = AnimationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,19 +26,24 @@ class UploadViewController: BaseViewController {
         
         layoutRecordButton()
         
+        animationView = .init(name: "lf30_editor_lcvwieey")
+          
+        animationView.frame = view.bounds
+          
+        animationView.contentMode = .scaleAspectFit
+          
+        animationView.loopMode = .loop
+          
+        animationView.animationSpeed = 0.5
+          
+        view.stickSubView(animationView, inset: UIEdgeInsets(top: 150, left: 0, bottom: 300, right: 0))
+          
+        animationView.play()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        let animationView = AnimationView(name: "39588-audio-visualiser-waves")
-        animationView.frame = CGRect(x: 0, y: 200, width: width, height: 200)
-        animationView.center = self.view.center
-        animationView.contentMode = .scaleAspectFill
-        animationView.loopMode = .loop
-                
-        view.addSubview(animationView)
-        animationView.play()
         
         selectFileButton.layer.cornerRadius = selectFileButton.frame.height / 2
         
