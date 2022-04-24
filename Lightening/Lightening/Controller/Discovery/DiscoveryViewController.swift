@@ -11,8 +11,6 @@ import AVFoundation
 
 class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     
-    private let mapButton = UIButton()
-    
     private var sections = DiscoverySection.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -30,7 +28,6 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
-        layoutMapButton()
     }
     
     private func configureCollectionView() {
@@ -171,35 +168,6 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutMapButton() {
-        
-        self.view.addSubview(mapButton)
-        
-        mapButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: mapButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        mapButton.setImage(UIImage(systemName: "map"), for: .normal)
-        
-        mapButton.addTarget(self, action: #selector(pushMapPage), for: .touchUpInside)
-    }
-    
-    @objc func pushMapPage(_ sender: UIButton) {
-        
-        let mapViewController = MapViewController()
-        
-        navigationController?.pushViewController(mapViewController, animated: true)
     }
 }
 
