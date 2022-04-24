@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="344" id="KGk-i7-Jjw" customClass="AddDetailsLocationCell" customModule="Lightening" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="498" height="344"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="498" height="344"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -37,7 +37,6 @@
                         </constraints>
                     </mapView>
                 </subviews>
-                <color key="backgroundColor" red="0.83921568629999999" green="0.34509803919999998" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="s5v-HY-RVg" secondAttribute="trailing" constant="16" id="1qJ-2I-nhb"/>
                     <constraint firstItem="XQ3-Si-na3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="RYF-EH-K49"/>

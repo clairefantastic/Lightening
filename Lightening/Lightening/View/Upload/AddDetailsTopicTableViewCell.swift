@@ -19,9 +19,13 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         // Initialization code
         selectTopicCollectionView.delegate = self
         selectTopicCollectionView.dataSource = self
+        
+        selectTopicCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
         selectTopicCollectionView.registerCellWithNib(identifier: "SelectTopicCollectionViewCell", bundle: nil)
     }
@@ -53,18 +57,9 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
       
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
         
-        cell.topicButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
-        
-        cell.topicButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
-        
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .selected)
         
         cell.topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
-        
-        cell.topicButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
-        
-        cell.topicButton.layer.borderWidth = 1
-        cell.topicButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
         
         return cell
     }
