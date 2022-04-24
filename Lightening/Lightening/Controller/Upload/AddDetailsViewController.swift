@@ -7,13 +7,10 @@
 
 import UIKit
 import AVFoundation
-import Lottie
 
-class AddDetailsViewController: UIViewController {
+class AddDetailsViewController: BaseViewController {
     
     private let uploadButton = UIButton()
-    
-    private var animationView = AnimationView()
     
     private var tableView = UITableView() {
         didSet {
