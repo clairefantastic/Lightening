@@ -61,6 +61,8 @@
 		7EA73F542813E0AA0071D197 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F532813E0AA0071D197 /* BaseViewController.swift */; };
 		7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F562813EBE80071D197 /* UserProfileView.swift */; };
 		7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5828145AA70071D197 /* ProfileSection.swift */; };
+		7EA73F5B28146DE10071D197 /* 39558-audio-visualiser-waves.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F5A28146DE00071D197 /* 39558-audio-visualiser-waves.json */; };
+		7EA73F5D28146E0D0071D197 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5C28146E0D0071D197 /* File.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -140,6 +142,8 @@
 		7EA73F532813E0AA0071D197 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EA73F562813EBE80071D197 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7EA73F5828145AA70071D197 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
+		7EA73F5A28146DE00071D197 /* 39558-audio-visualiser-waves.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "39558-audio-visualiser-waves.json"; sourceTree = "<group>"; };
+		7EA73F5C28146E0D0071D197 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
+				7EA73F5C28146E0D0071D197 /* File.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				7EA0235C2800452C00C73205 /* Info.plist */,
 				7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */,
 				7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */,
+				7EA73F5A28146DE00071D197 /* 39558-audio-visualiser-waves.json */,
 			);
 			path = Lightening;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
 				7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */,
 				7EDBA2CC2805E9A900C10FA5 /* VolLobbyViewController.xib in Resources */,
+				7EA73F5B28146DE10071D197 /* 39558-audio-visualiser-waves.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,6 +647,7 @@
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
+				7EA73F5D28146E0D0071D197 /* File.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

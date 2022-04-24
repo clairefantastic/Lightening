@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
 import AVFoundation
+import Lottie
 
 class UploadViewController: BaseViewController {
     
@@ -26,23 +26,44 @@ class UploadViewController: BaseViewController {
         
     }
     
-    func layoutSelectFileButton() {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let animationView = AnimationView(name: "39588-audio-visualiser-waves")
+        animationView.frame = CGRect(x: 0, y: 200, width: width, height: 200)
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+                
+        view.addSubview(animationView)
+        animationView.play()
+        
+        selectFileButton.layer.cornerRadius = selectFileButton.frame.height / 2
+        
+        recordButton.layer.cornerRadius = recordButton.frame.height / 2
+    }
+    
+    private func layoutSelectFileButton() {
         
         self.view.addSubview(selectFileButton)
         
         selectFileButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
+        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -80).isActive = true
         
         NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: selectFileButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: selectFileButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        selectFileButton.backgroundColor = .systemIndigo
+        selectFileButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         selectFileButton.setTitle("Select File", for: .normal)
+        
+        selectFileButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        selectFileButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
         selectFileButton.isEnabled = true
         
@@ -50,23 +71,27 @@ class UploadViewController: BaseViewController {
         
     }
     
-    func layoutRecordButton() {
+    private func layoutRecordButton() {
         
         self.view.addSubview(recordButton)
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: recordButton, attribute: .bottom, relatedBy: .equal, toItem: self.selectFileButton, attribute: .top, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .bottom, relatedBy: .equal, toItem: self.selectFileButton, attribute: .top, multiplier: 1, constant: -40).isActive = true
         
         NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.backgroundColor = .systemIndigo
+        recordButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         recordButton.setTitle("Record", for: .normal)
+        
+        recordButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        recordButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
         recordButton.isEnabled = true
         
@@ -105,6 +130,7 @@ class UploadViewController: BaseViewController {
 }
 
 extension UploadViewController: UIDocumentPickerDelegate {
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
         guard let url = urls.first else { return }
@@ -127,4 +153,3 @@ extension UploadViewController: UIDocumentPickerDelegate {
     }
                 
 }
-
