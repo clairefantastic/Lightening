@@ -37,9 +37,13 @@ class UploadViewController: BaseViewController {
         animationView.animationSpeed = 0.5
           
         view.stickSubView(animationView, inset: UIEdgeInsets(top: 150, left: 0, bottom: 300, right: 0))
-          
-        animationView.play()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        animationView.play()
     }
     
     override func viewDidLayoutSubviews() {

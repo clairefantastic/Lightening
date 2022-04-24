@@ -66,6 +66,7 @@
 		7EA73F65281502040071D197 /* 23559-microphone.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F64281502040071D197 /* 23559-microphone.json */; };
 		7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */; };
 		7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */; };
+		7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -150,6 +151,7 @@
 		7EA73F64281502040071D197 /* 23559-microphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "23559-microphone.json"; sourceTree = "<group>"; };
 		7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6mtolrvz.json; sourceTree = "<group>"; };
 		7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_sgfaitmz.json; sourceTree = "<group>"; };
+		7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6v2ghoza.json; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */,
 				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
+				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
 			path = Lightening;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
 				7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */,
+				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */,
 				7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */,

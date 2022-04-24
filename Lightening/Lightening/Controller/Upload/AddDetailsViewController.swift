@@ -7,10 +7,13 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
-class AddDetailsViewController: BaseViewController {
+class AddDetailsViewController: UIViewController {
     
     private let uploadButton = UIButton()
+    
+    private var animationView = AnimationView()
     
     private var tableView = UITableView() {
         didSet {
@@ -20,7 +23,7 @@ class AddDetailsViewController: BaseViewController {
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
     
-    private let image = ["nature", "city", "pet"]
+    private let image = ["nature", "city", "pet", "meaningful", "pure"]
     
     private var audio = Audio(audioUrl: URL(fileURLWithPath: ""), topic: "", title: "", description: "", cover: "", createdTime: 0.0, location: Location(latitude: 0.0, longitude: 0.0))
     
@@ -32,6 +35,17 @@ class AddDetailsViewController: BaseViewController {
         setupTableView()
         
         layoutUploadButton()
+        
+        animationView = .init(name: "lf30_editor_6v2ghoza")
+          
+        animationView.frame = self.view.bounds
+          
+        animationView.contentMode = .scaleAspectFit
+          
+        animationView.loopMode = .loop
+          
+        animationView.animationSpeed = 1
+          
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,8 +89,6 @@ class AddDetailsViewController: BaseViewController {
                                          bundle: nil
         )
         
-        tableView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
-        
         tableView.dataSource = self
 
         tableView.delegate = self
@@ -84,7 +96,7 @@ class AddDetailsViewController: BaseViewController {
     }
     
     private func layoutUploadButton() {
-        
+    
         view.addSubview(uploadButton)
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +127,11 @@ class AddDetailsViewController: BaseViewController {
         
         print("Upload file")
         
+        DispatchQueue.main.async {
+            self.view.stickSubView(self.animationView)
+            self.animationView.play() 
+        }
+    
         guard let localUrl = localUrl else {
             return
         }
@@ -136,25 +153,27 @@ class AddDetailsViewController: BaseViewController {
                     return
             }
             
-            PublishManager.shared.publishAudioFile(audio: publishAudio) { result in
+            PublishManager.shared.publishAudioFile(audio: publishAudio) { [weak self] result in
                 switch result {
 
                 case .success:
 
                     print("onTapPublish, success")
                     
+                    self?.animationView.removeFromSuperview()
+                    
+                    guard let count = self?.navigationController?.viewControllers.count else { return }
+                
+                    if let preController = self?.navigationController?.viewControllers[count - 3] {
+
+                        self?.navigationController?.popToViewController(preController, animated: true)
+                    }
+                    
                 case .failure(let error):
 
                     print("publishArticle.failure: \(error)")
                 }
                 
-                guard let count = self?.navigationController?.viewControllers.count else { return }
-            
-                if let preController = self?.navigationController?.viewControllers[count - 2] {
-
-                    self?.navigationController?.popToViewController(preController, animated: true)
-                }
-
             }
             
         }
