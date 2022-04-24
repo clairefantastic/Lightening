@@ -15,6 +15,8 @@ class VolLobbyViewController: BaseViewController {
     
     @IBOutlet private weak var answerButton: UIButton?
     
+    private let answerVideoCallButton = UIButton()
+    
     @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
         didSet {
             // Must Be here
@@ -40,7 +42,7 @@ class VolLobbyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        layoutAnswerButton()
         self.currentPerson = "giUsyJAOONHf3dNytlZG"
 
         self.signalingConnected = false
@@ -57,6 +59,11 @@ class VolLobbyViewController: BaseViewController {
         availableStatusSegmentedControl.selectedSegmentIndex = 0
         
         self.signalClientforVolunteer.updateStatus(for: currentPerson, status: VolunteerStatus.available)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        answerVideoCallButton.layer.cornerRadius = answerVideoCallButton.frame.height / 2
     }
     
     private var signalingConnected: Bool = false {
@@ -82,7 +89,9 @@ class VolLobbyViewController: BaseViewController {
     
     var remoteCandidateCount: Int = 0 {
       didSet {
-          NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
+          if remoteCandidateCount > 1 {
+              NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
+          }
       }
     }
 
@@ -136,7 +145,6 @@ extension VolLobbyViewController: SignalClientforVolunteerDelegate {
       
       self.webRTCClient.set(remoteCandidate: candidate)
     
-       
   }
 }
 
@@ -174,4 +182,50 @@ extension VolLobbyViewController: WebRTCClientDelegate {
       self.present(alert, animated: true, completion: nil)
     }
   }
+}
+
+extension VolLobbyViewController {
+    
+    private func layoutAnswerButton() {
+        
+        self.view.addSubview(answerVideoCallButton)
+        
+        answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -80).isActive = true
+        
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        answerVideoCallButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        answerVideoCallButton.setTitle("Answer a Call", for: .normal)
+        
+        answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
+        
+        answerVideoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        answerVideoCallButton.isEnabled = true
+        
+        answerVideoCallButton.addTarget(self, action: #selector(answerVideoCall), for: .touchUpInside)
+    }
+    
+    @objc func answerVideoCall() {
+        
+        self.webRTCClient.answer { (localSdp) in
+          self.hasLocalSdp = true
+            
+            self.signalClientforVolunteer.send(sdp: localSdp, from: self.currentPerson, to: self.oppositePerson)
+        }
+        
+        let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
+
+        videoCallViewController.currentPerson = self.currentPerson
+        
+        videoCallViewController.modalPresentationStyle = .fullScreen
+        self.present(videoCallViewController, animated: true, completion: nil)
+    }
 }
