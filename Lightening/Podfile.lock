@@ -484,6 +484,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - SoundWave (0.1.4)
   - SwiftLint (0.47.0)
 
 DEPENDENCIES:
@@ -495,6 +496,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - lottie-ios
+  - SoundWave
   - SwiftLint
 
 SPEC REPOS:
@@ -522,6 +524,7 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - PromisesObjC
+    - SoundWave
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -548,8 +551,9 @@ SPEC CHECKSUMS:
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SoundWave: d98ffaa863570b29d991da32a09b7ce1b4aaf2d4
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 73a7949cee749b3b0bb64ad397a559c0e9ea04c9
+PODFILE CHECKSUM: 67a492f0bf7c2799982716170271addc3a7fa716
 
 COCOAPODS: 1.11.2
