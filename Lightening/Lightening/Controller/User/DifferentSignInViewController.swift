@@ -7,12 +7,33 @@
 
 import UIKit
 import AuthenticationServices
+import FirebaseAuth
 
 class DifferentSignInViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureAppleSignInButton()
+    }
+    
+    @available(iOS 13, *)
+    @objc func handleSignInWithAppleTapped() {
+        
+        performSignIn()
+    }
+    
+    private func performSignIn() {
+        
+        let request = UserManager.shared.createAppleIDRequest()
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        
+        authorizationController.delegate = self
+        
+        authorizationController.presentationContextProvider = self
+        
+        authorizationController.performRequests()
     }
     
 }
@@ -26,9 +47,8 @@ extension DifferentSignInViewController {
         self.view.addSubview(appleSignInbutton)
         
         appleSignInbutton.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint(item: appleSignInbutton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-
+        
         NSLayoutConstraint(item: appleSignInbutton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
         
         NSLayoutConstraint(item: appleSignInbutton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
@@ -37,11 +57,28 @@ extension DifferentSignInViewController {
         
         appleSignInbutton.cornerRadius = 30.0
         
-        appleSignInbutton.addTarget(self, action: #selector(appleSignInButtonTapped), for: .touchUpInside)
+        appleSignInbutton.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
         
+    }
+}
+
+@available(iOS 13.0, *)
+extension DifferentSignInViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+        
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    // Handle error.
+        print("Sign in with Apple errored: \(error)")
     }
     
-    @objc func appleSignInButtonTapped() {
-        
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { error in
+            print(error as Any)
+        }
+//        print(authorization)
     }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+
 }
