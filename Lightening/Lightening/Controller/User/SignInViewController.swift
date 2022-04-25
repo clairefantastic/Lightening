@@ -210,10 +210,25 @@ extension SignInViewController {
         
         logInButton.isEnabled = true
         
-//        registerButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
+        logInButton.addTarget(self, action: #selector(handleNativeSignIn), for: .touchUpInside)
 
     }
     
+    @objc func handleNativeSignIn() {
+        
+        UserManager.shared.nativeSignIn(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { authDataResult in
+            
+            print(authDataResult)
+            
+            let identitySelectionViewController = IdentitySelectionViewController()
+            
+            identitySelectionViewController.modalPresentationStyle = .fullScreen
+            
+            self.present(identitySelectionViewController, animated: true)
+            
+        }
+    
+    }
 }
 
 @available(iOS 13.0, *)
