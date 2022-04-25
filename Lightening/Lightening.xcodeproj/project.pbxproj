@@ -72,6 +72,7 @@
 		7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F712816A4FC0071D197 /* UserManager.swift */; };
 		7EA73F742816EDA70071D197 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F732816EDA60071D197 /* User.swift */; };
 		7EA73F762816FC8E0071D197 /* VisuallyImpairedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F752816FC8E0071D197 /* VisuallyImpairedTabBarController.swift */; };
+		7EA73F7828170E170071D197 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F7728170E160071D197 /* RegisterViewController.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -163,6 +164,7 @@
 		7EA73F712816A4FC0071D197 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7EA73F732816EDA60071D197 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7EA73F752816FC8E0071D197 /* VisuallyImpairedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisuallyImpairedTabBarController.swift; sourceTree = "<group>"; };
+		7EA73F7728170E160071D197 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
+				7EA73F7728170E160071D197 /* RegisterViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				7EA73F522813D5530071D197 /* ProfileViewController.swift in Sources */,
 				7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */,
 				7EB3F502280D740900C6E385 /* DiscoverySection.swift in Sources */,
+				7EA73F7828170E170071D197 /* RegisterViewController.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
 				7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */,

@@ -85,8 +85,17 @@ extension SignInViewController {
         
         registerButton.isEnabled = true
         
-//        registerButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
 
+    }
+    
+    @objc func presentRegisterPage() {
+        
+        let registerViewController = RegisterViewController()
+        
+        registerViewController.modalPresentationStyle = .fullScreen
+        
+        self.present(registerViewController, animated: true)
     }
     
     private func configureNoAccountLabel() {
