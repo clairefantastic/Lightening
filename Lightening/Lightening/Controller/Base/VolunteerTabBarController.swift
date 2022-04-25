@@ -7,7 +7,7 @@
 
 import UIKit
 
-private enum Tab {
+private enum VolunteerTab {
 
     case lobby
     
@@ -95,9 +95,10 @@ private enum Tab {
         
     }
 }
-class TabBarController: UITabBarController {
+
+class VolunteerTabBarController: UITabBarController {
     
-    private let tabs: [Tab] = [.lobby, .discovery, .upload, .map, .profile]
+    private let tabs: [VolunteerTab] = [.lobby, .discovery, .upload, .map, .profile]
     
     var lobbyTabBarItem: UITabBarItem!
     

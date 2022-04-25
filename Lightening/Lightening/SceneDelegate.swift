@@ -68,7 +68,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      let navViewController = UINavigationController(rootViewController: mainViewController)
       let mainViewController = VolLobbyViewController(
         signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
-      let tabBarController = TabBarController()
+      let tabBarController = VolunteerTabBarController()
       let identitySelectionViewController = IdentitySelectionViewController()
       let signInViewController = SignInViewController()
       let navViewController = UINavigationController(rootViewController: signInViewController)

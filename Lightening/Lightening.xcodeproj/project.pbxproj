@@ -47,7 +47,7 @@
 		7E44B7E5280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */; };
 		7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */; };
 		7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */; };
-		7E498D552808175400389D1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* TabBarController.swift */; };
+		7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* VolunteerTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -71,6 +71,7 @@
 		7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F6F28168F080071D197 /* SignInViewController.swift */; };
 		7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F712816A4FC0071D197 /* UserManager.swift */; };
 		7EA73F742816EDA70071D197 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F732816EDA60071D197 /* User.swift */; };
+		7EA73F762816FC8E0071D197 /* VisuallyImpairedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F752816FC8E0071D197 /* VisuallyImpairedTabBarController.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -134,7 +135,7 @@
 		7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCoverCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
-		7E498D542808175400389D1C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7E498D542808175400389D1C /* VolunteerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 		7EA73F6F28168F080071D197 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7EA73F712816A4FC0071D197 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7EA73F732816EDA60071D197 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7EA73F752816FC8E0071D197 /* VisuallyImpairedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisuallyImpairedTabBarController.swift; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -287,7 +289,8 @@
 		7E498D532808173E00389D1C /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				7E498D542808175400389D1C /* TabBarController.swift */,
+				7E498D542808175400389D1C /* VolunteerTabBarController.swift */,
+				7EA73F752816FC8E0071D197 /* VisuallyImpairedTabBarController.swift */,
 				7EA73F532813E0AA0071D197 /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -629,7 +632,7 @@
 				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
 				7E44B7D1280B036200CF24AC /* AudioListCollectionViewCell.swift in Sources */,
 				7EA73F522813D5530071D197 /* ProfileViewController.swift in Sources */,
-				7E498D552808175400389D1C /* TabBarController.swift in Sources */,
+				7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */,
 				7EB3F502280D740900C6E385 /* DiscoverySection.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
@@ -651,6 +654,7 @@
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
 				7E44B7E1280C4B8300CF24AC /* AddDetailsCoverTableViewCell.swift in Sources */,
 				7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */,
+				7EA73F762816FC8E0071D197 /* VisuallyImpairedTabBarController.swift in Sources */,
 				7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */,
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientforVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
