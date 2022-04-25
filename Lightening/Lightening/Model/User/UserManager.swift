@@ -158,4 +158,28 @@ class UserManager {
             
         }
     }
+    
+    func register(with displayName: String, with email: String, with password: String, completion: @escaping (Error?) -> Void) {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authDataResult, error in
+            
+            guard
+                error == nil,
+                let user = authDataResult?.user,
+                let email = user.email,
+                let self = self
+                    
+            else {
+                
+                completion(error)
+                
+                return
+            }
+            
+            print("user registeration success! User: \(user.uid), \(user.email)")
+            
+        }
+        
+        
+    }
 }

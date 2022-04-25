@@ -145,7 +145,17 @@ extension RegisterViewController {
         
         registerButton.isEnabled = true
         
-//        registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
 
+    }
+    
+    @objc func handleRegister() {
+        UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
+            
+            print(error)
+            
+        }
+        
+        self.dismiss(animated: true)
     }
 }
