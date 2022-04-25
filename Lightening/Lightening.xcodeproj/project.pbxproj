@@ -67,6 +67,7 @@
 		7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */; };
 		7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */; };
 		7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */; };
+		7EA73F6D281687E30071D197 /* IdentitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -152,6 +153,8 @@
 		7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6mtolrvz.json; sourceTree = "<group>"; };
 		7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_sgfaitmz.json; sourceTree = "<group>"; };
 		7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6v2ghoza.json; sourceTree = "<group>"; };
+		7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySelectionViewController.swift; sourceTree = "<group>"; };
+		7EA73F6E281688800071D197 /* Lightening.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lightening.entitlements; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 		7EA0234D2800452A00C73205 /* Lightening */ = {
 			isa = PBXGroup;
 			children = (
+				7EA73F6E281688800071D197 /* Lightening.entitlements */,
 				7E44B7C5280AF13300CF24AC /* Third Party Wrapper */,
 				7EB9DAE72803D30C009B89D0 /* Services */,
 				7EB9DAE02803D164009B89D0 /* Extensions */,
@@ -351,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
+				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */,
 				7E44B7DB280BED5000CF24AC /* SelectTopicCollectionViewCell.swift in Sources */,
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
+				7EA73F6D281687E30071D197 /* IdentitySelectionViewController.swift in Sources */,
 				7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */,
@@ -805,6 +811,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lightening/Lightening.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9H6DPAU9ML;
@@ -838,6 +845,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lightening/Lightening.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9H6DPAU9ML;

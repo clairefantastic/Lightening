@@ -69,9 +69,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let mainViewController = VolLobbyViewController(
         signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
       let tabBarController = TabBarController()
+      let identitySelectionViewController = IdentitySelectionViewController()
       let navViewController = UINavigationController(rootViewController: tabBarController)
      
-      return tabBarController
+      return identitySelectionViewController
     }
 
 }
