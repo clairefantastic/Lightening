@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class AddDetailsViewController: BaseViewController {
     
@@ -17,6 +18,8 @@ class AddDetailsViewController: BaseViewController {
             tableView.reloadData()
         }
     }
+    
+    private var animationView = AnimationView()
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
     
