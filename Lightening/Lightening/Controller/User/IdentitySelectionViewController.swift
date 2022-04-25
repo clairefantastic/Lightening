@@ -58,6 +58,27 @@ extension IdentitySelectionViewController {
     
     @objc func pushVisuallyImpairedPage() {
         
+        var user = User()
+        
+        UserManager.shared.signInAsVisuallyImpaired(user: &user) { result in
+            
+            switch result {
+            
+            case .success:
+                
+                print("Visually Impaired user sign in success")
+                
+                let tabBarController = VisuallyImpairedTabBarController()
+                
+                tabBarController.modalPresentationStyle = .fullScreen
+                
+                self.present(tabBarController, animated: true, completion: nil)
+
+            case .failure(let error):
+                
+                print("visuallyImpairedSignin.failure: \(error)")
+            }
+        }
     }
     
     private func configureVolunteerButton() {
@@ -98,9 +119,9 @@ extension IdentitySelectionViewController {
             
             case .success:
                 
-                print("Welcome Volunteer, success")
+                print("Volunteer sign in success")
                 
-                let tabBarController = TabBarController()
+                let tabBarController = VolunteerTabBarController()
                 
                 tabBarController.modalPresentationStyle = .fullScreen
                 

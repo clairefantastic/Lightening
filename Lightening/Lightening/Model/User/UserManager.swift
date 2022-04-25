@@ -134,4 +134,28 @@ class UserManager {
             
         }
     }
+    
+    func signInAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let currentUser = Auth.auth().currentUser else { return }
+        
+        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid)
+        
+        let document = db.collection("visuallyImpaired").document(currentUser.uid)
+        
+        do {
+           try document.setData(from: user) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+        }
+    }
 }

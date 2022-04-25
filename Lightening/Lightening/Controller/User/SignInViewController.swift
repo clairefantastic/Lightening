@@ -11,8 +11,6 @@ import FirebaseAuth
 
 class SignInViewController: BaseViewController {
     
-    var identity: Int?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,7 +80,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
             
             self.present(identitySelectionViewController, animated: true)
         
-//            self.navigationController?.pushViewController(identitySelectionViewController, animated: true)
         }
 //        print(authorization)
     }
