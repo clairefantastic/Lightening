@@ -58,17 +58,9 @@ extension SearchViewController {
     
     private func layoutTableView() {
         
-        view.addSubview(tableView)
+        view.stickSubView(tableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.backgroundColor =  UIColor.hexStringToUIColor(hex: "#D65831")
     }
     
     private func setUpTableView() {
@@ -108,8 +100,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let audioPlayerViewController = AudioPlayerViewController()
-        audioPlayerViewController.audio = filteredAudioFiles[indexPath.row]
         addChild(audioPlayerViewController)
+        audioPlayerViewController.audio = filteredAudioFiles[indexPath.row]
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)

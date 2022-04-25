@@ -7,8 +7,11 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class AddDetailsViewController: BaseViewController {
+    
+    private let uploadButton = UIButton()
     
     private var tableView = UITableView() {
         didSet {
@@ -16,9 +19,11 @@ class AddDetailsViewController: BaseViewController {
         }
     }
     
-    private let categories = ["title", "description", "topic", "cover image", "pin on map"]
+    private var animationView = AnimationView()
     
-    private let image = ["nature", "city", "pet"]
+    private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
+    
+    private let image = ["nature", "city", "pet", "meaningful", "pure"]
     
     private var audio = Audio(audioUrl: URL(fileURLWithPath: ""), topic: "", title: "", description: "", cover: "", createdTime: 0.0, location: Location(latitude: 0.0, longitude: 0.0))
     
@@ -29,7 +34,23 @@ class AddDetailsViewController: BaseViewController {
         
         setupTableView()
         
-        layoutButton()
+        layoutUploadButton()
+        
+        animationView = .init(name: "lf30_editor_6v2ghoza")
+          
+        animationView.frame = self.view.bounds
+          
+        animationView.contentMode = .scaleAspectFit
+          
+        animationView.loopMode = .loop
+          
+        animationView.animationSpeed = 1
+          
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        uploadButton.layer.cornerRadius = uploadButton.frame.height / 2
     }
 
     private func setupTableView() {
@@ -74,10 +95,8 @@ class AddDetailsViewController: BaseViewController {
     
     }
     
-    private func layoutButton() {
-        
-        let uploadButton = UIButton()
-        
+    private func layoutUploadButton() {
+    
         view.addSubview(uploadButton)
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
@@ -86,13 +105,17 @@ class AddDetailsViewController: BaseViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = .systemIndigo
+        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         uploadButton.setTitle("Upload File", for: .normal)
+        
+        uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
         uploadButton.isEnabled = true
         
@@ -104,6 +127,11 @@ class AddDetailsViewController: BaseViewController {
         
         print("Upload file")
         
+        DispatchQueue.main.async {
+            self.view.stickSubView(self.animationView)
+            self.animationView.play() 
+        }
+    
         guard let localUrl = localUrl else {
             return
         }
@@ -125,25 +153,27 @@ class AddDetailsViewController: BaseViewController {
                     return
             }
             
-            PublishManager.shared.publishAudioFile(audio: publishAudio) { result in
+            PublishManager.shared.publishAudioFile(audio: publishAudio) { [weak self] result in
                 switch result {
 
                 case .success:
 
                     print("onTapPublish, success")
                     
+                    self?.animationView.removeFromSuperview()
+                    
+                    guard let count = self?.navigationController?.viewControllers.count else { return }
+                
+                    if let preController = self?.navigationController?.viewControllers[count - 3] {
+
+                        self?.navigationController?.popToViewController(preController, animated: true)
+                    }
+                    
                 case .failure(let error):
 
                     print("publishArticle.failure: \(error)")
                 }
                 
-                guard let count = self?.navigationController?.viewControllers.count else { return }
-            
-                if let preController = self?.navigationController?.viewControllers[count - 2] {
-
-                    self?.navigationController?.popToViewController(preController, animated: true)
-                }
-
             }
             
         }

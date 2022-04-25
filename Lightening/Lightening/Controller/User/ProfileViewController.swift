@@ -119,6 +119,7 @@ extension ProfileViewController {
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
         let audioPlayerViewController = AudioPlayerViewController()
+        addChild(audioPlayerViewController)
         audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)

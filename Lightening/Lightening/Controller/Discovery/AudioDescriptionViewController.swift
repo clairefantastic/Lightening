@@ -15,11 +15,11 @@ class AudioDescriptionViewController: BaseViewController {
     
     private let audioDescriptionLabel = UILabel()
     
+    private let audioCoverImageView = UIImageView()
+    
     private let sendOutTextButton = UIButton()
     
     private let enterCommentTextField = UITextField()
-//
-//    var comments = ["hi", "hiii", "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"]
     
     var comments: [Comment] = [] {
         
@@ -40,6 +40,7 @@ class AudioDescriptionViewController: BaseViewController {
             audioTitleLabel.text = self.audio?.title
             audioAuthorLabel.text = "Claire"
             audioDescriptionLabel.text = self.audio?.description
+            audioCoverImageView.image = UIImage(named: self.audio?.cover ?? "")
             
             guard let audio = audio else { return }
             
@@ -84,6 +85,8 @@ class AudioDescriptionViewController: BaseViewController {
         
         layoutAudioDescriptionLabel()
         
+        layoutAudioCoverImageView()
+        
         layoutSendOutTextButton()
         
         setUpSendOutTextButton()
@@ -96,6 +99,11 @@ class AudioDescriptionViewController: BaseViewController {
         
         setUpCommentsTableView()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        enterCommentTextField.layer.cornerRadius = enterCommentTextField.frame.height / 2
     }
     
 }
@@ -116,6 +124,14 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
+        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 36)
+        audioAuthorLabel.adjustsFontForContentSizeCategory = true
+        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioAuthorLabel.textAlignment = .left
+        audioAuthorLabel.numberOfLines = 0
+        audioAuthorLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
     }
     
     private func layoutAudioTitleLabel() {
@@ -131,6 +147,14 @@ extension AudioDescriptionViewController {
         NSLayoutConstraint(item: audioTitleLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        audioTitleLabel.adjustsFontForContentSizeCategory = true
+        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioTitleLabel.textAlignment = .left
+        audioTitleLabel.numberOfLines = 0
+        audioTitleLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
         
     }
     
@@ -148,6 +172,29 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
+        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 20)
+        audioDescriptionLabel.adjustsFontForContentSizeCategory = true
+        audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioDescriptionLabel.textAlignment = .left
+        audioDescriptionLabel.numberOfLines = 0
+        audioDescriptionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+    }
+    
+    private func layoutAudioCoverImageView() {
+        
+        self.view.addSubview(audioCoverImageView)
+        
+        audioCoverImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
     }
     
     private func layoutSendOutTextButton() {
@@ -169,13 +216,13 @@ extension AudioDescriptionViewController {
         
         sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         
+        sendOutTextButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
         sendOutTextButton.addTarget(self, action: #selector(sendOutText), for: .touchUpInside)
         
     }
     
     @objc func sendOutText() {
-        
-        enterCommentTextField.text = ""
         
         PublishManager.shared.publishComments(documentId: audioFileDocumentId ?? "",
                                               comment: Comment(authorImage: "", authorName: "Claire", text: enterCommentTextField.text ?? "")) { [weak self] result in
@@ -183,12 +230,12 @@ extension AudioDescriptionViewController {
             switch result {
             case .success(let success):
                 self?.comments.append(Comment(authorImage: "", authorName: "Claire", text: self?.enterCommentTextField.text ?? ""))
+                self?.enterCommentTextField.text = ""
             case .failure(let error):
                 print("publishComments.failure: \(error)")
             }
             
         }
-        
         
     }
     
@@ -209,9 +256,12 @@ extension AudioDescriptionViewController {
     
     private func setUpEnterCommentTextField() {
         
-        enterCommentTextField.layer.borderWidth = 1
+        enterCommentTextField.layer.borderWidth = 2
         
-        enterCommentTextField.layer.borderColor = UIColor.black.cgColor
+        enterCommentTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        
+        enterCommentTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
     }
     
     private func layoutCommentsTableView() {
@@ -233,6 +283,12 @@ extension AudioDescriptionViewController {
     private func setUpCommentsTableView() {
         
         commentsTableView.separatorStyle = .none
+        
+        commentsTableView.layer.borderWidth = 2
+        
+        commentsTableView.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        
+        commentsTableView.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
         
         commentsTableView.registerCellWithNib(identifier:
             String(describing: CommentTableViewCell.self),
@@ -258,6 +314,4 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
         return cell
     }
     
-    
 }
-

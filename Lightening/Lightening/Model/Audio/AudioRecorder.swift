@@ -37,7 +37,7 @@ class AudioRecorder: NSObject {
         self.fileManager = fileManager
     }
     
-    func setupRecorder(completion: @escaping (URL)-> Void ) {
+    func setupRecorder(completion: @escaping (URL) -> Void ) {
         
         guard let fileManager = self.fileManager else {
             return
@@ -56,8 +56,7 @@ class AudioRecorder: NSObject {
             recorder?.isMeteringEnabled = true
             recorder?.prepareToRecord()
             recorderStateChangeHandler?(.prepareToRecord)
-        }
-        catch let error {
+        } catch let error {
             recorderStateChangeHandler?(.failed(error))
         }
     }
@@ -68,9 +67,8 @@ class AudioRecorder: NSObject {
         if recorder.isRecording {
             currentTimeInterval += 0.1
             let min = Int(currentTimeInterval / 60)
-            let hr = Int(min / 60)
             let sec = Int(currentTimeInterval.truncatingRemainder(dividingBy: 60))
-            print(String(format: "%02d:%02d:%02d", hr, min, sec))
+            print(String(format: "%02d:%02d", min, sec))
             recorder.updateMeters()
             timeIntervalHandler?(recorder.currentTime)
         } else {
@@ -123,7 +121,7 @@ class AudioRecorder: NSObject {
     
     func doResume() {
         guard recorder != nil else { return }
-        if (recorder?.isRecording ?? true) {
+        if recorder?.isRecording ?? true {
             self.doStop()
         }
 
@@ -150,4 +148,3 @@ extension AudioRecorder: AVAudioRecorderDelegate {
         }
     }
 }
-

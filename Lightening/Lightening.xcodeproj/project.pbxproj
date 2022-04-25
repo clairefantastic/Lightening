@@ -61,6 +61,12 @@
 		7EA73F542813E0AA0071D197 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F532813E0AA0071D197 /* BaseViewController.swift */; };
 		7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F562813EBE80071D197 /* UserProfileView.swift */; };
 		7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5828145AA70071D197 /* ProfileSection.swift */; };
+		7EA73F5D28146E0D0071D197 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5C28146E0D0071D197 /* File.swift */; };
+		7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */; };
+		7EA73F65281502040071D197 /* 23559-microphone.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F64281502040071D197 /* 23559-microphone.json */; };
+		7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */; };
+		7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */; };
+		7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -140,6 +146,12 @@
 		7EA73F532813E0AA0071D197 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EA73F562813EBE80071D197 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7EA73F5828145AA70071D197 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
+		7EA73F5C28146E0D0071D197 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_lcvwieey.json; sourceTree = "<group>"; };
+		7EA73F64281502040071D197 /* 23559-microphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "23559-microphone.json"; sourceTree = "<group>"; };
+		7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6mtolrvz.json; sourceTree = "<group>"; };
+		7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_sgfaitmz.json; sourceTree = "<group>"; };
+		7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6v2ghoza.json; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -203,6 +215,7 @@
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
+				7EA73F5C28146E0D0071D197 /* File.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -325,6 +338,11 @@
 				7EA0235C2800452C00C73205 /* Info.plist */,
 				7EB9DAC62802FC1A009B89D0 /* GoogleService-Info.plist */,
 				7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */,
+				7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */,
+				7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */,
+				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
+				7EA73F64281502040071D197 /* 23559-microphone.json */,
+				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
 			path = Lightening;
 			sourceTree = "<group>";
@@ -506,14 +524,19 @@
 				7E44B7D2280B036200CF24AC /* AudioListCollectionViewCell.xib in Resources */,
 				7EB9DAC72802FC1A009B89D0 /* GoogleService-Info.plist in Resources */,
 				7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */,
+				7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */,
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
+				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
 				7E44B7CE280B002A00CF24AC /* GalleryTableViewCell.xib in Resources */,
+				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */,
 				7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */,
+				7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EB9DAF12803D9AD009B89D0 /* LobbyViewController.xib in Resources */,
+				7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */,
 				7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */,
 				7EDBA2CC2805E9A900C10FA5 /* VolLobbyViewController.xib in Resources */,
 			);
@@ -640,6 +663,7 @@
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
+				7EA73F5D28146E0D0071D197 /* File.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

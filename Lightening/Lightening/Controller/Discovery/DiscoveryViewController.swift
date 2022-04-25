@@ -6,12 +6,9 @@
 //
 
 import UIKit
-
 import AVFoundation
 
 class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
-    
-    private let mapButton = UIButton()
     
     private var sections = DiscoverySection.allSections
     
@@ -30,7 +27,6 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
-        layoutMapButton()
     }
     
     private func configureCollectionView() {
@@ -115,10 +111,11 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
 extension DiscoveryViewController {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
         let audioPlayerViewController = AudioPlayerViewController()
+        addChild(audioPlayerViewController)
         audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
@@ -171,35 +168,6 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutMapButton() {
-        
-        self.view.addSubview(mapButton)
-        
-        mapButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: mapButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: mapButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        mapButton.setImage(UIImage(systemName: "map"), for: .normal)
-        
-        mapButton.addTarget(self, action: #selector(pushMapPage), for: .touchUpInside)
-    }
-    
-    @objc func pushMapPage(_ sender: UIButton) {
-        
-        let mapViewController = MapViewController()
-        
-        navigationController?.pushViewController(mapViewController, animated: true)
     }
 }
 

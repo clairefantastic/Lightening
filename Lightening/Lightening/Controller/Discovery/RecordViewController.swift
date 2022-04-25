@@ -7,17 +7,21 @@
 
 import UIKit
 
+import Lottie
+
 class RecordViewController: BaseViewController {
     
     private let recordButton = UIButton()
     
-    private let playerButton = UIButton()
+    private let playButton = UIButton()
     
     private let resetButton = UIButton()
     
     private let finishRecordingButton = UIButton()
     
     private let timerLabel = UILabel()
+    
+    private var animationView = AnimationView()
     
     var localUrl: URL?
     
@@ -29,6 +33,18 @@ class RecordViewController: BaseViewController {
         audioManager.delegate = self
         audioManager.checkRecordPermission()
         
+        animationView = .init(name: "lf30_editor_sgfaitmz")
+          
+        animationView.frame = view.bounds
+          
+        animationView.contentMode = .scaleAspectFit
+          
+        animationView.loopMode = .loop
+          
+        animationView.animationSpeed = 0.5
+          
+        view.stickSubView(animationView, inset: UIEdgeInsets(top: 150, left: 0, bottom: 400, right: 0))
+        
         layoutRecordButton()
         
         layoutPlayerButton()
@@ -38,15 +54,23 @@ class RecordViewController: BaseViewController {
         layoutFinishRecordingButton()
         
         layoutTimeLabel()
+        
     }
     
-    func layoutTimeLabel() {
+    override func viewDidLayoutSubviews() {
+        recordButton.layer.cornerRadius = recordButton.frame.height / 2
+        playButton.layer.cornerRadius = resetButton.frame.height / 2
+        resetButton.layer.cornerRadius = resetButton.frame.height / 2
+        finishRecordingButton.layer.cornerRadius = finishRecordingButton.frame.height / 2
+    }
+    
+    private func layoutTimeLabel() {
         
         self.view.addSubview(timerLabel)
         
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: timerLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: timerLabel, attribute: .top, relatedBy: .equal, toItem: animationView, attribute: .bottom, multiplier: 1, constant: 30).isActive = true
         
         NSLayoutConstraint(item: timerLabel, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -54,28 +78,35 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: timerLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        timerLabel.text = "Start Time"
+        timerLabel.text = "00:00"
         
-        timerLabel.textColor = .systemIndigo
+        timerLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        
+        timerLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
+        timerLabel.textAlignment = .center
+        
+        timerLabel.isHidden = true
+
     }
     
-    func layoutRecordButton() {
+    private func layoutRecordButton() {
         
         self.view.addSubview(recordButton)
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: recordButton, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .top, relatedBy: .equal, toItem: animationView, attribute: .bottom, multiplier: 1, constant: 100).isActive = true
         
-        NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.backgroundColor = .systemIndigo
+        recordButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D")
         
-        recordButton.setTitle("Start Recording", for: .normal)
+        recordButton.setImage(UIImage(named: "record"), for: .normal)
         
         recordButton.isEnabled = true
         
@@ -84,7 +115,10 @@ class RecordViewController: BaseViewController {
     }
     
     @objc func recordAudio(_ sender: UIButton) {
+        
+        timerLabel.isHidden = false
         if !self.audioManager.isRecording {
+            animationView.play()
             self.audioManager.recordStart()
             self.audioManager.recorder?.timeIntervalHandler = { [weak self] currentTime in
                 let min = Int(currentTime / 60)
@@ -92,31 +126,32 @@ class RecordViewController: BaseViewController {
                 self?.timerLabel.text = String(format: "%02d:%02d", min, sec)
             }
         } else {
+            animationView.pause()
             self.audioManager.stopRecording()
         }
     }
     
-    func layoutPlayerButton() {
+    private func layoutPlayerButton() {
         
-        self.view.addSubview(playerButton)
+        self.view.addSubview(playButton)
         
-        playerButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: playerButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: playButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .top, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: playerButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: playButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: playerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: playButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: playerButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: playButton, attribute: .trailing, relatedBy: .equal, toItem: recordButton, attribute: .leading, multiplier: 1, constant: -36).isActive = true
         
-        playerButton.backgroundColor = .systemIndigo
+        playButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D")
         
-        playerButton.setTitle("Start Playing", for: .normal)
+        playButton.setImage(UIImage(named: "play"), for: .normal)
         
-        playerButton.isEnabled = true
+        playButton.isEnabled = true
         
-        playerButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
         
     }
     
@@ -128,23 +163,23 @@ class RecordViewController: BaseViewController {
         }
     }
     
-    func layoutResetButton() {
+    private func layoutResetButton() {
         
         self.view.addSubview(resetButton)
         
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: resetButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 120).isActive = true
+        NSLayoutConstraint(item: resetButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .top, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: resetButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: resetButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: resetButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: resetButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: resetButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: resetButton, attribute: .leading, relatedBy: .equal, toItem: recordButton, attribute: .trailing, multiplier: 1, constant: 36).isActive = true
         
-        resetButton.backgroundColor = .systemIndigo
+        resetButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D")
         
-        resetButton.setTitle("Reset", for: .normal)
+        resetButton.setImage(UIImage(named: "replay"), for: .normal)
         
         resetButton.isEnabled = true
         
@@ -153,28 +188,35 @@ class RecordViewController: BaseViewController {
     }
     
     @objc func resetAudio(_ sender: UIButton) {
+        timerLabel.text = "00:00"
+        timerLabel.isHidden = true
+        animationView.pause()
         audioManager.newRecording(fileManager: AudioFileManager(withFileName: nil))
         recordButton.isEnabled = true
-        playerButton.isEnabled = false
+        playButton.isEnabled = false
     }
     
-    func layoutFinishRecordingButton() {
+    private func layoutFinishRecordingButton() {
         
         self.view.addSubview(finishRecordingButton)
         
         finishRecordingButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: finishRecordingButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 200).isActive = true
+        NSLayoutConstraint(item: finishRecordingButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: finishRecordingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: finishRecordingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        finishRecordingButton.backgroundColor = .systemIndigo
+        finishRecordingButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         finishRecordingButton.setTitle("Finish Recording", for: .normal)
+        
+        finishRecordingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        finishRecordingButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
         finishRecordingButton.isEnabled = true
         
@@ -199,10 +241,10 @@ extension RecordViewController: AudioManagerDelegate {
             break
             
         case .granted:
-            recordButton.setTitle("Initialize Recorder", for: .normal)
-            playerButton.setTitle("Initialize Player", for: .normal)
+//            recordButton.setTitle("Initialize Recorder", for: .normal)
+            playButton.setTitle("Initialize Player", for: .normal)
             recordButton.isEnabled = true
-            playerButton.isEnabled = false
+            playButton.isEnabled = false
             
         case .denied:
             break
@@ -215,14 +257,14 @@ extension RecordViewController: AudioManagerDelegate {
     func recorderAndPlayer(_ recoder: AudioRecorder, withStates state: AudioRecorderState) {
         switch state {
         case .prepareToRecord:
-            recordButton.setTitle("Ready to record", for: .normal)
-            playerButton.setTitle("Ready to Play", for: .normal)
+//            recordButton.setTitle("Ready to record", for: .normal)
+            playButton.setTitle("Ready to Play", for: .normal)
             recordButton.isEnabled = true
-            playerButton.isEnabled = false
+            playButton.isEnabled = false
             
         case .recording:
             recordButton.setTitle("Recording....", for: .normal)
-            playerButton.isEnabled = false
+            playButton.isEnabled = false
             
         case .pause:
             recordButton.setTitle("Pause recording", for: .normal)
@@ -235,7 +277,7 @@ extension RecordViewController: AudioManagerDelegate {
             
         case .failed(let error):
             recordButton.setTitle(error.localizedDescription, for: .normal)
-            playerButton.isEnabled = false
+            playButton.isEnabled = false
             recordButton.isEnabled = false
         }
     }
@@ -243,25 +285,25 @@ extension RecordViewController: AudioManagerDelegate {
     func recorderAndPlayer(_ player: AudioPlayer, withStates state: AudioPlayerState) {
         switch state {
         case .prepareToPlay:
-            playerButton.setTitle("Ready to Play", for: .normal)
+            playButton.setTitle("Ready to Play", for: .normal)
             recordButton.isEnabled = false
-            playerButton.isEnabled = true
+            playButton.isEnabled = true
             
         case .play:
-            playerButton.setTitle("Playing", for: .normal)
+            playButton.setTitle("Playing", for: .normal)
             
         case .pause:
-            playerButton.setTitle("Pause Playing", for: .normal)
+            playButton.setTitle("Pause Playing", for: .normal)
             
         case .stop:
-            playerButton.setTitle("Stop Playing", for: .normal)
+            playButton.setTitle("Stop Playing", for: .normal)
             
         case .finish:
-            playerButton.setTitle("Play again", for: .normal)
+            playButton.setTitle("Play again", for: .normal)
             
         case .failed(let error):
             recordButton.setTitle(error.localizedDescription, for: .normal)
-            playerButton.isEnabled = false
+            playButton.isEnabled = false
             recordButton.isEnabled = false
         }
     }
@@ -270,4 +312,3 @@ extension RecordViewController: AudioManagerDelegate {
         
     }
 }
-

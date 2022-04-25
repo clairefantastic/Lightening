@@ -55,6 +55,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="authorImageView" destination="adt-G0-uCY" id="xXG-xp-9yK"/>
                 <outlet property="authorNameLabel" destination="Tqr-1H-RqY" id="AOc-ps-yox"/>

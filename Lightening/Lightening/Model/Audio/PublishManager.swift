@@ -52,7 +52,6 @@ class PublishManager {
                
                     audioUrl.stopAccessingSecurityScopedResource()
                     
-                    
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
