@@ -73,7 +73,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let signInViewController = SignInViewController()
       let navViewController = UINavigationController(rootViewController: signInViewController)
      
-      return navViewController
+      return signInViewController
     }
 
 }

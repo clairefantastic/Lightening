@@ -77,8 +77,12 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
             print(authDataResult as Any)
             
             let identitySelectionViewController = IdentitySelectionViewController()
+            
+            identitySelectionViewController.modalPresentationStyle = .fullScreen
+            
+            self.present(identitySelectionViewController, animated: true)
         
-            self.navigationController?.pushViewController(identitySelectionViewController, animated: true)
+//            self.navigationController?.pushViewController(identitySelectionViewController, animated: true)
         }
 //        print(authorization)
     }

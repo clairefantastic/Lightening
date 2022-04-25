@@ -92,7 +92,7 @@ extension IdentitySelectionViewController {
     
         var user = User()
         
-        UserManager.shared.signInAsVolunteer(user: &user)  { result in
+        UserManager.shared.signInAsVolunteer(user: &user) { result in
             
             switch result {
             
@@ -100,6 +100,12 @@ extension IdentitySelectionViewController {
                 
                 print("Welcome Volunteer, success")
                 
+                let tabBarController = TabBarController()
+                
+                tabBarController.modalPresentationStyle = .fullScreen
+                
+                self.present(tabBarController, animated: true, completion: nil)
+
             case .failure(let error):
                 
                 print("volunteerSignin.failure: \(error)")
