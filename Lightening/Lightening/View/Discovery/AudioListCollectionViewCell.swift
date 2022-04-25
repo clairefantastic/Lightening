@@ -14,7 +14,7 @@ class AudioListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var audioTitleLabel: UILabel!
     
-    @IBOutlet weak var audioAuthorLabel: UILabel!
+//    @IBOutlet weak var audioAuthorLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

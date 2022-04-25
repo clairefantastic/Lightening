@@ -14,6 +14,10 @@ private enum Tab {
     case discovery
 
     case upload
+    
+    case map
+    
+    case profile
 
     func controller() -> UIViewController {
 
@@ -27,12 +31,17 @@ private enum Tab {
 
         switch self {
 
-        case .lobby: controller = VolLobbyViewController(
-            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
+        case .lobby: controller = UINavigationController(rootViewController: VolLobbyViewController(
+            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
-        case .discovery: controller = DiscoveryViewController()
+        case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
         
-        case .upload: controller = UploadViewController()
+        case .upload: controller = UINavigationController(rootViewController: UploadViewController())
+            
+        case .map: controller = UINavigationController(rootViewController: MapViewController())
+            
+        case .profile: controller =
+            UINavigationController(rootViewController: ProfileViewController())
 
         }
 
@@ -67,14 +76,28 @@ private enum Tab {
                 image: UIImage(systemName: "arrow.up.heart"),
                 selectedImage: UIImage(systemName: "arrow.up.heart")
             )
-
+            
+        case .map:
+            return UITabBarItem(
+                title: nil,
+                image: UIImage(systemName: "map"),
+                selectedImage: UIImage(systemName: "map.fill")
+            )
         
+        case .profile:
+            return UITabBarItem(
+                title: nil,
+                image: UIImage(systemName: "person.circle"),
+                selectedImage: UIImage(systemName: "person.circle.fill")
+            )
+            
         }
+        
     }
 }
-class LighteningTabBarController: UITabBarController {
+class TabBarController: UITabBarController {
     
-    private let tabs: [Tab] = [.lobby, .discovery, .upload]
+    private let tabs: [Tab] = [.lobby, .discovery, .upload, .map, .profile]
     
     var lobbyTabBarItem: UITabBarItem!
     

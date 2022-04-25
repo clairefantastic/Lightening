@@ -6,147 +6,133 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AudioPlayerViewController: UIViewController {
     
-    var selectedAudioIndex: Int = 0
+    let playerView = AudioPlayerView()
     
-    var datas: [Audio] = [] {
+    private var isLiked = false {
         
         didSet {
+            
+            if isLiked == true {
+                
+                playerView.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                
+                playerView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
             
         }
     }
     
+    var audio: Audio? {
+        didSet {
+            playerView.audio = audio
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
+        playerView.layoutImageView()
+        playerView.configureTitleLabel()
+        playerView.configureAuthorLabel()
+        playerView.layoutDismissButton()
+        playerView.setUpDismissButton()
+        playerView.dismissButton.addTarget(self, action: #selector(dismissAudioPlayer), for: .touchUpInside)
+        playerView.layoutPlayPauseButton()
+        playerView.setUpPlayPauseButton()
+        playerView.layoutProgressSlider()
+        playerView.layoutLikeButton()
+        playerView.setUpLikeButton()
+        addPlayerView()
+        playerView.likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        tapGestureRecognizer.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        view.backgroundColor = UIColor.clear
-        
-        layoutButton()
-        
-        fetchData()
     }
     
-    func layoutButton() {
-        let playerButton = UIButton()
-        
-        self.view.addSubview(playerButton)
-        
-        playerButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: playerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: playerButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
-        playerButton.setImage(UIImage(systemName: "play"), for: .normal)
-        
-        playerButton.isEnabled = true
-        
-        playerButton.addTarget(self, action: #selector(playAudioFile), for: .touchUpInside)
-    
+    @objc func dismissAudioPlayer() {
+        self.view.removeFromSuperview()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        PublishManager.shared.fetchLikedAudio(userId: "giUsyJAOONHf3dNytlZG") {
+            [weak self] result in
+                
+                switch result {
+                
+                case .success(let audioFiles):
+                    
+                    guard let audio = self?.audio else {
+                        return
+                    }
+
+                    if audioFiles.contains(audio) {
+                        
+                        self?.isLiked = true
+                    }
+            
+                case .failure(let error):
+                    
+                    print("fetchData.failure: \(error)")
+                }
+                
+            }
+    }
     
-    func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
+    private func addPlayerView() {
+        
+        self.view.stickSubView(playerView)
+    }
+    
+    @objc func didTapView() {
+        let audioDescriptionViewController = AudioDescriptionViewController()
+        
+        audioDescriptionViewController.audio = audio
+    
+        navigationController?.pushViewController(audioDescriptionViewController, animated: true)
+
+    }
+    
+    @objc func likeAudio(_ sender: UIButton) {
+        
+        guard let audio = audio else { return }
+        
+        if isLiked {
             
-            switch result {
+            PublishManager.shared.deleteLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+                [weak self] result in
+                
+                switch result {
             
-            case .success(let audioFiles):
-                
-                self?.datas = audioFiles
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
+                case .success(_):
+                    print("Successfully unlike this audio!")
+                case .failure(_):
+                    print("Fail to unlike this audio")
+                }
             }
             
-        }
-
-    }
-    
-    
-    @objc func playAudioFile(_ sender: Any) {
+            isLiked = false
+        } else {
         
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
-        
-    }
-
-    
-}
-
-class AudioPlayerView: UIView {
-    
-    
-    @IBOutlet weak var playButton: UIButton!
-    
-    let nibName = "AudioPlayerView"
-    
-    var selectedAudioIndex: Int = 0
-    
-    var datas: [Audio] = [] {
-        
-        didSet {
-            
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
-        fetchData()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        guard let view = loadViewFromNib() else { return }
-        view.frame = self.bounds
-        self.addSubview(view)
-    }
-    
-    private func loadViewFromNib() -> UIView? {
-        let nib = UINib(nibName: nibName, bundle: nil)
-        return nib.instantiate(withOwner: self, options: nil).first as? UIView
-    }
-    
-    
-    func fetchData() {
-        AudioManager.shared.fetchAudioFiles { [weak self] result in
-            
-            switch result {
-            
-            case .success(let audioFiles):
+            PublishManager.shared.publishLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+                [weak self] result in
                 
-                self?.datas = audioFiles
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
+                switch result {
+            
+                case .success(_):
+                    print("Successfully like this audio!")
+                case .failure(_):
+                    print("Fail to like this audio")
+                }
             }
             
-        }
+            isLiked = true
 
+        }
     }
-    
-    @objc func playAudio(_ sender: UIButton) {
-        AudioManager.shared.playAudioFile(url: datas[selectedAudioIndex ?? 0].audioUrl)
-        
-    }
-    
     
 }
-

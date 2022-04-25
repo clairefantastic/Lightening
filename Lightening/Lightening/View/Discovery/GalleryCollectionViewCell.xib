@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GalleryCollectionViewCell" customModule="Lightening" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="GalleryCollectionViewCell" customModule="Lightening" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="359" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="359" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HiU-ud-ZTW">
+                        <rect key="frame" x="16" y="16" width="327" height="169"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ehn-rS-gWa">
+                                <rect key="frame" x="103.5" y="0.0" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="iXc-y2-tEG"/>
+                                    <constraint firstAttribute="width" secondItem="ehn-rS-gWa" secondAttribute="height" multiplier="1:1" id="uou-QL-jd1"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fGM-UH-qan">
+                                <rect key="frame" x="0.0" y="128" width="327" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieQ-RB-b3a">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Label">
+                                                <attributes>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" size="14" name="AmericanTypewriter-Semibold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhM-fK-xXn">
+                                        <rect key="frame" x="0.0" y="24.5" width="327" height="16.5"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
+                                        <color key="textColor" red="0.074509803921568626" green="0.14901960784313725" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fGM-UH-qan" secondAttribute="trailing" id="8nf-Oh-zdM"/>
+                            <constraint firstItem="fGM-UH-qan" firstAttribute="top" secondItem="ehn-rS-gWa" secondAttribute="bottom" constant="8" id="9bk-2E-ASb"/>
+                            <constraint firstAttribute="bottom" secondItem="fGM-UH-qan" secondAttribute="bottom" id="gP6-vo-hnP"/>
+                            <constraint firstItem="fGM-UH-qan" firstAttribute="leading" secondItem="HiU-ud-ZTW" secondAttribute="leading" id="ygF-Yz-Kew"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="HiU-ud-ZTW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="1xR-TF-846"/>
+                <constraint firstItem="HiU-ud-ZTW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="9dr-29-aXa"/>
+                <constraint firstAttribute="trailing" secondItem="HiU-ud-ZTW" secondAttribute="trailing" constant="16" id="hzO-cc-Hh8"/>
+            </constraints>
+            <size key="customSize" width="359" height="240"/>
+            <connections>
+                <outlet property="audioAuthorLabel" destination="bhM-fK-xXn" id="USg-li-ten"/>
+                <outlet property="audioCoverImageView" destination="ehn-rS-gWa" id="ef0-dq-b6Q"/>
+                <outlet property="audioTitleLabel" destination="ieQ-RB-b3a" id="uGL-ag-dKb"/>
+            </connections>
+            <point key="canvasLocation" x="194.92753623188406" y="66.294642857142861"/>
+        </collectionViewCell>
+    </objects>
+</document>

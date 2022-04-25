@@ -18,24 +18,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="407" height="213"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJV-4l-PEX">
-                        <rect key="frame" x="16" y="16" width="42" height="129"/>
-                        <color key="backgroundColor" red="0.9528910518" green="0.5860534906" blue="0.24156045910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJV-4l-PEX">
+                        <rect key="frame" x="16" y="16" width="50.5" height="117"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <color key="NSColor" systemColor="labelColor"/>
+                                    <font key="NSFont" size="18" name="AmericanTypewriter-Bold"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-qd-CZl">
-                        <rect key="frame" x="16" y="161" width="375" height="36"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-qd-CZl">
+                        <rect key="frame" x="16" y="149" width="375" height="48"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="Zb5-j6-P7Q"/>
+                            <constraint firstAttribute="height" constant="48" id="Zb5-j6-P7Q"/>
                         </constraints>
-                        <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <attributedString key="attributedText"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Mu9-qd-CZl" secondAttribute="trailing" constant="16" id="7op-4w-oEC"/>
                     <constraint firstAttribute="bottom" secondItem="Mu9-qd-CZl" secondAttribute="bottom" constant="16" id="MC9-OL-Ug9"/>
@@ -46,6 +51,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.83921568627450982" green="0.34509803921568627" blue="0.19215686274509802" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="categoryLabel" destination="vJV-4l-PEX" id="oxL-11-A2T"/>
                 <outlet property="contentTextView" destination="Mu9-qd-CZl" id="0ts-17-uJt"/>

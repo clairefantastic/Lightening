@@ -28,6 +28,7 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
         layoutTextView()
         
@@ -37,9 +38,13 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     
     private func layoutTextView() {
         
-        contentTextView.layer.borderColor = UIColor.black.cgColor
+        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "13263B").cgColor
         
-        contentTextView.layer.borderWidth = 1
+        contentTextView.layer.cornerRadius = contentTextView.frame.height / 2
+        
+        contentTextView.backgroundColor = UIColor.hexStringToUIColor(hex: "FCEED8")
+        
+        contentTextView.layer.borderWidth = 2
         
     }
     
@@ -50,4 +55,3 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     }
     
 }
-

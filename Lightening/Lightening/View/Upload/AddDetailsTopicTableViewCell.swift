@@ -15,15 +15,19 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
     @IBOutlet weak var selectTopicCollectionView: UICollectionView!
     
-    private let topicArray = ["Nature", "City", "Pet"]
+    private let topicArray = ["Nature", "City", "Pet", "Others"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
         // Initialization code
         selectTopicCollectionView.delegate = self
         selectTopicCollectionView.dataSource = self
         
-        selectTopicCollectionView.registerCellWithNib(identifier: String(describing: SelectTopicCollectionViewCell.self), bundle: nil)
+        selectTopicCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        
+        selectTopicCollectionView.registerCellWithNib(identifier: "SelectTopicCollectionViewCell", bundle: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,7 +38,7 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
     @objc func selectTopic(_ sender: UIButton) {
         
-        sender.isSelected = true
+        sender.layer.borderColor = UIColor.black.cgColor
         
         delegate?.didSelectTopic(sender)
     }
@@ -43,24 +47,19 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectTopicCollectionViewCell.self), for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
+        let nibName = "SelectTopicCollectionViewCell"
+        guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
       
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
-        
-        cell.topicButton.titleLabel?.textColor = .black
         
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .selected)
         
         cell.topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
-        
-        cell.topicButton.layer.borderWidth = 1
-        cell.topicButton.layer.borderColor = UIColor.black.cgColor
-        
         
         return cell
     }
@@ -69,7 +68,6 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
         
     }
 
-    
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -87,8 +85,4 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
-    
-
 }
-
-

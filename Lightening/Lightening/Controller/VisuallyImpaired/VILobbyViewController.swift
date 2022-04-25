@@ -220,9 +220,3 @@ extension VILobbyViewController: WebRTCClientDelegate {
   }
 }
 
-
-
-
-
-
-
