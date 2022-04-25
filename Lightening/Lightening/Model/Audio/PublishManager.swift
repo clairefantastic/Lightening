@@ -83,7 +83,7 @@ class PublishManager {
     func publishAudioFile(audio: inout Audio, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document()
-//        audio.audioId = document.documentID
+        audio.audioId = document.documentID
         
         do {
            try document.setData(from: audio) { error in
