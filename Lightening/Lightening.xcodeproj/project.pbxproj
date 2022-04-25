@@ -68,8 +68,9 @@
 		7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */; };
 		7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */; };
 		7EA73F6D281687E30071D197 /* IdentitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */; };
-		7EA73F7028168F090071D197 /* DifferentSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F6F28168F080071D197 /* DifferentSignInViewController.swift */; };
+		7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F6F28168F080071D197 /* SignInViewController.swift */; };
 		7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F712816A4FC0071D197 /* UserManager.swift */; };
+		7EA73F742816EDA70071D197 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F732816EDA60071D197 /* User.swift */; };
 		7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */; };
 		7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */; };
 		7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */; };
@@ -157,8 +158,9 @@
 		7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6v2ghoza.json; sourceTree = "<group>"; };
 		7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySelectionViewController.swift; sourceTree = "<group>"; };
 		7EA73F6E281688800071D197 /* Lightening.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lightening.entitlements; sourceTree = "<group>"; };
-		7EA73F6F28168F080071D197 /* DifferentSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentSignInViewController.swift; sourceTree = "<group>"; };
+		7EA73F6F28168F080071D197 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7EA73F712816A4FC0071D197 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7EA73F732816EDA60071D197 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTopic.swift; sourceTree = "<group>"; };
 		7EB3F4FD280D6CDB00C6E385 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EB3F4FE280D6CDB00C6E385 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -360,7 +362,7 @@
 			children = (
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
-				7EA73F6F28168F080071D197 /* DifferentSignInViewController.swift */,
+				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -454,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				7ED920F928070E4C00DD892A /* userType.swift */,
+				7EA73F732816EDA60071D197 /* User.swift */,
 				7EA73F712816A4FC0071D197 /* UserManager.swift */,
 			);
 			path = User;
@@ -620,7 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */,
-				7EA73F7028168F090071D197 /* DifferentSignInViewController.swift in Sources */,
+				7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */,
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
 				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
@@ -666,6 +669,7 @@
 				7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */,
 				7EA73F6D281687E30071D197 /* IdentitySelectionViewController.swift in Sources */,
 				7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */,
+				7EA73F742816EDA70071D197 /* User.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
 				7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,

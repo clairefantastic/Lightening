@@ -52,11 +52,11 @@ extension IdentitySelectionViewController {
         
         visuallyImpairedButton.isEnabled = true
         
-        visuallyImpairedButton.addTarget(self, action: #selector(pushSignInPage), for: .touchUpInside)
+        visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
         
     }
     
-    @objc func pushSignInPage() {
+    @objc func pushVisuallyImpairedPage() {
         
     }
     
@@ -84,8 +84,27 @@ extension IdentitySelectionViewController {
         
         volunteerButton.isEnabled = true
         
-        volunteerButton.addTarget(self, action: #selector(pushSignInPage), for: .touchUpInside)
+        volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
         
+    }
+    
+    @objc func pushVolunteerPage() {
+    
+        var user = User()
+        
+        UserManager.shared.signInAsVolunteer(user: &user)  { result in
+            
+            switch result {
+            
+            case .success:
+                
+                print("Welcome Volunteer, success")
+                
+            case .failure(let error):
+                
+                print("volunteerSignin.failure: \(error)")
+            }
+        }
     }
 
 }

@@ -70,10 +70,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
       let tabBarController = TabBarController()
       let identitySelectionViewController = IdentitySelectionViewController()
-      let differentSignInViewController = DifferentSignInViewController()
-      let navViewController = UINavigationController(rootViewController: tabBarController)
+      let signInViewController = SignInViewController()
+      let navViewController = UINavigationController(rootViewController: signInViewController)
      
-      return differentSignInViewController
+      return navViewController
     }
 
 }

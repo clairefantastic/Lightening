@@ -9,7 +9,9 @@ import UIKit
 import AuthenticationServices
 import FirebaseAuth
 
-class DifferentSignInViewController: BaseViewController {
+class SignInViewController: BaseViewController {
+    
+    var identity: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class DifferentSignInViewController: BaseViewController {
     
 }
 
-extension DifferentSignInViewController {
+extension SignInViewController {
     
     private func configureAppleSignInButton() {
         
@@ -63,7 +65,7 @@ extension DifferentSignInViewController {
 }
 
 @available(iOS 13.0, *)
-extension DifferentSignInViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
         
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
     // Handle error.
@@ -71,8 +73,12 @@ extension DifferentSignInViewController: ASAuthorizationControllerDelegate, ASAu
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { error in
-            print(error as Any)
+        UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { authDataResult in
+            print(authDataResult as Any)
+            
+            let identitySelectionViewController = IdentitySelectionViewController()
+        
+            self.navigationController?.pushViewController(identitySelectionViewController, animated: true)
         }
 //        print(authorization)
     }

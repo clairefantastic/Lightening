@@ -9,10 +9,13 @@ import UIKit
 import CryptoKit
 import AuthenticationServices
 import FirebaseAuth
+import FirebaseFirestore
 
 class UserManager {
     
     static let shared = UserManager()
+    
+    lazy var db = Firestore.firestore()
     
     fileprivate var currentNonce: String?
     
@@ -74,7 +77,7 @@ class UserManager {
         return request
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization, completion: @escaping (Error?) -> Void) {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization, completion: @escaping (AuthDataResult?) -> Void) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -98,14 +101,37 @@ class UserManager {
           // you're sending the SHA256-hashed nonce as a hex string with
           // your request to Apple.
                     print(error?.localizedDescription as Any)
-                    completion(error)
                     return
                 }
         // User is signed in to Firebase with Apple.
         // ...
-//                completion(authResult)
-      }
-    }
+                completion(authResult)
+            }
+        }
   
-}
+    }
+    
+    func signInAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let currentUser = Auth.auth().currentUser else { return }
+        
+        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid)
+        
+        let document = db.collection("volunteers").document(currentUser.uid)
+        
+        do {
+           try document.setData(from: user) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+        }
+    }
 }
