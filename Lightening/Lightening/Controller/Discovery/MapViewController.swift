@@ -117,12 +117,11 @@ extension MapViewController: MKMapViewDelegate {
         let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
         
         let audioPlayerViewController = AudioPlayerViewController()
-        addChild(audioPlayerViewController)
+        self.addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
-        addChild(audioPlayerViewController)
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
-        view.addSubview(audioPlayerViewController.view)
+        self.view.addSubview(audioPlayerViewController.view)
         UIView.animate(withDuration: 0.25,
                        delay: 0.0001,
                        options: .curveEaseInOut,

@@ -102,7 +102,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let audioPlayerViewController = AudioPlayerViewController()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = filteredAudioFiles[indexPath.row]
-        addChild(audioPlayerViewController)
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)
