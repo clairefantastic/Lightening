@@ -152,10 +152,14 @@ extension RegisterViewController {
     @objc func handleRegister() {
         UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
             
+            let identitySelectionViewController = IdentitySelectionViewController()
+            
+            identitySelectionViewController.modalPresentationStyle = .fullScreen
+            
+            self.present(identitySelectionViewController, animated: true)
+            
             print(error)
             
         }
-        
-        self.dismiss(animated: true)
     }
 }

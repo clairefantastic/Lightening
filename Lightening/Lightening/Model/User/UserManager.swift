@@ -113,7 +113,7 @@ class UserManager {
   
     }
     
-    func firstTimeSignInAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
@@ -137,7 +137,7 @@ class UserManager {
         }
     }
     
-    func firstTimeSignInAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
@@ -213,13 +213,14 @@ class UserManager {
                         if let user = try querySnapshot!.documents.first?.data(as: User.self, decoder: Firestore.Decoder()) {
                             self.currentUser = user
                             completion(.success(self.currentUser))
+                        } else {
+                            completion(.success(nil))
                         }
                     } catch {
                         completion(.failure(error))
     //                            completion(.failure(FirebaseError.documentError)
                     }
-                completion(.success(nil))
-               //
+                
             }
         }
     }

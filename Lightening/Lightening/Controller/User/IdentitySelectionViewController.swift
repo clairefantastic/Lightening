@@ -60,7 +60,7 @@ extension IdentitySelectionViewController {
         
         var user = User(userIdentity: 0)
         
-        UserManager.shared.firstTimeSignInAsVisuallyImpaired(user: &user) { result in
+        UserManager.shared.registerAsVisuallyImpaired(user: &user) { result in
             
             switch result {
             
@@ -113,7 +113,7 @@ extension IdentitySelectionViewController {
     
         var user = User(userIdentity: 1)
         
-        UserManager.shared.firstTimeSignInAsVolunteer(user: &user) { result in
+        UserManager.shared.registerAsVolunteer(user: &user) { result in
             
             switch result {
             
