@@ -11,6 +11,8 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     
     let userProfileView = UserProfileView()
     
+    private let logOutButton = UIButton()
+    
     private var sections = ProfileSection.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -27,6 +29,7 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         fetchData()
         configureCollectionView()
         configureLayout()
+        configureLogOutButton()
         
     }
     
@@ -109,6 +112,35 @@ extension ProfileViewController {
         self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
         
         userProfileView.backgroundColor =  UIColor.hexStringToUIColor(hex: "#D65831")
+    }
+    
+    private func configureLogOutButton() {
+        
+        view.addSubview(logOutButton)
+        
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: -8).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -60).isActive = true
+        
+        logOutButton.setTitle("Log out", for: .normal)
+        logOutButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
+        logOutButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+        logOutButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        logOutButton.layer.borderWidth = 1
+        logOutButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        logOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        
+    }
+    
+    @objc func signOut() {
+        
+        UserManager.shared.signOut()
     }
 }
 
