@@ -199,4 +199,24 @@ class UserManager {
             print("Error signing out: %@", signOutError)
         }
     }
+    
+    func fetchVisuallyImpairedUserInfo(with userId: String, completion: @escaping ([QueryDocumentSnapshot]) -> Void) {
+        db.collection("visuallyImpaired").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    completion(querySnapshot!.documents)
+                }
+        }
+    }
+    
+    func fetchVolunteerUserInfo(with userId: String, completion: @escaping ([QueryDocumentSnapshot]) -> Void) {
+        db.collection("volunteers").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    completion(querySnapshot!.documents)
+                }
+        }
+    }
 }

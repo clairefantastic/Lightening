@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import CryptoKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     internal var window: UIWindow?
     private let config = Config.default
+    private var userIdentity = 0
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,15 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 
-//            let rootVC = LobbyViewController(nibName: String(describing: LobbyViewController.self), bundle: nil)
-//            let navController = UINavigationController(rootViewController: rootVC)
-                
-            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-            window?.windowScene = windowScene
-//            window?.rootViewController = navController //navController
-            
-            window?.rootViewController = self.buildMainViewController()
-            window?.makeKeyAndVisible()
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        self.buildMainViewController() { rootViewController in
+            self.window?.rootViewController = rootViewController
+        }
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -58,22 +59,52 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
-    private func buildMainViewController() -> UIViewController {
-      let signalClient = SignalingClient()
-      let signalClientforVolunteer = SignalingClientforVolunteer()
-      let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
-        
-//      let mainViewController = LobbyViewController(signalClient: signalClient, webRTCClient: webRTCClient)
-//
-//      let navViewController = UINavigationController(rootViewController: mainViewController)
-      let mainViewController = VolLobbyViewController(
-        signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
-      let tabBarController = VolunteerTabBarController()
-      let identitySelectionViewController = IdentitySelectionViewController()
+    private func buildMainViewController(completion: @escaping (UIViewController?) -> Void) {
+    
+      let volunteerTabBarController = VolunteerTabBarController()
       let signInViewController = SignInViewController()
-      let navViewController = UINavigationController(rootViewController: signInViewController)
-     
-      return signInViewController
-    }
+      let visuallyImpairedTabBarController = VisuallyImpairedTabBarController()
+        if Auth.auth().currentUser == nil {
+            completion(signInViewController)
+        } else {
+            let group = DispatchGroup()
+            let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
+            group.enter()
+            queue1.async(group: group) {
+                
+                UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                    print(document)
+                    if document.count != 0 {
+                        self.userIdentity = 0
+                    }
+                    group.leave()
+                }
+            }
+            
+            let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
+            group.enter()
+            queue2.async(group: group) {
 
+                UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                    print(document)
+                    if document.count != 0 {
+                        self.userIdentity = 1
+                    }
+                    group.leave()
+                }
+                
+            }
+                    
+            group.notify(queue: DispatchQueue.main) {
+                if self.userIdentity == 0 {
+                    completion(visuallyImpairedTabBarController)
+                } else {
+                    completion(volunteerTabBarController)
+                }
+            }
+            
+            print(Auth.auth().currentUser?.email)
+        }
+    
+    }
 }
