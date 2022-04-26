@@ -19,6 +19,8 @@ class UserManager {
     
     fileprivate var currentNonce: String?
     
+    var currentUser: User?
+    
     private func randomNonceString(length: Int = 32) -> String {
       precondition(length > 0)
       let charset: [Character] =
@@ -111,13 +113,13 @@ class UserManager {
   
     }
     
-    func signInAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func firstTimeSignInAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid)
+        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
         
-        let document = db.collection("volunteers").document(currentUser.uid)
+        let document = db.collection("users").document(currentUser.uid)
         
         do {
            try document.setData(from: user) { error in
@@ -135,13 +137,13 @@ class UserManager {
         }
     }
     
-    func signInAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func firstTimeSignInAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid)
+        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
         
-        let document = db.collection("visuallyImpaired").document(currentUser.uid)
+        let document = db.collection("users").document(currentUser.uid)
         
         do {
            try document.setData(from: user) { error in
@@ -200,23 +202,26 @@ class UserManager {
         }
     }
     
-    func fetchVisuallyImpairedUserInfo(with userId: String, completion: @escaping ([QueryDocumentSnapshot]) -> Void) {
-        db.collection("visuallyImpaired").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    completion(querySnapshot!.documents)
-                }
+    func fetchUserInfo(with userId: String, completion: @escaping (Result<User?, Error>) -> Void) {
+        db.collection("users").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                
+                    do {
+                        if let user = try querySnapshot!.documents.first?.data(as: User.self, decoder: Firestore.Decoder()) {
+                            self.currentUser = user
+                            completion(.success(self.currentUser))
+                        }
+                    } catch {
+                        completion(.failure(error))
+    //                            completion(.failure(FirebaseError.documentError)
+                    }
+                completion(.success(nil))
+               //
+            }
         }
     }
-    
-    func fetchVolunteerUserInfo(with userId: String, completion: @escaping ([QueryDocumentSnapshot]) -> Void) {
-        db.collection("volunteers").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    completion(querySnapshot!.documents)
-                }
-        }
-    }
+      
 }

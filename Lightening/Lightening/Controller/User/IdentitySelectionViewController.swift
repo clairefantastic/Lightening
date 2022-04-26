@@ -58,9 +58,9 @@ extension IdentitySelectionViewController {
     
     @objc func pushVisuallyImpairedPage() {
         
-        var user = User()
+        var user = User(userIdentity: 0)
         
-        UserManager.shared.signInAsVisuallyImpaired(user: &user) { result in
+        UserManager.shared.firstTimeSignInAsVisuallyImpaired(user: &user) { result in
             
             switch result {
             
@@ -111,9 +111,9 @@ extension IdentitySelectionViewController {
     
     @objc func pushVolunteerPage() {
     
-        var user = User()
+        var user = User(userIdentity: 1)
         
-        UserManager.shared.signInAsVolunteer(user: &user) { result in
+        UserManager.shared.firstTimeSignInAsVolunteer(user: &user) { result in
             
             switch result {
             

@@ -177,8 +177,7 @@ class PublishManager {
             }
         }
     }
-    
-    
+
     func publishComments(documentId: String, comment: Comment, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document(documentId).collection("comments").document()

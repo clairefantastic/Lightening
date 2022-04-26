@@ -21,8 +21,6 @@ class SignInViewController: BaseViewController {
     
     private let haveNoAccountLabel = UILabel()
     
-    private var userIdentity: Int?
-    
     private var nextViewController = UIViewController()
     
     private let volunteerTabBarController = VolunteerTabBarController()
@@ -229,51 +227,37 @@ extension SignInViewController {
         UserManager.shared.nativeSignIn(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { authDataResult in
             
             print(authDataResult)
-            
-                  let group = DispatchGroup()
-                  let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
-                  group.enter()
-                  queue1.async(group: group) {
-                      
-                      UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                          print(document)
-                          if document.count != 0 {
-                              self.userIdentity = 0
-                          }
-                          group.leave()
-                      }
-                  }
-                  
-                  let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
-                  group.enter()
-                  queue2.async(group: group) {
+//
+                UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
+                        switch result {
+                            
+                        case .success(let user):
+                            
+                            guard let userIdentity = user?.userIdentity else {
+                                self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+                                self?.nextViewController.modalPresentationStyle = .fullScreen
 
-                      UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                          print(document)
-                          if document.count != 0 {
-                              self.userIdentity = 1
-                          }
-                          group.leave()
-                      }
-                      
-                  }
-                          
-                  group.notify(queue: DispatchQueue.main) {
-                      guard let userIdentity = self.userIdentity else {
-                          self.nextViewController = self.identitySelectionViewController
-                          return
-                      }
-                      if userIdentity == 0 {
-                          self.nextViewController = self.visuallyImpairedTabBarController
-                      } else {
-                          self.nextViewController = self.volunteerTabBarController
-                      }
-                      self.nextViewController.modalPresentationStyle = .fullScreen
-                      
-                      self.present(self.nextViewController, animated: true)
-                      
-                  }
-                  
+                                self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                                return
+                            }
+                            if userIdentity == 0 {
+                                self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                                
+                            } else {
+                                self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                                
+                            }
+                            self?.nextViewController.modalPresentationStyle = .fullScreen
+
+                            self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+
+                        case .failure(let error):
+                            
+                            print("fetchData.failure: \(error)")
+                        }
+                        
+                }
+            
                   print(Auth.auth().currentUser?.email)
             
         }
@@ -292,51 +276,37 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { authDataResult in
             print(authDataResult as Any)
-             
-                  let group = DispatchGroup()
-                  let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
-                  group.enter()
-                  queue1.async(group: group) {
-                      
-                      UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                          print(document)
-                          if document.count != 0 {
-                              self.userIdentity = 0
-                          }
-                          group.leave()
-                      }
-                  }
-                  
-                  let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
-                  group.enter()
-                  queue2.async(group: group) {
+            
+            UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
+                    switch result {
+                        
+                    case .success(let user):
+                        
+                        guard let userIdentity = user?.userIdentity else {
+                            self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+                            self?.nextViewController.modalPresentationStyle = .fullScreen
 
-                      UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                          print(document)
-                          if document.count != 0 {
-                              self.userIdentity = 1
-                          }
-                          group.leave()
-                      }
-                      
-                  }
-                          
-                  group.notify(queue: DispatchQueue.main) {
-                      guard let userIdentity = self.userIdentity else {
-                          self.nextViewController = self.identitySelectionViewController
-                          return
-                      }
-                      if userIdentity == 0 {
-                          self.nextViewController = self.visuallyImpairedTabBarController
-                      } else {
-                          self.nextViewController = self.volunteerTabBarController
-                      }
-                      self.nextViewController.modalPresentationStyle = .fullScreen
-                      
-                      self.present(self.nextViewController, animated: true)
-                      
-                  }
-                  
+                            self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                            return
+                        }
+                        if userIdentity == 0 {
+                            self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                            
+                        } else {
+                            self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                            
+                        }
+                        self?.nextViewController.modalPresentationStyle = .fullScreen
+
+                        self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+
+                    case .failure(let error):
+                        
+                        print("fetchData.failure: \(error)")
+                    }
+                    
+            }
+
                   print(Auth.auth().currentUser?.email)
         
         }

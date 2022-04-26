@@ -12,8 +12,8 @@ import CryptoKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     internal var window: UIWindow?
-    private let config = Config.default
-    private var userIdentity = 0
+    
+    private var userIdentity: Int?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -67,44 +67,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if Auth.auth().currentUser == nil {
             completion(signInViewController)
         } else {
-            let group = DispatchGroup()
-            let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
-            group.enter()
-            queue1.async(group: group) {
-                
-                UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                    print(document)
-                    if document.count != 0 {
-                        self.userIdentity = 0
-                    }
-                    group.leave()
-                }
-            }
-            
-            let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
-            group.enter()
-            queue2.async(group: group) {
-
-                UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
-                    print(document)
-                    if document.count != 0 {
-                        self.userIdentity = 1
-                    }
-                    group.leave()
-                }
-                
-            }
+            UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
+                switch result {
                     
-            group.notify(queue: DispatchQueue.main) {
-                if self.userIdentity == 0 {
-                    completion(visuallyImpairedTabBarController)
-                } else {
-                    completion(volunteerTabBarController)
+                case .success(let user):
+                    
+                    if user?.userIdentity == 0 {
+                        completion(visuallyImpairedTabBarController)
+                    } else {
+                        completion(volunteerTabBarController)
+                    }
+                
+                case .failure(let error):
+                    
+                    print("fetchData.failure: \(error)")
                 }
+                
             }
-            
             print(Auth.auth().currentUser?.email)
-        }
-    
+        
     }
+}
 }
