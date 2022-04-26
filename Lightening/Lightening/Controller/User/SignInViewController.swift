@@ -21,6 +21,16 @@ class SignInViewController: BaseViewController {
     
     private let haveNoAccountLabel = UILabel()
     
+    private var userIdentity: Int?
+    
+    private var nextViewController = UIViewController()
+    
+    private let volunteerTabBarController = VolunteerTabBarController()
+
+    private let visuallyImpairedTabBarController = VisuallyImpairedTabBarController()
+    
+    private let identitySelectionViewController = IdentitySelectionViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -220,11 +230,51 @@ extension SignInViewController {
             
             print(authDataResult)
             
-            let identitySelectionViewController = IdentitySelectionViewController()
-            
-            identitySelectionViewController.modalPresentationStyle = .fullScreen
-            
-            self.present(identitySelectionViewController, animated: true)
+                  let group = DispatchGroup()
+                  let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
+                  group.enter()
+                  queue1.async(group: group) {
+                      
+                      UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                          print(document)
+                          if document.count != 0 {
+                              self.userIdentity = 0
+                          }
+                          group.leave()
+                      }
+                  }
+                  
+                  let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
+                  group.enter()
+                  queue2.async(group: group) {
+
+                      UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                          print(document)
+                          if document.count != 0 {
+                              self.userIdentity = 1
+                          }
+                          group.leave()
+                      }
+                      
+                  }
+                          
+                  group.notify(queue: DispatchQueue.main) {
+                      guard let userIdentity = self.userIdentity else {
+                          self.nextViewController = self.identitySelectionViewController
+                          return
+                      }
+                      if userIdentity == 0 {
+                          self.nextViewController = self.visuallyImpairedTabBarController
+                      } else {
+                          self.nextViewController = self.volunteerTabBarController
+                      }
+                      self.nextViewController.modalPresentationStyle = .fullScreen
+                      
+                      self.present(self.nextViewController, animated: true)
+                      
+                  }
+                  
+                  print(Auth.auth().currentUser?.email)
             
         }
     
@@ -242,12 +292,52 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { authDataResult in
             print(authDataResult as Any)
-            
-            let identitySelectionViewController = IdentitySelectionViewController()
-            
-            identitySelectionViewController.modalPresentationStyle = .fullScreen
-            
-            self.present(identitySelectionViewController, animated: true)
+             
+                  let group = DispatchGroup()
+                  let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
+                  group.enter()
+                  queue1.async(group: group) {
+                      
+                      UserManager.shared.fetchVisuallyImpairedUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                          print(document)
+                          if document.count != 0 {
+                              self.userIdentity = 0
+                          }
+                          group.leave()
+                      }
+                  }
+                  
+                  let queue2 = DispatchQueue(label: "queue2", attributes: .concurrent)
+                  group.enter()
+                  queue2.async(group: group) {
+
+                      UserManager.shared.fetchVolunteerUserInfo(with: Auth.auth().currentUser?.uid ?? "") { document in
+                          print(document)
+                          if document.count != 0 {
+                              self.userIdentity = 1
+                          }
+                          group.leave()
+                      }
+                      
+                  }
+                          
+                  group.notify(queue: DispatchQueue.main) {
+                      guard let userIdentity = self.userIdentity else {
+                          self.nextViewController = self.identitySelectionViewController
+                          return
+                      }
+                      if userIdentity == 0 {
+                          self.nextViewController = self.visuallyImpairedTabBarController
+                      } else {
+                          self.nextViewController = self.volunteerTabBarController
+                      }
+                      self.nextViewController.modalPresentationStyle = .fullScreen
+                      
+                      self.present(self.nextViewController, animated: true)
+                      
+                  }
+                  
+                  print(Auth.auth().currentUser?.email)
         
         }
 //        print(authorization)
