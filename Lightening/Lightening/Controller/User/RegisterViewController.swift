@@ -22,6 +22,8 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNameTextField()
+        
         configureEmailTextField()
         
         configurePasswordTextField()
@@ -35,13 +37,34 @@ class RegisterViewController: BaseViewController {
 
 extension RegisterViewController {
     
+    private func configureNameTextField() {
+        
+        self.view.addSubview(nameTextField)
+        
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: nameTextField, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 150).isActive = true
+        
+        NSLayoutConstraint(item: nameTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: nameTextField, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: nameTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        nameTextField.layer.borderWidth = 2
+        
+        nameTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        
+        nameTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+    }
+    
     private func configureEmailTextField() {
         
         self.view.addSubview(emailTextField)
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: nameTextField, attribute: .bottom, multiplier: 1, constant: 40).isActive = true
         
         NSLayoutConstraint(item: emailTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
@@ -127,7 +150,7 @@ extension RegisterViewController {
     }
     
     @objc func handleRegister() {
-        UserManager.shared.register(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
+        UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
             
             let identitySelectionViewController = IdentitySelectionViewController()
             

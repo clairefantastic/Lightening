@@ -86,4 +86,3 @@ class VisuallyImpairedTabBarController: UITabBarController {
     }
 
 }
-
