@@ -302,6 +302,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         // 當判斷有 selectedImage 時，我們會在 if 判斷式裡將圖片上傳
         if let selectedImage = selectedImageFromPicker {
             
+            PublishManager.shared.getProfilePhotoUrl(selectedImage: selectedImage)
+            
+            self.userProfileView.profileImageView.image = selectedImage
+            
             print("\(selectedImage)")
         }
         
