@@ -149,11 +149,11 @@ class AddDetailsViewController: BaseViewController {
 //                                cover: self?.audioCover,
 //                                createdTime: self?.createdTime)
 
-            guard let publishAudio = self?.audio else {
+            guard var publishAudio = self?.audio else {
                     return
             }
             
-            PublishManager.shared.publishAudioFile(audio: publishAudio) { [weak self] result in
+            PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
                 switch result {
 
                 case .success:

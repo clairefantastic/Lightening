@@ -80,9 +80,10 @@ class PublishManager {
         }
     }
     
-    func publishAudioFile(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishAudioFile(audio: inout Audio, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document()
+        audio.audioId = document.documentID
         
         do {
            try document.setData(from: audio) { error in
@@ -176,8 +177,7 @@ class PublishManager {
             }
         }
     }
-    
-    
+
     func publishComments(documentId: String, comment: Comment, completion: @escaping (Result<String, Error>) -> Void) {
         
         let document = db.collection("audioFiles").document(documentId).collection("comments").document()
@@ -199,9 +199,9 @@ class PublishManager {
      
     }
     
-    func publishLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
         
         do {
            try document.setData(from: audio) { error in
@@ -220,9 +220,9 @@ class PublishManager {
 
     }
     
-    func deleteLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func deleteLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
 
            document.delete() { error in
                 
@@ -276,6 +276,27 @@ class PublishManager {
             player.play()
         } catch let error {
             print(error.localizedDescription)
+        }
+    }
+        
+    func fetchLikedAudios(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
+        
+        db.collection("users").document(userId).collection("likedAudios").addSnapshotListener { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            var likedAudios = [Audio]()
+            
+            snapshot.documents.forEach { document in
+                do {
+                    if let likedAudio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
+                        likedAudios.append(likedAudio)
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            completion(.success(likedAudios))
         }
     }
     
