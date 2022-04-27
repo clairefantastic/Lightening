@@ -19,7 +19,11 @@ class UserManager {
     
     fileprivate var currentNonce: String?
     
+    var currentUserName: String?
+    
     var currentUser: User?
+    
+//    var user: User?
     
     private func randomNonceString(length: Int = 32) -> String {
       precondition(length > 0)
@@ -117,7 +121,7 @@ class UserManager {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
+        user = User(displayName: self.currentUserName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
         
         let document = db.collection("users").document(currentUser.uid)
         
@@ -141,7 +145,7 @@ class UserManager {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: currentUser.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
+        user = User(displayName: self.currentUserName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
         
         let document = db.collection("users").document(currentUser.uid)
         
@@ -161,7 +165,7 @@ class UserManager {
         }
     }
     
-    func register(with email: String, with password: String, completion: @escaping (Error?) -> Void) {
+    func register(with displayName: String, with email: String, with password: String, completion: @escaping (Error?) -> Void) {
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authDataResult, error in
             
@@ -170,13 +174,15 @@ class UserManager {
                 let user = authDataResult?.user,
                 let email = user.email,
                 let self = self
-                    
+                
             else {
                 
                 completion(error)
                 
                 return
             }
+            
+            self.currentUserName = displayName
             
             print("user registeration success! User: \(user.uid), \(user.email)")
             
