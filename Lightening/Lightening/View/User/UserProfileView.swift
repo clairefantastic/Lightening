@@ -96,7 +96,7 @@ class UserProfileView: UIView {
         context.translateBy(x: size.width / 2, y: size.height / 2)
         context.scaleBy(x: 1, y: -1)
 
-        centreArcPerpendicular(text: "H  e  l  l  o   C  l  a  i  r  e",
+        centreArcPerpendicular(text: "H  e  l  l  o   L  i  g  h  t  y",
                                context: context, radius: 60,
                                angle: -30,
                                colour: UIColor.black,
