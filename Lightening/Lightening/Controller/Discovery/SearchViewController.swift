@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: BaseViewController {
     
-    private var audioFiles: [Audio]?
+    private var audios: [Audio]?
     
     private var filteredAudioFiles: [Audio] = []
     
@@ -37,13 +37,13 @@ class SearchViewController: BaseViewController {
     
     private func fetchData() {
         
-        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+        PublishManager.shared.fetchAudios() { [weak self] result in
             
             switch result {
             
-            case .success(let audioFiles):
+            case .success(let audios):
                 
-                self?.audioFiles = audioFiles
+                self?.audios = audios
                 
             case .failure(let error):
                 
@@ -120,7 +120,7 @@ extension SearchViewController: UISearchResultsUpdating {
         
         if let searchText = searchController.searchBar.text,
                    searchText.isEmpty == false  {
-            self.filteredAudioFiles = audioFiles?.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
+            self.filteredAudioFiles = audios?.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
                 } else {
                     self.filteredAudioFiles = []
                 }

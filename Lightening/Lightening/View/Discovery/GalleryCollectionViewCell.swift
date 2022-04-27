@@ -25,7 +25,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
       didSet {
           audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
           audioTitleLabel?.text = audio?.title
-          audioAuthorLabel?.text = "Claire"
+          audioAuthorLabel?.text = audio?.author?.displayName
       }
     }
 

@@ -28,6 +28,8 @@ struct Audio: Codable, Hashable {
     var location: Location?
     
     var comments: Comment?
+    
+    var author: User?
 
 }
 
