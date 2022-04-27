@@ -251,4 +251,30 @@ class PublishManager {
         }
     }
     
+//    func changeProfilePhoto(selectedImage: UIImage) {
+//        
+//        let uniqueString = NSUUID().uuidString
+//        
+//        let storageRef = Storage.storage().reference().child("ProfilePhoto").child("\(uniqueString).png")
+//         
+//        if let uploadData = selectedImage.pngData() {
+//             // 這行就是 FirebaseStorage 關鍵的存取方法。
+//             storageRef.putData(uploadData, metadata: nil, completion: { (data, error) in
+//                 
+//                 if error != nil {
+//                     
+//                     // 若有接收到錯誤，我們就直接印在 Console 就好，在這邊就不另外做處理。
+//                     print("Error: \(error!.localizedDescription)")
+//                     return
+//                 }
+//                 
+//                 // 連結取得方式就是：data?.downloadURL()?.absoluteString。
+//                 if let uploadImageUrl = data.downloadURL {
+//                     
+//                     // 我們可以 print 出來看看這個連結事不是我們剛剛所上傳的照片。
+//                     print("Photo Url: \(uploadImageUrl)")
+//                 }
+//             })
+//         }
+//    }
 }
