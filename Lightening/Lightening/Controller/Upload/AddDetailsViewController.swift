@@ -25,7 +25,14 @@ class AddDetailsViewController: BaseViewController {
     
     private let image = ["nature", "city", "pet", "meaningful", "pure"]
     
-    private var audio = Audio(audioUrl: URL(fileURLWithPath: ""), topic: "", title: "", description: "", cover: "", createdTime: 0.0, location: Location(latitude: 0.0, longitude: 0.0))
+    private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
+                              topic: "",
+                              title: "",
+                              description: "",
+                              cover: "",
+                              createdTime: 0.0,
+                              location: Location(latitude: 0.0, longitude: 0.0),
+                              author: UserManager.shared.currentUser)
     
     var localUrl: URL?
     
@@ -141,13 +148,6 @@ class AddDetailsViewController: BaseViewController {
             self?.audio.audioUrl = downloadUrl
             
             self?.audio.createdTime = Date().timeIntervalSince1970
-
-//            self?.audio = Audio(audioUrl: downloadUrl,
-//                                topic: self?.audioTopic,
-//                                title: self?.audioTitle,
-//                                description: self?.audioDescription,
-//                                cover: self?.audioCover,
-//                                createdTime: self?.createdTime)
 
             guard var publishAudio = self?.audio else {
                     return

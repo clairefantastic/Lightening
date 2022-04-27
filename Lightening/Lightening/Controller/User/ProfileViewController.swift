@@ -27,7 +27,8 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         addUserProfileView()
-        fetchData()
+        fetchMyAudios()
+        fetchLikedAudios()
         configureCollectionView()
         configureLayout()
         configureLogOutButton()
@@ -49,8 +50,28 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         
         collectionView.delegate = self
     }
+    
+    private func fetchMyAudios() {
+        
+        PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            switch result {
+                
+            case .success(let audios):
+                
+                self?.sections[0].audios.append(contentsOf: audios.filter { $0.author?.userId == UserManager.shared.currentUser?.userId})
+                self?.applySnapshot(animatingDifferences: true)
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
+        
+    }
 
-    private func fetchData() {
+    private func fetchLikedAudios() {
 
         PublishManager.shared.fetchLikedAudios(userId: UserManager.shared.currentUser?.userId ?? "") { [weak self] result in
             

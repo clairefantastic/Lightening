@@ -17,8 +17,6 @@ class PublishManager {
     
     lazy var db = Firestore.firestore()
     
-    var player: AVPlayer!
-    
     func getSelectedFileLocalUrl(audioUrl: URL, completion: @escaping (URL)-> Void ) {
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
@@ -82,10 +80,14 @@ class PublishManager {
     
     func publishAudioFile(audio: inout Audio, completion: @escaping (Result<String, Error>) -> Void) {
         
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        
         let document = db.collection("audioFiles").document()
         audio.audioId = document.documentID
+        audio.author = currentUser
         
         do {
+            
            try document.setData(from: audio) { error in
                 
                 if let error = error {
@@ -96,39 +98,32 @@ class PublishManager {
                     completion(.success("Success"))
                 }
             }
+            
         } catch {
             
         }
      
     }
     
-    func fetchAudioFiles(completion: @escaping (Result<[Audio], Error>) -> Void) {
+    func fetchAudios(completion: @escaping (Result<[Audio], Error>) -> Void) {
         
-        db.collection("audioFiles").order(by: "createdTime", descending: true).getDocuments() { (querySnapshot, error) in
+        db.collection("audioFiles").order(by: "createdTime", descending: true).addSnapshotListener { snapshot, error in
             
-                if let error = error {
-                    
-                    completion(.failure(error))
-                } else {
-                    
-                    var audiofiles = [Audio]()
-                    
-                    for document in querySnapshot!.documents {
-
-                        do {
-                            if let audiofile = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
-                                audiofiles.append(audiofile)
-                            }
-                            
-                        } catch {
-                            
-                            completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
-                        }
+            guard let snapshot = snapshot else { return }
+            
+            var audios = [Audio]()
+            
+            snapshot.documents.forEach { document in
+                
+                do {
+                    if let audio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
+                        audios.append(audio)
                     }
-                    
-                    completion(.success(audiofiles))
+                } catch {
+                    completion(.failure(error))
                 }
+            }
+            completion(.success(audios))
         }
     }
     
@@ -137,7 +132,6 @@ class PublishManager {
         db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments() { (querySnapshot, error) in
             
                 if let error = error {
-                    
                     completion(.failure(error))
                     
                 } else {
@@ -235,49 +229,6 @@ class PublishManager {
                 }
             }
         }
-    
-    func fetchLikedAudio(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
-        
-        db.collection("volunteers").document(userId).collection("collections").getDocuments() { (querySnapshot, error) in
-            
-            if let error = error {
-                
-                completion(.failure(error))
-            } else {
-                
-                var likedAudios = [Audio]()
-                
-                for document in querySnapshot!.documents {
-
-                    do {
-                        if let likedAudio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
-                            likedAudios.append(likedAudio)
-                        }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
-                    }
-                }
-                
-                completion(.success(likedAudios))
-            }
-        }
-    }
-
-    func playAudioFile(url: URL) {
-        
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            player.volume = 100.0
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
         
     func fetchLikedAudios(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
         

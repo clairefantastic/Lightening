@@ -36,7 +36,7 @@ class AudioPlayerView: UIView {
             
             audioImageView.image = UIImage(named: self.audio?.cover ?? "")
             audioTitleLabel.text = self.audio?.title
-            audioAuthorLabel.text = "Claire"
+            audioAuthorLabel.text = self.audio?.author?.displayName
             
             setPlayer(url: (self.audio?.audioUrl)!)
             player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in

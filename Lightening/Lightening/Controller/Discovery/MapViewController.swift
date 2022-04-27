@@ -17,7 +17,7 @@ class MapViewController: BaseViewController {
     
     private var audioAnnotations: [AudioAnnotation] = []
     
-    private var audioFiles: [Audio] = []
+    private var audios: [Audio] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,18 +49,18 @@ extension MapViewController: CLLocationManagerDelegate {
 
         mapView.setRegion(mRegion, animated: true)
         
-        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+        PublishManager.shared.fetchAudios() { [weak self] result in
             
             switch result {
             
-            case .success(let audioFiles):
+            case .success(let audios):
                 
-                self?.audioFiles = audioFiles
+                self?.audios = audios
                 
-                audioFiles.forEach { audioFile in
+                audios.forEach { audio in
                     
-                    self?.audioAnnotations.append(AudioAnnotation(title: audioFile.title, locationName: "Claire",
-                        coordinate: CLLocationCoordinate2DMake(audioFile.location?.latitude ?? 0.0, audioFile.location?.longitude ?? 0.0), audioUrl: audioFile.audioUrl))
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: "Claire",
+                        coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
                     
                 }
                 
@@ -114,7 +114,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation = view.annotation as? AudioAnnotation
-        let audioFile = audioFiles.filter { $0.audioUrl == annotation?.audioUrl }
+        let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
         let audioPlayerViewController = AudioPlayerViewController()
         self.addChild(audioPlayerViewController)

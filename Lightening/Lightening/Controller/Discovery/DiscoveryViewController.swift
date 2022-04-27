@@ -41,18 +41,18 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     }
     
     private func fetchData() {
-        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+        PublishManager.shared.fetchAudios() { [weak self] result in
             switch result {
                 
-            case .success(let audioFiles):
+            case .success(let audios):
                 
-                self?.sections[0].audios.append(contentsOf: audioFiles.filter { $0.topic == "Nature"})
+                self?.sections[0].audios.append(contentsOf: audios.filter { $0.topic == "Nature"})
                 
-                self?.sections[1].audios.append(contentsOf: audioFiles.filter { $0.topic == "City"})
+                self?.sections[1].audios.append(contentsOf: audios.filter { $0.topic == "City"})
                 
-                self?.sections[2].audios.append(contentsOf: audioFiles.filter { $0.topic == "Pet"})
+                self?.sections[2].audios.append(contentsOf: audios.filter { $0.topic == "Pet"})
                 
-                self?.sections[3].audios.append(contentsOf: audioFiles.filter { $0.topic == "Others"})
+                self?.sections[3].audios.append(contentsOf: audios.filter { $0.topic == "Others"})
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
