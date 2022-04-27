@@ -35,6 +35,7 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
         tapGestureRecognizer.numberOfTapsRequired = 2
         self.userProfileView.addGestureRecognizer(tapGestureRecognizer)
+        self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
         
     }
     

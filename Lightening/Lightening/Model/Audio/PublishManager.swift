@@ -268,6 +268,19 @@ class PublishManager {
 
                         print(url?.absoluteString)
                         
+                        guard let url = url else { return }
+                        
+                        self.publishProfilePhoto(url: url) { result in
+                            
+                            switch result {
+                                
+                            case .success(_):
+                                print("success")
+                            case .failure(_):
+                                print("fail")
+                            }
+                        }
+                        
                     })
                 }
             }
@@ -275,7 +288,31 @@ class PublishManager {
 
     }
     
-//    func publishProfilePhoto(url: URL, completion: @escaping Result<String, ) {
-//
-//    }
+    func publishProfilePhoto(url: URL, completion: @escaping (Result<String, Error>) -> Void) {
+
+        guard var currentUser = UserManager.shared.currentUser else { return }
+        
+        currentUser.image = url
+        
+        guard let userId = currentUser.userId else { return }
+        
+        let document = db.collection("users").document("\(userId)")
+        
+        do {
+            
+           try document.setData(from: currentUser) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+            
+        } catch {
+            
+        }
+    }
 }

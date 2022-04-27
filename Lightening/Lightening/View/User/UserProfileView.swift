@@ -11,6 +11,8 @@ class UserProfileView: UIView {
     
     let profileImageView = UIImageView()
     
+    var imageUrl: String?
+    
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
         let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
@@ -112,7 +114,7 @@ class UserProfileView: UIView {
                                font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
                                clockwise: false)
 
-        profileImageView.image = UIImage(named: "mask")
+        profileImageView.loadImage(imageUrl)
         self.stickSubView(profileImageView, inset: UIEdgeInsets(top: 50, left: 30, bottom: 50, right: 30))
         
     }

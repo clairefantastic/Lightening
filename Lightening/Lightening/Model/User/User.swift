@@ -19,4 +19,5 @@ struct User: Codable, Hashable {
     
     var userIdentity : Int
     
+    var image: URL?
 }
