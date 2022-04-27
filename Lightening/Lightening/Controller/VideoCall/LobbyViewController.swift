@@ -16,9 +16,7 @@ class LobbyViewController: BaseViewController {
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
     
-    @IBOutlet weak var speakerButton: UIButton!
-    
-    @IBOutlet weak var muteButton: UIButton!
+    private let videoCallButton = UIButton()
     
     @IBOutlet weak var localSDP: UILabel!
     
@@ -33,10 +31,10 @@ class LobbyViewController: BaseViewController {
     var currentPerson = ""
     private var oppositePerson = ""
     
-    init(signalClient: SignalingClient, webRTCClient: WebRTCClient) {
+    init(signalClient: SignalingClient, webRTCClient: WebRTCClient ) {
       self.signalClient = signalClient
       self.webRTCClient = webRTCClient
-      super.init(nibName: String(describing: LobbyViewController.self), bundle: Bundle.main)
+      super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +44,7 @@ class LobbyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureVideoCallButton()
         self.currentPerson = "qvDyYlDltZx7XYKRWrxn"
 //        self.oppositePerson = "eric"
         self.signalingConnected = false
@@ -60,9 +59,6 @@ class LobbyViewController: BaseViewController {
         
         self.webRTCClient.unmuteAudio()
         self.webRTCClient.speakerOn()
-
-   
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,8 +84,7 @@ class LobbyViewController: BaseViewController {
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
               
-          }
-          else {
+          } else {
             self.rtcStatus?.text = "Not connected"
             self.rtcStatus?.textColor = UIColor.red
           }
@@ -128,20 +123,6 @@ class LobbyViewController: BaseViewController {
         }
       }
     }
-    
-    private var speakerOn: Bool = false {
-      didSet {
-        let title = "Speaker: \(self.speakerOn ? "On" : "Off" )"
-        self.speakerButton?.setTitle(title, for: .normal)
-      }
-    }
-    
-    private var mute: Bool = false {
-      didSet {
-        let title = "Mute: \(self.mute ? "on" : "off")"
-        self.muteButton?.setTitle(title, for: .normal)
-      }
-    }
 
     @IBAction func endCall(_ sender: Any) {
         self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
@@ -153,52 +134,7 @@ class LobbyViewController: BaseViewController {
         self.hasRemoteSdp = false
         self.remoteCandidateCount = 0
     }
-    
-    @IBAction private func speakerDidTap(_ sender: UIButton) {
-      if self.speakerOn {
-        self.webRTCClient.speakerOff()
-      } else {
-        self.webRTCClient.speakerOn()
-      }
-      self.speakerOn = !self.speakerOn
-    }
-    
-    @IBAction private func muteDidTap(_ sender: UIButton) {
-      self.mute = !self.mute
-      if self.mute {
-        self.webRTCClient.muteAudio()
-      } else {
-        self.webRTCClient.unmuteAudio()
-      }
-    }
 
-    @IBAction func callDidTap(_ sender: UIButton) {
-        self.signalClient.listenVolunteers()
-        self.signalClient.getVolunteerHandler = { name in
-            self.oppositePerson = name
-            self.webRTCClient.offer { (sdp) in
-                self.hasLocalSdp = true
-                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
-            }
-        
-        }
-    }
-    
-    @IBAction func offerDidTap(_ sender: Any) {
-    }
-    
-    @IBAction func answerDidTap(_ sender: Any) {
-        self.webRTCClient.answer { (localSdp) in
-          self.hasLocalSdp = true
-            
-            self.signalClient.send(sdp: localSdp, from: self.currentPerson, to: self.oppositePerson)
-        }
-    }
-    
-    @IBAction private func videoDidTap(_ sender: UIButton) {
-        let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
-        self.present(videoCallViewController, animated: true, completion: nil)
-    }
 }
 
 extension LobbyViewController: SignalClientDelegate {
@@ -220,7 +156,6 @@ extension LobbyViewController: SignalClientDelegate {
   func signalClientDidDisconnect(_ signalClient: SignalingClient) {
     self.signalingConnected = false
   }
-  
   
   func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
     print("Received remote candidate")
@@ -273,6 +208,45 @@ extension LobbyViewController: WebRTCClientDelegate {
   }
 }
 
+extension LobbyViewController {
+    
+    private func configureVideoCallButton() {
+        
+        self.view.addSubview(videoCallButton)
+        
+        videoCallButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: videoCallButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -80).isActive = true
+        
+        NSLayoutConstraint(item: videoCallButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: videoCallButton, attribute: .centerY, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: videoCallButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        videoCallButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        videoCallButton.setTitle("Call a volunteer", for: .normal)
+        
+        videoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
+        
+        videoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        videoCallButton.isEnabled = true
+        
+        videoCallButton.addTarget(self, action: #selector(startVideoCall), for: .touchUpInside)
+    }
+    
+    @objc func startVideoCall() {
+        
+        self.signalClient.listenVolunteers()
+        self.signalClient.getVolunteerHandler = { name in
+            self.oppositePerson = name
+            self.webRTCClient.offer { (sdp) in
+                self.hasLocalSdp = true
+                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+            }
 
-
-
+        }
+    }
+}

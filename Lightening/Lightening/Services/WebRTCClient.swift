@@ -317,4 +317,3 @@ extension WebRTCClient: RTCDataChannelDelegate {
     self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
   }
 }
-
