@@ -61,7 +61,6 @@
 		7EA73F542813E0AA0071D197 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F532813E0AA0071D197 /* BaseViewController.swift */; };
 		7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F562813EBE80071D197 /* UserProfileView.swift */; };
 		7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5828145AA70071D197 /* ProfileSection.swift */; };
-		7EA73F5D28146E0D0071D197 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5C28146E0D0071D197 /* File.swift */; };
 		7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */; };
 		7EA73F65281502040071D197 /* 23559-microphone.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F64281502040071D197 /* 23559-microphone.json */; };
 		7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */; };
@@ -152,7 +151,6 @@
 		7EA73F532813E0AA0071D197 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EA73F562813EBE80071D197 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7EA73F5828145AA70071D197 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
-		7EA73F5C28146E0D0071D197 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_lcvwieey.json; sourceTree = "<group>"; };
 		7EA73F64281502040071D197 /* 23559-microphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "23559-microphone.json"; sourceTree = "<group>"; };
 		7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6mtolrvz.json; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
-				7EA73F5C28146E0D0071D197 /* File.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -689,7 +686,6 @@
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
-				7EA73F5D28146E0D0071D197 /* File.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
