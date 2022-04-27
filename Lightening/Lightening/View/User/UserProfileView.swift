@@ -9,6 +9,8 @@ import UIKit
 
 class UserProfileView: UIView {
     
+    let profileImageView = UIImageView()
+    
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
         let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
@@ -109,6 +111,10 @@ class UserProfileView: UIView {
                                colour: UIColor.black,
                                font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
                                clockwise: false)
-//        centre(text: "Hello flat world", context: context, radius: 0, angle: 0 , colour: UIColor.yellow, font: UIFont.systemFont(ofSize: 16), slantAngle: CGFloat(M_PI_4))
+
+        profileImageView.image = UIImage(named: "mask")
+        self.stickSubView(profileImageView, inset: UIEdgeInsets(top: 50, left: 30, bottom: 50, right: 30))
+        
     }
+    
 }

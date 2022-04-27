@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     
-    let userProfileView = UserProfileView()
+    private let userProfileView = UserProfileView()
     
     private let logOutButton = UIButton()
     
@@ -32,6 +32,11 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         configureLayout()
         configureLogOutButton()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.userProfileView.profileImageView.layer.cornerRadius = self.userProfileView.profileImageView.frame.height / 2
     }
     
     private func configureCollectionView() {
