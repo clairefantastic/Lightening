@@ -59,28 +59,33 @@ class AudioPlayerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        PublishManager.shared.fetchLikedAudio(userId: "giUsyJAOONHf3dNytlZG") {
-            [weak self] result in
-                
-                switch result {
-                
-                case .success(let audioFiles):
-                    
-                    guard let audio = self?.audio else {
-                        return
-                    }
-
-                    if audioFiles.contains(audio) {
-                        
-                        self?.isLiked = true
-                    }
+        
+        fetchLikedAudios()
+    }
+    
+    private func fetchLikedAudios() {
+        
+        PublishManager.shared.fetchLikedAudios(userId: UserManager.shared.currentUser?.userId ?? "") { [weak self] result in
             
-                case .failure(let error):
+            switch result {
+                
+            case .success(let likedAudios):
+                
+                guard let audio = self?.audio else {
+                    return
+                }
+
+                if likedAudios.contains(audio) {
                     
-                    print("fetchData.failure: \(error)")
+                    self?.isLiked = true
                 }
                 
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
             }
+            
+        }
     }
     
     private func addPlayerView() {
@@ -103,7 +108,7 @@ class AudioPlayerViewController: UIViewController {
         
         if isLiked {
             
-            PublishManager.shared.deleteLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+            PublishManager.shared.deleteLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) {
                 [weak self] result in
                 
                 switch result {
@@ -117,8 +122,8 @@ class AudioPlayerViewController: UIViewController {
             
             isLiked = false
         } else {
-        
-            PublishManager.shared.publishLikedAudio(authorId: "giUsyJAOONHf3dNytlZG", audio: audio) {
+            
+            PublishManager.shared.publishLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) {
                 [weak self] result in
                 
                 switch result {

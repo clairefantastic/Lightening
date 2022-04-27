@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     
@@ -43,15 +44,17 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         
         collectionView.delegate = self
     }
-    
+
     private func fetchData() {
-        PublishManager.shared.fetchLikedAudio(userId: "giUsyJAOONHf3dNytlZG") { [weak self] result in
+
+        PublishManager.shared.fetchLikedAudios(userId: UserManager.shared.currentUser?.userId ?? "") { [weak self] result in
+            
             switch result {
                 
-            case .success(let audioFiles):
+            case .success(let likedAudios):
                 
-                self?.sections[1].audios = audioFiles
-                self?.applySnapshot(animatingDifferences: false)
+                self?.sections[1].audios = likedAudios
+                self?.applySnapshot(animatingDifferences: true)
                 
             case .failure(let error):
                 
@@ -141,6 +144,9 @@ extension ProfileViewController {
     @objc func signOut() {
         
         UserManager.shared.signOut()
+        print(Auth.auth().currentUser?.email)
+        view.window?.rootViewController = SignInViewController()
+        view.window?.makeKeyAndVisible()
     }
 }
 
