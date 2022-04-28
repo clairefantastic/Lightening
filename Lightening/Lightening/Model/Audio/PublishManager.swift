@@ -172,7 +172,12 @@ class PublishManager {
         }
     }
 
-    func publishComments(documentId: String, comment: Comment, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishComments(documentId: String, comment: inout Comment, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let author = UserManager.shared.currentUser else { return }
+        comment.authorId = author.userId
+        comment.authorName = author.displayName
+        comment.authorImage = author.image
         
         let document = db.collection("audioFiles").document(documentId).collection("comments").document()
         

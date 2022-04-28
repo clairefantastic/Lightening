@@ -224,12 +224,16 @@ extension AudioDescriptionViewController {
     
     @objc func sendOutText() {
         
+        guard let text = enterCommentTextField.text else { return }
+        
+        var comment = Comment(text: text)
+        
         PublishManager.shared.publishComments(documentId: audioFileDocumentId ?? "",
-                                              comment: Comment(authorImage: "", authorName: "Claire", text: enterCommentTextField.text ?? "")) { [weak self] result in
+                                              comment: &comment) { [weak self] result in
             
             switch result {
             case .success(let success):
-                self?.comments.append(Comment(authorImage: "", authorName: "Claire", text: self?.enterCommentTextField.text ?? ""))
+                self?.comments.append(Comment(authorImage: URL(string: ""), authorName: "Claire", text: self?.enterCommentTextField.text ?? ""))
                 self?.enterCommentTextField.text = ""
             case .failure(let error):
                 print("publishComments.failure: \(error)")
