@@ -165,6 +165,11 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
             view?.titleLabel.text = section.category
+            view?.didTapTopicHandler = { [weak self] in
+                let audioListViewController = AudioListViewController()
+                audioListViewController.audios = section.audios
+                self?.navigationController?.pushViewController(audioListViewController, animated: true)
+            }
             return view
         }
         return dataSource
