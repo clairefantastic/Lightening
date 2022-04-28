@@ -30,6 +30,8 @@ struct Audio: Codable, Hashable {
     var comments: Comment?
     
     var author: User?
+    
+    var authorId: String?
 
 }
 
@@ -42,9 +44,11 @@ struct Location: Codable, Hashable {
 
 struct Comment: Codable, Hashable {
     
-    var authorImage: String?
+    var authorImage: URL?
     
     var authorName: String?
+    
+    var authorId: String?
     
     var text: String
     

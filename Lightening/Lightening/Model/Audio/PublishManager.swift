@@ -85,6 +85,8 @@ class PublishManager {
         let document = db.collection("audioFiles").document()
         audio.audioId = document.documentID
         audio.author = currentUser
+        guard let authorId = currentUser.userId else { return }
+        audio.authorId = authorId
         
         do {
             
@@ -104,6 +106,24 @@ class PublishManager {
         }
      
     }
+    
+    func deleteAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+
+        guard let audioId = audio.audioId else { return }
+        
+        let document = db.collection("audioFiles").document(audioId)
+    
+           document.delete() { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        }
     
     func fetchAudios(completion: @escaping (Result<[Audio], Error>) -> Void) {
         
