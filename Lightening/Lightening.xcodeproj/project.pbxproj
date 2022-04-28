@@ -43,6 +43,9 @@
 		7E44B7E5280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */; };
 		7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */; };
 		7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */; };
+		7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4702819F4FD0080476E /* AudioListViewController.swift */; };
+		7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */; };
+		7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */; };
 		7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* VolunteerTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
@@ -126,6 +129,9 @@
 		7E44B7E3280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCoverCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
+		7E48D4702819F4FD0080476E /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
+		7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListTableViewCell.swift; sourceTree = "<group>"; };
+		7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListTableViewCell.xib; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* VolunteerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +252,7 @@
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
 				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
 				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
+				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -267,6 +274,8 @@
 				7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */,
 				7EA73F4A281273EB0071D197 /* CommentTableViewCell.swift */,
 				7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */,
+				7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */,
+				7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -519,6 +528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */,
 				7E44B7E2280C4B8300CF24AC /* AddDetailsCoverTableViewCell.xib in Resources */,
 				7E44B7AD2809187C00CF24AC /* AddDetailsContentCell.xib in Resources */,
 				7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */,
@@ -626,6 +636,7 @@
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
 				7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
+				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
 				7EDBA2CA2805E93600C10FA5 /* VolLobbyViewController.swift in Sources */,
 				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
@@ -640,6 +651,7 @@
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientforVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
+				7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
 				7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */,
