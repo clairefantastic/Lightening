@@ -9,7 +9,7 @@ import UIKit
 
 class SectionHeaderReusableView: UICollectionReusableView {
     
-    var didTapTopicHandler: (() -> Void)?
+    var didTapSectionHandler: (() -> Void)?
     
     static var reuseIdentifier: String {
         return String(describing: SectionHeaderReusableView.self)
@@ -98,6 +98,6 @@ class SectionHeaderReusableView: UICollectionReusableView {
     
     @objc func didTapTopic(_ sender: UIButton) {
         
-        didTapTopicHandler?()
+        didTapSectionHandler?()
     }
 }
