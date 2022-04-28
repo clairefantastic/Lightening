@@ -38,7 +38,7 @@ class AudioDescriptionViewController: BaseViewController {
         didSet {
         
             audioTitleLabel.text = self.audio?.title
-            audioAuthorLabel.text = "Claire"
+            audioAuthorLabel.text = self.audio?.author?.displayName
             audioDescriptionLabel.text = self.audio?.description
             audioCoverImageView.image = UIImage(named: self.audio?.cover ?? "")
             
