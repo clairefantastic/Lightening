@@ -159,17 +159,29 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
             }
             let section = self.dataSource.snapshot()
                 .sectionIdentifiers[indexPath.section]
-            
             let view = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
             view?.titleLabel.text = section.category
-            view?.didTapSectionHandler = { [weak self] in
-                let audioListViewController = AudioListViewController()
-                audioListViewController.audios = section.audios
-                self?.navigationController?.pushViewController(audioListViewController, animated: true)
+            if indexPath.section == 0 {
+                
+                view?.didTapSectionHandler = { [weak self] in
+                    let audioListViewController = AudioListViewController()
+                    audioListViewController.audios = section.audios
+                    audioListViewController.canDeleteAudio = true
+                    self?.navigationController?.pushViewController(audioListViewController, animated: true)
+                }
+            } else {
+                
+                view?.didTapSectionHandler = { [weak self] in
+                    let audioListViewController = AudioListViewController()
+                    audioListViewController.audios = section.audios
+                    audioListViewController.canDeleteAudio = false
+                    self?.navigationController?.pushViewController(audioListViewController, animated: true)
+                }
             }
+            
             return view
         }
         return dataSource
