@@ -66,13 +66,27 @@ extension IdentitySelectionViewController {
             
             case .success:
                 
-                print("Visually Impaired user sign in success")
+                guard let userId = user.userId else { return }
                 
-                let tabBarController = VisuallyImpairedTabBarController()
+                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
+                        switch result {
+                            
+                        case .success(let user):
+                            
+                            let tabBarController = VisuallyImpairedTabBarController()
+                            
+                            tabBarController.modalPresentationStyle = .fullScreen
+                            
+                            self?.present(tabBarController, animated: true, completion: nil)
+
+                        case .failure(let error):
+                            
+                            print("fetchData.failure: \(error)")
+                        }
+                        
+                }
                 
-                tabBarController.modalPresentationStyle = .fullScreen
-                
-                self.present(tabBarController, animated: true, completion: nil)
+                print("visuallyImpaired sign in success")
 
             case .failure(let error):
                 
@@ -119,14 +133,28 @@ extension IdentitySelectionViewController {
             
             case .success:
                 
-                print("Volunteer sign in success")
+                guard let userId = user.userId else { return }
                 
-                let tabBarController = VolunteerTabBarController()
-                
-                tabBarController.modalPresentationStyle = .fullScreen
-                
-                self.present(tabBarController, animated: true, completion: nil)
+                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
+                        switch result {
+                            
+                        case .success(let user):
+                            
+                            let tabBarController = VolunteerTabBarController()
+                            
+                            tabBarController.modalPresentationStyle = .fullScreen
+                            
+                            self?.present(tabBarController, animated: true, completion: nil)
 
+                        case .failure(let error):
+                            
+                            print("fetchData.failure: \(error)")
+                        }
+                        
+                }
+                
+                print("Volunteer sign in success")
+    
             case .failure(let error):
                 
                 print("volunteerSignin.failure: \(error)")
