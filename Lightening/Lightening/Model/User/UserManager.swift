@@ -186,6 +186,8 @@ class UserManager {
             
             print("user registeration success! User: \(user.uid), \(user.email)")
             
+            completion(nil)
+            
         }
     }
     
@@ -230,5 +232,73 @@ class UserManager {
             }
         }
     }
-      
+    
+    func deleteAccount(completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        
+        guard let userId = currentUser.userId else { return }
+        
+        db.collection("users").document(userId).delete() { error in
+            
+            if let error = error {
+                
+                print(error)
+                
+            } else {
+                
+                self.db.collection("audioFiles").whereField("authorId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                        
+                    } else {
+                        
+                        guard let documents = querySnapshot?.documents else { return }
+                        
+                        for document in documents {
+                            document.reference.delete()
+                        }
+                        
+                        self.db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
+                            
+                            if let error = error {
+                                
+                                completion(.failure(error))
+                                
+                            } else {
+                                
+                                guard let documents = querySnapshot?.documents else { return }
+                                
+                                for document in documents {
+                                    
+                                    document.reference.collection("comments").whereField("authorId",
+                                                                                                   isEqualTo: userId).getDocuments { (querySnapshot, error) in
+
+                             if let error = error {
+                                 completion(.failure(error))
+    
+                             } else {
+    
+                                 guard let documents = querySnapshot?.documents else { return }
+    
+                                 for document in documents {
+                                     document.reference.delete()
+                                 }
+    
+                                 completion(.success("Success"))
+                             }
+                         
+                                }
+                            }
+                            
+                        }
+                                                
+                }
+            }
+            
+            }
+        }
+    }
+}
 }
