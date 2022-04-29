@@ -170,17 +170,15 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
             if indexPath.section == 0 {
                 
                 view?.didTapSectionHandler = { [weak self] in
-                    let audioListViewController = AudioListViewController()
-                    audioListViewController.audios = section.audios
-                    audioListViewController.canDeleteAudio = true
-                    self?.navigationController?.pushViewController(audioListViewController, animated: true)
+                    let myAudioListViewController = MyAudioListViewController()
+                    myAudioListViewController.audios = section.audios
+                    self?.navigationController?.pushViewController(myAudioListViewController, animated: true)
                 }
             } else {
                 
                 view?.didTapSectionHandler = { [weak self] in
                     let audioListViewController = AudioListViewController()
                     audioListViewController.audios = section.audios
-                    audioListViewController.canDeleteAudio = false
                     self?.navigationController?.pushViewController(audioListViewController, animated: true)
                 }
             }

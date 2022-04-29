@@ -48,6 +48,7 @@
 		7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */; };
 		7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* VolunteerTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
+		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
@@ -134,6 +135,7 @@
 		7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListTableViewCell.xib; sourceTree = "<group>"; };
 		7E498D542808175400389D1C /* VolunteerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioListViewController.swift; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA023502800452A00C73205 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
+				7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
 				7EA73F7728170E160071D197 /* RegisterViewController.swift */,
@@ -671,6 +674,7 @@
 				7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */,
+				7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */,
 				7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */,
 				7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */,
 				7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */,

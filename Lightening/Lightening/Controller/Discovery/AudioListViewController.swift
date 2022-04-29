@@ -11,8 +11,6 @@ class AudioListViewController: UIViewController {
     
     var audios: [Audio]?
     
-    var canDeleteAudio: Bool?
-    
     private var tableView = UITableView()
     
     override func viewDidLoad() {
@@ -80,36 +78,5 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
                        options: .curveEaseInOut,
                        animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
                        completion: {_ in })
-        
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if canDeleteAudio == true {
-            let deleteAudioIndex = indexPath.row
-            
-            guard let audio = audios?[indexPath.row] else { return }
-            
-            PublishManager.shared.deleteAudio(audio: audio) { result in
-                
-                switch result {
-                    
-                case.success(_):
-                    tableView.reloadData()
-                case .failure(_):
-                    print("fail")
-                }
-            }
-             // 更新tableView
-        } else {
-            return
-        }
-           
-    }
-       
-    func tableView(_ tableView: UITableView,
-                   titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath)
-               -> String? {
-           return "Delete"
     }
 }
