@@ -79,6 +79,7 @@ class ImpairedLobbyViewController: BaseViewController {
               
             var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
               vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+              vc.oppositePerson = self.oppositePerson
               
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)

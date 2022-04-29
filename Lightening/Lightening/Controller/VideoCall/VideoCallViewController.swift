@@ -18,6 +18,7 @@ class VideoCallViewController: UIViewController {
     private let webRTCClient: WebRTCClient
     
     var currentPerson = ""
+    var oppositePerson = ""
     
     var connectedHandler: ((Bool) -> Void)?
     
@@ -78,14 +79,19 @@ class VideoCallViewController: UIViewController {
     }
     
     @IBAction func endCall(_ sender: Any) {
+        
         self.connectedHandler?(false)
+        
         self.signalClient.deleteSdpAndCandidateAndSender(for: "\(currentPerson)")
+        
+        self.signalClient.deleteSdpAndCandidateAndSender(for: "\(oppositePerson)")
+        
         self.webRTCClient.closePeerConnection()
 
         self.webRTCClient.createPeerConnection()
         
         NotificationCenter.default.post(name: NSNotification.Name (notificationKey2), object: nil)
-
+        
         self.dismiss(animated: true)
         
     }

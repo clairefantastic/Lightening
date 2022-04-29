@@ -224,6 +224,7 @@ extension VolLobbyViewController {
         let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
 
         videoCallViewController.currentPerson = self.currentPerson
+        videoCallViewController.oppositePerson = self.oppositePerson
         
         videoCallViewController.modalPresentationStyle = .fullScreen
         self.present(videoCallViewController, animated: true, completion: nil)
