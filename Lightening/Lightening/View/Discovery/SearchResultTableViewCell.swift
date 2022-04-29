@@ -47,7 +47,7 @@ class SearchResultTableViewCell: UITableViewCell {
       didSet {
           searchResultImageView?.image = UIImage(named: audio?.cover ?? "")
           searchResultTitleLabel?.text = audio?.title ?? ""
-          searchResultAuthorLabel?.text = "Claire"
+          searchResultAuthorLabel?.text = audio?.author?.displayName
       }
     }
     

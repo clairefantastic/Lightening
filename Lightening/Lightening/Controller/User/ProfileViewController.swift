@@ -10,6 +10,8 @@ import FirebaseAuth
 
 class ProfileViewController: BaseViewController, UICollectionViewDelegate {
     
+    private let deleteAccountButton = UIButton()
+    
     private let userProfileView = UserProfileView()
     
     private let logOutButton = UIButton()
@@ -32,6 +34,7 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         configureLogOutButton()
+        configureDeleteAccountButton()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
         tapGestureRecognizer.numberOfTapsRequired = 2
         self.userProfileView.addGestureRecognizer(tapGestureRecognizer)
@@ -159,12 +162,27 @@ class ProfileViewController: BaseViewController, UICollectionViewDelegate {
             }
             let section = self.dataSource.snapshot()
                 .sectionIdentifiers[indexPath.section]
-            
             let view = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
             view?.titleLabel.text = section.category
+            if indexPath.section == 0 {
+                
+                view?.didTapSectionHandler = { [weak self] in
+                    let myAudioListViewController = MyAudioListViewController()
+                    myAudioListViewController.audios = section.audios
+                    self?.navigationController?.pushViewController(myAudioListViewController, animated: true)
+                }
+            } else {
+                
+                view?.didTapSectionHandler = { [weak self] in
+                    let audioListViewController = AudioListViewController()
+                    audioListViewController.audios = section.audios
+                    self?.navigationController?.pushViewController(audioListViewController, animated: true)
+                }
+            }
+            
             return view
         }
         return dataSource
@@ -223,6 +241,55 @@ extension ProfileViewController {
         print(Auth.auth().currentUser?.email)
         view.window?.rootViewController = SignInViewController()
         view.window?.makeKeyAndVisible()
+    }
+    
+    private func configureDeleteAccountButton() {
+        
+        view.addSubview(deleteAccountButton)
+        
+        deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .top, relatedBy: .equal, toItem: logOutButton, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        deleteAccountButton.setTitle("x", for: .normal)
+        deleteAccountButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
+        deleteAccountButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+        deleteAccountButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        deleteAccountButton.layer.borderWidth = 1
+        deleteAccountButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+        
+    }
+    
+    @objc func deleteAccount() {
+        
+        let user = Auth.auth().currentUser
+
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+          } else {
+              
+              UserManager.shared.deleteAccount() { result in
+                  switch result {
+                  case .success(_):
+                      print("Successfully delete all information of this user.")
+                      self.view.window?.rootViewController = SignInViewController()
+                      self.view.window?.makeKeyAndVisible()
+                  case .failure(_):
+                      print("Fail to delete all information of this user.")
+                  }
+              }
+            // Account deleted.
+          }
+        }
+        
     }
 }
 

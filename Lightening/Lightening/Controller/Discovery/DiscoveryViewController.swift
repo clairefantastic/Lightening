@@ -27,6 +27,7 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
+        
     }
     
     private func configureCollectionView() {
@@ -89,6 +90,11 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
             view?.titleLabel.text = section.topic
+            view?.didTapSectionHandler = { [weak self] in
+                let audioListViewController = AudioListViewController()
+                audioListViewController.audios = section.audios
+                self?.navigationController?.pushViewController(audioListViewController, animated: true)
+            }
             return view
         }
         return dataSource
