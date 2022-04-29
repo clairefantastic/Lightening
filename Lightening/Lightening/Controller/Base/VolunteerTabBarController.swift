@@ -25,7 +25,7 @@ private enum VolunteerTab {
         
         let config = Config.default
         
-        let signalClientforVolunteer = SignalingClientforVolunteer()
+        let signalClientforVolunteer = SignalingClientForVolunteer()
         
         let webRTCClient = WebRTCClient(iceServers: config.webRTCIceServers)
 

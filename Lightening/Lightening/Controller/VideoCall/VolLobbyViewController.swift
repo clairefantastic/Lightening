@@ -20,13 +20,13 @@ class VolLobbyViewController: BaseViewController {
             // Must Be here
         }
     }
-    private let signalClientforVolunteer: SignalingClientforVolunteer
+    private let signalClientforVolunteer: SignalingClientForVolunteer
     private let webRTCClient: WebRTCClient
     private var oppositePerson = ""
     
     let notificationKey1 = "com.volunteer.receiveCall"
     
-    init(signalClientforVolunteer: SignalingClientforVolunteer, webRTCClient: WebRTCClient) {
+    init(signalClientforVolunteer: SignalingClientForVolunteer, webRTCClient: WebRTCClient) {
         self.signalClientforVolunteer = signalClientforVolunteer
         self.webRTCClient = webRTCClient
         super.init(nibName: String(describing: VolLobbyViewController.self), bundle: Bundle.main)
@@ -114,8 +114,8 @@ class VolLobbyViewController: BaseViewController {
     }
 }
 
-extension VolLobbyViewController: SignalClientforVolunteerDelegate {
-    func signalClient(_ signalClient: SignalingClientforVolunteer, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
+extension VolLobbyViewController: SignalClientForVolunteerDelegate {
+    func signalClient(_ signalClient: SignalingClientForVolunteer, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
         print("Received remote sdp")
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
             self.hasRemoteSdp = true
@@ -126,15 +126,15 @@ extension VolLobbyViewController: SignalClientforVolunteerDelegate {
         
     }
     
-    func signalClientDidConnect(_ signalClient: SignalingClientforVolunteer) {
+    func signalClientDidConnect(_ signalClient: SignalingClientForVolunteer) {
         self.signalingConnected = true
     }
     
-    func signalClientDidDisconnect(_ signalClient: SignalingClientforVolunteer) {
+    func signalClientDidDisconnect(_ signalClient: SignalingClientForVolunteer) {
         self.signalingConnected = false
     }
     
-    func signalClient(_ signalClient: SignalingClientforVolunteer, didReceiveCandidate candidate: RTCIceCandidate) {
+    func signalClient(_ signalClient: SignalingClientForVolunteer, didReceiveCandidate candidate: RTCIceCandidate) {
         print("Received remote candidate")
         self.remoteCandidateCount += 1
         

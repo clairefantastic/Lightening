@@ -14,7 +14,7 @@ class VideoCallViewController: UIViewController {
     
     private let signalClient = SignalingClient()
     
-    private let signalClientforVolunteer = SignalingClientforVolunteer()
+    private let signalClientforVolunteer = SignalingClientForVolunteer()
     private let webRTCClient: WebRTCClient
     
     var currentPerson = ""
