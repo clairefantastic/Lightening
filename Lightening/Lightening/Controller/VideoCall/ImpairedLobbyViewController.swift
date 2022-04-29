@@ -14,6 +14,7 @@ import FirebaseFirestore
 class ImpairedLobbyViewController: BaseViewController {
     
     private let signalClient: SignalingClient
+    
     private let webRTCClient: WebRTCClient
     
     private let videoCallButton = UIButton()
@@ -45,15 +46,14 @@ class ImpairedLobbyViewController: BaseViewController {
         super.viewDidLoad()
 
         configureVideoCallButton()
-        self.currentPerson = "qvDyYlDltZx7XYKRWrxn"
-//        self.oppositePerson = "eric"
+
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-        self.signalClient.listenSdp(to: self.currentPerson)
-        self.signalClient.listenCandidate(to: self.currentPerson)
+        self.signalClient.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
+        self.signalClient.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         
@@ -79,7 +79,7 @@ class ImpairedLobbyViewController: BaseViewController {
             self.rtcStatus?.textColor = UIColor.green
               
             var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-              vc.currentPerson = self.currentPerson
+              vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
               
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
@@ -125,7 +125,7 @@ class ImpairedLobbyViewController: BaseViewController {
     }
 
     @IBAction func endCall(_ sender: Any) {
-        self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
+        self.signalClient.deleteSdpAndCandidateAndSender(for: UserManager.shared.currentUser?.userId ?? "")
         self.webRTCClient.closePeerConnection()
         
         self.webRTCClient.createPeerConnection()
@@ -244,7 +244,7 @@ extension ImpairedLobbyViewController {
             self.oppositePerson = name
             self.webRTCClient.offer { (sdp) in
                 self.hasLocalSdp = true
-                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+                self.signalClient.send(sdp: sdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
             }
 
         }
