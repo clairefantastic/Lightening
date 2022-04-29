@@ -62,7 +62,7 @@ class ImpairedLobbyViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
         vc.connectedHandler? = {(connectedStatus) in
             
             self.signalingConnected = connectedStatus
@@ -77,7 +77,7 @@ class ImpairedLobbyViewController: BaseViewController {
             self.rtcStatus?.text = "Connected"
             self.rtcStatus?.textColor = UIColor.green
               
-            var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+            let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
               vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
               vc.oppositePerson = self.oppositePerson
               
