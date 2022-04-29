@@ -30,7 +30,7 @@ private enum VisuallyImpairedTab {
         case .lobby: controller = UINavigationController(rootViewController: ImpairedLobbyViewController(
             signalClient: signalingClient, webRTCClient: webRTCClient))
             
-        case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
+        case .discovery: controller = UINavigationController(rootViewController: ImpairedDiscoveryViewController())
             
         case .profile: controller =
             UINavigationController(rootViewController: ProfileViewController())

@@ -26,7 +26,7 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         fetchData()
         configureCollectionView()
         configureLayout()
-        
+        layoutBarItem()
     }
     
     func configureCollectionView() {
@@ -173,5 +173,20 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
+    }
+}
+
+extension DiscoveryViewController {
+    
+    private func layoutBarItem() {
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
+    }
+    
+    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
+        
+        let searchViewController = SearchViewController()
+        
+        navigationController?.pushViewController(searchViewController, animated: true)
     }
 }

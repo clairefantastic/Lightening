@@ -13,4 +13,6 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
     }
+    
+    
 }
