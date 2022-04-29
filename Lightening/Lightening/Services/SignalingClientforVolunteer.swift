@@ -42,7 +42,7 @@ final class SignalingClientForVolunteer {
         switch status {
             
         case .available, .inCall, .unavailable:
-            Firestore.firestore().collection("users").document(person).setData(["status" : status.rawValue]) { err in
+            Firestore.firestore().collection("users").document(person).updateData(["status" : status.rawValue]) { err in
                 if let err = err {
                     print("Error updating status: \(err)")
                 } else {
