@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolLobbyViewController" customModule="Lightening" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolunteerLobbyViewController" customModule="Lightening" customModuleProvider="target">
             <connections>
                 <outlet property="availableStatusSegmentedControl" destination="fgQ-h5-sl4" id="efA-IX-pZ1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yP2-gq-Mwg"/>

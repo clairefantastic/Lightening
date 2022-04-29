@@ -31,7 +31,7 @@ private enum VolunteerTab {
 
         switch self {
 
-        case .lobby: controller = UINavigationController(rootViewController: VolLobbyViewController(
+        case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
         case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())

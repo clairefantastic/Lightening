@@ -9,7 +9,7 @@ import UIKit
 import WebRTC
 import Lottie
 
-class VolLobbyViewController: BaseViewController {
+class VolunteerLobbyViewController: BaseViewController {
     
     @IBOutlet private weak var answerButton: UIButton?
     
@@ -29,7 +29,7 @@ class VolLobbyViewController: BaseViewController {
     init(signalClientforVolunteer: SignalingClientForVolunteer, webRTCClient: WebRTCClient) {
         self.signalClientforVolunteer = signalClientforVolunteer
         self.webRTCClient = webRTCClient
-        super.init(nibName: String(describing: VolLobbyViewController.self), bundle: Bundle.main)
+        super.init(nibName: String(describing: VolunteerLobbyViewController.self), bundle: Bundle.main)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,7 +114,7 @@ class VolLobbyViewController: BaseViewController {
     }
 }
 
-extension VolLobbyViewController: SignalClientForVolunteerDelegate {
+extension VolunteerLobbyViewController: SignalClientForVolunteerDelegate {
     func signalClient(_ signalClient: SignalingClientForVolunteer, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
         print("Received remote sdp")
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
@@ -143,7 +143,7 @@ extension VolLobbyViewController: SignalClientForVolunteerDelegate {
     }
 }
 
-extension VolLobbyViewController: WebRTCClientDelegate {
+extension VolunteerLobbyViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("discovered local candidate")
@@ -179,7 +179,7 @@ extension VolLobbyViewController: WebRTCClientDelegate {
     }
 }
 
-extension VolLobbyViewController {
+extension VolunteerLobbyViewController {
     
     private func layoutAnswerButton() {
         
