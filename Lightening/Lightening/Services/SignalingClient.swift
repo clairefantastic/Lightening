@@ -38,7 +38,7 @@ final class SignalingClient {
     
     func deleteSdpAndCandidateAndSender(for person: String) {
         
-        db.collection("visuallyImpaired").document(person).collection("WebRTC").document("sdp").delete() { err in
+        db.collection("users").document(person).collection("WebRTC").document("sdp").delete() { err in
             
             if let err = err {
                 
@@ -51,7 +51,7 @@ final class SignalingClient {
             }
         }
         
-        db.collection("visuallyImpaired").document(person).collection("WebRTC").document("candidate").collection("candidates").getDocuments { (querySnapshot, err)  in
+        db.collection("users").document(person).collection("WebRTC").document("candidate").collection("candidates").getDocuments { (querySnapshot, err)  in
             if let err = err {
                 print("Error removing firestore candidate: \(err)")
             } else {
@@ -64,7 +64,7 @@ final class SignalingClient {
             }
         }
         
-        db.collection("visuallyImpaired").document(person).collection("WebRTC").document("sender").delete() { err in
+        db.collection("users").document(person).collection("WebRTC").document("sender").delete() { err in
             if let err = err {
                 print("Error removing firestore sender: \(err)")
             } else {
@@ -78,8 +78,8 @@ final class SignalingClient {
             let dataMessage = try self.encoder.encode(SessionDescription(from: rtcSdp))
             let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any]
             guard let dict = dict else { return }
-            db.collection("volunteers").document(person).collection("WebRTC").document("sdp").setData(dict) { (err) in
-                self.db.collection("volunteers").document(person).collection("WebRTC").document("sender").setData(["sender": sender])
+            db.collection("users").document(person).collection("WebRTC").document("sdp").setData(dict) { (err) in
+                self.db.collection("users").document(person).collection("WebRTC").document("sender").setData(["sender": sender])
                 if let err = err {
                     print("Error send sdp: \(err)")
                 } else {
@@ -96,7 +96,7 @@ final class SignalingClient {
             let dataMessage = try self.encoder.encode(IceCandidate(from: rtcIceCandidate))
             guard let dict = try JSONSerialization.jsonObject(with: dataMessage, options: .allowFragments) as? [String: Any] else { return }
             
-            db.collection("volunteers").document(person).collection("WebRTC")
+            db.collection("users").document(person).collection("WebRTC")
                 .document("candidate")
                 .collection("candidates")
                 .addDocument(data: dict) { (err) in
@@ -113,8 +113,7 @@ final class SignalingClient {
     
     func listenVolunteers() {
         
-        db.collection("volunteers").whereField("status", isEqualTo: 0).getDocuments() {
-            (snapshot, err) in
+        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments() { (snapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -128,7 +127,7 @@ final class SignalingClient {
     }
     
     func listenSdp(to person: String) {
-        db.collection("visuallyImpaired").document(person).collection("WebRTC").document("sdp")
+        db.collection("users").document(person).collection("WebRTC").document("sdp")
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching sdp: \(error!)")
@@ -143,7 +142,7 @@ final class SignalingClient {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
                     let sessionDescription = try self.decoder.decode(SessionDescription.self, from: jsonData)
                     self.delegate?.signalClient(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription, didReceiveSender: nil)
-                    self.db.collection("visuallyImpaired").document(person).collection("WebRTC").document("sender")
+                    self.db.collection("users").document(person).collection("WebRTC").document("sender")
                         .addSnapshotListener { documentSnapshot, error in
                             guard let document = documentSnapshot else {
                                 print("Error fetching sender: \(error!)")
@@ -166,7 +165,7 @@ final class SignalingClient {
     }
     
     func listenCandidate(to person: String) {
-        db.collection("visuallyImpaired").document(person).collection("WebRTC")
+        db.collection("users").document(person).collection("WebRTC")
             .document("candidate")
             .collection("candidates")
             .addSnapshotListener { (querySnapshot, err) in
@@ -190,4 +189,3 @@ final class SignalingClient {
             }
     }
 }
-
