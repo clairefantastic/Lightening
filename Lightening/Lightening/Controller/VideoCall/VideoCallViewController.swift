@@ -77,7 +77,6 @@ class VideoCallViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    
     @IBAction func endCall(_ sender: Any) {
         self.connectedHandler?(false)
         self.signalClient.deleteSdpAndCandidateAndSender(for: "\(currentPerson)")
@@ -88,9 +87,6 @@ class VideoCallViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name (notificationKey2), object: nil)
 
         self.dismiss(animated: true)
-        
-        
-        
         
     }
     

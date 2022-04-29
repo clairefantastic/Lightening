@@ -29,7 +29,6 @@ class ImpairedLobbyViewController: BaseViewController {
     
     @IBOutlet weak var rtcStatus: UILabel!
     
-    var currentPerson = ""
     private var oppositePerson = ""
     
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient ) {
@@ -122,17 +121,6 @@ class ImpairedLobbyViewController: BaseViewController {
           self.remoteCandidates?.text = "\(self.remoteCandidateCount)"
         }
       }
-    }
-
-    @IBAction func endCall(_ sender: Any) {
-        self.signalClient.deleteSdpAndCandidateAndSender(for: UserManager.shared.currentUser?.userId ?? "")
-        self.webRTCClient.closePeerConnection()
-        
-        self.webRTCClient.createPeerConnection()
-        self.hasLocalSdp = false
-        self.localCandidateCount = 0
-        self.hasRemoteSdp = false
-        self.remoteCandidateCount = 0
     }
 
 }

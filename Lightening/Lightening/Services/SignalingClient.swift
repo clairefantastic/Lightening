@@ -121,8 +121,7 @@ final class SignalingClient {
                    let randomInt = Int.random(in: 0..<snapshot!.documents.count)
                    let volunteerName = snapshot!.documents[randomInt].documentID
                    self.getVolunteerHandler?(volunteerName)
-                   
-
+                
                }
         }
 
