@@ -11,7 +11,7 @@ import WebRTC
 import Firebase
 import FirebaseFirestore
 
-class LobbyViewController: BaseViewController {
+class ImpairedLobbyViewController: BaseViewController {
     
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
@@ -137,7 +137,7 @@ class LobbyViewController: BaseViewController {
 
 }
 
-extension LobbyViewController: SignalClientDelegate {
+extension ImpairedLobbyViewController: SignalClientDelegate {
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
         print("Received remote sdp")
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
@@ -164,7 +164,7 @@ extension LobbyViewController: SignalClientDelegate {
   }
 }
 
-extension LobbyViewController: WebRTCClientDelegate {
+extension ImpairedLobbyViewController: WebRTCClientDelegate {
   
   func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
     print("discovered local candidate")
@@ -208,7 +208,7 @@ extension LobbyViewController: WebRTCClientDelegate {
   }
 }
 
-extension LobbyViewController {
+extension ImpairedLobbyViewController {
     
     private func configureVideoCallButton() {
         
