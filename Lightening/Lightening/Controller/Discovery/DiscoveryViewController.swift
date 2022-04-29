@@ -26,11 +26,10 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         fetchData()
         configureCollectionView()
         configureLayout()
-        layoutBarItem()
         
     }
     
-    private func configureCollectionView() {
+    func configureCollectionView() {
         
         view.stickSubView(collectionView)
         
@@ -41,7 +40,7 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         collectionView.delegate = self
     }
     
-    private func fetchData() {
+    func fetchData() {
         PublishManager.shared.fetchAudios() { [weak self] result in
             switch result {
                 
@@ -137,7 +136,7 @@ extension DiscoveryViewController {
 
 extension DiscoveryViewController {
     
-    private func configureLayout() {
+    func configureLayout() {
         collectionView.register(SectionHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)
@@ -174,20 +173,5 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutBarItem() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
-    }
-    
-    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
-        
-        let searchViewController = SearchViewController()
-        
-        navigationController?.pushViewController(searchViewController, animated: true)
     }
 }
