@@ -229,8 +229,8 @@ extension ImpairedLobbyViewController {
     @objc func startVideoCall() {
         
         self.signalClient.listenVolunteers()
-        self.signalClient.getVolunteerHandler = { name in
-            self.oppositePerson = name
+        self.signalClient.getVolunteerHandler = { userId in
+            self.oppositePerson = userId
             self.webRTCClient.offer { (sdp) in
                 self.hasLocalSdp = true
                 self.signalClient.send(sdp: sdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
