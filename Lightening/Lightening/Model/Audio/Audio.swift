@@ -11,6 +11,8 @@ import FirebaseFirestoreSwift
 
 struct Audio: Codable, Hashable {
     
+    let uuid = UUID()
+    
     var audioId: String?
     
     var audioUrl: URL
@@ -32,6 +34,14 @@ struct Audio: Codable, Hashable {
     var author: User?
     
     var authorId: String?
+    
+    static func ==(lhs: Audio, rhs: Audio) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
 
 }
 
