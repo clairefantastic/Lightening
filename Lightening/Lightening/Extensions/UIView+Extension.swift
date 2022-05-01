@@ -54,13 +54,13 @@ extension UIView {
 
         objectView.translatesAutoresizingMaskIntoConstraints = false
 
-        objectView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        objectView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
 
-        objectView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        objectView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
 
-        objectView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        objectView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
 
-        objectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 
     func stickSubView(_ objectView: UIView, inset: UIEdgeInsets) {

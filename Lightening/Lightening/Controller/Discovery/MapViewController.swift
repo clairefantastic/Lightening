@@ -31,7 +31,7 @@ class MapViewController: BaseViewController {
     
     func determineCurrentLocation() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
 
         if CLLocationManager.locationServicesEnabled() {

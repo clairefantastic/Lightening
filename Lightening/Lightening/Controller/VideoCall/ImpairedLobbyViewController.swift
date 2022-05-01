@@ -11,9 +11,10 @@ import WebRTC
 import Firebase
 import FirebaseFirestore
 
-class LobbyViewController: BaseViewController {
+class ImpairedLobbyViewController: BaseViewController {
     
     private let signalClient: SignalingClient
+    
     private let webRTCClient: WebRTCClient
     
     private let videoCallButton = UIButton()
@@ -28,7 +29,6 @@ class LobbyViewController: BaseViewController {
     
     @IBOutlet weak var rtcStatus: UILabel!
     
-    var currentPerson = ""
     private var oppositePerson = ""
     
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient ) {
@@ -45,15 +45,14 @@ class LobbyViewController: BaseViewController {
         super.viewDidLoad()
 
         configureVideoCallButton()
-        self.currentPerson = "qvDyYlDltZx7XYKRWrxn"
-//        self.oppositePerson = "eric"
+
         self.signalingConnected = false
         self.hasLocalSdp = false
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-        self.signalClient.listenSdp(to: self.currentPerson)
-        self.signalClient.listenCandidate(to: self.currentPerson)
+        self.signalClient.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
+        self.signalClient.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         
@@ -63,7 +62,7 @@ class LobbyViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+        let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
         vc.connectedHandler? = {(connectedStatus) in
             
             self.signalingConnected = connectedStatus
@@ -78,8 +77,9 @@ class LobbyViewController: BaseViewController {
             self.rtcStatus?.text = "Connected"
             self.rtcStatus?.textColor = UIColor.green
               
-            var vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-              vc.currentPerson = self.currentPerson
+            let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+              vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+              vc.oppositePerson = self.oppositePerson
               
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
@@ -124,20 +124,9 @@ class LobbyViewController: BaseViewController {
       }
     }
 
-    @IBAction func endCall(_ sender: Any) {
-        self.signalClient.deleteSdpAndCandidateAndSender(for: self.currentPerson)
-        self.webRTCClient.closePeerConnection()
-        
-        self.webRTCClient.createPeerConnection()
-        self.hasLocalSdp = false
-        self.localCandidateCount = 0
-        self.hasRemoteSdp = false
-        self.remoteCandidateCount = 0
-    }
-
 }
 
-extension LobbyViewController: SignalClientDelegate {
+extension ImpairedLobbyViewController: SignalClientDelegate {
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
         print("Received remote sdp")
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
@@ -164,7 +153,7 @@ extension LobbyViewController: SignalClientDelegate {
   }
 }
 
-extension LobbyViewController: WebRTCClientDelegate {
+extension ImpairedLobbyViewController: WebRTCClientDelegate {
   
   func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
     print("discovered local candidate")
@@ -208,7 +197,7 @@ extension LobbyViewController: WebRTCClientDelegate {
   }
 }
 
-extension LobbyViewController {
+extension ImpairedLobbyViewController {
     
     private func configureVideoCallButton() {
         
@@ -240,11 +229,11 @@ extension LobbyViewController {
     @objc func startVideoCall() {
         
         self.signalClient.listenVolunteers()
-        self.signalClient.getVolunteerHandler = { name in
-            self.oppositePerson = name
+        self.signalClient.getVolunteerHandler = { userId in
+            self.oppositePerson = userId
             self.webRTCClient.offer { (sdp) in
                 self.hasLocalSdp = true
-                self.signalClient.send(sdp: sdp, from: self.currentPerson, to: self.oppositePerson)
+                self.signalClient.send(sdp: sdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
             }
 
         }

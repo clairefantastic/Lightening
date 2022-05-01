@@ -20,7 +20,13 @@ class MyAudioListViewController: AudioListViewController {
             switch result {
                     
             case.success(_):
+                
+                self.audios?.remove(at: indexPath.row)
+
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
                 print("success")
+                
             case .failure(_):
                 print("fail")
             }

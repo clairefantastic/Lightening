@@ -25,13 +25,13 @@ private enum VolunteerTab {
         
         let config = Config.default
         
-        let signalClientforVolunteer = SignalingClientforVolunteer()
+        let signalClientforVolunteer = SignalingClientForVolunteer()
         
         let webRTCClient = WebRTCClient(iceServers: config.webRTCIceServers)
 
         switch self {
 
-        case .lobby: controller = UINavigationController(rootViewController: VolLobbyViewController(
+        case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
         case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
@@ -41,7 +41,7 @@ private enum VolunteerTab {
         case .map: controller = UINavigationController(rootViewController: MapViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: ProfileViewController())
+            UINavigationController(rootViewController: MyProfileViewController())
 
         }
 
@@ -124,6 +124,11 @@ class VolunteerTabBarController: UITabBarController {
     }
     
     @objc func notifyIncomingCall() {
+        
+        let popUpViewController = PopUpViewController()
+        popUpViewController.modalPresentationStyle = .overCurrentContext
+        popUpViewController.modalTransitionStyle = .crossDissolve
+        present(popUpViewController, animated: true, completion: nil)
         self.lobbyTabBarItem.badgeValue = "1"
     }
     

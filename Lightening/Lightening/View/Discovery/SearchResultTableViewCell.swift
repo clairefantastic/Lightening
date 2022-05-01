@@ -18,7 +18,7 @@ class SearchResultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleClearBackground(self)
         layoutLabels()
     }
 

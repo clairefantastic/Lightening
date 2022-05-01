@@ -27,21 +27,20 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
-        
     }
     
-    private func configureCollectionView() {
+    func configureCollectionView() {
         
         view.stickSubView(collectionView)
         
-        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
         collectionView.delegate = self
     }
     
-    private func fetchData() {
+    func fetchData() {
         PublishManager.shared.fetchAudios() { [weak self] result in
             switch result {
                 
@@ -137,7 +136,7 @@ extension DiscoveryViewController {
 
 extension DiscoveryViewController {
     
-    private func configureLayout() {
+    func configureLayout() {
         collectionView.register(SectionHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)

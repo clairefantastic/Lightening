@@ -11,7 +11,30 @@ class UserProfileView: UIView {
     
     let profileImageView = UIImageView()
     
-    var imageUrl: String?
+    var imageUrl: String? {
+        
+        didSet {
+            
+            if imageUrl == nil {
+                
+                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                
+            } else {
+                
+                profileImageView.loadImage(imageUrl)
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+    }
     
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
@@ -94,6 +117,7 @@ class UserProfileView: UIView {
     // *******************************************************************
 
     override func draw(_ rect: CGRect) {
+
         guard let context = UIGraphicsGetCurrentContext() else { return }
         let size = self.bounds.size
 
@@ -113,10 +137,31 @@ class UserProfileView: UIView {
                                colour: UIColor.black,
                                font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
                                clockwise: false)
-
-        profileImageView.loadImage(imageUrl)
-        self.stickSubView(profileImageView, inset: UIEdgeInsets(top: 50, left: 30, bottom: 50, right: 30))
         
+    }
+    
+    func addProfileImageView() {
+        
+        addSubview(profileImageView)
+        
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .centerX, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        profileImageView.layer.masksToBounds = true
+        
+        profileImageView.layer.cornerRadius = 40
+        
+        profileImageView.layer.borderColor = UIColor.black.cgColor
+        
+        profileImageView.layer.borderWidth = 1
+    
     }
     
 }
