@@ -13,10 +13,46 @@ class MyProfileViewController: BaseViewController {
     
     private let userProfileView = UserProfileView()
     
+    private let lightImageView = UIImageView()
+    
+    private let myAudiosButton = UIButton()
+    
+    private let seeMoreButton = UIButton()
+    
+    private var myAudios: [Audio]?
+    
+    private var likedAudios: [Audio]?
+    
+    private var hideLightBeam: Bool? {
+        
+        didSet {
+            
+            if hideLightBeam == false {
+                
+                lightImageView.isHidden = false
+                
+                seeMoreButton.isHidden = false
+                
+            } else {
+                
+                lightImageView.isHidden = true
+                
+                seeMoreButton.isHidden = true
+            }
+        }
+    }
+    
+    private var myAudiosButtonIsSelected = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVinylImageView()
         addUserProfileView()
+        configureLightImageView()
+        configureButtons()
+        fetchMyAudios()
+        fetchLikedAudios()
+        ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
         tapGestureRecognizer.numberOfTapsRequired = 2
@@ -24,10 +60,43 @@ class MyProfileViewController: BaseViewController {
         self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func fetchMyAudios() {
+        
+        PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            switch result {
+                
+            case .success(let audios):
+                
+                self?.myAudios = audios.filter { $0.author?.userId == UserManager.shared.currentUser?.userId}
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
         
     }
+
+    private func fetchLikedAudios() {
+
+        PublishManager.shared.fetchLikedAudios(userId: UserManager.shared.currentUser?.userId ?? "") { [weak self] result in
+            
+            switch result {
+                
+            case .success(let likedAudios):
+                
+                self?.likedAudios = likedAudios
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+            
+        }
+    }
+    
     
     @objc func didTapProfileView() {
         
@@ -93,6 +162,102 @@ extension MyProfileViewController {
         self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
         
     }
+    
+    private func configureLightImageView() {
+        
+        self.view.addSubview(lightImageView)
+        
+        lightImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: lightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: lightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
+        
+        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300).isActive = true
+        
+        NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
+        
+        lightImageView.image = UIImage(named: "light")
+        
+        hideLightBeam = true
+    
+    }
+    
+    private func configureButtons() {
+        
+        self.view.addSubview(myAudiosButton)
+        
+        myAudiosButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        NSLayoutConstraint(item: myAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -170).isActive = true
+        
+        NSLayoutConstraint(item: myAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: myAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        myAudiosButton.setTitle("My Audios", for: .normal)
+        
+        myAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        
+        myAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .selected)
+        
+        myAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+        
+        myAudiosButton.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
+        
+        self.view.addSubview(seeMoreButton)
+        
+        seeMoreButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: seeMoreButton, attribute: .top, relatedBy: .equal, toItem: myAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: seeMoreButton, attribute: .centerX, relatedBy: .equal, toItem: myAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: seeMoreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: seeMoreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        seeMoreButton.setTitle("See More", for: .normal)
+        
+        seeMoreButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        
+        seeMoreButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
+        
+        seeMoreButton.addTarget(self, action: #selector(didTapSeeMore), for: .touchUpInside)
+        
+    }
+    
+    @objc func selectButton() {
+        
+        if myAudiosButtonIsSelected == false {
+            
+            myAudiosButton.isSelected = true
+            
+            hideLightBeam = false
+            
+            myAudiosButtonIsSelected = true
+            
+        } else {
+            
+            myAudiosButton.isSelected = false
+            
+            hideLightBeam = true
+            
+            myAudiosButtonIsSelected = false
+            
+        }
+        
+    }
+    
+    @objc func didTapSeeMore() {
+        
+        let myAudioListViewController = MyAudioListViewController()
+        myAudioListViewController.audios = myAudios
+        self.navigationController?.pushViewController(myAudioListViewController, animated: true)
+    }
+       
 }
 
 extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -119,4 +284,3 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
         dismiss(animated: true, completion: nil)
     }
 }
-
