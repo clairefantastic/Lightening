@@ -18,7 +18,7 @@ class SearchResultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ElementsStyle.styleCellBackground(self)
+        ElementsStyle.styleClearBackground(self)
         layoutLabels()
     }
 

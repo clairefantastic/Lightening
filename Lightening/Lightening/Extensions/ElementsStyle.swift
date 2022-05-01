@@ -11,11 +11,11 @@ class ElementsStyle {
     
     static func styleViewBackground(_ view: UIView) {
          
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
     }
     
-    static func styleCellBackground(_ view: UIView) {
+    static func styleClearBackground(_ view: UIView) {
         
         view.backgroundColor = UIColor.clear
     }

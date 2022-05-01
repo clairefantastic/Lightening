@@ -54,7 +54,6 @@
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
 		7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */; };
 		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
-		7E55BEB4281D873100F6A8AC /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
@@ -228,6 +227,14 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		7E409323281E64530027D8B5 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		7E44B7A62809154F00CF24AC /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +340,7 @@
 				7EA0234C2800452A00C73205 /* Products */,
 				2FAC819CF43EB4034E4E8714 /* Pods */,
 				B6494955E2310280A84E8C75 /* Frameworks */,
+				7E409323281E64530027D8B5 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -559,7 +567,6 @@
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
-				7E55BEB4281D873100F6A8AC /* 16873-flying-pigeon (2).json in Resources */,
 				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */,

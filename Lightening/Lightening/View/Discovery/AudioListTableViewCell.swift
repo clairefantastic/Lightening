@@ -18,7 +18,7 @@ class AudioListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        ElementsStyle.styleCellBackground(self)
+        ElementsStyle.styleClearBackground(self)
         layoutLabels()
     }
 

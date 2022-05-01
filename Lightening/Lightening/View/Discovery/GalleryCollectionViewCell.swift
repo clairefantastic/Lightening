@@ -17,13 +17,13 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ElementsStyle.styleCellBackground(self)
+        ElementsStyle.styleClearBackground(self)
         // Initialization code
     }
     
     var audio: Audio? {
       didSet {
-          audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
+          audioCoverImageView?.image = UIImage(named: "black_vinyl-PhotoRoom")
           audioTitleLabel?.text = audio?.title
           audioAuthorLabel?.text = audio?.author?.displayName
       }
