@@ -38,6 +38,10 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
         collectionView.delegate = self
+        
+        collectionView.isAccessibilityElement = false
+        
+        collectionView.shouldGroupAccessibilityChildren = true
     }
     
     func fetchData() {
@@ -88,7 +92,7 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
-            view?.titleLabel.text = section.topic
+            view?.title = section.topic
             view?.didTapSectionHandler = { [weak self] in
                 let audioListViewController = AudioListViewController()
                 audioListViewController.audios = section.audios
