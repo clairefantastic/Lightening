@@ -51,6 +51,7 @@
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
 		7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */; };
+		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
 		7E55BEB4281D873100F6A8AC /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -141,6 +142,7 @@
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioListViewController.swift; sourceTree = "<group>"; };
 		7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedDiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
 				7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */,
+				7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
+				7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */,
 				7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
