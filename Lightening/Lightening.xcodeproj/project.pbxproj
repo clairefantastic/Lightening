@@ -24,6 +24,7 @@
 		7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
+		7E409322281E32160027D8B5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* MyProfileViewController.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -116,6 +117,7 @@
 		7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
+		7E409321281E32160027D8B5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
 				7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
+				7E409321281E32160027D8B5 /* MyProfileViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
 				7EA73F7728170E160071D197 /* RegisterViewController.swift */,
 			);
@@ -649,6 +652,7 @@
 				7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */,
 				7E27300C281006760096DB72 /* MapViewController.swift in Sources */,
 				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
+				7E409322281E32160027D8B5 /* MyProfileViewController.swift in Sources */,
 				7E44B7D7280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.swift in Sources */,
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
