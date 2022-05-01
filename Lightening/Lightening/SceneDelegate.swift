@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleViewBackground(window ?? UIWindow())
         self.buildMainViewController() { rootViewController in
             self.window?.rootViewController = rootViewController
         }

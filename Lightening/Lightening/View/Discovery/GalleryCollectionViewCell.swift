@@ -17,7 +17,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleCellBackground(self)
         // Initialization code
     }
     
