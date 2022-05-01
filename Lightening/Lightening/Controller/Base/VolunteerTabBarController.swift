@@ -124,6 +124,11 @@ class VolunteerTabBarController: UITabBarController {
     }
     
     @objc func notifyIncomingCall() {
+        
+        let popUpViewController = PopUpViewController()
+        popUpViewController.modalPresentationStyle = .overCurrentContext
+        popUpViewController.modalTransitionStyle = .crossDissolve
+        present(popUpViewController, animated: true, completion: nil)
         self.lobbyTabBarItem.badgeValue = "1"
     }
     
