@@ -4,6 +4,8 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Require user permission when accessing location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Require user permission when accessing location</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Require user permission when accessing camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
