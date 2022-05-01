@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MyProfileViewController: BaseViewController {
     
@@ -15,34 +16,69 @@ class MyProfileViewController: BaseViewController {
     
     private let lightImageView = UIImageView()
     
+    private let rightLightImageView = UIImageView()
+    
     private let myAudiosButton = UIButton()
     
-    private let seeMoreButton = UIButton()
+    private let likedAudiosButton = UIButton()
+    
+    private let seeMyAudiosButton = UIButton()
+    
+    private let seeLikedAudiosButton = UIButton()
+    
+    private let logOutButton = UIButton()
+    
+    private let deleteAccountButton = UIButton()
     
     private var myAudios: [Audio]?
     
     private var likedAudios: [Audio]?
     
-    private var hideLightBeam: Bool? {
+    private var hideLeftLightBeam: Bool? {
         
         didSet {
             
-            if hideLightBeam == false {
+            if hideLeftLightBeam == false {
                 
                 lightImageView.isHidden = false
                 
-                seeMoreButton.isHidden = false
+                seeMyAudiosButton.isHidden = false
                 
             } else {
                 
                 lightImageView.isHidden = true
                 
-                seeMoreButton.isHidden = true
+                seeMyAudiosButton.isHidden = true
+            }
+        }
+    }
+    
+    private var hideRightLightBeam: Bool? {
+        
+        didSet {
+            
+            if hideRightLightBeam == false {
+                
+                rightLightImageView.isHidden = false
+                
+                seeLikedAudiosButton.isHidden = false
+                
+                likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+                
+            } else {
+                
+                rightLightImageView.isHidden = true
+                
+                seeLikedAudiosButton.isHidden = true
+                
+                likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#F1E6B9")
             }
         }
     }
     
     private var myAudiosButtonIsSelected = false
+    
+    private var likedAudiosButtonIsSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +88,8 @@ class MyProfileViewController: BaseViewController {
         configureButtons()
         fetchMyAudios()
         fetchLikedAudios()
+        configureLogOutButton()
+        configureDeleteAccountButton()
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
@@ -96,7 +134,6 @@ class MyProfileViewController: BaseViewController {
             
         }
     }
-    
     
     @objc func didTapProfileView() {
         
@@ -177,9 +214,27 @@ extension MyProfileViewController {
         
         NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
         
-        lightImageView.image = UIImage(named: "light")
+        lightImageView.image = UIImage(named: "leftLight")
         
-        hideLightBeam = true
+        hideLeftLightBeam = true
+        
+        self.view.addSubview(rightLightImageView)
+        
+        rightLightImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: rightLightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: rightLightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -80).isActive = true
+        
+        NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350).isActive = true
+        
+        NSLayoutConstraint(item: rightLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        
+        rightLightImageView.image = UIImage(named: "leftLight")
+        
+        hideLeftLightBeam = true
+        
+        hideRightLightBeam = true
     
     }
     
@@ -205,37 +260,74 @@ extension MyProfileViewController {
         
         myAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
         
-        myAudiosButton.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
+        myAudiosButton.addTarget(self, action: #selector(selectMyAudiosButton), for: .touchUpInside)
         
-        self.view.addSubview(seeMoreButton)
+        self.view.addSubview(seeMyAudiosButton)
         
-        seeMoreButton.translatesAutoresizingMaskIntoConstraints = false
+        seeMyAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: seeMoreButton, attribute: .top, relatedBy: .equal, toItem: myAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: seeMyAudiosButton, attribute: .top, relatedBy: .equal, toItem: myAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: seeMoreButton, attribute: .centerX, relatedBy: .equal, toItem: myAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: seeMyAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: myAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: seeMoreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: seeMyAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
         
-        NSLayoutConstraint(item: seeMoreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: seeMyAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
-        seeMoreButton.setTitle("See More", for: .normal)
+        seeMyAudiosButton.setTitle("See More", for: .normal)
         
-        seeMoreButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        seeMyAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
         
-        seeMoreButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
+        seeMyAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
         
-        seeMoreButton.addTarget(self, action: #selector(didTapSeeMore), for: .touchUpInside)
+        seeMyAudiosButton.addTarget(self, action: #selector(didTapSeeMoreMyAudios), for: .touchUpInside)
         
+        self.view.addSubview(likedAudiosButton)
+        
+        likedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -90).isActive = true
+        
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        likedAudiosButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        
+        likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#F1E6B9")
+        
+        likedAudiosButton.addTarget(self, action: #selector(selectLikedAudiosButton), for: .touchUpInside)
+        
+        self.view.addSubview(seeLikedAudiosButton)
+        
+        seeLikedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .top, relatedBy: .equal, toItem: likedAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: likedAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
+        
+        NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        seeLikedAudiosButton.setTitle("See More", for: .normal)
+        
+        seeLikedAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        
+        seeLikedAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
+        
+        seeLikedAudiosButton.addTarget(self, action: #selector(didTapSeeMoreLikedAudios), for: .touchUpInside)
     }
     
-    @objc func selectButton() {
+    @objc func selectMyAudiosButton() {
         
         if myAudiosButtonIsSelected == false {
             
             myAudiosButton.isSelected = true
             
-            hideLightBeam = false
+            hideLeftLightBeam = false
             
             myAudiosButtonIsSelected = true
             
@@ -243,7 +335,7 @@ extension MyProfileViewController {
             
             myAudiosButton.isSelected = false
             
-            hideLightBeam = true
+            hideLeftLightBeam = true
             
             myAudiosButtonIsSelected = false
             
@@ -251,13 +343,123 @@ extension MyProfileViewController {
         
     }
     
-    @objc func didTapSeeMore() {
+    @objc func didTapSeeMoreMyAudios() {
         
         let myAudioListViewController = MyAudioListViewController()
         myAudioListViewController.audios = myAudios
         self.navigationController?.pushViewController(myAudioListViewController, animated: true)
     }
        
+    @objc func selectLikedAudiosButton() {
+        
+        if likedAudiosButtonIsSelected == false {
+            
+            likedAudiosButton.isSelected = true
+            
+            hideRightLightBeam = false
+            
+            likedAudiosButtonIsSelected = true
+            
+        } else {
+            
+            myAudiosButton.isSelected = false
+            
+            hideRightLightBeam = true
+            
+            likedAudiosButtonIsSelected = false
+            
+        }
+        
+    }
+    
+    @objc func didTapSeeMoreLikedAudios() {
+        
+        let myAudioListViewController = MyAudioListViewController()
+        myAudioListViewController.audios = likedAudios
+        self.navigationController?.pushViewController(myAudioListViewController, animated: true)
+    }
+    
+    private func configureLogOutButton() {
+        
+        view.addSubview(logOutButton)
+        
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: logOutButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        logOutButton.setTitle("Log out", for: .normal)
+        logOutButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        logOutButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+//        logOutButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        logOutButton.layer.borderWidth = 1
+        logOutButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        logOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        
+    }
+    
+    @objc func signOut() {
+        
+        UserManager.shared.signOut()
+        print(Auth.auth().currentUser?.email)
+        view.window?.rootViewController = SignInViewController()
+        view.window?.makeKeyAndVisible()
+    }
+    
+    private func configureDeleteAccountButton() {
+        
+        view.addSubview(deleteAccountButton)
+        
+        deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32).isActive = true
+        
+        NSLayoutConstraint(item: deleteAccountButton, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        deleteAccountButton.setTitle("Delete Account", for: .normal)
+        deleteAccountButton.titleLabel?.numberOfLines = 0
+        deleteAccountButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        deleteAccountButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+
+        deleteAccountButton.layer.borderWidth = 1
+        deleteAccountButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+        
+    }
+    
+    @objc func deleteAccount() {
+        
+        let user = Auth.auth().currentUser
+
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+          } else {
+              
+              UserManager.shared.deleteAccount() { result in
+                  switch result {
+                  case .success(_):
+                      print("Successfully delete all information of this user.")
+                      self.view.window?.rootViewController = SignInViewController()
+                      self.view.window?.makeKeyAndVisible()
+                  case .failure(_):
+                      print("Fail to delete all information of this user.")
+                  }
+              }
+            // Account deleted.
+          }
+        }
+        
+    }
 }
 
 extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
