@@ -15,9 +15,12 @@ class SearchResultTableViewCell: UITableViewCell {
     
     @IBOutlet weak var searchResultAuthorLabel: UILabel!
     
+    @IBOutlet weak var cloudImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+//        self.layer.borderColor = UIColor.black.cgColor
+//        self.layer.borderWidth = 1
         ElementsStyle.styleClearBackground(self)
         layoutLabels()
     }
@@ -41,6 +44,13 @@ class SearchResultTableViewCell: UITableViewCell {
         searchResultAuthorLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
         
+        searchResultImageView.layer.masksToBounds = true
+
+        searchResultImageView.layer.cornerRadius = searchResultImageView.frame.height / 2
+
+//        searchResultImageView.layer.borderColor = UIColor.black.cgColor
+//
+//        searchResultImageView.layer.borderWidth = 1
     }
     
     var audio: Audio? {
@@ -48,6 +58,7 @@ class SearchResultTableViewCell: UITableViewCell {
           searchResultImageView?.image = UIImage(named: audio?.cover ?? "")
           searchResultTitleLabel?.text = audio?.title ?? ""
           searchResultAuthorLabel?.text = audio?.author?.displayName
+          cloudImageView?.image = UIImage(named: "cloud")
       }
     }
     
