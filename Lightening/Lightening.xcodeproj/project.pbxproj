@@ -26,6 +26,7 @@
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* MyProfileViewController.swift */; };
 		7E4297C7281ED53B00649458 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C6281ED53B00649458 /* NavigationBarView.swift */; };
+		7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -119,6 +120,7 @@
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		7E4297C6281ED53B00649458 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedProfileViewController.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
+				7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */,
 				7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 				7E409321281E32160027D8B5 /* MyProfileViewController.swift */,
@@ -683,6 +686,7 @@
 				7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */,
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
+				7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */,
 				7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */,

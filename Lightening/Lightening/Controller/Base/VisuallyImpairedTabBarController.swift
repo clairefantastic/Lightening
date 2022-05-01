@@ -33,7 +33,7 @@ private enum VisuallyImpairedTab {
         case .discovery: controller = UINavigationController(rootViewController: ImpairedDiscoveryViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: ProfileViewController())
+            UINavigationController(rootViewController: ImpairedProfileViewController())
 
         }
 
