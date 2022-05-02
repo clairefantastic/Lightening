@@ -13,6 +13,8 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let statusSwitch = UISwitch()
     
+    private let doorView = DoorView()
+    
     private let answerVideoCallButton = UIButton()
     
     private let signalClientforVolunteer: SignalingClientForVolunteer
@@ -34,6 +36,8 @@ class VolunteerLobbyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         self.navigationItem.title = "Video Call"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
@@ -53,6 +57,11 @@ class VolunteerLobbyViewController: BaseViewController {
         self.webRTCClient.unmuteAudio()
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+        
+        let popUpViewController = PopUpViewController()
+        popUpViewController.modalPresentationStyle = .overCurrentContext
+        popUpViewController.modalTransitionStyle = .crossDissolve
+        self.present(popUpViewController, animated: true, completion: nil)
 
     }
     
@@ -175,29 +184,50 @@ extension VolunteerLobbyViewController {
     
     private func layoutAnswerButton() {
         
+
+        
+        self.view.addSubview(doorView)
+        
+        doorView.configureRectView()
+        
+        doorView.configureHalfCircleView()
+        
+        doorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: doorView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: doorView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        
+        NSLayoutConstraint(item: doorView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
+        
+        NSLayoutConstraint(item: doorView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 60).isActive = true
+        
         self.view.addSubview(answerVideoCallButton)
         
         answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -80).isActive = true
-        
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        answerVideoCallButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
+
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .centerY, relatedBy: .equal, toItem: doorView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
+
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .trailing, multiplier: 1, constant: -8).isActive = true
+
         answerVideoCallButton.setTitle("Answer a Call", for: .normal)
         
-        answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
+        answerVideoCallButton.titleLabel?.numberOfLines = 0
         
+        answerVideoCallButton.titleLabel?.textAlignment = .center
+
+        answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 14)
+
         answerVideoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
+
         answerVideoCallButton.isEnabled = true
-        
+
         answerVideoCallButton.addTarget(self, action: #selector(answerVideoCall), for: .touchUpInside)
+        
     }
     
     @objc func answerVideoCall() {
