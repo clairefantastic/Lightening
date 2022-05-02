@@ -18,6 +18,8 @@ class BaseViewController: UIViewController {
         
         navigationController?.navigationBar.barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
+        navigationController?.navigationBar.tintColor = UIColor.black
+        
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
