@@ -41,7 +41,7 @@ class AirBallonView: UIView {
         
         NSLayoutConstraint(item: rectView2, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 12).isActive = true
         
-        NSLayoutConstraint(item: rectView2, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: rectView2, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
         
         NSLayoutConstraint(item: rectView2, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
@@ -51,11 +51,11 @@ class AirBallonView: UIView {
         
         rectView1.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: rectView1, attribute: .trailing, relatedBy: .equal, toItem: rectView2, attribute: .leading, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: rectView1, attribute: .trailing, relatedBy: .equal, toItem: rectView2, attribute: .leading, multiplier: 1, constant: -24).isActive = true
         
         NSLayoutConstraint(item: rectView1, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 12).isActive = true
         
-        NSLayoutConstraint(item: rectView1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: rectView1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
         
         NSLayoutConstraint(item: rectView1, attribute: .bottom, relatedBy: .equal, toItem: rectView2, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
@@ -65,11 +65,11 @@ class AirBallonView: UIView {
         
         rectView3.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: rectView3, attribute: .leading, relatedBy: .equal, toItem: rectView2, attribute: .trailing, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: rectView3, attribute: .leading, relatedBy: .equal, toItem: rectView2, attribute: .trailing, multiplier: 1, constant: 24).isActive = true
         
         NSLayoutConstraint(item: rectView3, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 12).isActive = true
         
-        NSLayoutConstraint(item: rectView3, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        NSLayoutConstraint(item: rectView3, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
         
         NSLayoutConstraint(item: rectView3, attribute: .bottom, relatedBy: .equal, toItem: rectView2, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
@@ -83,7 +83,7 @@ class AirBallonView: UIView {
         
         NSLayoutConstraint(item: rectView, attribute: .trailing, relatedBy: .equal, toItem: rectView3, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: rectView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: rectView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
         
         NSLayoutConstraint(item: rectView, attribute: .top, relatedBy: .equal, toItem: rectView1, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
@@ -95,9 +95,9 @@ class AirBallonView: UIView {
         
         NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: rectView2, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
         
-        NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
         
         NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: rectView1, attribute: .top, multiplier: 1, constant: 36).isActive = true
         

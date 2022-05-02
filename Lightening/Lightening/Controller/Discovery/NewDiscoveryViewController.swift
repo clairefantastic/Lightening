@@ -85,8 +85,8 @@ extension NewDiscoveryViewController: UICollectionViewDelegateFlowLayout {
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.minimumLineSpacing = 0
 
-        let width = (width  - 15.0 - 32.0)/2
-        return CGSize(width: width, height: (width/164)*328)
+        let width = (width - 60.0)/2
+        return CGSize(width: width, height: width)
     }
 }
 
