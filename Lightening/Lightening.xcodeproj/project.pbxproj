@@ -37,7 +37,7 @@
 		7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B42809751300CF24AC /* UITableView+Extension.swift */; };
 		7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B82809AEB800CF24AC /* Audio.swift */; };
 		7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */; };
-		7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */; };
+		7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */; };
 		7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */; };
 		7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */; };
 		7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */; };
@@ -56,7 +56,7 @@
 		7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* VolunteerTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
-		7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */; };
+		7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */; };
 		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -133,7 +133,7 @@
 		7E44B7B42809751300CF24AC /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7B82809AEB800CF24AC /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentsion.swift"; sourceTree = "<group>"; };
-		7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		7E498D542808175400389D1C /* VolunteerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioListViewController.swift; sourceTree = "<group>"; };
-		7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedDiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,14 +277,14 @@
 		7E44B7BE280AEA0300CF24AC /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
-				7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */,
+				7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */,
 				7E2730122810E6260096DB72 /* SearchViewController.swift */,
 				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
 				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
 				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
-				7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */,
+				7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */,
 				7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */,
 			);
 			path = Discovery;
@@ -722,9 +722,9 @@
 				7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */,
 				7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */,
 				7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */,
-				7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */,
+				7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */,
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
-				7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */,
+				7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */,
 				7E4297C7281ED53B00649458 /* NavigationBarView.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,

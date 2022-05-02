@@ -32,6 +32,7 @@ class AudioPlayerViewController: UIViewController {
             playerView.audio = audio
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
