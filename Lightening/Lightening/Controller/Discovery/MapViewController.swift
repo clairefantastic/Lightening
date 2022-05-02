@@ -31,6 +31,11 @@ class MapViewController: BaseViewController {
         self.navigationItem.title = "Map"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        
+        let center = CLLocationCoordinate2D(latitude: 24.5, longitude: 121.0)
+        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
+        mapView.setRegion(mRegion, animated: true)
     }
     
     func determineCurrentLocation() {
@@ -47,11 +52,6 @@ class MapViewController: BaseViewController {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let mUserLocation: CLLocation = locations[0] as CLLocation
-
-        let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
-        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
-        mapView.setRegion(mRegion, animated: true)
         
         PublishManager.shared.fetchAudios() { [weak self] result in
             
