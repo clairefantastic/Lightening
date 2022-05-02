@@ -27,7 +27,17 @@ class PopUpViewController: UIViewController {
         
         animationView.animationSpeed = 0.5
           
-        view.stickSubView(animationView)
+        view.addSubview(animationView)
+        
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: animationView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: animationView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        
+        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        
+        NSLayoutConstraint(item: animationView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 150).isActive = true
         
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
             self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
