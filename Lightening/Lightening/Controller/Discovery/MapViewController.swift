@@ -63,7 +63,7 @@ extension MapViewController: CLLocationManagerDelegate {
                 
                 audios.forEach { audio in
                     
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: "Claire",
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
                         coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
                     
                 }
@@ -110,7 +110,10 @@ extension MapViewController: MKMapViewDelegate {
             reuseIdentifier: identifier)
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
-          view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
+          let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            button.setImage(UIImage(named: "black_vinyl-PhotoRoom"), for: .normal)
+          view.rightCalloutAccessoryView = button
         
         }
         return view
