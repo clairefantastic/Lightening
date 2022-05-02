@@ -25,6 +25,8 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Audio Files"
+        
         fetchData()
         configureCollectionView()
         configureLayout()

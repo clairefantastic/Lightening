@@ -19,6 +19,11 @@ class ImpairedProfileViewController: BaseViewController {
     let deleteAccountButton = UIButton()
     
     override func viewDidLoad() {
+        
+        self.navigationItem.title = "Profile"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        
         configureVinylImageView()
         addUserProfileView()
         configureLogOutButton()
