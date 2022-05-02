@@ -75,10 +75,12 @@ class AudioPlayerViewController: UIViewController {
                 guard let audio = self?.audio else {
                     return
                 }
-
-                if likedAudios.contains(audio) {
+                
+                for likedAudio in 0...likedAudios.count - 1 {
                     
-                    self?.isLiked = true
+                    if audio.audioUrl == likedAudios[likedAudio].audioUrl {
+                        self?.isLiked = true
+                    }
                 }
                 
             case .failure(let error):
