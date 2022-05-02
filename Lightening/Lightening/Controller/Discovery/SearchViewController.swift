@@ -20,6 +20,8 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        
         searchController.searchResultsUpdater = self
         
         navigationItem.searchController = searchController
@@ -60,7 +62,7 @@ extension SearchViewController {
         
         view.stickSubView(tableView)
         
-        tableView.backgroundColor =  UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleClearBackground(tableView)
     }
     
     private func setUpTableView() {
