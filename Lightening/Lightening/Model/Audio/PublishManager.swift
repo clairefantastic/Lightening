@@ -164,31 +164,23 @@ class PublishManager {
     
     func fetchAudioComments(documentId: String, completion: @escaping (Result<[Comment], Error>) -> Void) {
         
-        db.collection("audioFiles").document(documentId).collection("comments").getDocuments() { (querySnapshot, error) in
+        db.collection("audioFiles").document(documentId).collection("comments").order(by: "createdTime", descending: true).addSnapshotListener { snapshot, error in
             
-            if let error = error {
+            guard let snapshot = snapshot else { return }
+            
+            var comments = [Comment]()
+            
+            snapshot.documents.forEach { document in
                 
-                completion(.failure(error))
-            } else {
-                
-                var comments = [Comment]()
-                
-                for document in querySnapshot!.documents {
-
-                    do {
-                        if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
-                            comments.append(comment)
-                        }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
+                do {
+                    if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
+                        comments.append(comment)
                     }
+                } catch {
+                    completion(.failure(error))
                 }
-                
-                completion(.success(comments))
             }
+            completion(.success(comments))
         }
     }
 
@@ -198,6 +190,7 @@ class PublishManager {
         comment.authorId = author.userId
         comment.authorName = author.displayName
         comment.authorImage = author.image
+        comment.createdTime = Date().timeIntervalSince1970
         
         let document = db.collection("audioFiles").document(documentId).collection("comments").document()
         
