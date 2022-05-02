@@ -11,6 +11,7 @@
 		7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */; };
 		7E225863281FCCA900FE8694 /* DoorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225862281FCCA900FE8694 /* DoorView.swift */; };
 		7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225864281FF5F000FE8694 /* AirBallonView.swift */; };
+		7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */; };
 		7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF5280EB55F0096DB72 /* RecordViewController.swift */; };
 		7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF7280EED7B0096DB72 /* AudioManager.swift */; };
 		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
@@ -108,6 +109,7 @@
 		7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "16873-flying-pigeon (2).json"; path = "../../../../Downloads/16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7E225862281FCCA900FE8694 /* DoorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorView.swift; sourceTree = "<group>"; };
 		7E225864281FF5F000FE8694 /* AirBallonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBallonView.swift; sourceTree = "<group>"; };
+		7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "87530-frequencies-fork-lottie-animation.json"; sourceTree = "<group>"; };
 		7E272FF5280EB55F0096DB72 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		7E272FF7280EED7B0096DB72 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */,
 				7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */,
 				7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */,
+				7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */,
 				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
 				7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
@@ -590,6 +593,7 @@
 				7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */,
+				7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */,
 				7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
