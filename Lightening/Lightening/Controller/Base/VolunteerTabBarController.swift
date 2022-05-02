@@ -35,7 +35,7 @@ private enum VolunteerTab {
         case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
-        case .discovery: controller = UINavigationController(rootViewController: NewDiscoveryViewController())
+        case .discovery: controller = UINavigationController(rootViewController: VolunteerDiscoveryViewController())
         
         case .upload: controller = UINavigationController(rootViewController: UploadViewController())
             

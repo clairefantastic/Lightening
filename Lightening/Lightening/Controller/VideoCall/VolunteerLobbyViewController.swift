@@ -58,10 +58,10 @@ class VolunteerLobbyViewController: BaseViewController {
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
         
-        let popUpViewController = PopUpViewController()
-        popUpViewController.modalPresentationStyle = .overCurrentContext
-        popUpViewController.modalTransitionStyle = .crossDissolve
-        self.present(popUpViewController, animated: true, completion: nil)
+//        let popUpViewController = PopUpViewController()
+//        popUpViewController.modalPresentationStyle = .overCurrentContext
+//        popUpViewController.modalTransitionStyle = .crossDissolve
+//        self.present(popUpViewController, animated: true, completion: nil)
 
     }
     

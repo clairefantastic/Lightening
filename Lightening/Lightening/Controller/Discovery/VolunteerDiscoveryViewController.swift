@@ -47,6 +47,7 @@ extension VolunteerDiscoveryViewController {
     private func layoutBarItem() {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
     @objc func pushSearchPage(_ sender: UIBarButtonItem) {
