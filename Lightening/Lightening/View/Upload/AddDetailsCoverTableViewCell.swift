@@ -27,9 +27,9 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
-        selectCoverCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        selectCoverCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
     
         selectCoverCollectionView.registerCellWithNib(identifier: String(describing: SelectCoverCollectionViewCell.self), bundle: nil)
     }
@@ -52,8 +52,19 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? SelectCoverCollectionViewCell {
+            cell.coverImageView.layer.borderWidth = 2
+            cell.coverImageView.layer.borderColor = UIColor.black.cgColor
+        }
     
         delegate?.didSelectCover(indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? SelectCoverCollectionViewCell {
+            cell.coverImageView.layer.borderWidth = 0
+        }
     }
 }
 
@@ -62,7 +73,7 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let layout = selectCoverCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.scrollDirection = .horizontal
-        return CGSize(width: 150, height: 300)
+        return CGSize(width: 150, height: 150)
     }
     
 }

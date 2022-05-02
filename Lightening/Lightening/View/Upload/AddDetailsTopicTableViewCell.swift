@@ -20,12 +20,12 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         // Initialization code
         selectTopicCollectionView.delegate = self
         selectTopicCollectionView.dataSource = self
         
-        selectTopicCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        selectTopicCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
         selectTopicCollectionView.registerCellWithNib(identifier: "SelectTopicCollectionViewCell", bundle: nil)
     }
@@ -38,6 +38,7 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
     @objc func selectTopic(_ sender: UIButton) {
         
+        sender.layer.borderWidth = 2
         sender.layer.borderColor = UIColor.black.cgColor
         
         delegate?.didSelectTopic(sender)
@@ -66,8 +67,17 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if let cell = collectionView.cellForItem(at: indexPath) as? SelectTopicCollectionViewCell {
+            cell.topicButton.layer.borderWidth = 2
+            cell.topicButton.layer.borderColor = UIColor.black.cgColor
+        }
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? SelectTopicCollectionViewCell {
+            cell.topicButton.layer.borderWidth = 0
+        }
+    }
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
