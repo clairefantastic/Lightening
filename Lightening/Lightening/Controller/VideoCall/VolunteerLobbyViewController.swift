@@ -11,15 +11,10 @@ import Lottie
 
 class VolunteerLobbyViewController: BaseViewController {
     
-    @IBOutlet private weak var answerButton: UIButton?
+    private let statusSwitch = UISwitch()
     
     private let answerVideoCallButton = UIButton()
     
-    @IBOutlet weak var availableStatusSegmentedControl: UISegmentedControl! {
-        didSet {
-            // Must Be here
-        }
-    }
     private let signalClientforVolunteer: SignalingClientForVolunteer
     private let webRTCClient: WebRTCClient
     private var oppositePerson = ""
@@ -29,7 +24,7 @@ class VolunteerLobbyViewController: BaseViewController {
     init(signalClientforVolunteer: SignalingClientForVolunteer, webRTCClient: WebRTCClient) {
         self.signalClientforVolunteer = signalClientforVolunteer
         self.webRTCClient = webRTCClient
-        super.init(nibName: String(describing: VolunteerLobbyViewController.self), bundle: Bundle.main)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,6 +39,7 @@ class VolunteerLobbyViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
         layoutAnswerButton()
+        configureSwitch()
         
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -56,11 +52,8 @@ class VolunteerLobbyViewController: BaseViewController {
         self.signalClientforVolunteer.delegate = self
         self.webRTCClient.unmuteAudio()
         
-        availableStatusSegmentedControl.selectedSegmentIndex = 0
-        
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
 
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -97,14 +90,6 @@ class VolunteerLobbyViewController: BaseViewController {
         }
     }
     
-    @IBAction func changeVolunteerStatus(_ sender: Any) {
-        if availableStatusSegmentedControl.selectedSegmentIndex == 0 {
-            // FireBase Status Update
-            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
-        } else {
-            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
-        }
-    }
     @IBAction func answerDidTap(_ sender: Any) {
         self.webRTCClient.answer { (localSdp) in
             self.hasLocalSdp = true
@@ -230,5 +215,38 @@ extension VolunteerLobbyViewController {
         
         videoCallViewController.modalPresentationStyle = .fullScreen
         self.present(videoCallViewController, animated: true, completion: nil)
+    }
+    
+    private func configureSwitch() {
+        
+        self.view.addSubview(statusSwitch)
+        
+        statusSwitch.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: statusSwitch, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: statusSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: statusSwitch, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
+        
+        statusSwitch.onImage = UIImage(named: "black_vinyl-PhotoRoom")
+        
+        statusSwitch.offImage = UIImage(named: "black_vinyl-PhotoRoom")
+        
+        statusSwitch.onTintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        statusSwitch.isOn = true
+        
+        statusSwitch.addTarget(self, action: #selector(changeStatus), for: .valueChanged)
+    }
+    
+    @objc func changeStatus() {
+        if statusSwitch.isOn == true {
+            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+        } else {
+            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
+        }
     }
 }
