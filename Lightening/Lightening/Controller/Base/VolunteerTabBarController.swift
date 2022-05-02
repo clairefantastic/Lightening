@@ -123,7 +123,7 @@ class VolunteerTabBarController: UITabBarController {
 
         lobbyTabBarItem = viewControllers?[0].tabBarItem
 
-        lobbyTabBarItem.badgeColor = .red
+        lobbyTabBarItem.badgeColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
         NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
         
