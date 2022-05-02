@@ -10,6 +10,10 @@ import AVFoundation
 
 class AudioPlayerView: UIView {
     
+    var startRotateHandler: (() -> Void)?
+    
+    var stopRotateHandler: (() -> Void)?
+    
     private let playPauseButton = UIButton()
     
     let likeButton = UIButton()
@@ -76,6 +80,7 @@ class AudioPlayerView: UIView {
     }
 
     @objc func playerDidFinishPlaying(note: NSNotification) {
+        stopRotateHandler?()
         print("Video Finished")
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         
@@ -195,6 +200,7 @@ extension AudioPlayerView {
         if isPlaying {
             
             player.pause()
+            stopRotateHandler?()
             sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
             
             isPlaying = false
@@ -202,6 +208,7 @@ extension AudioPlayerView {
         } else {
             
             player.play()
+            startRotateHandler?()
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             
             isPlaying = true

@@ -51,6 +51,8 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
+        collectionView.registerCellWithNib(identifier: String(describing: VinylCollectionViewCell.self), bundle: nil)
+        
         collectionView.delegate = self
         
         collectionView.isAccessibilityElement = false
@@ -89,11 +91,36 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
             cellProvider: { (collectionView, indexPath, audio) ->
                 UICollectionViewCell? in
                 // 2
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: String(describing: GalleryCollectionViewCell.self),
-                    for: indexPath) as? GalleryCollectionViewCell
-                cell?.audio = audio
-                return cell
+                if indexPath.section % 2 == 0 {
+                    if indexPath.row % 2 == 0 {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    } else {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    }
+                } else {
+                    if indexPath.row % 2 == 0 {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    } else {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    }
+                }
+            
             })
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else {
@@ -131,6 +158,17 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     }
 }
 
+extension UIView{
+    func rotate() {
+        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = NSNumber(value: Double.pi * 2)
+        rotation.duration = 1
+        rotation.isCumulative = true
+        rotation.repeatCount = Float.greatestFiniteMagnitude
+        self.layer.add(rotation, forKey: "rotationAnimation")
+    }
+}
+
 extension ImpairedDiscoveryViewController {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -138,18 +176,6 @@ extension ImpairedDiscoveryViewController {
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
     
         setPlayer(url: audio.audioUrl)
-        
-//        let audioPlayerViewController = AudioPlayerViewController()
-//        addChild(audioPlayerViewController)
-//        audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
-//        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
-//        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
-//        view.addSubview(audioPlayerViewController.view)
-//        UIView.animate(withDuration: 0.25,
-//                       delay: 0.0001,
-//                       options: .curveEaseInOut,
-//                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
-//                       completion: {_ in })
         
     }
 }

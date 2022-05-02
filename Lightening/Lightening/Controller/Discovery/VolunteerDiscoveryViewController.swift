@@ -38,6 +38,20 @@ extension VolunteerDiscoveryViewController {
                        options: .curveEaseInOut,
                        animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
                        completion: {_ in })
+        audioPlayerViewController.playerView.startRotateHandler = { [weak self] in
+            if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
+                cell.vinylImageView.rotate()
+                cell.audioCoverImageView.rotate()
+                
+                audioPlayerViewController.playerView.stopRotateHandler = { [weak self] in
+                    if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
+                        cell.vinylImageView.layer.removeAnimation(forKey: "rotationAnimation")
+                        cell.audioCoverImageView.layer.removeAnimation(forKey: "rotationAnimation")
+                    
+                    }
+                }
+            }
+        }
         
     }
 }

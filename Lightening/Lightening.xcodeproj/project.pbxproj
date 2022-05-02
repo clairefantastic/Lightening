@@ -12,6 +12,8 @@
 		7E225863281FCCA900FE8694 /* DoorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225862281FCCA900FE8694 /* DoorView.swift */; };
 		7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225864281FF5F000FE8694 /* AirBallonView.swift */; };
 		7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */; };
+		7E22586B282056B100FE8694 /* VinylCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */; };
+		7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */; };
 		7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF5280EB55F0096DB72 /* RecordViewController.swift */; };
 		7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF7280EED7B0096DB72 /* AudioManager.swift */; };
 		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
@@ -110,6 +112,8 @@
 		7E225862281FCCA900FE8694 /* DoorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorView.swift; sourceTree = "<group>"; };
 		7E225864281FF5F000FE8694 /* AirBallonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBallonView.swift; sourceTree = "<group>"; };
 		7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "87530-frequencies-fork-lottie-animation.json"; sourceTree = "<group>"; };
+		7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinylCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VinylCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E272FF5280EB55F0096DB72 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		7E272FF7280EED7B0096DB72 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */,
 				7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */,
 				7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */,
+				7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */,
+				7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */,
 				7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */,
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
+				7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
 				7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */,
@@ -737,6 +744,7 @@
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
+				7E22586B282056B100FE8694 /* VinylCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
