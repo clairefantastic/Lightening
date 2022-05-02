@@ -38,6 +38,11 @@ class VolunteerLobbyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "Video Call"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        
         layoutAnswerButton()
         
         self.signalingConnected = false

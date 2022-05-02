@@ -14,6 +14,10 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         configureCollectionView()
         configureLayout()
         layoutBarItem()
+        
+        self.navigationItem.title = "Discovery"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
     }
 }
 

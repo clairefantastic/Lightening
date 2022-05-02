@@ -27,6 +27,10 @@ class MapViewController: BaseViewController {
         mapView.delegate = self
         
         determineCurrentLocation()
+        
+        self.navigationItem.title = "Map"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
     }
     
     func determineCurrentLocation() {
