@@ -67,7 +67,7 @@ class VolunteerLobbyViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        answerVideoCallButton.layer.cornerRadius = answerVideoCallButton.frame.height / 2
+        answerVideoCallButton.layer.cornerRadius = 30
     }
     
     private var signalingConnected: Bool = false {
@@ -184,8 +184,6 @@ extension VolunteerLobbyViewController {
     
     private func layoutAnswerButton() {
         
-
-        
         self.view.addSubview(doorView)
         
         doorView.configureRectView()
@@ -210,9 +208,13 @@ extension VolunteerLobbyViewController {
 
         NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
 
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
+        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
 
         NSLayoutConstraint(item: answerVideoCallButton, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .trailing, multiplier: 1, constant: -8).isActive = true
+        
+        answerVideoCallButton.layer.borderWidth = 1
+        
+        answerVideoCallButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
 
         answerVideoCallButton.setTitle("Answer a Call", for: .normal)
         
