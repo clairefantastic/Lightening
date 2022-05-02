@@ -50,21 +50,21 @@ private enum VisuallyImpairedTab {
 
         case .lobby:
             return UITabBarItem(
-                title: nil,
+                title: "Video Call",
                 image: UIImage(systemName: "video"),
                 selectedImage: UIImage(systemName: "video")
             )
             
         case .discovery:
             return UITabBarItem(
-                title: nil,
+                title: "Audio Files",
                 image: UIImage(systemName: "rectangle.grid.2x2"),
                 selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
             )
         
         case .profile:
             return UITabBarItem(
-                title: nil,
+                title: "Profile",
                 image: UIImage(systemName: "person.circle"),
                 selectedImage: UIImage(systemName: "person.circle.fill")
             )
@@ -82,7 +82,9 @@ class VisuallyImpairedTabBarController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = tabs.map({ $0.controller() })
-
+        self.tabBar.tintColor = UIColor.black // tab bar icon tint color
+        self.tabBar.isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
     }
 
 }
