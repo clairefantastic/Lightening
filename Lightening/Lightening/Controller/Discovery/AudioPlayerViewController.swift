@@ -76,10 +76,16 @@ class AudioPlayerViewController: UIViewController {
                     return
                 }
                 
-                for likedAudio in 0...likedAudios.count - 1 {
+                if likedAudios.count == 0 {
+                    self?.isLiked = false
                     
-                    if audio.audioUrl == likedAudios[likedAudio].audioUrl {
-                        self?.isLiked = true
+                } else {
+                    
+                    for likedAudio in 0...likedAudios.count - 1 {
+                        
+                        if audio.audioUrl == likedAudios[likedAudio].audioUrl {
+                            self?.isLiked = true
+                        }
                     }
                 }
                 
