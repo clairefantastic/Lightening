@@ -288,7 +288,6 @@
 				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
 				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
-				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
 				7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */,
 				7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */,
@@ -344,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				7E498D582808188300389D1C /* UploadViewController.swift */,
+				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */,
 			);
 			path = Upload;
