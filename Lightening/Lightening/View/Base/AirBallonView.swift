@@ -19,6 +19,8 @@ class AirBallonView: UIView {
     
     private let imageView = UIImageView()
     
+    private let profileView = UIImageView()
+    
     private let halfCircleView = UIView()
     
     override init(frame: CGRect) {
@@ -100,10 +102,31 @@ class AirBallonView: UIView {
         NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: rectView1, attribute: .top, multiplier: 1, constant: 36).isActive = true
         
         imageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        
+        self.addSubview(profileView)
+        
+        profileView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: profileView, attribute: .centerX, relatedBy: .equal, toItem: imageView, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: profileView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: profileView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: profileView, attribute: .centerY, relatedBy: .equal, toItem: imageView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        profileView.loadImage(UserManager.shared.currentUser?.image?.absoluteString)
+        
+        profileView.contentMode = .scaleAspectFill
+        
+        profileView.clipsToBounds = true
+        
+        profileView.layer.masksToBounds = true
+        
+        profileView.layer.cornerRadius = 40
     }
     
 }
-
 
 private extension UIView {
     func rotate(by angle: CGFloat, around point: CGPoint = CGPoint(x: 0.5, y: 0.5)) {
