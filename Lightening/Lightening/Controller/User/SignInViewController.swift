@@ -144,7 +144,7 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: appleSignInbutton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -200).isActive = true
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .top, relatedBy: .equal, toItem: logInButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         appleSignInbutton.cornerRadius = 30.0
         
@@ -158,7 +158,7 @@ extension SignInViewController {
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 100).isActive = true
         
         NSLayoutConstraint(item: emailTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
