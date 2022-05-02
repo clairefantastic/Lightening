@@ -54,11 +54,7 @@ class VolunteerLobbyViewController: BaseViewController {
         availableStatusSegmentedControl.selectedSegmentIndex = 0
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
-        
-        let popUpViewController = PopUpViewController()
-        popUpViewController.modalPresentationStyle = .overCurrentContext
-        popUpViewController.modalTransitionStyle = .crossDissolve
-        present(popUpViewController, animated: true, completion: nil)
+
         
     }
     

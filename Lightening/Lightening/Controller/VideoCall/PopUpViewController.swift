@@ -24,13 +24,22 @@ class PopUpViewController: UIViewController {
         animationView.frame = view.bounds
           
         animationView.contentMode = .scaleAspectFit
-          
-        animationView.loopMode = .loop
-          
+        
         animationView.animationSpeed = 0.5
           
         view.stickSubView(animationView)
         
-        animationView.play()
+        animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+            self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+                self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+                    self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+                        self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+                            self.animationView.removeFromSuperview()
+                            self.dismiss(animated: true)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

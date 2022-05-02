@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 private enum VolunteerTab {
 
@@ -98,6 +99,8 @@ private enum VolunteerTab {
 
 class VolunteerTabBarController: UITabBarController {
     
+    var count = 0
+    
     private let tabs: [VolunteerTab] = [.lobby, .discovery, .upload, .map, .profile]
     
     var lobbyTabBarItem: UITabBarItem!
@@ -125,10 +128,14 @@ class VolunteerTabBarController: UITabBarController {
     
     @objc func notifyIncomingCall() {
         
-        let popUpViewController = PopUpViewController()
-        popUpViewController.modalPresentationStyle = .overCurrentContext
-        popUpViewController.modalTransitionStyle = .crossDissolve
-        present(popUpViewController, animated: true, completion: nil)
+        if count == 0 {
+            let popUpViewController = PopUpViewController()
+            popUpViewController.modalPresentationStyle = .overCurrentContext
+            popUpViewController.modalTransitionStyle = .crossDissolve
+            self.present(popUpViewController, animated: true, completion: nil)
+            self.count += 1
+        }
+        
         self.lobbyTabBarItem.badgeValue = "1"
     }
     

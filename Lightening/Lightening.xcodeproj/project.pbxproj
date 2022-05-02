@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		507B431CE111D2D733E5EBFB /* Pods_Lightening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */; };
+		7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */; };
 		7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF5280EB55F0096DB72 /* RecordViewController.swift */; };
 		7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF7280EED7B0096DB72 /* AudioManager.swift */; };
 		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
@@ -27,6 +28,7 @@
 		7E409322281E32160027D8B5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* MyProfileViewController.swift */; };
 		7E4297C7281ED53B00649458 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C6281ED53B00649458 /* NavigationBarView.swift */; };
 		7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */; };
+		7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297CA281F6DC600649458 /* AnimationView.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -102,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
+		7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "16873-flying-pigeon (2).json"; path = "../../../../Downloads/16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7E272FF5280EB55F0096DB72 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		7E272FF7280EED7B0096DB72 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		7E409321281E32160027D8B5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		7E4297C6281ED53B00649458 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedProfileViewController.swift; sourceTree = "<group>"; };
+		7E4297CA281F6DC600649458 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7E4297C6281ED53B00649458 /* NavigationBarView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
+				7E4297CA281F6DC600649458 /* AnimationView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */,
 				7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */,
 				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
+				7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
 				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
@@ -573,6 +579,7 @@
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
+				7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */,
 				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */,
@@ -670,6 +677,7 @@
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
 				7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */,
+				7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
