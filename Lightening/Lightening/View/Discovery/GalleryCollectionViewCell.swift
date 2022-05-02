@@ -23,7 +23,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     var audio: Audio? {
       didSet {
-          audioCoverImageView?.image = UIImage(named: "black_vinyl-PhotoRoom")
+          audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
           audioTitleLabel?.text = audio?.title
           audioAuthorLabel?.text = audio?.author?.displayName
           applyAccessibility()
