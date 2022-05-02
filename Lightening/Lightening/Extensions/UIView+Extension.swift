@@ -71,12 +71,12 @@ extension UIView {
 
         objectView.translatesAutoresizingMaskIntoConstraints = false
 
-        objectView.topAnchor.constraint(equalTo: topAnchor, constant: inset.top).isActive = true
+        objectView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: inset.top).isActive = true
 
-        objectView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset.left).isActive = true
+        objectView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: inset.left).isActive = true
 
-        objectView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset.right).isActive = true
+        objectView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -inset.right).isActive = true
 
-        objectView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset.bottom).isActive = true
+        objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -inset.bottom).isActive = true
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class `ImpairedProfileViewController`: BaseViewController {
+class ImpairedProfileViewController: BaseViewController {
     
     let vinylImageView = UIImageView()
     
@@ -41,8 +41,20 @@ extension ImpairedProfileViewController {
     func addUserProfileView() {
         
         userProfileView.addProfileImageView()
+        
+        view.addSubview(userProfileView)
+        
+        userProfileView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: userProfileView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: userProfileView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: userProfileView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
+        
+        NSLayoutConstraint(item: userProfileView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
     
-        self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
+//        self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
         
     }
     
