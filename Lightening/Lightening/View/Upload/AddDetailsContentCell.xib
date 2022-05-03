@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJV-4l-PEX">
-                        <rect key="frame" x="16" y="16" width="50.5" height="117"/>
+                        <rect key="frame" x="16" y="16" width="50.5" height="105"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
@@ -32,10 +32,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-qd-CZl">
-                        <rect key="frame" x="16" y="149" width="375" height="48"/>
+                        <rect key="frame" x="16" y="137" width="375" height="60"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="48" id="Zb5-j6-P7Q"/>
+                            <constraint firstAttribute="height" constant="60" id="AzU-Cg-yyf"/>
                         </constraints>
                         <attributedString key="attributedText"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
