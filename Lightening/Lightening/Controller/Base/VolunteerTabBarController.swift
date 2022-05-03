@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Lottie
 
-private enum Tab {
+private enum VolunteerTab {
 
     case lobby
     
@@ -25,23 +26,23 @@ private enum Tab {
         
         let config = Config.default
         
-        let signalClientforVolunteer = SignalingClientforVolunteer()
+        let signalClientforVolunteer = SignalingClientForVolunteer()
         
         let webRTCClient = WebRTCClient(iceServers: config.webRTCIceServers)
 
         switch self {
 
-        case .lobby: controller = UINavigationController(rootViewController: VolLobbyViewController(
+        case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
-        case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
+        case .discovery: controller = UINavigationController(rootViewController: VolunteerDiscoveryViewController())
         
         case .upload: controller = UINavigationController(rootViewController: UploadViewController())
             
         case .map: controller = UINavigationController(rootViewController: MapViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: ProfileViewController())
+            UINavigationController(rootViewController: MyProfileViewController())
 
         }
 
@@ -58,35 +59,35 @@ private enum Tab {
 
         case .lobby:
             return UITabBarItem(
-                title: nil,
+                title: "Video Call",
                 image: UIImage(systemName: "video"),
                 selectedImage: UIImage(systemName: "video")
             )
             
         case .discovery:
             return UITabBarItem(
-                title: nil,
+                title: "Discovery",
                 image: UIImage(systemName: "rectangle.grid.2x2"),
                 selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
             )
         
         case .upload:
             return UITabBarItem(
-                title: nil,
+                title: "Upload",
                 image: UIImage(systemName: "arrow.up.heart"),
                 selectedImage: UIImage(systemName: "arrow.up.heart")
             )
             
         case .map:
             return UITabBarItem(
-                title: nil,
+                title: "Map",
                 image: UIImage(systemName: "map"),
                 selectedImage: UIImage(systemName: "map.fill")
             )
         
         case .profile:
             return UITabBarItem(
-                title: nil,
+                title: "Profile",
                 image: UIImage(systemName: "person.circle"),
                 selectedImage: UIImage(systemName: "person.circle.fill")
             )
@@ -95,9 +96,12 @@ private enum Tab {
         
     }
 }
-class TabBarController: UITabBarController {
+
+class VolunteerTabBarController: UITabBarController {
     
-    private let tabs: [Tab] = [.lobby, .discovery, .upload, .map, .profile]
+    var count = 0
+    
+    private let tabs: [VolunteerTab] = [.lobby, .discovery, .upload, .map, .profile]
     
     var lobbyTabBarItem: UITabBarItem!
     
@@ -111,10 +115,15 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = tabs.map({ $0.controller() })
+        
+        self.tabBar.tintColor = UIColor.black // tab bar icon tint color
+        self.tabBar.isTranslucent = false
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
+        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
 
         lobbyTabBarItem = viewControllers?[0].tabBarItem
 
-        lobbyTabBarItem.badgeColor = .red
+        lobbyTabBarItem.badgeColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
         NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
         
@@ -123,6 +132,15 @@ class TabBarController: UITabBarController {
     }
     
     @objc func notifyIncomingCall() {
+        
+        if count == 0 {
+            let popUpViewController = PopUpViewController()
+            popUpViewController.modalPresentationStyle = .overCurrentContext
+            popUpViewController.modalTransitionStyle = .crossDissolve
+            self.present(popUpViewController, animated: true, completion: nil)
+            self.count += 1
+        }
+        
         self.lobbyTabBarItem.badgeValue = "1"
     }
     

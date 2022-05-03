@@ -8,13 +8,15 @@
 import UIKit
 import AVFoundation
 
-class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
+class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     
-    private var sections = DiscoverySection.allSections
+    var player: AVPlayer!
+    
+    var sections = DiscoverySection.allSections
     
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    private lazy var dataSource = makeDataSource()
+    lazy var dataSource = makeDataSource()
     
     typealias DataSource = UICollectionViewDiffableDataSource<DiscoverySection, Audio>
     
@@ -23,36 +25,62 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Audio Files"
+        
         fetchData()
         configureCollectionView()
         configureLayout()
-        layoutBarItem()
+    
     }
     
-    private func configureCollectionView() {
+    func setPlayer(url: URL) {
+        
+        let asset = AVAsset(url: url)
+        let playerItem = AVPlayerItem(asset: asset)
+            
+        player = AVPlayer(playerItem: playerItem)
+        player.volume = 100.0
+
+    }
+    
+    func configureCollectionView() {
         
         view.stickSubView(collectionView)
         
-        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
+        collectionView.registerCellWithNib(identifier: String(describing: VinylCollectionViewCell.self), bundle: nil)
+        
         collectionView.delegate = self
+        
+        collectionView.isAccessibilityElement = false
+        
+        collectionView.shouldGroupAccessibilityChildren = true
     }
     
-    private func fetchData() {
-        PublishManager.shared.fetchAudioFiles() { [weak self] result in
+    func fetchData() {
+        PublishManager.shared.fetchAudios() { [weak self] result in
             switch result {
                 
-            case .success(let audioFiles):
+            case .success(let audios):
                 
-                self?.sections[0].audios.append(contentsOf: audioFiles.filter { $0.topic == "Nature"})
+                self?.sections[0].audios = []
                 
-                self?.sections[1].audios.append(contentsOf: audioFiles.filter { $0.topic == "City"})
+                self?.sections[0].audios = audios.filter { $0.topic == "Nature"}
                 
-                self?.sections[2].audios.append(contentsOf: audioFiles.filter { $0.topic == "Pet"})
+                self?.sections[1].audios = []
                 
-                self?.sections[3].audios.append(contentsOf: audioFiles.filter { $0.topic == "Others"})
+                self?.sections[1].audios.append(contentsOf: audios.filter { $0.topic == "City"})
+                
+                self?.sections[2].audios = []
+                
+                self?.sections[2].audios.append(contentsOf: audios.filter { $0.topic == "Pet"})
+                
+                self?.sections[3].audios = []
+                
+                self?.sections[3].audios.append(contentsOf: audios.filter { $0.topic == "Others"})
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
@@ -71,11 +99,36 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
             cellProvider: { (collectionView, indexPath, audio) ->
                 UICollectionViewCell? in
                 // 2
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: String(describing: GalleryCollectionViewCell.self),
-                    for: indexPath) as? GalleryCollectionViewCell
-                cell?.audio = audio
-                return cell
+                if indexPath.section % 2 == 0 {
+                    if indexPath.row % 2 == 0 {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    } else {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    }
+                } else {
+                    if indexPath.row % 2 == 0 {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    } else {
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
+                            for: indexPath) as? VinylCollectionViewCell
+                        cell?.audio = audio
+                        return cell
+                    }
+                }
+            
             })
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else {
@@ -88,7 +141,12 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
-            view?.titleLabel.text = section.topic
+            view?.title = section.topic
+            view?.didTapSectionHandler = { [weak self] in
+                let audioListViewController = AudioListViewController()
+                audioListViewController.audios = section.audios
+                self?.navigationController?.pushViewController(audioListViewController, animated: true)
+            }
             return view
         }
         return dataSource
@@ -108,30 +166,31 @@ class DiscoveryViewController: BaseViewController, UICollectionViewDelegate {
     }
 }
 
-extension DiscoveryViewController {
+extension UIView{
+    func rotate() {
+        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = NSNumber(value: Double.pi * 2)
+        rotation.duration = 1
+        rotation.isCumulative = true
+        rotation.repeatCount = Float.greatestFiniteMagnitude
+        self.layer.add(rotation, forKey: "rotationAnimation")
+    }
+}
+
+extension ImpairedDiscoveryViewController {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-        let audioPlayerViewController = AudioPlayerViewController()
-        addChild(audioPlayerViewController)
-        audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
-        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
-        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
-        view.addSubview(audioPlayerViewController.view)
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0001,
-                       options: .curveEaseInOut,
-                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
-                       completion: {_ in })
+    
+        setPlayer(url: audio.audioUrl)
         
     }
 }
 
-extension DiscoveryViewController {
+extension ImpairedDiscoveryViewController {
     
-    private func configureLayout() {
+    func configureLayout() {
         collectionView.register(SectionHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)
@@ -168,20 +227,5 @@ extension DiscoveryViewController {
         coordinator.animate(alongsideTransition: { context in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
-    }
-}
-
-extension DiscoveryViewController {
-    
-    private func layoutBarItem() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
-    }
-    
-    @objc func pushSearchPage(_ sender: UIBarButtonItem) {
-        
-        let searchViewController = SearchViewController()
-        
-        navigationController?.pushViewController(searchViewController, animated: true)
     }
 }

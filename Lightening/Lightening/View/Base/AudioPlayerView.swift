@@ -10,6 +10,10 @@ import AVFoundation
 
 class AudioPlayerView: UIView {
     
+    var startRotateHandler: (() -> Void)?
+    
+    var stopRotateHandler: (() -> Void)?
+    
     private let playPauseButton = UIButton()
     
     let likeButton = UIButton()
@@ -36,7 +40,7 @@ class AudioPlayerView: UIView {
             
             audioImageView.image = UIImage(named: self.audio?.cover ?? "")
             audioTitleLabel.text = self.audio?.title
-            audioAuthorLabel.text = "Claire"
+            audioAuthorLabel.text = self.audio?.author?.displayName
             
             setPlayer(url: (self.audio?.audioUrl)!)
             player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
@@ -48,12 +52,10 @@ class AudioPlayerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        commonInit()
     }
     
     func setPlayer(url: URL) {
@@ -78,6 +80,7 @@ class AudioPlayerView: UIView {
     }
 
     @objc func playerDidFinishPlaying(note: NSNotification) {
+        stopRotateHandler?()
         print("Video Finished")
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         
@@ -197,6 +200,7 @@ extension AudioPlayerView {
         if isPlaying {
             
             player.pause()
+            stopRotateHandler?()
             sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
             
             isPlaying = false
@@ -204,6 +208,7 @@ extension AudioPlayerView {
         } else {
             
             player.play()
+            startRotateHandler?()
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             
             isPlaying = true

@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import CryptoKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     internal var window: UIWindow?
-    private let config = Config.default
+    
+    private var userIdentity: Int?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,15 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 
-//            let rootVC = LobbyViewController(nibName: String(describing: LobbyViewController.self), bundle: nil)
-//            let navController = UINavigationController(rootViewController: rootVC)
-                
-            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-            window?.windowScene = windowScene
-//            window?.rootViewController = navController //navController
-            
-            window?.rootViewController = self.buildMainViewController()
-            window?.makeKeyAndVisible()
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        ElementsStyle.styleViewBackground(window ?? UIWindow())
+        self.buildMainViewController() { rootViewController in
+            self.window?.rootViewController = rootViewController
+        }
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -58,21 +59,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
-    private func buildMainViewController() -> UIViewController {
-      let signalClient = SignalingClient()
-      let signalClientforVolunteer = SignalingClientforVolunteer()
-      let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
+    private func buildMainViewController(completion: @escaping (UIViewController?) -> Void) {
+    
+      let volunteerTabBarController = VolunteerTabBarController()
+      let signInViewController = SignInViewController()
+      let visuallyImpairedTabBarController = VisuallyImpairedTabBarController()
+        if Auth.auth().currentUser == nil {
+            completion(signInViewController)
+        } else {
+            UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
+                switch result {
+                    
+                case .success(let user):
+                    
+                    if user?.userIdentity == 0 {
+                        completion(visuallyImpairedTabBarController)
+                    } else {
+                        completion(volunteerTabBarController)
+                    }
+                
+                case .failure(let error):
+                    
+                    print("fetchData.failure: \(error)")
+                }
+                
+            }
+            print(Auth.auth().currentUser?.email)
         
-//      let mainViewController = LobbyViewController(signalClient: signalClient, webRTCClient: webRTCClient)
-//
-//      let navViewController = UINavigationController(rootViewController: mainViewController)
-      let mainViewController = VolLobbyViewController(
-        signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient)
-      let tabBarController = TabBarController()
-      let navViewController = UINavigationController(rootViewController: tabBarController)
-     
-      return tabBarController
     }
-
 }
-
+}

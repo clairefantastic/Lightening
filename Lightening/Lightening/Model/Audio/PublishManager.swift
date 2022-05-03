@@ -17,8 +17,6 @@ class PublishManager {
     
     lazy var db = Firestore.firestore()
     
-    var player: AVPlayer!
-    
     func getSelectedFileLocalUrl(audioUrl: URL, completion: @escaping (URL)-> Void ) {
             // then lets create your document folder url
         audioUrl.startAccessingSecurityScopedResource()
@@ -80,11 +78,18 @@ class PublishManager {
         }
     }
     
-    func publishAudioFile(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishAudioFile(audio: inout Audio, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let currentUser = UserManager.shared.currentUser else { return }
         
         let document = db.collection("audioFiles").document()
+        audio.audioId = document.documentID
+        audio.author = currentUser
+        guard let authorId = currentUser.userId else { return }
+        audio.authorId = authorId
         
         do {
+            
            try document.setData(from: audio) { error in
                 
                 if let error = error {
@@ -95,39 +100,50 @@ class PublishManager {
                     completion(.success("Success"))
                 }
             }
+            
         } catch {
             
         }
      
     }
     
-    func fetchAudioFiles(completion: @escaping (Result<[Audio], Error>) -> Void) {
+    func deleteAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+
+        guard let audioId = audio.audioId else { return }
         
-        db.collection("audioFiles").order(by: "createdTime", descending: true).getDocuments() { (querySnapshot, error) in
-            
+        let document = db.collection("audioFiles").document(audioId)
+    
+           document.delete() { error in
+                
                 if let error = error {
                     
                     completion(.failure(error))
                 } else {
                     
-                    var audiofiles = [Audio]()
-                    
-                    for document in querySnapshot!.documents {
-
-                        do {
-                            if let audiofile = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
-                                audiofiles.append(audiofile)
-                            }
-                            
-                        } catch {
-                            
-                            completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
-                        }
-                    }
-                    
-                    completion(.success(audiofiles))
+                    completion(.success("Success"))
                 }
+            }
+        }
+    
+    func fetchAudios(completion: @escaping (Result<[Audio], Error>) -> Void) {
+        
+        db.collection("audioFiles").order(by: "createdTime", descending: true).addSnapshotListener { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            var audios = [Audio]()
+            
+            snapshot.documents.forEach { document in
+                
+                do {
+                    if let audio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
+                        audios.append(audio)
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            completion(.success(audios))
         }
     }
     
@@ -136,7 +152,6 @@ class PublishManager {
         db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments() { (querySnapshot, error) in
             
                 if let error = error {
-                    
                     completion(.failure(error))
                     
                 } else {
@@ -149,36 +164,33 @@ class PublishManager {
     
     func fetchAudioComments(documentId: String, completion: @escaping (Result<[Comment], Error>) -> Void) {
         
-        db.collection("audioFiles").document(documentId).collection("comments").getDocuments() { (querySnapshot, error) in
+        db.collection("audioFiles").document(documentId).collection("comments").order(by: "createdTime", descending: true).addSnapshotListener { snapshot, error in
             
-            if let error = error {
+            guard let snapshot = snapshot else { return }
+            
+            var comments = [Comment]()
+            
+            snapshot.documents.forEach { document in
                 
-                completion(.failure(error))
-            } else {
-                
-                var comments = [Comment]()
-                
-                for document in querySnapshot!.documents {
-
-                    do {
-                        if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
-                            comments.append(comment)
-                        }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
+                do {
+                    if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
+                        comments.append(comment)
                     }
+                } catch {
+                    completion(.failure(error))
                 }
-                
-                completion(.success(comments))
             }
+            completion(.success(comments))
         }
     }
-    
-    
-    func publishComments(documentId: String, comment: Comment, completion: @escaping (Result<String, Error>) -> Void) {
+
+    func publishComments(documentId: String, comment: inout Comment, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let author = UserManager.shared.currentUser else { return }
+        comment.authorId = author.userId
+        comment.authorName = author.displayName
+        comment.authorImage = author.image
+        comment.createdTime = Date().timeIntervalSince1970
         
         let document = db.collection("audioFiles").document(documentId).collection("comments").document()
         
@@ -199,9 +211,9 @@ class PublishManager {
      
     }
     
-    func publishLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func publishLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
         
         do {
            try document.setData(from: audio) { error in
@@ -220,9 +232,9 @@ class PublishManager {
 
     }
     
-    func deleteLikedAudio(authorId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func deleteLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("volunteers").document(authorId).collection("collections").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
 
            document.delete() { error in
                 
@@ -235,48 +247,90 @@ class PublishManager {
                 }
             }
         }
-    
-    func fetchLikedAudio(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
         
-        db.collection("volunteers").document(userId).collection("collections").getDocuments() { (querySnapshot, error) in
+    func fetchLikedAudios(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
+        
+        db.collection("users").document(userId).collection("likedAudios").addSnapshotListener { snapshot, error in
             
-            if let error = error {
-                
-                completion(.failure(error))
-            } else {
-                
-                var likedAudios = [Audio]()
-                
-                for document in querySnapshot!.documents {
+            guard let snapshot = snapshot else { return }
+            
+            var likedAudios = [Audio]()
+            
+            snapshot.documents.forEach { document in
+                do {
+                    if let likedAudio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
+                        likedAudios.append(likedAudio)
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            completion(.success(likedAudios))
+        }
+    }
+    
+    func getProfilePhotoUrl(selectedImage: UIImage) {
+        
+        let uniqueString = NSUUID().uuidString
+        
+        let storageRef = Storage.storage().reference().child("ProfilePhoto").child("\(uniqueString).png")
+        
+        if let uploadData = selectedImage.jpegData(compressionQuality: 0.5) {
+                storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                if error != nil {
+                    print("error")
+                    
+                } else {
 
-                    do {
-                        if let likedAudio = try document.data(as: Audio.self, decoder: Firestore.Decoder()) {
-                            likedAudios.append(likedAudio)
+                    storageRef.downloadURL(completion: { (url, error) in
+
+                        print(url?.absoluteString)
+                        
+                        guard let url = url else { return }
+                        
+                        self.publishProfilePhoto(url: url) { result in
+                            
+                            switch result {
+                                
+                            case .success(_):
+                                print("success")
+                            case .failure(_):
+                                print("fail")
+                            }
                         }
                         
-                    } catch {
-                        
-                        completion(.failure(error))
-//                            completion(.failure(FirebaseError.documentError))
-                    }
+                    })
                 }
-                
-                completion(.success(likedAudios))
             }
         }
-    }
 
-    func playAudioFile(url: URL) {
-        
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            player.volume = 100.0
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
-        }
     }
     
+    func publishProfilePhoto(url: URL, completion: @escaping (Result<String, Error>) -> Void) {
+
+        guard var currentUser = UserManager.shared.currentUser else { return }
+        
+        currentUser.image = url
+        
+        guard let userId = currentUser.userId else { return }
+        
+        let document = db.collection("users").document("\(userId)")
+        
+        do {
+            
+           try document.setData(from: currentUser) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+            
+        } catch {
+            
+        }
+    }
 }

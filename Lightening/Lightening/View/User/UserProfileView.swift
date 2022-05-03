@@ -9,6 +9,33 @@ import UIKit
 
 class UserProfileView: UIView {
     
+    let profileImageView = UIImageView()
+    
+    var imageUrl: String? {
+        
+        didSet {
+            
+            if imageUrl == nil {
+                
+                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                
+            } else {
+                
+                profileImageView.loadImage(imageUrl)
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+    }
+    
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
         let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
@@ -90,13 +117,14 @@ class UserProfileView: UIView {
     // *******************************************************************
 
     override func draw(_ rect: CGRect) {
+
         guard let context = UIGraphicsGetCurrentContext() else { return }
         let size = self.bounds.size
 
         context.translateBy(x: size.width / 2, y: size.height / 2)
         context.scaleBy(x: 1, y: -1)
 
-        centreArcPerpendicular(text: "H  e  l  l  o   C  l  a  i  r  e",
+        centreArcPerpendicular(text: "H  e  l  l  o   L  i  g  h  t  y",
                                context: context, radius: 60,
                                angle: -30,
                                colour: UIColor.black,
@@ -109,6 +137,31 @@ class UserProfileView: UIView {
                                colour: UIColor.black,
                                font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
                                clockwise: false)
-//        centre(text: "Hello flat world", context: context, radius: 0, angle: 0 , colour: UIColor.yellow, font: UIFont.systemFont(ofSize: 16), slantAngle: CGFloat(M_PI_4))
+        
     }
+    
+    func addProfileImageView() {
+        
+        addSubview(profileImageView)
+        
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .centerX, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: profileImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        profileImageView.layer.masksToBounds = true
+        
+        profileImageView.layer.cornerRadius = 40
+        
+        profileImageView.layer.borderColor = UIColor.black.cgColor
+        
+        profileImageView.layer.borderWidth = 1
+    
+    }
+    
 }

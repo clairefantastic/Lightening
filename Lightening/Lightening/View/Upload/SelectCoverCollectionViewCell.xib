@@ -11,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SelectCoverCollectionViewCell" customModule="Lightening" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="218" height="190"/>
+            <rect key="frame" x="0.0" y="0.0" width="281" height="266"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="218" height="190"/>
+                <rect key="frame" x="0.0" y="0.0" width="281" height="266"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZsG-ea-hof">
-                        <rect key="frame" x="16" y="16" width="74" height="74"/>
+                        <rect key="frame" x="16" y="16" width="249" height="249"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZsG-ea-hof" secondAttribute="height" multiplier="1:1" id="5Hx-Xj-1Ou"/>
                         </constraints>
@@ -27,15 +27,15 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ZsG-ea-hof" secondAttribute="bottom" constant="100" id="Yvl-fj-k2x"/>
+                <constraint firstAttribute="trailing" secondItem="ZsG-ea-hof" secondAttribute="trailing" constant="16" id="lpu-A1-BCG"/>
                 <constraint firstItem="ZsG-ea-hof" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="nB2-a0-Qlv"/>
                 <constraint firstItem="ZsG-ea-hof" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="ovn-nr-TlU"/>
             </constraints>
-            <size key="customSize" width="218" height="190"/>
+            <size key="customSize" width="281" height="266"/>
             <connections>
                 <outlet property="coverImageView" destination="ZsG-ea-hof" id="KRD-EH-Gee"/>
             </connections>
-            <point key="canvasLocation" x="89.855072463768124" y="126.5625"/>
+            <point key="canvasLocation" x="135.50724637681159" y="152.00892857142856"/>
         </collectionViewCell>
     </objects>
 </document>

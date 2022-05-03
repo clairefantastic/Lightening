@@ -38,7 +38,7 @@ class AudioDescriptionViewController: BaseViewController {
         didSet {
         
             audioTitleLabel.text = self.audio?.title
-            audioAuthorLabel.text = "Claire"
+            audioAuthorLabel.text = self.audio?.author?.displayName
             audioDescriptionLabel.text = self.audio?.description
             audioCoverImageView.image = UIImage(named: self.audio?.cover ?? "")
             
@@ -126,7 +126,7 @@ extension AudioDescriptionViewController {
         
         audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 36)
         audioAuthorLabel.adjustsFontForContentSizeCategory = true
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         audioAuthorLabel.textAlignment = .left
         audioAuthorLabel.numberOfLines = 0
         audioAuthorLabel.setContentCompressionResistancePriority(
@@ -150,7 +150,7 @@ extension AudioDescriptionViewController {
         
         audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
         audioTitleLabel.adjustsFontForContentSizeCategory = true
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         audioTitleLabel.textAlignment = .left
         audioTitleLabel.numberOfLines = 0
         audioTitleLabel.setContentCompressionResistancePriority(
@@ -216,7 +216,7 @@ extension AudioDescriptionViewController {
         
         sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         
-        sendOutTextButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        sendOutTextButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
         sendOutTextButton.addTarget(self, action: #selector(sendOutText), for: .touchUpInside)
         
@@ -224,12 +224,15 @@ extension AudioDescriptionViewController {
     
     @objc func sendOutText() {
         
+        guard let text = enterCommentTextField.text else { return }
+        
+        var comment = Comment(text: text)
+        
         PublishManager.shared.publishComments(documentId: audioFileDocumentId ?? "",
-                                              comment: Comment(authorImage: "", authorName: "Claire", text: enterCommentTextField.text ?? "")) { [weak self] result in
+                                              comment: &comment) { [weak self] result in
             
             switch result {
             case .success(let success):
-                self?.comments.append(Comment(authorImage: "", authorName: "Claire", text: self?.enterCommentTextField.text ?? ""))
                 self?.enterCommentTextField.text = ""
             case .failure(let error):
                 print("publishComments.failure: \(error)")

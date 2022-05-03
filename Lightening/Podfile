@@ -17,5 +17,6 @@ target 'Lightening' do
   pod 'IQKeyboardManagerSwift'
   pod 'Kingfisher'
   pod 'SoundWave'
+  pod ‘Firebase/Auth’
 
 end
