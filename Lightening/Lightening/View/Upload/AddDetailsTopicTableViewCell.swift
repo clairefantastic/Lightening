@@ -85,20 +85,6 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let cell = collectionView.cellForItem(at: indexPath) as? SelectTopicCollectionViewCell {
-            cell.topicButton.layer.borderWidth = 2
-            cell.topicButton.layer.borderColor = UIColor.black.cgColor
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? SelectTopicCollectionViewCell {
-            cell.topicButton.layer.borderWidth = 0
-        }
-    }
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
