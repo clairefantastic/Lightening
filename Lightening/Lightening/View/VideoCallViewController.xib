@@ -21,9 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd9-re-MFi">
-                    <rect key="frame" x="52" y="87" width="56" height="31"/>
+                    <rect key="frame" x="52" y="87" width="33" height="31"/>
+                    <color key="tintColor" red="0.074509803920000006" green="0.14901960780000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                    <buttonConfiguration key="configuration" style="plain" title="&lt;"/>
                     <connections>
                         <action selector="backDidTap:" destination="-1" eventType="touchUpInside" id="SIf-lh-hw2"/>
                     </connections>
@@ -38,9 +39,15 @@
                         <constraint firstAttribute="width" constant="60" id="OwN-6Z-Q28"/>
                         <constraint firstAttribute="height" constant="60" id="pEs-IS-JJq"/>
                     </constraints>
-                    <color key="tintColor" systemColor="systemRedColor"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="phone.down.fill" catalog="system" title=""/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="tintColor" red="0.83921568629999999" green="0.34509803919999998" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="" image="phone.down.circle.fill" catalog="system">
+                        <color key="titleColor" systemColor="systemRedColor"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                        </preferredSymbolConfiguration>
+                    </state>
                     <connections>
                         <action selector="endCall:" destination="-1" eventType="touchUpInside" id="q03-Xb-p6Y"/>
                     </connections>
@@ -62,7 +69,7 @@
         </view>
     </objects>
     <resources>
-        <image name="phone.down.fill" catalog="system" width="128" height="52"/>
+        <image name="phone.down.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

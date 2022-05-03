@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 private enum VolunteerTab {
 
@@ -34,7 +35,7 @@ private enum VolunteerTab {
         case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
             signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
             
-        case .discovery: controller = UINavigationController(rootViewController: DiscoveryViewController())
+        case .discovery: controller = UINavigationController(rootViewController: VolunteerDiscoveryViewController())
         
         case .upload: controller = UINavigationController(rootViewController: UploadViewController())
             
@@ -58,35 +59,35 @@ private enum VolunteerTab {
 
         case .lobby:
             return UITabBarItem(
-                title: nil,
+                title: "Video Call",
                 image: UIImage(systemName: "video"),
                 selectedImage: UIImage(systemName: "video")
             )
             
         case .discovery:
             return UITabBarItem(
-                title: nil,
+                title: "Discovery",
                 image: UIImage(systemName: "rectangle.grid.2x2"),
                 selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
             )
         
         case .upload:
             return UITabBarItem(
-                title: nil,
+                title: "Upload",
                 image: UIImage(systemName: "arrow.up.heart"),
                 selectedImage: UIImage(systemName: "arrow.up.heart")
             )
             
         case .map:
             return UITabBarItem(
-                title: nil,
+                title: "Map",
                 image: UIImage(systemName: "map"),
                 selectedImage: UIImage(systemName: "map.fill")
             )
         
         case .profile:
             return UITabBarItem(
-                title: nil,
+                title: "Profile",
                 image: UIImage(systemName: "person.circle"),
                 selectedImage: UIImage(systemName: "person.circle.fill")
             )
@@ -97,6 +98,8 @@ private enum VolunteerTab {
 }
 
 class VolunteerTabBarController: UITabBarController {
+    
+    var count = 0
     
     private let tabs: [VolunteerTab] = [.lobby, .discovery, .upload, .map, .profile]
     
@@ -112,10 +115,15 @@ class VolunteerTabBarController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = tabs.map({ $0.controller() })
+        
+        self.tabBar.tintColor = UIColor.black // tab bar icon tint color
+        self.tabBar.isTranslucent = false
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
+        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
 
         lobbyTabBarItem = viewControllers?[0].tabBarItem
 
-        lobbyTabBarItem.badgeColor = .red
+        lobbyTabBarItem.badgeColor = UIColor.hexStringToUIColor(hex: "#D65831")
         
         NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
         
@@ -125,10 +133,14 @@ class VolunteerTabBarController: UITabBarController {
     
     @objc func notifyIncomingCall() {
         
-        let popUpViewController = PopUpViewController()
-        popUpViewController.modalPresentationStyle = .overCurrentContext
-        popUpViewController.modalTransitionStyle = .crossDissolve
-        present(popUpViewController, animated: true, completion: nil)
+        if count == 0 {
+            let popUpViewController = PopUpViewController()
+            popUpViewController.modalPresentationStyle = .overCurrentContext
+            popUpViewController.modalTransitionStyle = .crossDissolve
+            self.present(popUpViewController, animated: true, completion: nil)
+            self.count += 1
+        }
+        
         self.lobbyTabBarItem.badgeValue = "1"
     }
     

@@ -23,10 +23,22 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     var audio: Audio? {
       didSet {
-          audioCoverImageView?.image = UIImage(named: "black_vinyl-PhotoRoom")
+          audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
           audioTitleLabel?.text = audio?.title
           audioAuthorLabel?.text = audio?.author?.displayName
+          applyAccessibility()
       }
+    }
+    
+    func applyAccessibility() {
+        guard let audioTitle = audioTitleLabel.text else { return }
+        guard let audioAuthor = audioAuthorLabel.text else { return }
+        isAccessibilityElement = true
+        accessibilityLabel = "audio title: \(audioTitle), audio author: \(audioAuthor)"
+        accessibilityHint = "Double tap to play."
+        audioCoverImageView.isAccessibilityElement = false
+        audioTitleLabel.isAccessibilityElement = false
+        audioAuthorLabel.isAccessibilityElement = false
     }
 
 }

@@ -28,7 +28,7 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
         layoutTextView()
         

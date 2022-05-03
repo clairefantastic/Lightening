@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AudioListViewController: UIViewController {
+class AudioListViewController: BaseViewController {
     
     var audios: [Audio]?
     
@@ -28,7 +28,7 @@ extension AudioListViewController {
         
         view.stickSubView(tableView)
         
-        tableView.backgroundColor =  UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleClearBackground(tableView)
     }
     
     private func setUpTableView() {

@@ -32,6 +32,7 @@ class AudioPlayerViewController: UIViewController {
             playerView.audio = audio
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
@@ -74,10 +75,18 @@ class AudioPlayerViewController: UIViewController {
                 guard let audio = self?.audio else {
                     return
                 }
-
-                if likedAudios.contains(audio) {
+                
+                if likedAudios.count == 0 {
+                    self?.isLiked = false
                     
-                    self?.isLiked = true
+                } else {
+                    
+                    for likedAudio in 0...likedAudios.count - 1 {
+                        
+                        if audio.audioUrl == likedAudios[likedAudio].audioUrl {
+                            self?.isLiked = true
+                        }
+                    }
                 }
                 
             case .failure(let error):

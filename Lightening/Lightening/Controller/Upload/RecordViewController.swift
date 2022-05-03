@@ -9,7 +9,13 @@ import UIKit
 
 import Lottie
 
+import AVFoundation
+
+import SoundWave
+
 class RecordViewController: BaseViewController {
+    
+    private let limitLengthLabel = UILabel()
     
     private let recordButton = UIButton()
     
@@ -43,7 +49,7 @@ class RecordViewController: BaseViewController {
           
         animationView.animationSpeed = 0.5
           
-        view.stickSubView(animationView, inset: UIEdgeInsets(top: 150, left: 0, bottom: 400, right: 0))
+        view.stickSubView(animationView, inset: UIEdgeInsets(top: 100, left: 0, bottom: 350, right: 0))
         
         layoutRecordButton()
         
@@ -55,6 +61,8 @@ class RecordViewController: BaseViewController {
         
         layoutTimeLabel()
         
+        configureLimitLengthLabel()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,6 +70,31 @@ class RecordViewController: BaseViewController {
         playButton.layer.cornerRadius = resetButton.frame.height / 2
         resetButton.layer.cornerRadius = resetButton.frame.height / 2
         finishRecordingButton.layer.cornerRadius = finishRecordingButton.frame.height / 2
+    }
+    
+    private func configureLimitLengthLabel() {
+    
+        view.addSubview(limitLengthLabel)
+        
+        limitLengthLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: limitLengthLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
+        
+        NSLayoutConstraint(item: limitLengthLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: limitLengthLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: limitLengthLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
+        limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
+        limitLengthLabel.adjustsFontForContentSizeCategory = true
+        limitLengthLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        limitLengthLabel.textAlignment = .center
+        limitLengthLabel.numberOfLines = 0
+        limitLengthLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+
     }
     
     private func layoutTimeLabel() {
@@ -226,11 +259,35 @@ class RecordViewController: BaseViewController {
     
     @objc func finishRecordingAudio(_ sender: UIButton) {
         
-        let addDetailsViewController = AddDetailsViewController()
+        guard let url = audioManager.localUrl else { return }
         
-        addDetailsViewController.localUrl = audioManager.localUrl
-        
-        navigationController?.pushViewController(addDetailsViewController, animated: true)
+        let asset = AVAsset(url: url)
+        do {
+            let playerItem = AVPlayerItem(asset: asset)
+            let duration = playerItem.asset.duration
+            let seconds = CMTimeGetSeconds(duration)
+            
+            if seconds >= 3.0 && seconds <= 30.0 {
+                let addDetailsViewController = AddDetailsViewController()
+                
+                addDetailsViewController.localUrl = audioManager.localUrl
+                
+                navigationController?.pushViewController(addDetailsViewController, animated: true)
+            } else {
+                
+                let controller = UIAlertController(title: "Wrong audio length", message: "Only support uploading audio files from 3 to 30 seconds", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                   controller.addAction(okAction)
+                   present(controller, animated: true, completion: nil)
+            }
+//            player = AVPlayer(playerItem: playerItem)
+//            player.volume = 100.0
+//            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+                
     }
 }
 

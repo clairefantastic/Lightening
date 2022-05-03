@@ -43,7 +43,9 @@ class ImpairedLobbyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        self.navigationItem.title = "Video Call"
+        
         configureVideoCallButton()
 
         self.signalingConnected = false

@@ -11,6 +11,14 @@ class SectionHeaderReusableView: UICollectionReusableView {
     
     var didTapSectionHandler: (() -> Void)?
     
+    var title: String? {
+        
+        didSet {
+            titleLabel.text = title
+            applyAccessibility()
+        }
+    }
+    
     static var reuseIdentifier: String {
         return String(describing: SectionHeaderReusableView.self)
     }
@@ -33,9 +41,8 @@ class SectionHeaderReusableView: UICollectionReusableView {
         let button = UIButton()
         button.setTitle(">", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
-        button.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
-        button.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        button.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        button.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
         return button
@@ -99,5 +106,11 @@ class SectionHeaderReusableView: UICollectionReusableView {
     @objc func didTapTopic(_ sender: UIButton) {
         
         didTapSectionHandler?()
+    }
+    
+    func applyAccessibility() {
+        guard let title = titleLabel.text else { return }
+        isAccessibilityElement = true
+        accessibilityLabel = "\(title) category"
     }
 }

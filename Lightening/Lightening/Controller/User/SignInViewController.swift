@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class SignInViewController: BaseViewController {
     
+    let appleSignInbutton = ASAuthorizationAppleIDButton(authorizationButtonType: .default, authorizationButtonStyle: .white)
+    
     private let emailTextField = UITextField()
     
     private let passwordTextField = UITextField()
@@ -20,6 +22,8 @@ class SignInViewController: BaseViewController {
     private let registerButton = UIButton()
     
     private let haveNoAccountLabel = UILabel()
+    
+    private let welcomeLabel = UILabel()
     
     private var nextViewController = UIViewController()
     
@@ -40,9 +44,11 @@ class SignInViewController: BaseViewController {
         
         configureAppleSignInButton()
         
+        configureNoAccountLabel()
+        
         configureRegisterButton()
         
-        configureNoAccountLabel()
+        configureWelcomeLabel()
         
     }
     
@@ -75,7 +81,7 @@ extension SignInViewController {
         
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: registerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: registerButton, attribute: .top, relatedBy: .equal, toItem: haveNoAccountLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: registerButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -112,7 +118,7 @@ extension SignInViewController {
         
         haveNoAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: haveNoAccountLabel, attribute: .bottom, relatedBy: .equal, toItem: registerButton, attribute: .top, multiplier: 1, constant: -8).isActive = true
+        NSLayoutConstraint(item: haveNoAccountLabel, attribute: .top, relatedBy: .equal, toItem: appleSignInbutton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: haveNoAccountLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -131,9 +137,32 @@ extension SignInViewController {
 
     }
     
-    private func configureAppleSignInButton() {
+    private func configureWelcomeLabel() {
+    
+        view.addSubview(welcomeLabel)
         
-        let appleSignInbutton = ASAuthorizationAppleIDButton(authorizationButtonType: .default, authorizationButtonStyle: .white)
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: welcomeLabel, attribute: .top, relatedBy: .equal, toItem: emailTextField, attribute: .top, multiplier: 1, constant: -60).isActive = true
+        
+        NSLayoutConstraint(item: welcomeLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: welcomeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        welcomeLabel.text = "Welcome, Lightening!"
+        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        welcomeLabel.adjustsFontForContentSizeCategory = true
+        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textAlignment = .center
+        welcomeLabel.numberOfLines = 0
+        welcomeLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+
+    }
+    
+    private func configureAppleSignInButton() {
         
         self.view.addSubview(appleSignInbutton)
         
@@ -144,7 +173,7 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: appleSignInbutton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -200).isActive = true
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .top, relatedBy: .equal, toItem: logInButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         appleSignInbutton.cornerRadius = 30.0
         

@@ -27,6 +27,15 @@ class MapViewController: BaseViewController {
         mapView.delegate = self
         
         determineCurrentLocation()
+        
+        self.navigationItem.title = "Map"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        
+        let center = CLLocationCoordinate2D(latitude: 24.5, longitude: 121.0)
+        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
+        mapView.setRegion(mRegion, animated: true)
     }
     
     func determineCurrentLocation() {
@@ -43,11 +52,6 @@ class MapViewController: BaseViewController {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let mUserLocation: CLLocation = locations[0] as CLLocation
-
-        let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
-        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
-        mapView.setRegion(mRegion, animated: true)
         
         PublishManager.shared.fetchAudios() { [weak self] result in
             
@@ -59,7 +63,7 @@ extension MapViewController: CLLocationManagerDelegate {
                 
                 audios.forEach { audio in
                     
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: "Claire",
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
                         coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
                     
                 }
@@ -106,7 +110,10 @@ extension MapViewController: MKMapViewDelegate {
             reuseIdentifier: identifier)
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
-          view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
+          let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            button.setImage(UIImage(named: "black_vinyl-PhotoRoom"), for: .normal)
+          view.rightCalloutAccessoryView = button
         
         }
         return view

@@ -9,6 +9,8 @@ import UIKit
 
 class NewDiscoveryViewController: BaseViewController {
     
+    private let airBallonView = AirBallonView()
+    
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var audios: [Audio]? {
@@ -25,13 +27,14 @@ class NewDiscoveryViewController: BaseViewController {
         
         fetchData()
         configureCollectionView()
+        configureAirBallonView()
     }
     
     func configureCollectionView() {
         
         view.stickSubView(collectionView)
         
-        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        ElementsStyle.styleClearBackground(collectionView)
         
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
     
@@ -82,10 +85,29 @@ extension NewDiscoveryViewController: UICollectionViewDelegateFlowLayout {
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.minimumLineSpacing = 0
 
-        let width = (width  - 15.0 - 32.0)/2
-        return CGSize(width: width, height: (width/164)*328)
+        let width = (width - 60.0)/2
+        return CGSize(width: width, height: width)
     }
-
 }
 
-
+extension NewDiscoveryViewController {
+    
+    private func configureAirBallonView() {
+        
+        view.addSubview(airBallonView)
+        
+        airBallonView.configureRectView()
+        
+//        airBallonView.configureHalfCircleView()
+        
+        airBallonView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: airBallonView, attribute: .centerY, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: airBallonView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        
+        NSLayoutConstraint(item: airBallonView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300).isActive = true
+        
+        NSLayoutConstraint(item: airBallonView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+    }
+}

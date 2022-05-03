@@ -62,4 +62,6 @@ struct Comment: Codable, Hashable {
     
     var text: String
     
+    var createdTime: Double?
+    
 }

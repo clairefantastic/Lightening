@@ -8,7 +8,6 @@
 import UIKit
 
 class CommentTableViewCell: UITableViewCell {
-
     
     @IBOutlet weak var authorImageView: UIImageView!
     
@@ -47,9 +46,14 @@ class CommentTableViewCell: UITableViewCell {
     var comment: Comment? {
         
         didSet {
+            
+            if comment?.authorImage == nil {
+                authorImageView.image = UIImage(named: "mask")
+            } else {
+                authorImageView.loadImage(comment?.authorImage?.absoluteString)
+            }
             authorNameLabel.text = comment?.authorName
             commentTextLabel.text = comment?.text
-            authorImageView.image = UIImage(named: "mask")
         }
     }
         

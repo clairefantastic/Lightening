@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		507B431CE111D2D733E5EBFB /* Pods_Lightening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */; };
+		7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */; };
+		7E225863281FCCA900FE8694 /* DoorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225862281FCCA900FE8694 /* DoorView.swift */; };
+		7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225864281FF5F000FE8694 /* AirBallonView.swift */; };
+		7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */; };
+		7E22586B282056B100FE8694 /* VinylCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */; };
+		7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */; };
 		7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF5280EB55F0096DB72 /* RecordViewController.swift */; };
 		7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF7280EED7B0096DB72 /* AudioManager.swift */; };
 		7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */; };
@@ -25,6 +31,9 @@
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* MyProfileViewController.swift */; };
+		7E4297C7281ED53B00649458 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C6281ED53B00649458 /* NavigationBarView.swift */; };
+		7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */; };
+		7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297CA281F6DC600649458 /* AnimationView.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -33,7 +42,7 @@
 		7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B42809751300CF24AC /* UITableView+Extension.swift */; };
 		7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7B82809AEB800CF24AC /* Audio.swift */; };
 		7E44B7BB280A981500CF24AC /* UIColor+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */; };
-		7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */; };
+		7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */; };
 		7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */; };
 		7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */; };
 		7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */; };
@@ -52,7 +61,7 @@
 		7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D542808175400389D1C /* VolunteerTabBarController.swift */; };
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
-		7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */; };
+		7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */; };
 		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -94,12 +103,17 @@
 		7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */; };
 		7ED920FA28070E4C00DD892A /* userType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED920F928070E4C00DD892A /* userType.swift */; };
 		7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */; };
-		7EDBA2CC2805E9A900C10FA5 /* VolunteerLobbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EDBA2CB2805E9A900C10FA5 /* VolunteerLobbyViewController.xib */; };
 		7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
+		7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "16873-flying-pigeon (2).json"; path = "../../../../Downloads/16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
+		7E225862281FCCA900FE8694 /* DoorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorView.swift; sourceTree = "<group>"; };
+		7E225864281FF5F000FE8694 /* AirBallonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBallonView.swift; sourceTree = "<group>"; };
+		7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "87530-frequencies-fork-lottie-animation.json"; sourceTree = "<group>"; };
+		7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinylCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VinylCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E272FF5280EB55F0096DB72 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		7E272FF7280EED7B0096DB72 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -117,6 +131,9 @@
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		7E4297C6281ED53B00649458 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedProfileViewController.swift; sourceTree = "<group>"; };
+		7E4297CA281F6DC600649458 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -125,7 +142,7 @@
 		7E44B7B42809751300CF24AC /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7B82809AEB800CF24AC /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentsion.swift"; sourceTree = "<group>"; };
-		7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -144,7 +161,7 @@
 		7E498D542808175400389D1C /* VolunteerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTabBarController.swift; sourceTree = "<group>"; };
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioListViewController.swift; sourceTree = "<group>"; };
-		7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedDiscoveryViewController.swift; sourceTree = "<group>"; };
+		7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,7 +207,6 @@
 		7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		7ED920F928070E4C00DD892A /* userType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userType.swift; sourceTree = "<group>"; };
 		7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerLobbyViewController.swift; sourceTree = "<group>"; };
-		7EDBA2CB2805E9A900C10FA5 /* VolunteerLobbyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolunteerLobbyViewController.xib; sourceTree = "<group>"; };
 		7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClientForVolunteer.swift; sourceTree = "<group>"; };
 		7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "96115-video-call.json"; sourceTree = "<group>"; };
 		BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lightening.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,7 +256,11 @@
 			children = (
 				7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
+				7E4297C6281ED53B00649458 /* NavigationBarView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
+				7E4297CA281F6DC600649458 /* AnimationView.swift */,
+				7E225862281FCCA900FE8694 /* DoorView.swift */,
+				7E225864281FF5F000FE8694 /* AirBallonView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -267,14 +287,13 @@
 		7E44B7BE280AEA0300CF24AC /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
-				7E44B7BF280AEA1800CF24AC /* DiscoveryViewController.swift */,
+				7E44B7BF280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift */,
 				7E2730122810E6260096DB72 /* SearchViewController.swift */,
 				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
 				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
-				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
-				7E55BEAF281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift */,
+				7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */,
 				7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */,
 			);
 			path = Discovery;
@@ -299,6 +318,8 @@
 				7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */,
 				7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */,
 				7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */,
+				7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */,
+				7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -328,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				7E498D582808188300389D1C /* UploadViewController.swift */,
+				7E272FF5280EB55F0096DB72 /* RecordViewController.swift */,
 				7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */,
 			);
 			path = Upload;
@@ -372,7 +394,9 @@
 				7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */,
 				7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */,
 				7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */,
+				7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */,
 				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
+				7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
 				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
@@ -383,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
+				7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */,
 				7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 				7E409321281E32160027D8B5 /* MyProfileViewController.swift */,
@@ -445,7 +470,6 @@
 				7E44B7C8280AFD9200CF24AC /* Discovery */,
 				7E44B7A72809159F00CF24AC /* Upload */,
 				7E44B7A62809154F00CF24AC /* Base */,
-				7EDBA2CB2805E9A900C10FA5 /* VolunteerLobbyViewController.xib */,
 				7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */,
 			);
 			path = View;
@@ -565,8 +589,10 @@
 				7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */,
 				7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */,
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
+				7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
+				7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */,
 				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
 				7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */,
@@ -574,8 +600,8 @@
 				7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */,
 				7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */,
 				7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */,
+				7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */,
 				7EB3F500280D6CDB00C6E385 /* GalleryCollectionViewCell.xib in Resources */,
-				7EDBA2CC2805E9A900C10FA5 /* VolunteerLobbyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +690,7 @@
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
 				7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */,
+				7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
@@ -676,13 +703,16 @@
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
 				7E44B7E1280C4B8300CF24AC /* AddDetailsCoverTableViewCell.swift in Sources */,
 				7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */,
+				7E225863281FCCA900FE8694 /* DoorView.swift in Sources */,
 				7EA73F762816FC8E0071D197 /* VisuallyImpairedTabBarController.swift in Sources */,
 				7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */,
 				7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */,
 				7E44B7D4280B0F1F00CF24AC /* UICollectionView+Extension.swift in Sources */,
+				7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */,
 				7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */,
+				7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */,
 				7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
@@ -707,12 +737,14 @@
 				7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */,
 				7E272FFE280EEDDE0096DB72 /* AudioFileManager.swift in Sources */,
 				7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */,
-				7E44B7C0280AEA1800CF24AC /* DiscoveryViewController.swift in Sources */,
+				7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */,
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
-				7E55BEB0281BC6F700F6A8AC /* ImpairedDiscoveryViewController.swift in Sources */,
+				7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */,
+				7E4297C7281ED53B00649458 /* NavigationBarView.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,
+				7E22586B282056B100FE8694 /* VinylCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
