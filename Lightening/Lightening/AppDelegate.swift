@@ -23,6 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Firestore.firestore().settings = settings
         
         IQKeyboardManager.shared.enable = true
+        
+        if #available(iOS 15, *) {
+            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().tintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().isTranslucent = false
+        } else {
+            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().tintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().isTranslucent = false
+        }
 
         return true
     }
@@ -42,4 +52,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-
