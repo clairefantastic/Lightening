@@ -10,6 +10,8 @@ import UIKit
 class AddDetailsTopicTableViewCell: UITableViewCell {
     
     weak var delegate: AddDetailsTableViewCellDelegate?
+    
+    var topicButtonArray = [UIButton()]
 
     @IBOutlet weak var categoryLabel: UILabel!
     
@@ -38,10 +40,27 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
     @objc func selectTopic(_ sender: UIButton) {
         
-        sender.layer.borderWidth = 2
-        sender.layer.borderColor = UIColor.black.cgColor
+        sender.isSelected = true
         
-        delegate?.didSelectTopic(sender)
+        for button in topicButtonArray {
+        
+            if button != sender {
+                button.isSelected = false
+            }
+        }
+        
+        for button in topicButtonArray {
+            
+            if button.isSelected == true {
+                button.layer.borderWidth = 2
+                button.layer.borderColor = UIColor.black.cgColor
+                button.setTitleColor(.black, for: .selected)
+                delegate?.didSelectTopic(button)
+            } else {
+                button.layer.borderWidth = 0
+            }
+        }
+        
     }
     
 }
@@ -59,6 +78,8 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
         
         cell.topicButton.setTitle(topicArray[indexPath.row], for: .selected)
+        
+        topicButtonArray.append(cell.topicButton)
         
         cell.topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
         
