@@ -19,6 +19,8 @@ class AudioDescriptionViewController: BaseViewController {
     
     private let sendOutTextButton = UIButton()
     
+    private let moreButton = UIButton()
+    
     private let enterCommentTextField = UITextField()
     
     var comments: [Comment] = [] {
@@ -98,6 +100,8 @@ class AudioDescriptionViewController: BaseViewController {
         layoutCommentsTableView()
         
         setUpCommentsTableView()
+        
+        configureMoreButton()
         
     }
     
@@ -188,13 +192,13 @@ extension AudioDescriptionViewController {
         
         audioCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 24).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
     }
     
     private func layoutSendOutTextButton() {
@@ -265,6 +269,16 @@ extension AudioDescriptionViewController {
         
         enterCommentTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
+        enterCommentTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: enterCommentTextField.frame.height))
+        
+        enterCommentTextField.rightView = UIView(frame: CGRect(x: enterCommentTextField.frame.width - 15, y: 0, width: 15, height: enterCommentTextField.frame.height))
+        
+        enterCommentTextField.leftViewMode = .always
+        
+        enterCommentTextField.rightViewMode = .always
+        
+        enterCommentTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
     }
     
     private func layoutCommentsTableView() {
@@ -301,6 +315,57 @@ extension AudioDescriptionViewController {
         commentsTableView.delegate = self
         
         commentsTableView.dataSource = self
+    }
+    
+    private func configureMoreButton() {
+        
+        self.view.addSubview(moreButton)
+        
+        moreButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: moreButton, attribute: .bottom, relatedBy: .equal, toItem: audioCoverImageView, attribute: .top, multiplier: 1, constant: -8).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        moreButton.setImage(UIImage(named: "option"), for: .normal)
+        
+        moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        moreButton.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
+        
+    }
+    
+    @objc func tapMoreButton() {
+        
+        let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+
+        let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+            
+            let controller = UIAlertController(title: "Are you sure?",
+                                               message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                               preferredStyle: .alert)
+            let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+               print("Successfully block this user")
+            }
+            controller.addAction(blockAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            controller.addAction(cancelAction)
+            self.present(controller, animated: true, completion: nil)
+
+        }
+              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                  blockUserAlertController.dismiss(animated: true, completion: nil)
+              }
+
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+
+        present(blockUserAlertController, animated: true, completion: nil)
     }
     
 }
