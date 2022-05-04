@@ -45,10 +45,16 @@ class SearchViewController: BaseViewController {
             
             case .success(let audios):
                 
-                for audio in audios where UserManager.shared.currentUser?.blockList?.contains(audio.authorId ?? "") == false {
-                
-                    self?.audios.append(audio)
-        
+                if let blockList = UserManager.shared.currentUser?.blockList {
+                    
+                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                        
+                        self?.audios.append(audio)
+                        
+                    }
+                } else {
+                    
+                    self?.audios = audios
                 }
                 
             case .failure(let error):
