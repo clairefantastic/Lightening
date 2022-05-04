@@ -71,6 +71,10 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
+            if comment?.authorId == UserManager.shared.currentUser?.userId {
+                moreButton.isHidden = true
+            }
+            
             if comment?.authorImage == nil {
                 authorImageView.image = UIImage(named: "mask")
             } else {

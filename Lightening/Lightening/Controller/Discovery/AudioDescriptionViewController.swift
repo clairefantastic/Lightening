@@ -38,6 +38,11 @@ class AudioDescriptionViewController: BaseViewController {
     var audio: Audio? {
         
         didSet {
+            
+            if audio?.authorId == UserManager.shared.currentUser?.userId {
+                
+                moreButton.isHidden = true
+            }
         
             audioTitleLabel.text = self.audio?.title
             audioAuthorLabel.text = self.audio?.author?.displayName
