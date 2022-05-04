@@ -233,6 +233,32 @@ class UserManager {
         }
     }
     
+    func blockUser(userId: String, completion: @escaping (Result<String, Error>) -> Void) {
+
+        guard let currentUser = currentUser else {
+            return
+        }
+
+        let document = db.collection("users").document(currentUser.userId ?? "").collection("blockList").document(userId)
+        
+        do {
+           try document.setData(["userId" : userId]) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+        } catch {
+            
+            completion(.failure(error))
+        }
+
+    }
+    
     func deleteAccount(completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = UserManager.shared.currentUser else { return }

@@ -354,7 +354,17 @@ extension AudioDescriptionViewController {
                                                message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
                                                preferredStyle: .alert)
             let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
-               print("Successfully block this user")
+                
+                UserManager.shared.blockUser(userId: self.audio?.authorId ?? "") { result in
+                    switch result {
+                    case .success(let success):
+                        print(success)
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                }
+               
             }
             controller.addAction(blockAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -384,7 +394,52 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
         guard let cell = commentsTableView.dequeueReusableCell(withIdentifier: "\(CommentTableViewCell.self)", for: indexPath) as? CommentTableViewCell
         else { return UITableViewCell() }
         cell.comment = comments[indexPath.row]
+        cell.moreButton.addTarget(self, action: #selector(tapCommentMoreButton), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func tapCommentMoreButton(_ sender: UIButton) {
+        
+        let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+
+        let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+            
+            let controller = UIAlertController(title: "Are you sure?",
+                                               message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                               preferredStyle: .alert)
+            let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+                
+                let point = sender.convert(CGPoint.zero, to: self.commentsTableView)
+                
+                if let indexPath = self.commentsTableView.indexPathForRow(at: point) {
+                    
+                    UserManager.shared.blockUser(userId: self.comments[indexPath.row].authorId ?? "") { result in
+                        switch result {
+                        case .success(let success):
+                            print(success)
+                        case .failure(let error):
+                            print(error)
+                        }
+                        
+                    }
+                }
+               
+            }
+            controller.addAction(blockAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            controller.addAction(cancelAction)
+            self.present(controller, animated: true, completion: nil)
+
+        }
+              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                  blockUserAlertController.dismiss(animated: true, completion: nil)
+              }
+
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+
+        present(blockUserAlertController, animated: true, completion: nil)
     }
     
 }
