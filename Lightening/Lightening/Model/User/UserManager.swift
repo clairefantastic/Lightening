@@ -239,10 +239,12 @@ class UserManager {
             return
         }
 
-        let document = db.collection("users").document(currentUser.userId ?? "").collection("blockList").document(userId)
+        let document = db.collection("users").document(currentUser.userId ?? "")
         
         do {
-           try document.setData(["userId" : userId]) { error in
+           try document.updateData([
+            "blockList": FieldValue.arrayUnion([userId])
+        ]) { error in
                 
                 if let error = error {
                     
