@@ -65,8 +65,18 @@ class AudioDescriptionViewController: BaseViewController {
                             switch result {
                                 
                             case .success(let comments):
-                                self?.comments = comments
                                 
+                                if let blockList = UserManager.shared.currentUser?.blockList {
+                                    
+                                    for comment in comments where blockList.contains(comment.authorId ?? "") == false {
+                                        
+                                        self?.comments.append(comment)
+                                        
+                                    }
+                                } else {
+                                    
+                                    self?.comments = comments
+                                }
                             case .failure(let error):
                                 print("fetchData.failure: \(error)")
                             }
