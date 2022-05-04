@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: BaseViewController {
     
-    private var audios: [Audio]?
+    private var audios: [Audio] = []
     
     private var filteredAudioFiles: [Audio] = []
     
@@ -45,7 +45,11 @@ class SearchViewController: BaseViewController {
             
             case .success(let audios):
                 
-                self?.audios = audios
+                for audio in audios where UserManager.shared.currentUser?.blockList?.contains(audio.authorId ?? "") == false {
+                
+                    self?.audios.append(audio)
+        
+                }
                 
             case .failure(let error):
                 
@@ -122,7 +126,7 @@ extension SearchViewController: UISearchResultsUpdating {
         
         if let searchText = searchController.searchBar.text,
                    searchText.isEmpty == false  {
-            self.filteredAudioFiles = audios?.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
+            self.filteredAudioFiles = audios.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
                 } else {
                     self.filteredAudioFiles = []
                 }

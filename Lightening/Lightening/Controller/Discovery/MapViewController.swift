@@ -59,9 +59,13 @@ extension MapViewController: CLLocationManagerDelegate {
             
             case .success(let audios):
                 
-                self?.audios = audios
+                for audio in audios where UserManager.shared.currentUser?.blockList?.contains(audio.authorId ?? "") == false {
                 
-                audios.forEach { audio in
+                    self?.audios.append(audio)
+        
+                }
+                
+                self?.audios.forEach { audio in
                     
                     self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
                         coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))

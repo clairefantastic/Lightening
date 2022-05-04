@@ -14,6 +14,8 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     
     var sections = DiscoverySection.allSections
     
+    var audios: [Audio] = []
+    
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     lazy var dataSource = makeDataSource()
@@ -66,21 +68,27 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
             case .success(let audios):
                 
+                for audio in audios where UserManager.shared.currentUser?.blockList?.contains(audio.authorId ?? "") == false {
+                
+                    self?.audios.append(audio)
+        
+                }
+                
                 self?.sections[0].audios = []
                 
-                self?.sections[0].audios = audios.filter { $0.topic == "Nature"}
+                self?.sections[0].audios.append(contentsOf: self?.audios.filter { $0.topic == "Nature"} ?? [])
                 
                 self?.sections[1].audios = []
                 
-                self?.sections[1].audios.append(contentsOf: audios.filter { $0.topic == "City"})
+                self?.sections[1].audios.append(contentsOf: self?.audios.filter { $0.topic == "City"} ?? [])
                 
                 self?.sections[2].audios = []
                 
-                self?.sections[2].audios.append(contentsOf: audios.filter { $0.topic == "Pet"})
+                self?.sections[2].audios.append(contentsOf: self?.audios.filter { $0.topic == "Pet"} ?? [])
                 
                 self?.sections[3].audios = []
                 
-                self?.sections[3].audios.append(contentsOf: audios.filter { $0.topic == "Others"})
+                self?.sections[3].audios.append(contentsOf: self?.audios.filter { $0.topic == "Others"} ?? [])
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
