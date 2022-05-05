@@ -207,17 +207,6 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     }
 }
 
-extension UIView{
-    func rotate() {
-        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.toValue = NSNumber(value: Double.pi * 2)
-        rotation.duration = 1
-        rotation.isCumulative = true
-        rotation.repeatCount = Float.greatestFiniteMagnitude
-        self.layer.add(rotation, forKey: "rotationAnimation")
-    }
-}
-
 extension ImpairedDiscoveryViewController {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
