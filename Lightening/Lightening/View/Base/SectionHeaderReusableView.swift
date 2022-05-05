@@ -50,8 +50,8 @@ class SectionHeaderReusableView: UICollectionReusableView {
   
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+//        layer.borderWidth = 3
+//        layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
         backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
         addSubview(titleLabel)
         addSubview(titleButton)
