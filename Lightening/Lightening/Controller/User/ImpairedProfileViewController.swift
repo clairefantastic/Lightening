@@ -98,10 +98,6 @@ extension ImpairedProfileViewController {
         
         let userSettingsAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
-        let checkBlockListAction = UIAlertAction(title: "Block List", style: .default) { _ in
-            
-        }
-        
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { _ in
             
             self.logOut()
@@ -129,7 +125,6 @@ extension ImpairedProfileViewController {
             userSettingsAlertController.dismiss(animated: true, completion: nil)
         }
         
-        userSettingsAlertController.addAction(checkBlockListAction)
         userSettingsAlertController.addAction(logOutAction)
         userSettingsAlertController.addAction(deleteAccountAction)
         userSettingsAlertController.addAction(cancelAction)
