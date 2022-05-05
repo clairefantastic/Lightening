@@ -146,21 +146,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: emailTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
-        emailTextField.layer.borderWidth = 2
-        
-        emailTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
-        
-        emailTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        ElementsStyle.styleTextField(emailTextField)
         
         emailTextField.layer.cornerRadius = 25
-        
-        emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: emailTextField.frame.height))
-        
-        emailTextField.rightView = UIView(frame: CGRect(x: emailTextField.frame.width - 15, y: 0, width: 15, height: emailTextField.frame.height))
-        
-        emailTextField.leftViewMode = .always
-        
-        emailTextField.rightViewMode = .always
         
         emailTextField.font = UIFont(name: "American Typewriter", size: 16)
     }
@@ -203,21 +191,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: passwordTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
-        passwordTextField.layer.borderWidth = 2
-        
-        passwordTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
-        
-        passwordTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        ElementsStyle.styleTextField(passwordTextField)
         
         passwordTextField.layer.cornerRadius = 25
-        
-        passwordTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: passwordTextField.frame.height))
-        
-        passwordTextField.rightView = UIView(frame: CGRect(x: passwordTextField.frame.width - 15, y: 0, width: 15, height: passwordTextField.frame.height))
-        
-        passwordTextField.leftViewMode = .always
-        
-        passwordTextField.rightViewMode = .always
         
         passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
         
