@@ -161,13 +161,8 @@ class AddDetailsViewController: BaseViewController {
                     print("onTapPublish, success")
                     
                     self?.animationView.removeFromSuperview()
-                    
-                    guard let count = self?.navigationController?.viewControllers.count else { return }
-                
-                    if let preController = self?.navigationController?.viewControllers[count - 3] {
 
-                        self?.navigationController?.popToViewController(preController, animated: true)
-                    }
+                    self?.tabBarController?.selectedIndex = 1
                     
                 case .failure(let error):
 
