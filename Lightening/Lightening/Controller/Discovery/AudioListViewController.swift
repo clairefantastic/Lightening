@@ -19,19 +19,20 @@ class AudioListViewController: BaseViewController {
         layoutTableView()
         
         setUpTableView()
+        
     }
 }
 
 extension AudioListViewController {
     
-    private func layoutTableView() {
+    func layoutTableView() {
         
         view.stickSubView(tableView)
         
         ElementsStyle.styleClearBackground(tableView)
     }
     
-    private func setUpTableView() {
+    func setUpTableView() {
         
         tableView.separatorStyle = .none
         
