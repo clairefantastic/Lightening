@@ -9,7 +9,19 @@ import UIKit
 
 class AudioListViewController: BaseViewController {
     
-    var audios: [Audio]?
+    let noContentLabel = UILabel()
+    
+    var audios: [Audio]? {
+        
+        didSet {
+            
+            if audios?.isEmpty == true {
+                
+                configureNoContentLabel()
+                
+            }
+        }
+    }
     
     private var tableView = UITableView()
     
@@ -24,6 +36,31 @@ class AudioListViewController: BaseViewController {
 }
 
 extension AudioListViewController {
+    
+    func configureNoContentLabel() {
+        
+        self.view.addSubview(noContentLabel)
+        
+        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        
+        noContentLabel.text = "No audio files yet!"
+        noContentLabel.font = UIFont(name: "American Typewriter", size: 20)
+        noContentLabel.adjustsFontForContentSizeCategory = true
+        noContentLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noContentLabel.textAlignment = .center
+        noContentLabel.numberOfLines = 0
+        noContentLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+    }
     
     func layoutTableView() {
         
