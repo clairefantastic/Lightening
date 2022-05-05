@@ -13,7 +13,11 @@ class SignInViewController: BaseViewController {
     
     let appleSignInbutton = ASAuthorizationAppleIDButton(authorizationButtonType: .default, authorizationButtonStyle: .white)
     
+    private let emailLabel = UILabel()
+    
     private let emailTextField = UITextField()
+    
+    private let passwordLabel = UILabel()
     
     private let passwordTextField = UITextField()
     
@@ -36,19 +40,23 @@ class SignInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureWelcomeLabel()
+        
+        configureEmailLabel()
+        
         configureEmailTextField()
         
+        configurePasswordLabel()
+        
         configurePasswordTextField()
-        
+      
         configureLogInButton()
-        
+       
         configureAppleSignInButton()
         
         configureNoAccountLabel()
         
         configureRegisterButton()
-        
-        configureWelcomeLabel()
         
     }
     
@@ -75,41 +83,173 @@ class SignInViewController: BaseViewController {
 
 extension SignInViewController {
     
-    private func configureRegisterButton() {
+    private func configureWelcomeLabel() {
     
-        view.addSubview(registerButton)
+        view.addSubview(welcomeLabel)
         
-        registerButton.translatesAutoresizingMaskIntoConstraints = false
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: registerButton, attribute: .top, relatedBy: .equal, toItem: haveNoAccountLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: welcomeLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: registerButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: welcomeLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: registerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: welcomeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        registerButton.setTitle("Registration", for: .normal)
-        
-        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        registerButton.isEnabled = true
-        
-        registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
+        welcomeLabel.text = "Welcome, Lightening!"
+        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        welcomeLabel.adjustsFontForContentSizeCategory = true
+        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textAlignment = .center
+        welcomeLabel.numberOfLines = 0
+        welcomeLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
 
     }
     
-    @objc func presentRegisterPage() {
+    private func configureEmailLabel() {
         
-        let registerViewController = RegisterViewController()
+        self.view.addSubview(emailLabel)
         
-        registerViewController.modalPresentationStyle = .fullScreen
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.present(registerViewController, animated: true)
+        NSLayoutConstraint(item: emailLabel, attribute: .top, relatedBy: .equal, toItem: welcomeLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: emailLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: emailLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        emailLabel.text = "Email"
+        emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        emailLabel.adjustsFontForContentSizeCategory = true
+        emailLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        emailLabel.textAlignment = .left
+        emailLabel.numberOfLines = 0
+        emailLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
+    
+    private func configureEmailTextField() {
+        
+        self.view.addSubview(emailTextField)
+        
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: emailLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: emailTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: emailTextField, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: emailTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
+        
+        emailTextField.layer.borderWidth = 2
+        
+        emailTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        
+        emailTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
+        emailTextField.layer.cornerRadius = 25
+    }
+    
+    private func configurePasswordLabel() {
+        
+        self.view.addSubview(passwordLabel)
+        
+        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: passwordLabel, attribute: .top, relatedBy: .equal, toItem: emailTextField, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: passwordLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: passwordLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        passwordLabel.text = "Password"
+        passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        passwordLabel.adjustsFontForContentSizeCategory = true
+        passwordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        passwordLabel.textAlignment = .left
+        passwordLabel.numberOfLines = 0
+        passwordLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
+    
+    private func configurePasswordTextField() {
+        
+        self.view.addSubview(passwordTextField)
+        
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: passwordTextField, attribute: .top, relatedBy: .equal, toItem: passwordLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: passwordTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: passwordTextField, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: passwordTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
+        
+        passwordTextField.layer.borderWidth = 2
+        
+        passwordTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        
+        passwordTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        
+        passwordTextField.layer.cornerRadius = 25
+    }
+    
+    private func configureLogInButton() {
+    
+        view.addSubview(logInButton)
+        
+        logInButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: logInButton, attribute: .top, relatedBy: .equal, toItem: passwordTextField, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: logInButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: logInButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
+        
+        NSLayoutConstraint(item: logInButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        logInButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        logInButton.setTitle("Log in", for: .normal)
+        
+        logInButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        logInButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        logInButton.isEnabled = true
+        
+        logInButton.addTarget(self, action: #selector(handleNativeSignIn), for: .touchUpInside)
+        
+        logInButton.layer.cornerRadius = 25
+
+    }
+    
+    private func configureAppleSignInButton() {
+        
+        self.view.addSubview(appleSignInbutton)
+        
+        appleSignInbutton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
+        
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
+        
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: appleSignInbutton, attribute: .top, relatedBy: .equal, toItem: logInButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
+        
+        appleSignInbutton.cornerRadius = 25
+        
+        appleSignInbutton.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
+        
     }
     
     private func configureNoAccountLabel() {
@@ -129,7 +269,7 @@ extension SignInViewController {
         haveNoAccountLabel.text = "Have no account yet?"
         haveNoAccountLabel.font = UIFont(name: "American Typewriter", size: 14)
         haveNoAccountLabel.adjustsFontForContentSizeCategory = true
-        haveNoAccountLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        haveNoAccountLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         haveNoAccountLabel.textAlignment = .center
         haveNoAccountLabel.numberOfLines = 0
         haveNoAccountLabel.setContentCompressionResistancePriority(
@@ -137,118 +277,43 @@ extension SignInViewController {
 
     }
     
-    private func configureWelcomeLabel() {
+    private func configureRegisterButton() {
     
-        view.addSubview(welcomeLabel)
+        view.addSubview(registerButton)
         
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        registerButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: welcomeLabel, attribute: .top, relatedBy: .equal, toItem: emailTextField, attribute: .top, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: registerButton, attribute: .top, relatedBy: .equal, toItem: haveNoAccountLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: welcomeLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: registerButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: welcomeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: registerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
-        NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        welcomeLabel.text = "Welcome, Lightening!"
-        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
-        welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        welcomeLabel.textAlignment = .center
-        welcomeLabel.numberOfLines = 0
-        welcomeLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        registerButton.setTitle("Registration", for: .normal)
+        
+        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        registerButton.isEnabled = true
+        
+        registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
+        
+        registerButton.layer.cornerRadius = 25
 
     }
     
-    private func configureAppleSignInButton() {
+    @objc func presentRegisterPage() {
         
-        self.view.addSubview(appleSignInbutton)
+        let registerViewController = RegisterViewController()
         
-        appleSignInbutton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        registerViewController.modalPresentationStyle = .fullScreen
         
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
-        
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: appleSignInbutton, attribute: .top, relatedBy: .equal, toItem: logInButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
-        
-        appleSignInbutton.cornerRadius = 30.0
-        
-        appleSignInbutton.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
-        
-    }
-    
-    private func configureEmailTextField() {
-        
-        self.view.addSubview(emailTextField)
-        
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: emailTextField, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 150).isActive = true
-        
-        NSLayoutConstraint(item: emailTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: emailTextField, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: emailTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
-        emailTextField.layer.borderWidth = 2
-        
-        emailTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
-        
-        emailTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
-    }
-    
-    private func configurePasswordTextField() {
-        
-        self.view.addSubview(passwordTextField)
-        
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: passwordTextField, attribute: .top, relatedBy: .equal, toItem: emailTextField, attribute: .bottom, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: passwordTextField, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: passwordTextField, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: passwordTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
-        passwordTextField.layer.borderWidth = 2
-        
-        passwordTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
-        
-        passwordTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
-    }
-    
-    private func configureLogInButton() {
-    
-        view.addSubview(logInButton)
-        
-        logInButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: logInButton, attribute: .top, relatedBy: .equal, toItem: passwordTextField, attribute: .bottom, multiplier: 1, constant: 40).isActive = true
-        
-        NSLayoutConstraint(item: logInButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: logInButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
-        NSLayoutConstraint(item: logInButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        logInButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        logInButton.setTitle("Log in", for: .normal)
-        
-        logInButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        logInButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        logInButton.isEnabled = true
-        
-        logInButton.addTarget(self, action: #selector(handleNativeSignIn), for: .touchUpInside)
-
+        self.present(registerViewController, animated: true)
     }
     
     @objc func handleNativeSignIn() {
@@ -288,7 +353,6 @@ extension SignInViewController {
                 }
             
                   print(Auth.auth().currentUser?.email)
-            
         }
     
     }
