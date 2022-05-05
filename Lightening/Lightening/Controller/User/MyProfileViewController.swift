@@ -350,9 +350,9 @@ extension MyProfileViewController {
     
     @objc func didTapSeeMoreLikedAudios() {
         
-        let myAudioListViewController = MyAudioListViewController()
-        myAudioListViewController.audios = likedAudios
-        self.navigationController?.pushViewController(myAudioListViewController, animated: true)
+        let likedAudioListViewController = LikedAudioListViewController()
+        likedAudioListViewController.audios = likedAudios
+        self.navigationController?.pushViewController(likedAudioListViewController, animated: true)
     }
 }
 
