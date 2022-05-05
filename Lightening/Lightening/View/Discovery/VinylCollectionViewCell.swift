@@ -22,6 +22,7 @@ class VinylCollectionViewCell: UICollectionViewCell {
         // Initialization code
         ElementsStyle.styleClearBackground(self)
         audioCoverImageView.layer.cornerRadius = 30
+        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
     }
     
     var audio: Audio? {
