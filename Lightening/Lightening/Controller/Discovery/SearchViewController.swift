@@ -11,7 +11,22 @@ class SearchViewController: BaseViewController {
     
     private var audios: [Audio] = []
     
-    private var filteredAudioFiles: [Audio] = []
+    private let noContentLabel = UILabel()
+    
+    private var filteredAudioFiles: [Audio]? {
+        
+        didSet {
+            
+            if filteredAudioFiles?.isEmpty == true {
+                
+                noContentLabel.isHidden = false
+            
+            } else {
+              
+                noContentLabel.isHidden = true
+            }
+        }
+    }
     
     private var tableView = UITableView()
     
@@ -19,6 +34,8 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNoContentLabel()
         
         navigationItem.leftBarButtonItem?.tintColor = .black
         
@@ -95,7 +112,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.filteredAudioFiles.count
+        return self.filteredAudioFiles?.count  ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +120,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultTableViewCell.self)", for: indexPath) as? SearchResultTableViewCell
         else { return UITableViewCell() }
         
-        cell.audio = filteredAudioFiles[indexPath.row]
+        cell.audio = filteredAudioFiles?[indexPath.row]
         
         return cell
 
@@ -113,7 +130,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let audioPlayerViewController = AudioPlayerViewController()
         addChild(audioPlayerViewController)
-        audioPlayerViewController.audio = filteredAudioFiles[indexPath.row]
+        audioPlayerViewController.audio = filteredAudioFiles?[indexPath.row]
         audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)
@@ -138,5 +155,35 @@ extension SearchViewController: UISearchResultsUpdating {
                 }
         self.tableView.reloadData()
                 
+    }
+}
+
+extension SearchViewController {
+    
+    private func configureNoContentLabel() {
+        
+        self.view.addSubview(noContentLabel)
+        
+        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.bringSubviewToFront(noContentLabel)
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        
+        noContentLabel.text = "No audio files yet!"
+        noContentLabel.font = UIFont(name: "American Typewriter", size: 20)
+        noContentLabel.adjustsFontForContentSizeCategory = true
+        noContentLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noContentLabel.textAlignment = .center
+        noContentLabel.numberOfLines = 0
+        noContentLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
     }
 }
