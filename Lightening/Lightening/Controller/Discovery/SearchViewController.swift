@@ -106,6 +106,55 @@ extension SearchViewController {
         tableView.dataSource = self
     
     }
+    
+    @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        let touchPoint = sender.location(in: self.tableView)
+        
+        if (sender.state == UIGestureRecognizer.State.ended) {
+            
+            let indexPath = self.tableView.indexPathForRow(at: touchPoint)
+            
+            if indexPath != nil && self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+                let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+
+                let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+                    
+                    let controller = UIAlertController(title: "Are you sure?",
+                                                       message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                                       preferredStyle: .alert)
+                    let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+                        
+                        UserManager.shared.blockUser(userId: self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "") { result in
+                            switch result {
+                            case .success(let success):
+                                print(success)
+                                self.navigationController?.popToRootViewController(animated: true)
+                            case .failure(let error):
+                                print(error)
+                            }
+                            
+                        }
+                       
+                    }
+                    controller.addAction(blockAction)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    controller.addAction(cancelAction)
+                    self.present(controller, animated: true, completion: nil)
+
+                }
+                      let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                          blockUserAlertController.dismiss(animated: true, completion: nil)
+                      }
+
+                blockUserAlertController.addAction(blockUserAction)
+                blockUserAlertController.addAction(cancelAction)
+
+                present(blockUserAlertController, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -121,6 +170,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         else { return UITableViewCell() }
         
         cell.audio = filteredAudioFiles?[indexPath.row]
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
+        
+        cell.addGestureRecognizer(longPress)
         
         return cell
 
