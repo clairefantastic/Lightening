@@ -89,7 +89,7 @@ extension SignInViewController {
         
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: welcomeLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: welcomeLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
         NSLayoutConstraint(item: welcomeLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
@@ -153,6 +153,16 @@ extension SignInViewController {
         emailTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
         emailTextField.layer.cornerRadius = 25
+        
+        emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: emailTextField.frame.height))
+        
+        emailTextField.rightView = UIView(frame: CGRect(x: emailTextField.frame.width - 15, y: 0, width: 15, height: emailTextField.frame.height))
+        
+        emailTextField.leftViewMode = .always
+        
+        emailTextField.rightViewMode = .always
+        
+        emailTextField.font = UIFont(name: "American Typewriter", size: 16)
     }
     
     private func configurePasswordLabel() {
@@ -200,6 +210,18 @@ extension SignInViewController {
         passwordTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
         passwordTextField.layer.cornerRadius = 25
+        
+        passwordTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: passwordTextField.frame.height))
+        
+        passwordTextField.rightView = UIView(frame: CGRect(x: passwordTextField.frame.width - 15, y: 0, width: 15, height: passwordTextField.frame.height))
+        
+        passwordTextField.leftViewMode = .always
+        
+        passwordTextField.rightViewMode = .always
+        
+        passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
+        passwordTextField.isSecureTextEntry = true
     }
     
     private func configureLogInButton() {
