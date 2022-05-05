@@ -369,6 +369,7 @@ extension AudioDescriptionViewController {
                     switch result {
                     case .success(let success):
                         print(success)
+                        self.navigationController?.popToRootViewController(animated: true)
                     case .failure(let error):
                         print(error)
                     }
@@ -427,6 +428,7 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
                         switch result {
                         case .success(let success):
                             print(success)
+                            self.navigationController?.popToRootViewController(animated: true)
                         case .failure(let error):
                             print(error)
                         }
