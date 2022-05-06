@@ -181,16 +181,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
+        
         let audioPlayerViewController = AudioPlayerViewController()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = filteredAudioFiles?[indexPath.row]
-        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
+        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)
         UIView.animate(withDuration: 0.25,
                        delay: 0.0001,
                        options: .curveEaseInOut,
-                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
+                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - tabBarHeight - 80, width: width, height: 80)},
                        completion: {_ in })
         
     }

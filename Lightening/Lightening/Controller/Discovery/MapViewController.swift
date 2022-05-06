@@ -133,16 +133,17 @@ extension MapViewController: MKMapViewDelegate {
         let annotation = view.annotation as? AudioAnnotation
         let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
+        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
         let audioPlayerViewController = AudioPlayerViewController()
         self.addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
-        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
+        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         self.view.addSubview(audioPlayerViewController.view)
         UIView.animate(withDuration: 0.25,
                        delay: 0.0001,
                        options: .curveEaseInOut,
-                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
+                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - tabBarHeight - 80, width: width, height: 80)},
                        completion: {_ in })
         
     }
