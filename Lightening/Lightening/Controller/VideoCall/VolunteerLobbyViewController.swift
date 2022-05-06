@@ -13,6 +13,8 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let statusSwitch = UISwitch()
     
+    private let instructionLabel = UILabel()
+    
     private let doorView = DoorView()
     
     private let answerVideoCallButton = UIButton()
@@ -36,13 +38,12 @@ class VolunteerLobbyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         self.navigationItem.title = "Video Call"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
         layoutAnswerButton()
+        configureInstructionLabel()
         configureSwitch()
         
         self.signalingConnected = false
@@ -57,11 +58,6 @@ class VolunteerLobbyViewController: BaseViewController {
         self.webRTCClient.unmuteAudio()
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
-        
-//        let popUpViewController = PopUpViewController()
-//        popUpViewController.modalPresentationStyle = .overCurrentContext
-//        popUpViewController.modalTransitionStyle = .crossDissolve
-//        self.present(popUpViewController, animated: true, completion: nil)
 
     }
     
@@ -255,7 +251,7 @@ extension VolunteerLobbyViewController {
         
         statusSwitch.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: statusSwitch, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: statusSwitch, attribute: .top, relatedBy: .equal, toItem: instructionLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: statusSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
@@ -272,6 +268,30 @@ extension VolunteerLobbyViewController {
         statusSwitch.isOn = true
         
         statusSwitch.addTarget(self, action: #selector(changeStatus), for: .valueChanged)
+    }
+    
+    private func configureInstructionLabel() {
+        
+        self.view.addSubview(instructionLabel)
+        
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+        
+        instructionLabel.text = "Switch status when you are available to answer a call"
+        instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        instructionLabel.adjustsFontForContentSizeCategory = true
+        instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        instructionLabel.textAlignment = .center
+        instructionLabel.numberOfLines = 0
+        instructionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
     }
     
     @objc func changeStatus() {
