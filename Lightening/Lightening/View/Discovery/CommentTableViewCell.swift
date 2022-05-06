@@ -13,7 +13,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            authorImageView.layer.cornerRadius = authorImageView.frame.height / 2
+            authorImageView.layer.cornerRadius = 24
             
         }
     }
@@ -22,7 +22,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            authorNameLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+            authorNameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
             
             authorNameLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
             
@@ -37,7 +37,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            commentTextLabel.font = UIFont(name: "American Typewriter", size: 16)
+            commentTextLabel.font = UIFont(name: "American Typewriter", size: 14)
             
             commentTextLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
             
