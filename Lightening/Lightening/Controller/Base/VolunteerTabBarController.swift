@@ -116,6 +116,15 @@ class VolunteerTabBarController: UITabBarController {
 
         viewControllers = tabs.map({ $0.controller() })
         
+        if #available(iOS 15.0, *) {
+           let appearance = UITabBarAppearance()
+           appearance.configureWithOpaqueBackground()
+           appearance.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+           
+           self.tabBar.standardAppearance = appearance
+           self.tabBar.scrollEdgeAppearance = appearance
+        }
+        
         self.tabBar.tintColor = UIColor.black // tab bar icon tint color
         self.tabBar.isTranslucent = false
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
