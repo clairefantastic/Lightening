@@ -17,6 +17,10 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let doorView = DoorView()
     
+    private let cloudImageView = UIImageView()
+    
+    private let vinylImageView = UIImageView()
+    
     private let answerVideoCallButton = UIButton()
     
     private let signalClientforVolunteer: SignalingClientForVolunteer
@@ -44,6 +48,9 @@ class VolunteerLobbyViewController: BaseViewController {
         
         layoutAnswerButton()
         configureInstructionLabel()
+        configureCloudImageView()
+        configureVinylImageView()
+        configureCloudImageView()
         configureSwitch()
         
         self.signalingConnected = false
@@ -58,6 +65,11 @@ class VolunteerLobbyViewController: BaseViewController {
         self.webRTCClient.unmuteAudio()
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+        
+//        let popUpViewController = PopUpViewController()
+//        popUpViewController.modalPresentationStyle = .overCurrentContext
+//        popUpViewController.modalTransitionStyle = .crossDissolve
+//        self.present(popUpViewController, animated: true, completion: nil)
 
     }
     
@@ -178,6 +190,42 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
 
 extension VolunteerLobbyViewController {
     
+    private func configureCloudImageView() {
+        
+        self.view.addSubview(cloudImageView)
+        
+        cloudImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: cloudImageView, attribute: .top, relatedBy: .equal, toItem: self.instructionLabel, attribute: .bottom, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: cloudImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300).isActive = true
+        
+        NSLayoutConstraint(item: cloudImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
+        
+        NSLayoutConstraint(item: cloudImageView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        cloudImageView.image = UIImage(named: "cloud")
+        
+    }
+    
+    private func configureVinylImageView() {
+        
+        self.view.addSubview(vinylImageView)
+        
+        vinylImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: vinylImageView, attribute: .centerX, relatedBy: .equal, toItem: cloudImageView, attribute: .centerX, multiplier: 1, constant: -60).isActive = true
+        
+        NSLayoutConstraint(item: vinylImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: vinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: vinylImageView, attribute: .centerY, relatedBy: .equal, toItem: cloudImageView, attribute: .centerY, multiplier: 1, constant: -24).isActive = true
+        
+        vinylImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        
+    }
+    
     private func layoutAnswerButton() {
         
         self.view.addSubview(doorView)
@@ -194,7 +242,7 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: doorView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
         
-        NSLayoutConstraint(item: doorView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: doorView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -60).isActive = true
         
         self.view.addSubview(answerVideoCallButton)
         
@@ -208,7 +256,7 @@ extension VolunteerLobbyViewController {
 
         NSLayoutConstraint(item: answerVideoCallButton, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .trailing, multiplier: 1, constant: -8).isActive = true
         
-        answerVideoCallButton.layer.borderWidth = 1
+        answerVideoCallButton.layer.borderWidth = 2
         
         answerVideoCallButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
 
@@ -296,9 +344,13 @@ extension VolunteerLobbyViewController {
     
     @objc func changeStatus() {
         if statusSwitch.isOn == true {
+            self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+            self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         } else {
+            self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
+            self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         }
     }
 }
