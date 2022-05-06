@@ -54,9 +54,10 @@ class UploadViewController: BaseViewController {
         
         view.addSubview(vinylImageView)
         
-        layoutSelectFileButton()
-        
         layoutRecordButton()
+        
+        layoutSelectFileButton()
+    
     
     }
     
@@ -86,7 +87,7 @@ class UploadViewController: BaseViewController {
         
         NSLayoutConstraint(item: vinylImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: vinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height).isActive = true
+        NSLayoutConstraint(item: vinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 600).isActive = true
         
         NSLayoutConstraint(item: vinylImageView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 300).isActive = true
     
@@ -98,7 +99,7 @@ class UploadViewController: BaseViewController {
         
         selectFileButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: selectFileButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -80).isActive = true
+        NSLayoutConstraint(item: selectFileButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1/3, constant: 0).isActive = true
         
@@ -128,7 +129,7 @@ class UploadViewController: BaseViewController {
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: recordButton, attribute: .bottom, relatedBy: .equal, toItem: self.selectFileButton, attribute: .top, multiplier: 1, constant: -40).isActive = true
+        NSLayoutConstraint(item: recordButton, attribute: .top, relatedBy: .equal, toItem: self.vinylImageView, attribute: .top, multiplier: 1, constant: 100).isActive = true
         
         NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1/3, constant: 0).isActive = true
         
