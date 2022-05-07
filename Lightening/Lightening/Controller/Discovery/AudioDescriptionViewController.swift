@@ -187,11 +187,11 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
-        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 20)
+        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
         audioDescriptionLabel.adjustsFontForContentSizeCategory = true
         audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         audioDescriptionLabel.textAlignment = .left
@@ -304,9 +304,9 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: commentsTableView, attribute: .top, relatedBy: .equal, toItem: audioDescriptionLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: commentsTableView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: commentsTableView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
-        NSLayoutConstraint(item: commentsTableView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: commentsTableView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: commentsTableView, attribute: .bottom, relatedBy: .equal, toItem: enterCommentTextField, attribute: .top, multiplier: 1, constant: -16).isActive = true
         
@@ -316,7 +316,7 @@ extension AudioDescriptionViewController {
         
         commentsTableView.separatorStyle = .none
         
-        commentsTableView.layer.borderWidth = 2
+//        commentsTableView.layer.borderWidth = 2
         
         commentsTableView.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
         
