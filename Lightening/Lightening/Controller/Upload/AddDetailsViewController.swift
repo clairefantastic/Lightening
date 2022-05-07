@@ -132,6 +132,8 @@ class AddDetailsViewController: BaseViewController {
     
     @objc func uploadFile(_ sender: UIButton) {
         
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        
         print("Upload file")
         
         DispatchQueue.main.async {
@@ -160,13 +162,17 @@ class AddDetailsViewController: BaseViewController {
 
                     print("onTapPublish, success")
                     
+                    self?.navigationController?.navigationBar.isUserInteractionEnabled = true
+                    
                     self?.animationView.removeFromSuperview()
-
-                    self?.tabBarController?.selectedIndex = 1
+                    
+                    self?.navigationController?.popToRootViewController(animated: true)
                     
                 case .failure(let error):
 
                     print("publishArticle.failure: \(error)")
+                    
+                    self?.navigationController?.navigationBar.isUserInteractionEnabled = true
                 }
                 
             }
