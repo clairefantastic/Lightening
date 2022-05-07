@@ -32,6 +32,8 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
         self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
         mapView.delegate = self
+        
+        mapView.layer.cornerRadius = 10
 
     }
     

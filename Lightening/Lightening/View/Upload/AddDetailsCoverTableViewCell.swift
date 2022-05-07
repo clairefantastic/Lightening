@@ -32,6 +32,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         selectCoverCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
     
         selectCoverCollectionView.registerCellWithNib(identifier: String(describing: SelectCoverCollectionViewCell.self), bundle: nil)
+        
     }
 }
 

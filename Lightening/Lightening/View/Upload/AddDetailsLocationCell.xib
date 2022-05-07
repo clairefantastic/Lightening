@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQ3-Si-na3">
-                        <rect key="frame" x="16" y="16" width="50.5" height="21"/>
+                        <rect key="frame" x="16" y="16" width="50.5" height="37"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5v-HY-RVg">
-                        <rect key="frame" x="16" y="53" width="466" height="275"/>
+                        <rect key="frame" x="16" y="69" width="466" height="275"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="275" id="FZj-aZ-ics"/>
                             <constraint firstAttribute="width" constant="466" id="Z5E-YX-efY"/>
@@ -41,7 +41,7 @@
                     <constraint firstAttribute="trailing" secondItem="s5v-HY-RVg" secondAttribute="trailing" constant="16" id="1qJ-2I-nhb"/>
                     <constraint firstItem="XQ3-Si-na3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="RYF-EH-K49"/>
                     <constraint firstItem="s5v-HY-RVg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="b0c-KF-Kii"/>
-                    <constraint firstAttribute="bottom" secondItem="s5v-HY-RVg" secondAttribute="bottom" constant="16" id="ihA-xn-p4D"/>
+                    <constraint firstAttribute="bottom" secondItem="s5v-HY-RVg" secondAttribute="bottom" id="ihA-xn-p4D"/>
                     <constraint firstItem="XQ3-Si-na3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="mYJ-XL-ZjD"/>
                     <constraint firstItem="s5v-HY-RVg" firstAttribute="top" secondItem="XQ3-Si-na3" secondAttribute="bottom" constant="16" id="qQ3-Db-e0m"/>
                 </constraints>

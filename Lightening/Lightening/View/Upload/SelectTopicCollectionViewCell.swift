@@ -25,6 +25,8 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
         topicButton.layer.borderWidth = 1
         topicButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
         
+        topicButton.layer.cornerRadius = 10
+        
     }
 
 }

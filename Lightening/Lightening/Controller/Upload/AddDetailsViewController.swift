@@ -39,9 +39,9 @@ class AddDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
-        
         layoutUploadButton()
+        
+        setupTableView()
         
         animationView = .init(name: "lf30_editor_6v2ghoza")
           
@@ -62,6 +62,8 @@ class AddDetailsViewController: BaseViewController {
 
     private func setupTableView() {
         
+        ElementsStyle.styleViewBackground(tableView)
+        
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +72,7 @@ class AddDetailsViewController: BaseViewController {
         
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: uploadButton.topAnchor, constant: -16).isActive = true
         
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
@@ -108,11 +110,11 @@ class AddDetailsViewController: BaseViewController {
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -30).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         

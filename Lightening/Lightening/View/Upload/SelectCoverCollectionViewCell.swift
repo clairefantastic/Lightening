@@ -15,6 +15,9 @@ class SelectCoverCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        coverImageView.layer.masksToBounds = true
+        
+        coverImageView.layer.cornerRadius = 10
         
     }
 
