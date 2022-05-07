@@ -227,7 +227,7 @@ extension ImpairedDiscoveryViewController {
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             let size = NSCollectionLayoutSize(
-                widthDimension: NSCollectionLayoutDimension.fractionalWidth(1/3),
+                widthDimension: NSCollectionLayoutDimension.fractionalWidth(2/5),
                 heightDimension: NSCollectionLayoutDimension.absolute(190)
             )
             let itemCount = isPhone ? 1 : 3
