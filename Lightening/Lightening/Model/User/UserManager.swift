@@ -267,6 +267,8 @@ class UserManager {
         
         guard let userId = currentUser.userId else { return }
         
+        self.signOut()
+        
         db.collection("users").document(userId).delete() { error in
             
             if let error = error {
