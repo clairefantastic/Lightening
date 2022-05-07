@@ -299,11 +299,11 @@ extension VolunteerLobbyViewController {
         
         statusSwitch.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: statusSwitch, attribute: .top, relatedBy: .equal, toItem: instructionLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: statusSwitch, attribute: .centerY, relatedBy: .equal, toItem: instructionLabel, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         
         NSLayoutConstraint(item: statusSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: statusSwitch, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
         
@@ -326,13 +326,13 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: instructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         
-        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
+        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 3/4, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: instructionLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: instructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: instructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
         
-        instructionLabel.text = "Switch status when you are available to answer a call"
+        instructionLabel.text = "Switch for receiving call or not"
         instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         instructionLabel.adjustsFontForContentSizeCategory = true
         instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
