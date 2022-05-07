@@ -103,7 +103,7 @@ extension ImpairedProfileViewController {
             self.logOut()
         }
         
-        let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .default) { _ in
+        let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .destructive) { _ in
             
             let controller = UIAlertController(title: "Are you sure?",
                                                message: "All your information will be deleted and you cannot undo this action.",
