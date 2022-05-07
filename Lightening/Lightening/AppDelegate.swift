@@ -23,16 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Firestore.firestore().settings = settings
         
         IQKeyboardManager.shared.enable = true
-//        
-//        if #available(iOS 15, *) {
-//            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-//            UINavigationBar.appearance().tintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-//            UINavigationBar.appearance().isTranslucent = false
-//        } else {
-//            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-//            UINavigationBar.appearance().tintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-//            UINavigationBar.appearance().isTranslucent = false
-//        }
+    
+        if #available(iOS 15, *) {
+            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().tintColor = UIColor.black
+            UINavigationBar.appearance().isTranslucent = false
+        } else {
+            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().tintColor = UIColor.black
+            UINavigationBar.appearance().isTranslucent = false
+        }
 
         return true
     }
@@ -49,6 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        let deviceOrientation = UIInterfaceOrientationMask.portrait
+        return deviceOrientation
     }
     
 }

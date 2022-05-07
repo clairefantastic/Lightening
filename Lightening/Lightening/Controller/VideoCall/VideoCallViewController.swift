@@ -74,10 +74,6 @@ class VideoCallViewController: UIViewController {
         containerView.layoutIfNeeded()
     }
     
-    @IBAction private func backDidTap(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
     @IBAction func endCall(_ sender: Any) {
         
         self.connectedHandler?(false)

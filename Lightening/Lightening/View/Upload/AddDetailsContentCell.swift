@@ -46,6 +46,10 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         
         contentTextView.layer.borderWidth = 2
         
+        contentTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
+        contentTextView.font = UIFont(name: "American Typewriter", size: 16)
+        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

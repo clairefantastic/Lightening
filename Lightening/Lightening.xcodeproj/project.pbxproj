@@ -71,7 +71,6 @@
 		7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F422811D81E0071D197 /* AudioPlayerView.swift */; };
 		7EA73F4C281273EB0071D197 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F4A281273EB0071D197 /* CommentTableViewCell.swift */; };
 		7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */; };
-		7EA73F522813D5530071D197 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F512813D5530071D197 /* ProfileViewController.swift */; };
 		7EA73F542813E0AA0071D197 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F532813E0AA0071D197 /* BaseViewController.swift */; };
 		7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F562813EBE80071D197 /* UserProfileView.swift */; };
 		7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5828145AA70071D197 /* ProfileSection.swift */; };
@@ -101,6 +100,7 @@
 		7EB9DAF02803D9AD009B89D0 /* ImpairedLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAEE2803D9AD009B89D0 /* ImpairedLobbyViewController.swift */; };
 		7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */; };
 		7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */; };
+		7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */; };
 		7ED920FA28070E4C00DD892A /* userType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED920F928070E4C00DD892A /* userType.swift */; };
 		7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */; };
 		7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */; };
@@ -174,7 +174,6 @@
 		7EA73F422811D81E0071D197 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		7EA73F4A281273EB0071D197 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
-		7EA73F512813D5530071D197 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7EA73F532813E0AA0071D197 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EA73F562813EBE80071D197 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7EA73F5828145AA70071D197 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
@@ -205,6 +204,7 @@
 		7EB9DAEE2803D9AD009B89D0 /* ImpairedLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedLobbyViewController.swift; sourceTree = "<group>"; };
 		7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCallViewController.xib; sourceTree = "<group>"; };
 		7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
+		7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAudioListViewController.swift; sourceTree = "<group>"; };
 		7ED920F928070E4C00DD892A /* userType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userType.swift; sourceTree = "<group>"; };
 		7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerLobbyViewController.swift; sourceTree = "<group>"; };
 		7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClientForVolunteer.swift; sourceTree = "<group>"; };
@@ -406,9 +406,9 @@
 		7EA73F502813D5460071D197 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				7EA73F512813D5530071D197 /* ProfileViewController.swift */,
 				7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */,
 				7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */,
+				7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */,
 				7EA73F6C281687E20071D197 /* IdentitySelectionViewController.swift */,
 				7E409321281E32160027D8B5 /* MyProfileViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
@@ -674,9 +674,9 @@
 				7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */,
 				7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */,
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
+				7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
 				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
-				7EA73F522813D5530071D197 /* ProfileViewController.swift in Sources */,
 				7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */,
 				7EB3F502280D740900C6E385 /* DiscoverySection.swift in Sources */,
 				7EA73F7828170E170071D197 /* RegisterViewController.swift in Sources */,
@@ -893,12 +893,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lightening/Info.plist;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "App needs your permission to access camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Require user permission when accessing camera";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Require user permission when accessing location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Require user permission when accessing location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs your permission to assess microphone";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Require user permission when accessing photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -927,12 +931,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lightening/Info.plist;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "App needs your permission to access camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Require user permission when accessing camera";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Require user permission when accessing location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Require user permission when accessing location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs your permission to assess microphone";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Require user permission when accessing photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

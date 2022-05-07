@@ -9,6 +9,19 @@ import UIKit
 
 class MyAudioListViewController: AudioListViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.title = "My Audios"
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        
+        layoutTableView()
+        
+        setUpTableView()
+
+    }
+    
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let deleteAudioIndex = indexPath.row

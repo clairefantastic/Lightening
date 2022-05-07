@@ -161,6 +161,8 @@ class UserProfileView: UIView {
         profileImageView.layer.borderColor = UIColor.black.cgColor
         
         profileImageView.layer.borderWidth = 1
+        
+        profileImageView.contentMode = .scaleAspectFill
     
     }
     

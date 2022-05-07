@@ -85,7 +85,6 @@ class MyProfileViewController: ImpairedProfileViewController {
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
-        tapGestureRecognizer.numberOfTapsRequired = 2
         self.userProfileView.addGestureRecognizer(tapGestureRecognizer)
         self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
@@ -350,9 +349,9 @@ extension MyProfileViewController {
     
     @objc func didTapSeeMoreLikedAudios() {
         
-        let myAudioListViewController = MyAudioListViewController()
-        myAudioListViewController.audios = likedAudios
-        self.navigationController?.pushViewController(myAudioListViewController, animated: true)
+        let likedAudioListViewController = LikedAudioListViewController()
+        likedAudioListViewController.audios = likedAudios
+        self.navigationController?.pushViewController(likedAudioListViewController, animated: true)
     }
 }
 
