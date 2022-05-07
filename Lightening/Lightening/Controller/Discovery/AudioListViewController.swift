@@ -162,13 +162,24 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
         let audioPlayerViewController = AudioPlayerViewController()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audios?[indexPath.row]
-        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
+//        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0001,
-                       options: .curveEaseInOut,
-                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - tabBarHeight - 80, width: width, height: 80)},
-                       completion: {_ in })
+        audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
+//        UIView.animate(withDuration: 0.25,
+//                       delay: 0.0001,
+//                       options: .curveEaseInOut,
+//                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - tabBarHeight - 80, width: width, height: 80)},
+//                       completion: {_ in })
     }
 }
