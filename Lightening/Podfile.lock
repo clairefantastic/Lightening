@@ -344,7 +344,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - Eula (0.1.9)
   - Firebase/Auth (8.12.1):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 8.12.0)
@@ -497,7 +496,6 @@ PODS:
   - SwiftLint (0.47.0)
 
 DEPENDENCIES:
-  - Eula
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -514,7 +512,6 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
-    - Eula
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -543,7 +540,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  Eula: 76c7c9b8fafa5a73f41504f0e957423e53c9d6c0
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
   FirebaseAnalytics: bd10d7706ba8d6e01ea2816f8fe9e9b881cb0918
   FirebaseAuth: 5250d7bdba35e57cc34ec7ddc525f82b2757f2a0
@@ -569,6 +565,5 @@ SPEC CHECKSUMS:
   SoundWave: d98ffaa863570b29d991da32a09b7ce1b4aaf2d4
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 45755817740837df6e80573253413f3ac1568453
 
 COCOAPODS: 1.11.2
