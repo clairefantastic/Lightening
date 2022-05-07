@@ -56,6 +56,8 @@ class RegisterViewController: BaseViewController {
         
         configureDismissButton()
         
+        nameTextField.delegate = self
+        
     }
 }
 
@@ -127,6 +129,8 @@ extension RegisterViewController {
         ElementsStyle.styleTextField(nameTextField)
         
         nameTextField.layer.cornerRadius = 25
+        
+        nameTextField.font = UIFont(name: "American Typewriter", size: 16)
     }
     
     private func configureEmailLabel() {
@@ -170,6 +174,8 @@ extension RegisterViewController {
         ElementsStyle.styleTextField(emailTextField)
         
         emailTextField.layer.cornerRadius = 25
+        
+        emailTextField.font = UIFont(name: "American Typewriter", size: 16)
     }
     
     private func configurePasswordLabel() {
@@ -214,6 +220,8 @@ extension RegisterViewController {
         ElementsStyle.styleTextField(passwordTextField)
         
         passwordTextField.layer.cornerRadius = 25
+        
+        passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
         
         passwordTextField.isSecureTextEntry = true
     }
@@ -261,6 +269,8 @@ extension RegisterViewController {
         
         checkPasswordTextField.layer.cornerRadius = 25
         
+        checkPasswordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
         checkPasswordTextField.isSecureTextEntry = true
     }
     
@@ -295,17 +305,49 @@ extension RegisterViewController {
     }
     
     @objc func handleRegister() {
-        UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
+        
+        if nameTextField.text == "" {
             
-            let identitySelectionViewController = IdentitySelectionViewController()
+            let nameEmptyAlert = UIAlertController(title: "Error", message: "Name should not be empty.", preferredStyle: .alert)
+            nameEmptyAlert.addAction(action)
+            present(nameEmptyAlert, animated: true)
             
-            identitySelectionViewController.modalPresentationStyle = .fullScreen
+        } else if emailTextField.text == "" {
             
-            self.present(identitySelectionViewController, animated: true)
+            let emailEmptyAlert = UIAlertController(title: "Error", message: "Email should not be empty.", preferredStyle: .alert)
+            emailEmptyAlert.addAction(action)
+            present(emailEmptyAlert, animated: true)
             
-            print(error)
+        } else if passwordTextField.text == "" {
+            
+            let passwordEmptyAlert = UIAlertController(title: "Error", message: "Password should not be empty.", preferredStyle: .alert)
+            passwordEmptyAlert.addAction(action)
+            present(passwordEmptyAlert, animated: true)
+            
+        } else if checkPasswordTextField.text != passwordTextField.text {
+            
+            let checkPasswordFailAlert = UIAlertController(title: "Error", message: "Check password should be same as password", preferredStyle: .alert)
+            checkPasswordFailAlert.addAction(action)
+            present(checkPasswordFailAlert, animated: true)
+            
+        } else {
+            
+            UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
+                
+                let identitySelectionViewController = IdentitySelectionViewController()
+                
+                identitySelectionViewController.modalPresentationStyle = .fullScreen
+                
+                self.present(identitySelectionViewController, animated: true)
+                
+                print(error)
+                
+            }
             
         }
+        
     }
     
     private func configureDismissButton() {
@@ -336,5 +378,19 @@ extension RegisterViewController {
     @objc func dismissRegisterPage() {
         
         self.dismiss(animated: true)
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let countOfWords = string.count + textField.text!.count - range.length
+    
+        if countOfWords > 15 {
+            return false
+        }
+        
+        return true
     }
 }
