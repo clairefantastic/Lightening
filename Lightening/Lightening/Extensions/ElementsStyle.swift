@@ -13,6 +13,18 @@ class ElementsStyle {
          
         view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = view.bounds
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+//        gradientLayer.locations = [0.4, 0.8]
+//        let darkBlueColor = UIColor.hexStringToUIColor(hex: "041C32").cgColor
+//
+//        let lightBlueColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+//
+//        gradientLayer.colors = [darkBlueColor, lightBlueColor]
+//        view.layer.addSublayer(gradientLayer)
+        
     }
     
     static func styleClearBackground(_ view: UIView) {
