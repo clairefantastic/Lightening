@@ -207,13 +207,17 @@ extension AudioDescriptionViewController {
         
         audioCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 24).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
+        
+        audioCoverImageView.layer.masksToBounds = true
+        
+        audioCoverImageView.layer.cornerRadius = 10
     }
     
     private func layoutSendOutTextButton() {
@@ -320,12 +324,14 @@ extension AudioDescriptionViewController {
         
         commentsTableView.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
         
-        commentsTableView.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        commentsTableView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         
         commentsTableView.registerCellWithNib(identifier:
             String(describing: CommentTableViewCell.self),
                                          bundle: nil
         )
+        
+        commentsTableView.layer.cornerRadius = 10
         
         commentsTableView.delegate = self
         
