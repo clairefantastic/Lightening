@@ -193,6 +193,8 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
                     
             else { return UITableViewCell() }
             
+            cell.index = indexPath.row
+            
             cell.delegate = self
             
             cell.categoryLabel.text = categories[indexPath.row]
