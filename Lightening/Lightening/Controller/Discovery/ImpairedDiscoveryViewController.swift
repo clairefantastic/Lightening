@@ -70,11 +70,14 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
                 if let blockList = UserManager.shared.currentUser?.blockList {
                     
+                    self?.audios = []
+                    
                     for audio in audios where blockList.contains(audio.authorId ?? "") == false {
                         
                         self?.audios.append(audio)
                         
                     }
+                    
                 } else {
                     
                     self?.audios = audios
