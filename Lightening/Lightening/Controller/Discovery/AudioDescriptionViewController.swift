@@ -66,6 +66,8 @@ class AudioDescriptionViewController: BaseViewController {
                                 
                             case .success(let comments):
                                 
+                                self?.comments = []
+                                
                                 if let blockList = UserManager.shared.currentUser?.blockList {
                                     
                                     for comment in comments where blockList.contains(comment.authorId ?? "") == false {
