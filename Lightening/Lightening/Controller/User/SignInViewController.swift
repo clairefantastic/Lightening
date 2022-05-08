@@ -322,41 +322,63 @@ extension SignInViewController {
     
     @objc func handleNativeSignIn() {
         
-        UserManager.shared.nativeSignIn(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { authDataResult in
+        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
+        
+        if emailTextField.text == "" {
             
-            print(authDataResult)
-//
-                UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
-                        switch result {
-                            
-                        case .success(let user):
-                            
-                            guard let userIdentity = user?.userIdentity else {
-                                self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+            let emailEmptyAlert = UIAlertController(title: "Error", message: "Email should not be empty.", preferredStyle: .alert)
+            emailEmptyAlert.addAction(action)
+            present(emailEmptyAlert, animated: true)
+            
+        } else if passwordTextField.text == "" {
+            
+            let passwordEmptyAlert = UIAlertController(title: "Error", message: "Password should not be empty.", preferredStyle: .alert)
+            passwordEmptyAlert.addAction(action)
+            present(passwordEmptyAlert, animated: true)
+            
+        } else {
+            
+            UserManager.shared.nativeSignIn(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
+                
+                
+                if let error = error {
+                    LKProgressHUD.showFailure(text: "Firebase signIn fail")
+                } else {
+                    UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
+                            switch result {
+                                
+                            case .success(let user):
+                                
+                                guard let userIdentity = user?.userIdentity else {
+                                    self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+                                    self?.nextViewController.modalPresentationStyle = .fullScreen
+
+                                    self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                                    return
+                                }
+                                if userIdentity == 0 {
+                                    self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                                    
+                                } else {
+                                    self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                                    
+                                }
                                 self?.nextViewController.modalPresentationStyle = .fullScreen
 
                                 self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-                                return
-                            }
-                            if userIdentity == 0 {
-                                self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
-                                
-                            } else {
-                                self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
-                                
-                            }
-                            self?.nextViewController.modalPresentationStyle = .fullScreen
 
-                            self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-
-                        case .failure(let error):
+                            case .failure(let error):
+                                
+                                print("fetchData.failure: \(error)")
+                            }
                             
-                            print("fetchData.failure: \(error)")
-                        }
-                        
+                    }
+                
+                      print(Auth.auth().currentUser?.email)
+            }
                 }
+                    
             
-                  print(Auth.auth().currentUser?.email)
         }
     
     }
