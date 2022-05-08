@@ -198,12 +198,12 @@ class UserManager {
         }
     }
     
-    func nativeSignIn(with email: String, with password: String, completion: @escaping (AuthDataResult?) -> Void) {
+    func nativeSignIn(with email: String, with password: String, completion: @escaping (Error?) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else { return }
             
-            completion(authResult)
+            completion(error)
             
         }
     }
