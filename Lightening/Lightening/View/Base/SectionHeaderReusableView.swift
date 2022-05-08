@@ -34,6 +34,8 @@ class SectionHeaderReusableView: UICollectionReusableView {
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        
         return label
     }()
     

@@ -66,12 +66,22 @@
                             <constraint firstAttribute="height" constant="60" id="x0g-Me-gLA"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aB-YZ-e2D">
+                        <rect key="frame" x="0.0" y="221" width="311" height="2"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="h3n-3d-edG"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="FHA-sF-hfm" secondAttribute="trailing" constant="16" id="5fR-mI-mtM"/>
                 <constraint firstItem="ML3-Jm-ocI" firstAttribute="centerY" secondItem="csP-L6-7O9" secondAttribute="centerY" id="8mo-6B-3cV"/>
+                <constraint firstItem="9aB-YZ-e2D" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Gro-YT-d5K"/>
+                <constraint firstAttribute="trailing" secondItem="9aB-YZ-e2D" secondAttribute="trailing" id="Qkz-ib-ttk"/>
+                <constraint firstAttribute="bottom" secondItem="9aB-YZ-e2D" secondAttribute="bottom" id="Yru-9A-5sB"/>
                 <constraint firstItem="ML3-Jm-ocI" firstAttribute="centerX" secondItem="csP-L6-7O9" secondAttribute="centerX" id="gze-ar-2fV"/>
                 <constraint firstItem="FHA-sF-hfm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="kpv-FB-OOG"/>
                 <constraint firstItem="FHA-sF-hfm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="scx-nk-hMe"/>

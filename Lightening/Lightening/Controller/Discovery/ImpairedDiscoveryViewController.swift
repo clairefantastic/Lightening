@@ -232,7 +232,7 @@ extension ImpairedDiscoveryViewController {
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             let size = NSCollectionLayoutSize(
                 widthDimension: NSCollectionLayoutDimension.fractionalWidth(2/5),
-                heightDimension: NSCollectionLayoutDimension.absolute(190)
+                heightDimension: NSCollectionLayoutDimension.absolute(200)
             )
             let itemCount = isPhone ? 1 : 3
             let item = NSCollectionLayoutItem(layoutSize: size)
