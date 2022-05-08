@@ -88,9 +88,13 @@ class AudioPlayerViewController: UIViewController {
                     }
                 }
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch like status")
             }
             
         }
