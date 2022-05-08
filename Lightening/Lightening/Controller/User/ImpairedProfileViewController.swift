@@ -122,9 +122,15 @@ extension ImpairedProfileViewController {
             userSettingsAlertController.dismiss(animated: true, completion: nil)
         }
         
+        let privacyPolicyAction = UIAlertAction(title: "Privacy Policy", style: .default) { _ in
+            
+            
+        }
+        
         userSettingsAlertController.addAction(logOutAction)
         userSettingsAlertController.addAction(deleteAccountAction)
         userSettingsAlertController.addAction(cancelAction)
+        userSettingsAlertController.addAction(privacyPolicyAction)
         
         present(userSettingsAlertController, animated: true, completion: nil)
     }
