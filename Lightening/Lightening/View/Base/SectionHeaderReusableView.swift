@@ -85,7 +85,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(
                     equalTo: leadingAnchor,
-                    constant: 16),
+                    constant: 24),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
                     constant: -16)
@@ -94,10 +94,10 @@ class SectionHeaderReusableView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: 10),
+                constant: 12),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -10)
+                constant: -12)
         ])
     }
   
