@@ -124,6 +124,9 @@ extension ImpairedProfileViewController {
         
         let privacyPolicyAction = UIAlertAction(title: "Privacy Policy", style: .default) { _ in
             
+            let privacyPolicyViewController = PrivacyPolicyViewController()
+            
+            self.present(privacyPolicyViewController, animated: true, completion: nil)
             
         }
         

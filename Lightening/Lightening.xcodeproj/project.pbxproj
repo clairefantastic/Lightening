@@ -102,6 +102,7 @@
 		7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */; };
 		7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */; };
 		7EC6BABE28260DFE00556429 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6BABD28260DFE00556429 /* JGProgressHUDWrapper.swift */; };
+		7EC6BAD028279D4F00556429 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */; };
 		7ED920FA28070E4C00DD892A /* userType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED920F928070E4C00DD892A /* userType.swift */; };
 		7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */; };
 		7EDBA2CE2805EDB900C10FA5 /* SignalingClientForVolunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */; };
@@ -207,6 +208,7 @@
 		7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
 		7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAudioListViewController.swift; sourceTree = "<group>"; };
 		7EC6BABD28260DFE00556429 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
+		7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		7ED920F928070E4C00DD892A /* userType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userType.swift; sourceTree = "<group>"; };
 		7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerLobbyViewController.swift; sourceTree = "<group>"; };
 		7EDBA2CD2805EDB900C10FA5 /* SignalingClientForVolunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClientForVolunteer.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				7E409321281E32160027D8B5 /* MyProfileViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
 				7EA73F7728170E160071D197 /* RegisterViewController.swift */,
+				7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				7EA73F7828170E170071D197 /* RegisterViewController.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
+				7EC6BAD028279D4F00556429 /* PrivacyPolicyViewController.swift in Sources */,
 				7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */,
 				7E27300C281006760096DB72 /* MapViewController.swift in Sources */,
 				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
