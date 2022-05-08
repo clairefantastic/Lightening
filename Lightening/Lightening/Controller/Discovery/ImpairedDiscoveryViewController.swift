@@ -98,9 +98,13 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data")
             }
             
         }

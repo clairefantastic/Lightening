@@ -83,9 +83,13 @@ extension MapViewController: CLLocationManagerDelegate {
                 
                 self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
             }
             
         }
@@ -173,6 +177,8 @@ extension MapViewController {
         mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        mapView.layer.cornerRadius = 10
         
     }
 }

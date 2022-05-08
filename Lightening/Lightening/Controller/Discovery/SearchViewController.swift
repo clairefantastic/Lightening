@@ -74,9 +74,13 @@ class SearchViewController: BaseViewController {
                     self?.audios = audios
                 }
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Search Page data")
             }
             
         }
