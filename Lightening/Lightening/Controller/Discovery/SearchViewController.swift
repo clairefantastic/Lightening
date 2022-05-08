@@ -51,6 +51,10 @@ class SearchViewController: BaseViewController {
         
         setUpTableView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         fetchData()
     }
     

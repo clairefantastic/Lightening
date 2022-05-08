@@ -28,11 +28,15 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         super.viewDidLoad()
         
         self.navigationItem.title = "Audio Files"
-        
+ 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         fetchData()
         configureCollectionView()
         configureLayout()
-    
+        
     }
     
     func setPlayer(url: URL) {

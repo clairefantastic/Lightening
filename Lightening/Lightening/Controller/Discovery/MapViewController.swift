@@ -34,6 +34,60 @@ class MapViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        mapView.removeAnnotations(self.audioAnnotations)
+        
+        notifyBlockUser()
+        
+    }
+    
+    func notifyBlockUser() {
+        
+        PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audios):
+                
+                self?.audios = []
+                
+                if let blockList = UserManager.shared.currentUser?.blockList {
+                    
+                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                        
+                        self?.audios.append(audio)
+                        
+                    }
+                } else {
+                    
+                    self?.audios = audios
+                }
+                
+                self?.audioAnnotations = []
+                
+                self?.audios.forEach { audio in
+                    
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
+                        coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
+                    
+                }
+                
+                self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
+                
+                LKProgressHUD.dismiss()
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
+            }
+            
+        }
+    }
+    
     func determineCurrentLocation() {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -56,45 +110,7 @@ extension MapViewController: CLLocationManagerDelegate {
         
         locationManager.stopUpdatingLocation()
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
-            
-            switch result {
-            
-            case .success(let audios):
-                
-                if let blockList = UserManager.shared.currentUser?.blockList {
-                    
-                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
-                        
-                        self?.audios.append(audio)
-                        
-                    }
-                } else {
-                    
-                    self?.audios = audios
-                }
-                
-                self?.audios.forEach { audio in
-                    
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
-                        coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
-                    
-                }
-                
-                self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
-                
-                LKProgressHUD.dismiss()
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-                
-                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
-            }
-            
         }
-        
-    }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error - locationManager: \(error.localizedDescription)")
@@ -108,6 +124,7 @@ extension MapViewController: MKMapViewDelegate {
         _ mapView: MKMapView,
         viewFor annotation: MKAnnotation
       ) -> MKAnnotationView? {
+          
         // 2
         guard let annotation = annotation as? AudioAnnotation else {
           return nil
@@ -128,6 +145,10 @@ extension MapViewController: MKMapViewDelegate {
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
             
+          let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.viewLongPress))
+            
+          view.addGestureRecognizer(longPress)
+            
           let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             button.setImage(UIImage(named: "black_vinyl-PhotoRoom"), for: .normal)
           view.rightCalloutAccessoryView = button
@@ -137,6 +158,7 @@ extension MapViewController: MKMapViewDelegate {
       }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         let annotation = view.annotation as? AudioAnnotation
         let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
@@ -179,6 +201,10 @@ extension MapViewController {
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         mapView.layer.cornerRadius = 10
+        
+    }
+    
+    @objc func viewLongPress() {
         
     }
 }
