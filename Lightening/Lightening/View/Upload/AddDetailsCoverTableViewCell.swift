@@ -23,7 +23,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["nature", "city", "dog", "meaningful", "pure"]
+    private let coverArray = ["nature", "city", "pet", "meaningful", "pure"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -78,3 +78,5 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+
