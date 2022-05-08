@@ -42,6 +42,8 @@ class VolunteerLobbyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LKProgressHUD.show()
+        
         self.navigationItem.title = "Video Call"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
@@ -65,6 +67,8 @@ class VolunteerLobbyViewController: BaseViewController {
         self.webRTCClient.unmuteAudio()
         
         self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+        
+        LKProgressHUD.dismiss()
         
 //        let popUpViewController = PopUpViewController()
 //        popUpViewController.modalPresentationStyle = .overCurrentContext

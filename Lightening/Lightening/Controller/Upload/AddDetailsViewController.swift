@@ -126,55 +126,89 @@ class AddDetailsViewController: BaseViewController {
         
         uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
-        uploadButton.isEnabled = true
-        
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
 
     }
     
     @objc func uploadFile(_ sender: UIButton) {
         
-        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
         
-        print("Upload file")
-        
-        DispatchQueue.main.async {
-            self.view.stickSubView(self.animationView)
-            self.animationView.play() 
-        }
-    
-        guard let localUrl = localUrl else {
-            return
-        }
-
-        PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
+        if self.audio.title == "" {
             
-            self?.audio.audioUrl = downloadUrl
+            let titleEmptyAlert = UIAlertController(title: "Error", message: "Title should not be empty.", preferredStyle: .alert)
+            titleEmptyAlert.addAction(action)
+            present(titleEmptyAlert, animated: true)
             
-            self?.audio.createdTime = Date().timeIntervalSince1970
-
-            guard var publishAudio = self?.audio else {
-                    return
+        } else if self.audio.description == "" {
+            
+            let descriptionEmptyAlert = UIAlertController(title: "Error", message: "Description should not be empty.", preferredStyle: .alert)
+            descriptionEmptyAlert.addAction(action)
+            present(descriptionEmptyAlert, animated: true)
+            
+        } else if self.audio.topic == "" {
+            
+            let topicEmptyAlert = UIAlertController(title: "Error", message: "Topic should not be empty.", preferredStyle: .alert)
+            topicEmptyAlert.addAction(action)
+            present(topicEmptyAlert, animated: true)
+            
+        } else if self.audio.cover == "" {
+            
+            let topicEmptyAlert = UIAlertController(title: "Error", message: "Cover should not be empty.", preferredStyle: .alert)
+            topicEmptyAlert.addAction(action)
+            present(topicEmptyAlert, animated: true)
+            
+        } else {
+           
+            self.navigationController?.navigationBar.isUserInteractionEnabled = false
+            
+            print("Upload file")
+            
+            DispatchQueue.main.async {
+                self.view.stickSubView(self.animationView)
+                self.animationView.play()
             }
-            
-            PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
-                switch result {
+        
+            guard let localUrl = localUrl else {
+                return
+            }
 
-                case .success:
+            PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
+                
+                self?.audio.audioUrl = downloadUrl
+                
+                self?.audio.createdTime = Date().timeIntervalSince1970
 
-                    print("onTapPublish, success")
-                    
-                    self?.navigationController?.navigationBar.isUserInteractionEnabled = true
-                    
-                    self?.animationView.removeFromSuperview()
-                    
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    
-                case .failure(let error):
+                guard var publishAudio = self?.audio else {
+                        return
+                }
+                
+                PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
+                    switch result {
 
-                    print("publishArticle.failure: \(error)")
+                    case .success:
+
+                        print("onTapPublish, success")
+                        
+                        self?.animationView.removeFromSuperview()
+                        
+                        LKProgressHUD.showSuccess()
+                        
+                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
+                        
+                        self?.navigationController?.popToRootViewController(animated: true)
+                        
+                        self?.tabBarController?.selectedIndex = 1
+                        
+                    case .failure(let error):
+
+                        print("publishArticle.failure: \(error)")
+                        
+                        LKProgressHUD.showFailure()
+                        
+                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
+                    }
                     
-                    self?.navigationController?.navigationBar.isUserInteractionEnabled = true
                 }
                 
             }

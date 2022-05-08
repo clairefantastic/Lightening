@@ -81,7 +81,6 @@ class MyProfileViewController: ImpairedProfileViewController {
         fetchMyAudios()
         fetchLikedAudios()
         configureLogOutButton()
-        configureDeleteAccountButton()
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
@@ -99,9 +98,13 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 self?.myAudios = audios.filter { $0.author?.userId == UserManager.shared.currentUser?.userId}
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch my audios")
             }
             
         }
@@ -118,9 +121,13 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 self?.likedAudios = likedAudios
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch liked audios")
             }
             
         }

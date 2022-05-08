@@ -103,6 +103,7 @@ class PublishManager {
             
         } catch {
             
+            completion(.failure(error))
         }
      
     }
@@ -127,6 +128,8 @@ class PublishManager {
     
     func fetchAudios(completion: @escaping (Result<[Audio], Error>) -> Void) {
         
+        LKProgressHUD.show()
+        
         db.collection("audioFiles").order(by: "createdTime", descending: true).addSnapshotListener { snapshot, error in
             
             guard let snapshot = snapshot else { return }
@@ -148,6 +151,8 @@ class PublishManager {
     }
     
     func fetchAudioID(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        LKProgressHUD.show()
         
         db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments() { (querySnapshot, error) in
             
@@ -249,6 +254,8 @@ class PublishManager {
         }
         
     func fetchLikedAudios(userId: String, completion: @escaping (Result<[Audio], Error>) -> Void) {
+        
+        LKProgressHUD.show()
         
         db.collection("users").document(userId).collection("likedAudios").addSnapshotListener { snapshot, error in
             

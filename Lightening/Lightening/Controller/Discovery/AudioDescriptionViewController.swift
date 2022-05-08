@@ -77,8 +77,14 @@ class AudioDescriptionViewController: BaseViewController {
                                     
                                     self?.comments = comments
                                 }
+                                
+                                LKProgressHUD.dismiss()
+                                
                             case .failure(let error):
                                 print("fetchData.failure: \(error)")
+                                
+                                LKProgressHUD.showFailure(text: "Fail to fetch comments")
+                                
                             }
                             
                         }
@@ -86,6 +92,8 @@ class AudioDescriptionViewController: BaseViewController {
                     case .failure(let error):
                         
                         print("fetchData.failure: \(error)")
+                        
+                        LKProgressHUD.showFailure(text: "Fail to fetch Audio Description Page data")
             
                 }
             }

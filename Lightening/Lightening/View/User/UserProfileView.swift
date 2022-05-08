@@ -19,9 +19,15 @@ class UserProfileView: UIView {
                 
                 profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
                 
+                LKProgressHUD.dismiss()
+                
             } else {
                 
+                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                
                 profileImageView.loadImage(imageUrl)
+                
+                LKProgressHUD.dismiss()
             }
         }
     }

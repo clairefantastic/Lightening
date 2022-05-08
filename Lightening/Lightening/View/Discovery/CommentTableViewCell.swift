@@ -59,6 +59,7 @@ class CommentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        authorImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -76,7 +77,7 @@ class CommentTableViewCell: UITableViewCell {
             }
             
             if comment?.authorImage == nil {
-                authorImageView.image = UIImage(named: "mask")
+                authorImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
             } else {
                 authorImageView.loadImage(comment?.authorImage?.absoluteString)
             }

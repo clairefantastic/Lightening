@@ -42,6 +42,8 @@ class MyAudioListViewController: AudioListViewController {
                 
             case .failure(_):
                 print("fail")
+                
+                LKProgressHUD.showFailure(text: "Fail to delete audio")
             }
         }
     }
