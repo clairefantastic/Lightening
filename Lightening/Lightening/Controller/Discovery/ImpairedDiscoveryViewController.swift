@@ -46,6 +46,8 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
             
         player = AVPlayer(playerItem: playerItem)
         player.volume = 100.0
+        
+        player.play()
 
     }
     
@@ -224,7 +226,17 @@ extension ImpairedDiscoveryViewController {
         
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        setPlayer(url: audio.audioUrl)
+        LKProgressHUD.show()
+        
+        DispatchQueue.global().async {
+            self.setPlayer(url: audio.audioUrl)
+        }
+        
+        DispatchQueue.main.async {
+            LKProgressHUD.dismiss()
+        }
+        
+        
         
     }
 }
