@@ -88,7 +88,7 @@ class AudioPlayerView: UIView {
             audioLength = Float(seconds)
             
             player = AVPlayer(playerItem: playerItem)
-            player.volume = 100.0
+            player.volume = 300.0
 //            player.play()
         } catch let error {
             print(error.localizedDescription)
