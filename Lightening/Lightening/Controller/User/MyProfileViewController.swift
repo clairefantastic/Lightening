@@ -192,7 +192,7 @@ extension MyProfileViewController {
         
         NSLayoutConstraint(item: lightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
         
-        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320).isActive = true
+        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
         
         NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
         
@@ -208,7 +208,7 @@ extension MyProfileViewController {
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -80).isActive = true
         
-        NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350).isActive = true
+        NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
         
@@ -226,7 +226,7 @@ extension MyProfileViewController {
         
         myAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
         NSLayoutConstraint(item: myAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -170).isActive = true
         
@@ -268,7 +268,7 @@ extension MyProfileViewController {
         
         likedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
         NSLayoutConstraint(item: likedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -90).isActive = true
         
