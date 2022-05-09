@@ -15,6 +15,8 @@ class AudioListViewController: BaseViewController {
         
         didSet {
             
+            tableView.reloadData()
+            
             if audios?.isEmpty == true {
                 
                 configureNoContentLabel()
