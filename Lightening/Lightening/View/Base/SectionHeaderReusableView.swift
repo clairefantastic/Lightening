@@ -80,7 +80,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
                     constant: 16),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
-                    constant: -16)])
+                    constant: 0)])
         } else {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(
