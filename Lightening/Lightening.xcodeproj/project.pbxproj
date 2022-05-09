@@ -63,6 +63,7 @@
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
 		7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */; };
 		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
+		7E87C4D228283C85001759C9 /* lf30_editor_ewa07nyv.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
@@ -166,6 +167,7 @@
 		7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
+		7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_ewa07nyv.json; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA023502800452A00C73205 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */,
 				7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
+				7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */,
 				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
 			path = Lightening;
@@ -595,6 +598,7 @@
 				7E44B7DC280BED5000CF24AC /* SelectTopicCollectionViewCell.xib in Resources */,
 				7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */,
 				7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */,
+				7E87C4D228283C85001759C9 /* lf30_editor_ewa07nyv.json in Resources */,
 				7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
