@@ -66,6 +66,8 @@ class AudioDescriptionViewController: BaseViewController {
                                 
                             case .success(let comments):
                                 
+                                self?.comments = []
+                                
                                 if let blockList = UserManager.shared.currentUser?.blockList {
                                     
                                     for comment in comments where blockList.contains(comment.authorId ?? "") == false {
@@ -77,8 +79,14 @@ class AudioDescriptionViewController: BaseViewController {
                                     
                                     self?.comments = comments
                                 }
+                                
+                                LKProgressHUD.dismiss()
+                                
                             case .failure(let error):
                                 print("fetchData.failure: \(error)")
+                                
+                                LKProgressHUD.showFailure(text: "Fail to fetch comments")
+                                
                             }
                             
                         }
@@ -86,6 +94,8 @@ class AudioDescriptionViewController: BaseViewController {
                     case .failure(let error):
                         
                         print("fetchData.failure: \(error)")
+                        
+                        LKProgressHUD.showFailure(text: "Fail to fetch Audio Description Page data")
             
                 }
             }
@@ -131,35 +141,11 @@ extension AudioDescriptionViewController {
     
     private func layoutAudioAuthorLabel() {
         
-        self.view.addSubview(audioAuthorLabel)
-        
-        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
-        
-        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 36)
-        audioAuthorLabel.adjustsFontForContentSizeCategory = true
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        audioAuthorLabel.textAlignment = .left
-        audioAuthorLabel.numberOfLines = 0
-        audioAuthorLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
-    }
-    
-    private func layoutAudioTitleLabel() {
-        
         self.view.addSubview(audioTitleLabel)
         
         audioTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
@@ -177,21 +163,45 @@ extension AudioDescriptionViewController {
         
     }
     
+    private func layoutAudioTitleLabel() {
+        
+        self.view.addSubview(audioAuthorLabel)
+        
+        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        audioAuthorLabel.adjustsFontForContentSizeCategory = true
+        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioAuthorLabel.textAlignment = .left
+        audioAuthorLabel.numberOfLines = 0
+        audioAuthorLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+    }
+    
     private func layoutAudioDescriptionLabel() {
         
         self.view.addSubview(audioDescriptionLabel)
         
         audioDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
-        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 20)
+        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
         audioDescriptionLabel.adjustsFontForContentSizeCategory = true
         audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         audioDescriptionLabel.textAlignment = .left
@@ -207,13 +217,17 @@ extension AudioDescriptionViewController {
         
         audioCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 24).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120).isActive = true
+        
+        audioCoverImageView.layer.masksToBounds = true
+        
+        audioCoverImageView.layer.cornerRadius = 10
     }
     
     private func layoutSendOutTextButton() {
@@ -304,9 +318,9 @@ extension AudioDescriptionViewController {
         
         NSLayoutConstraint(item: commentsTableView, attribute: .top, relatedBy: .equal, toItem: audioDescriptionLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: commentsTableView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: commentsTableView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
-        NSLayoutConstraint(item: commentsTableView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: commentsTableView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
         NSLayoutConstraint(item: commentsTableView, attribute: .bottom, relatedBy: .equal, toItem: enterCommentTextField, attribute: .top, multiplier: 1, constant: -16).isActive = true
         
@@ -316,16 +330,18 @@ extension AudioDescriptionViewController {
         
         commentsTableView.separatorStyle = .none
         
-        commentsTableView.layer.borderWidth = 2
+//        commentsTableView.layer.borderWidth = 2
         
         commentsTableView.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
         
-        commentsTableView.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        commentsTableView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         
         commentsTableView.registerCellWithNib(identifier:
             String(describing: CommentTableViewCell.self),
                                          bundle: nil
         )
+        
+        commentsTableView.layer.cornerRadius = 10
         
         commentsTableView.delegate = self
         
@@ -357,6 +373,16 @@ extension AudioDescriptionViewController {
     @objc func tapMoreButton() {
         
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        blockUserAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
         let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
             
@@ -412,6 +438,16 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
     @objc func tapCommentMoreButton(_ sender: UIButton) {
         
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        blockUserAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
         let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
             

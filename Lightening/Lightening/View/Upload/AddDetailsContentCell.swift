@@ -25,6 +25,8 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
     
     @IBOutlet weak var contentTextView: UITextView!
     
+    var index: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,7 +48,7 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         
         contentTextView.layer.borderWidth = 2
         
-        contentTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        contentTextView.textContainerInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
         
         contentTextView.font = UIFont(name: "American Typewriter", size: 16)
         
@@ -58,4 +60,26 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let countOfWords = text.count + textView.text!.count - range.length
+        
+        if index == 0 {
+            
+            if countOfWords > 15 {
+                
+                return false
+            }
+            
+        } else if index == 1 {
+            
+            if countOfWords > 100 {
+                
+                return false
+            }
+        }
+        
+        return true
+    }
+
 }

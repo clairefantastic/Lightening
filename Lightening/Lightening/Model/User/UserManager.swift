@@ -11,6 +11,8 @@ import AuthenticationServices
 import FirebaseAuth
 import FirebaseFirestore
 
+let notificationKey3 = "com.blockUser"
+
 class UserManager {
     
     static let shared = UserManager()
@@ -21,7 +23,12 @@ class UserManager {
     
     var currentUserName: String?
     
-    var currentUser: User?
+    var currentUser: User? {
+        
+        didSet {
+                NotificationCenter.default.post(name: NSNotification.Name (notificationKey3), object: nil)
+        }
+    }
     
 //    var user: User?
     
@@ -191,12 +198,12 @@ class UserManager {
         }
     }
     
-    func nativeSignIn(with email: String, with password: String, completion: @escaping (AuthDataResult?) -> Void) {
+    func nativeSignIn(with email: String, with password: String, completion: @escaping (Error?) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else { return }
             
-            completion(authResult)
+            completion(error)
             
         }
     }
@@ -211,26 +218,53 @@ class UserManager {
     }
     
     func fetchUserInfo(with userId: String, completion: @escaping (Result<User?, Error>) -> Void) {
-        db.collection("users").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+        
+        db.collection("users").whereField("userId", isEqualTo: userId).addSnapshotListener { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            var audios = [Audio]()
+            
+            snapshot.documents.forEach { document in
+                
+                do {
+                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                        self.currentUser = user
+                        completion(.success(self.currentUser))
+                    } else {
+                        completion(.success(nil))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
             
             if let error = error {
                 completion(.failure(error))
-            } else {
-                
-                    do {
-                        if let user = try querySnapshot!.documents.first?.data(as: User.self, decoder: Firestore.Decoder()) {
-                            self.currentUser = user
-                            completion(.success(self.currentUser))
-                        } else {
-                            completion(.success(nil))
-                        }
-                    } catch {
-                        completion(.failure(error))
-    //                            completion(.failure(FirebaseError.documentError)
-                    }
-                
             }
+            
         }
+        
+//        db.collection("users").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+//
+//            if let error = error {
+//                completion(.failure(error))
+//            } else {
+//
+//                    do {
+//                        if let user = try querySnapshot!.documents.first?.data(as: User.self, decoder: Firestore.Decoder()) {
+//                            self.currentUser = user
+//                            completion(.success(self.currentUser))
+//                        } else {
+//                            completion(.success(nil))
+//                        }
+//                    } catch {
+//                        completion(.failure(error))
+//    //                            completion(.failure(FirebaseError.documentError)
+//                    }
+//
+//            }
+//        }
     }
     
     func blockUser(userId: String, completion: @escaping (Result<String, Error>) -> Void) {
@@ -266,6 +300,8 @@ class UserManager {
         guard let currentUser = UserManager.shared.currentUser else { return }
         
         guard let userId = currentUser.userId else { return }
+        
+        self.signOut()
         
         db.collection("users").document(userId).delete() { error in
             

@@ -34,6 +34,16 @@ class AudioPlayerView: UIView {
     
     private var isPlaying = false
     
+    var audioLength: Float? {
+        
+        didSet {
+            
+            DispatchQueue.main.async {
+                self.audioProgressSlider.maximumValue = Float(self.audioLength ?? 0)
+            }
+        }
+    }
+    
     var audio: Audio? {
         
         didSet {
@@ -42,11 +52,21 @@ class AudioPlayerView: UIView {
             audioTitleLabel.text = self.audio?.title
             audioAuthorLabel.text = self.audio?.author?.displayName
             
-            setPlayer(url: (self.audio?.audioUrl)!)
-            player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
+            audioProgressSlider.minimumValue = 0
+            audioProgressSlider.isContinuous = true
+            
+            DispatchQueue.global().async {
+                self.setPlayer(url: (self.audio?.audioUrl)!)
+                
+            }
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+            
+            self.player?.addPeriodicTimeObserver(forInterval:  CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { (CMTime) in
                     let currentTime = CMTimeGetSeconds(self.player.currentTime())
                 self.audioProgressSlider.value = Float(currentTime)
             })
+            
         }
     }
     
@@ -65,18 +85,15 @@ class AudioPlayerView: UIView {
             let playerItem = AVPlayerItem(asset: asset)
             let duration = playerItem.asset.duration
             let seconds = CMTimeGetSeconds(duration)
-            audioProgressSlider.minimumValue = 0
-            audioProgressSlider.maximumValue = Float(seconds)
-            audioProgressSlider.isContinuous = true
+            audioLength = Float(seconds)
             
             player = AVPlayer(playerItem: playerItem)
-            player.volume = 100.0
+            player.volume = 300.0
 //            player.play()
         } catch let error {
             print(error.localizedDescription)
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
 
     @objc func playerDidFinishPlaying(note: NSNotification) {

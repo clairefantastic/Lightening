@@ -226,6 +226,8 @@ extension ImpairedLobbyViewController {
         videoCallButton.isEnabled = true
         
         videoCallButton.addTarget(self, action: #selector(startVideoCall), for: .touchUpInside)
+        
+        videoCallButton.layer.cornerRadius = 10
     }
     
     @objc func startVideoCall() {

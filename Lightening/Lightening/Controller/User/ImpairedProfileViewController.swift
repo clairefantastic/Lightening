@@ -16,8 +16,6 @@ class ImpairedProfileViewController: BaseViewController {
     
     let logOutButton = UIButton()
     
-    let deleteAccountButton = UIButton()
-    
     override func viewDidLoad() {
         
         self.navigationItem.title = "Profile"
@@ -27,7 +25,6 @@ class ImpairedProfileViewController: BaseViewController {
         configureVinylImageView()
         addUserProfileView()
         configureLogOutButton()
-        configureDeleteAccountButton()
         ElementsStyle.styleViewBackground(userProfileView)
         self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
@@ -98,12 +95,23 @@ extension ImpairedProfileViewController {
         
         let userSettingsAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
+        // iPad specific code
+        userSettingsAlertController.popoverPresentationController?.sourceView = self.view
+                
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        userSettingsAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        userSettingsAlertController.popoverPresentationController?.permittedArrowDirections = .up
+        
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { _ in
             
             self.logOut()
         }
         
-        let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .default) { _ in
+        let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .destructive) { _ in
             
             let controller = UIAlertController(title: "Are you sure?",
                                                message: "All your information will be deleted and you cannot undo this action.",
@@ -125,36 +133,20 @@ extension ImpairedProfileViewController {
             userSettingsAlertController.dismiss(animated: true, completion: nil)
         }
         
+        let privacyPolicyAction = UIAlertAction(title: "Privacy Policy", style: .default) { _ in
+            
+            let privacyPolicyViewController = PrivacyPolicyViewController()
+            
+            self.present(privacyPolicyViewController, animated: true, completion: nil)
+            
+        }
+        
         userSettingsAlertController.addAction(logOutAction)
         userSettingsAlertController.addAction(deleteAccountAction)
         userSettingsAlertController.addAction(cancelAction)
+        userSettingsAlertController.addAction(privacyPolicyAction)
         
         present(userSettingsAlertController, animated: true, completion: nil)
-    }
-    
-    func configureDeleteAccountButton() {
-        
-        view.addSubview(deleteAccountButton)
-        
-        deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: deleteAccountButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
-        
-        NSLayoutConstraint(item: deleteAccountButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
-        
-        NSLayoutConstraint(item: deleteAccountButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32).isActive = true
-        
-        NSLayoutConstraint(item: deleteAccountButton, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        deleteAccountButton.setTitle("Delete Account", for: .normal)
-        deleteAccountButton.titleLabel?.numberOfLines = 0
-        deleteAccountButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
-        deleteAccountButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        deleteAccountButton.layer.borderWidth = 1
-        deleteAccountButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
-//        deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
-        
     }
     
     func deleteAccount() {

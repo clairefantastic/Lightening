@@ -23,7 +23,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["nature", "city", "dog", "meaningful", "pure"]
+    private let coverArray = ["nature", "city", "pet", "meaningful", "pure"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +32,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         selectCoverCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
     
         selectCoverCollectionView.registerCellWithNib(identifier: String(describing: SelectCoverCollectionViewCell.self), bundle: nil)
+        
     }
 }
 
@@ -77,3 +78,5 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+

@@ -81,7 +81,6 @@ class MyProfileViewController: ImpairedProfileViewController {
         fetchMyAudios()
         fetchLikedAudios()
         configureLogOutButton()
-        configureDeleteAccountButton()
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
@@ -99,9 +98,13 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 self?.myAudios = audios.filter { $0.author?.userId == UserManager.shared.currentUser?.userId}
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch my audios")
             }
             
         }
@@ -118,9 +121,13 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 self?.likedAudios = likedAudios
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch liked audios")
             }
             
         }
@@ -131,8 +138,20 @@ class MyProfileViewController: ImpairedProfileViewController {
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
+        
+        
 
         let imagePickerAlertController = UIAlertController(title: "Upload Profile Photo", message: "Please select a photo for your profile", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        imagePickerAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        imagePickerAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        imagePickerAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
               // 建立三個 UIAlertAction 的實體
               // 新增 UIAlertAction 在 UIAlertController actionSheet 的 動作 (action) 與標題
@@ -185,7 +204,7 @@ extension MyProfileViewController {
         
         NSLayoutConstraint(item: lightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
         
-        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320).isActive = true
+        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
         
         NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
         
@@ -201,7 +220,7 @@ extension MyProfileViewController {
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -80).isActive = true
         
-        NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350).isActive = true
+        NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
         
@@ -219,7 +238,7 @@ extension MyProfileViewController {
         
         myAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
         NSLayoutConstraint(item: myAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -170).isActive = true
         
@@ -261,7 +280,7 @@ extension MyProfileViewController {
         
         likedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         
         NSLayoutConstraint(item: likedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -90).isActive = true
         

@@ -34,6 +34,8 @@ class SectionHeaderReusableView: UICollectionReusableView {
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        
         return label
     }()
     
@@ -78,12 +80,12 @@ class SectionHeaderReusableView: UICollectionReusableView {
                     constant: 16),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
-                    constant: -16)])
+                    constant: 0)])
         } else {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(
                     equalTo: leadingAnchor,
-                    constant: 16),
+                    constant: 24),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
                     constant: -16)
@@ -92,10 +94,10 @@ class SectionHeaderReusableView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: 10),
+                constant: 12),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -10)
+                constant: -12)
         ])
     }
   

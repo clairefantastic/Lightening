@@ -28,11 +28,15 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         super.viewDidLoad()
         
         self.navigationItem.title = "Audio Files"
-        
+ 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         fetchData()
         configureCollectionView()
         configureLayout()
-    
+        
     }
     
     func setPlayer(url: URL) {
@@ -41,7 +45,9 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         let playerItem = AVPlayerItem(asset: asset)
             
         player = AVPlayer(playerItem: playerItem)
-        player.volume = 100.0
+        player.volume = 300.0
+        
+        player.play()
 
     }
     
@@ -70,11 +76,14 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
                 if let blockList = UserManager.shared.currentUser?.blockList {
                     
+                    self?.audios = []
+                    
                     for audio in audios where blockList.contains(audio.authorId ?? "") == false {
                         
                         self?.audios.append(audio)
                         
                     }
+                    
                 } else {
                     
                     self?.audios = audios
@@ -98,9 +107,13 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data")
             }
             
         }
@@ -168,6 +181,16 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
             
             if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
                 let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+                
+                // iPad specific code
+                blockUserAlertController
+                        let xOrigin = self.view.bounds.width / 2
+                        
+                        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                        
+                blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                        
+                blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
                 let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
                     
@@ -213,7 +236,16 @@ extension ImpairedDiscoveryViewController {
         
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        setPlayer(url: audio.audioUrl)
+        DispatchQueue.main.async {
+            LKProgressHUD.show()
+        }
+        DispatchQueue.global().async {
+            self.setPlayer(url: audio.audioUrl)
+        }
+        
+        DispatchQueue.main.async {
+            LKProgressHUD.dismiss()
+        }
         
     }
 }
@@ -228,7 +260,7 @@ extension ImpairedDiscoveryViewController {
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             let size = NSCollectionLayoutSize(
                 widthDimension: NSCollectionLayoutDimension.fractionalWidth(2/5),
-                heightDimension: NSCollectionLayoutDimension.absolute(190)
+                heightDimension: NSCollectionLayoutDimension.absolute(200)
             )
             let itemCount = isPhone ? 1 : 3
             let item = NSCollectionLayoutItem(layoutSize: size)
