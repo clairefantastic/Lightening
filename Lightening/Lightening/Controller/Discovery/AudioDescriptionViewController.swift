@@ -141,35 +141,11 @@ extension AudioDescriptionViewController {
     
     private func layoutAudioAuthorLabel() {
         
-        self.view.addSubview(audioAuthorLabel)
-        
-        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
-        
-        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 36)
-        audioAuthorLabel.adjustsFontForContentSizeCategory = true
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        audioAuthorLabel.textAlignment = .left
-        audioAuthorLabel.numberOfLines = 0
-        audioAuthorLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
-    }
-    
-    private func layoutAudioTitleLabel() {
-        
         self.view.addSubview(audioTitleLabel)
         
         audioTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
@@ -187,13 +163,37 @@ extension AudioDescriptionViewController {
         
     }
     
+    private func layoutAudioTitleLabel() {
+        
+        self.view.addSubview(audioAuthorLabel)
+        
+        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: audioAuthorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
+        
+        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        audioAuthorLabel.adjustsFontForContentSizeCategory = true
+        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioAuthorLabel.textAlignment = .left
+        audioAuthorLabel.numberOfLines = 0
+        audioAuthorLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+    }
+    
     private func layoutAudioDescriptionLabel() {
         
         self.view.addSubview(audioDescriptionLabel)
         
         audioDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
+        NSLayoutConstraint(item: audioDescriptionLabel, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: audioDescriptionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         
@@ -217,7 +217,7 @@ extension AudioDescriptionViewController {
         
         audioCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioAuthorLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: audioCoverImageView, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
         
         NSLayoutConstraint(item: audioCoverImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
