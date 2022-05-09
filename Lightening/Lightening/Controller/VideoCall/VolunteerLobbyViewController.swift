@@ -112,13 +112,16 @@ class VolunteerLobbyViewController: BaseViewController {
     
     var remoteCandidateCount: Int = 0 {
         didSet {
-            if remoteCandidateCount > 1 {
+            if remoteCandidateCount >= 1 {
                 NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
                 
                 answerVideoCallButton.layer.add(createAnimation(keyPath: "transform.scale", toValue: 0.5), forKey: nil)
                 
                 answerVideoCallButton.isEnabled = true
                 
+            } else {
+                
+                answerVideoCallButton.isEnabled = false
             }
         }
     }
