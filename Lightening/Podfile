@@ -19,5 +19,6 @@ target 'Lightening' do
   pod 'SoundWave'
   pod ‘Firebase/Auth’
   pod 'JGProgressHUD'
+  pod 'Firebase/Crashlytics'
 
 end
