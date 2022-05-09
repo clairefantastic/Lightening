@@ -45,7 +45,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         let playerItem = AVPlayerItem(asset: asset)
             
         player = AVPlayer(playerItem: playerItem)
-        player.volume = 100.0
+        player.volume = 300.0
         
         player.play()
 
