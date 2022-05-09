@@ -22,7 +22,7 @@ class PrivacyPolicyViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myURL = URL(string: "https://pages.flycricket.io/lightening/privacy.html")
+        let myURL = URL(string: "https://pages.flycricket.io/lightening-0/privacy.html")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
