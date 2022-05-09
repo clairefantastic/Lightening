@@ -94,6 +94,16 @@ extension AudioListViewController {
             
             if indexPath != nil && self.audios?[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
                 let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+                
+                // iPad specific code
+                blockUserAlertController
+                        let xOrigin = self.view.bounds.width / 2
+                        
+                        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                        
+                blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                        
+                blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
                 let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
                     

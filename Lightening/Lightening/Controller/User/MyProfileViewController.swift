@@ -138,8 +138,20 @@ class MyProfileViewController: ImpairedProfileViewController {
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
+        
+        
 
         let imagePickerAlertController = UIAlertController(title: "Upload Profile Photo", message: "Please select a photo for your profile", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        imagePickerAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        imagePickerAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        imagePickerAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
               // 建立三個 UIAlertAction 的實體
               // 新增 UIAlertAction 在 UIAlertController actionSheet 的 動作 (action) 與標題
