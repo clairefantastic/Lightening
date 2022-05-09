@@ -336,14 +336,17 @@ extension RegisterViewController {
             
             UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
                 
-                let identitySelectionViewController = IdentitySelectionViewController()
                 
-                identitySelectionViewController.modalPresentationStyle = .fullScreen
-                
-                self.present(identitySelectionViewController, animated: true)
-                
-                print(error)
-                
+                if let error = error {
+                    LKProgressHUD.showFailure(text: "Firebase signUp fail")
+                } else {
+                    let identitySelectionViewController = IdentitySelectionViewController()
+                    
+                    identitySelectionViewController.modalPresentationStyle = .fullScreen
+                    
+                    self.present(identitySelectionViewController, animated: true)
+                }
+                            
             }
             
         }
