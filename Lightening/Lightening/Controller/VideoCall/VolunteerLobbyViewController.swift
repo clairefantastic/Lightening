@@ -15,6 +15,8 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let instructionLabel = UILabel()
     
+    private let birdInstructionLabel = UILabel()
+    
     private let doorView = DoorView()
     
     private let cloudImageView = UIImageView()
@@ -54,6 +56,7 @@ class VolunteerLobbyViewController: BaseViewController {
         configureVinylImageView()
         configureCloudImageView()
         configureSwitch()
+        addUpAndDownAnimation()
         
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -74,6 +77,10 @@ class VolunteerLobbyViewController: BaseViewController {
 //        popUpViewController.modalPresentationStyle = .overCurrentContext
 //        popUpViewController.modalTransitionStyle = .crossDissolve
 //        self.present(popUpViewController, animated: true, completion: nil)
+//
+//        answerVideoCallButton.layer.add(createAnimation(keyPath: "transform.scale", toValue: 0.5), forKey: nil)
+//
+//        answerVideoCallButton.isEnabled = true
 
     }
     
@@ -107,8 +114,27 @@ class VolunteerLobbyViewController: BaseViewController {
         didSet {
             if remoteCandidateCount > 1 {
                 NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
+                
+                answerVideoCallButton.layer.add(createAnimation(keyPath: "transform.scale", toValue: 0.5), forKey: nil)
+                
+                answerVideoCallButton.isEnabled = true
+                
             }
         }
+    }
+    
+    fileprivate func createAnimation (keyPath: String, toValue: CGFloat) -> CABasicAnimation {
+        //創建動畫對象
+        let scaleAni = CABasicAnimation()
+        //設置動畫屬性
+        scaleAni.keyPath = keyPath
+        //設置動畫的起始位置。也就是動畫從哪裡到哪裡。不指定起點，默認就從positoin開始
+        scaleAni.toValue = toValue
+        //動畫持續時間
+        scaleAni.duration = 2;
+        //動畫重複次數
+        scaleAni.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
+        return scaleAni;
     }
     
     @IBAction func answerDidTap(_ sender: Any) {
@@ -246,7 +272,7 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: doorView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
         
-        NSLayoutConstraint(item: doorView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: doorView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
         
         self.view.addSubview(answerVideoCallButton)
         
@@ -274,7 +300,7 @@ extension VolunteerLobbyViewController {
 
         answerVideoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
 
-        answerVideoCallButton.isEnabled = true
+        answerVideoCallButton.isEnabled = false
 
         answerVideoCallButton.addTarget(self, action: #selector(answerVideoCall), for: .touchUpInside)
         
@@ -309,7 +335,7 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
-        NSLayoutConstraint(item: statusSwitch, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: statusSwitch, attribute: .leading, relatedBy: .equal, toItem: instructionLabel, attribute: .trailing, multiplier: 1, constant: 8).isActive = true
         
         statusSwitch.onImage = UIImage(named: "black_vinyl-PhotoRoom")
         
@@ -336,13 +362,34 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: instructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
         
-        instructionLabel.text = "Switch for receiving call or not"
+        instructionLabel.text = "Switch for receiving calls or not"
         instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         instructionLabel.adjustsFontForContentSizeCategory = true
         instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         instructionLabel.textAlignment = .center
         instructionLabel.numberOfLines = 0
         instructionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+        self.view.addSubview(birdInstructionLabel)
+        
+        birdInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .leading, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        birdInstructionLabel.text = "Call will be notified by a bird"
+        birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        birdInstructionLabel.adjustsFontForContentSizeCategory = true
+        birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        birdInstructionLabel.textAlignment = .center
+        birdInstructionLabel.numberOfLines = 0
+        birdInstructionLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
     }
     
@@ -351,10 +398,25 @@ extension VolunteerLobbyViewController {
             self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
             self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            self.birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         } else {
             self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
             self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+            self.birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         }
     }
+    
+    func addUpAndDownAnimation() {
+        let animatioan = CABasicAnimation(keyPath: "transform.translation.y")
+        animatioan.isRemovedOnCompletion = false
+        animatioan.duration = 2.0
+        animatioan.autoreverses = true
+        animatioan.repeatCount = MAXFLOAT
+        animatioan.fromValue = NSNumber(value: 0)
+        animatioan.toValue = NSNumber(value: 40)
+        vinylImageView.layer.add(animatioan, forKey: "bounce")
+        cloudImageView.layer.add(animatioan, forKey: "bounce")
+    }
+
 }
