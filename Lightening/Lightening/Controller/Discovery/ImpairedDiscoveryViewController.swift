@@ -226,8 +226,9 @@ extension ImpairedDiscoveryViewController {
         
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        LKProgressHUD.show()
-        
+        DispatchQueue.main.async {
+            LKProgressHUD.show()
+        }
         DispatchQueue.global().async {
             self.setPlayer(url: audio.audioUrl)
         }
@@ -235,8 +236,6 @@ extension ImpairedDiscoveryViewController {
         DispatchQueue.main.async {
             LKProgressHUD.dismiss()
         }
-        
-        
         
     }
 }
