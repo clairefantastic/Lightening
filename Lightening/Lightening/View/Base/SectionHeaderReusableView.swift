@@ -29,19 +29,22 @@ class SectionHeaderReusableView: UICollectionReusableView {
         
         label.font = UIFont(name: "American Typewriter Bold", size: 20)
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        label.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        
         return label
     }()
     
     lazy var titleButton: UIButton = {
         let button = UIButton()
-        button.setTitle(">", for: .normal)
+        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
+//        button.setTitle(">", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        button.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
         button.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
@@ -50,9 +53,8 @@ class SectionHeaderReusableView: UICollectionReusableView {
   
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
-        backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
+
+//        backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
         addSubview(titleLabel)
         addSubview(titleButton)
         titleButton.addTarget(self, action: #selector(self.didTapTopic), for: .touchUpInside)
@@ -78,12 +80,12 @@ class SectionHeaderReusableView: UICollectionReusableView {
                     constant: 16),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
-                    constant: -16)])
+                    constant: 0)])
         } else {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(
                     equalTo: leadingAnchor,
-                    constant: 16),
+                    constant: 24),
                 titleLabel.trailingAnchor.constraint(
                     lessThanOrEqualTo: trailingAnchor,
                     constant: -16)
@@ -92,10 +94,10 @@ class SectionHeaderReusableView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: 10),
+                constant: 12),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -10)
+                constant: -12)
         ])
     }
   

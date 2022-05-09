@@ -18,5 +18,7 @@ target 'Lightening' do
   pod 'Kingfisher'
   pod 'SoundWave'
   pod ‘Firebase/Auth’
+  pod 'JGProgressHUD'
+  pod 'Firebase/Crashlytics'
 
 end

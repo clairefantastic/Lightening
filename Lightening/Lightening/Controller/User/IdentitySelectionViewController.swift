@@ -13,20 +13,69 @@ class IdentitySelectionViewController: BaseViewController {
     
     private let volunteerButton = UIButton()
     
+    private let rotationVinylImageView = UIImageView()
+    
+    private let instructionLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureVisuallyImpairedButton()
         configureVolunteerButton()
+        configureVisuallyImpairedButton()
+        configureInstructionLabel()
+        configureRotationVinylImageView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         visuallyImpairedButton.layer.cornerRadius = visuallyImpairedButton.frame.height / 2
         volunteerButton.layer.cornerRadius = volunteerButton.frame.height / 2
+        rotationVinylImageView.rotate()
+        
     }
 }
 
 extension IdentitySelectionViewController {
+    
+    private func configureRotationVinylImageView() {
+        
+        self.view.addSubview(rotationVinylImageView)
+        
+        rotationVinylImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: rotationVinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 240).isActive = true
+        
+        NSLayoutConstraint(item: rotationVinylImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 240).isActive = true
+        
+        NSLayoutConstraint(item: rotationVinylImageView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: rotationVinylImageView, attribute: .bottom, relatedBy: .equal, toItem: instructionLabel, attribute: .top, multiplier: 1, constant: -36).isActive = true
+        
+        rotationVinylImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+    }
+    
+    private func configureInstructionLabel() {
+        
+        self.view.addSubview(instructionLabel)
+        
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: instructionLabel, attribute: .bottom, relatedBy: .equal, toItem: visuallyImpairedButton, attribute: .top, multiplier: 1, constant: -16).isActive = true
+        
+        instructionLabel.text = "Please select an identity"
+        instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        instructionLabel.adjustsFontForContentSizeCategory = true
+        instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        instructionLabel.textAlignment = .center
+        instructionLabel.numberOfLines = 0
+        instructionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
     
     private func configureVisuallyImpairedButton() {
         
@@ -40,7 +89,7 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: visuallyImpairedButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -200).isActive = true
+        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .bottom, relatedBy: .equal, toItem: volunteerButton, attribute: .top, multiplier: 1, constant: -24).isActive = true
         
         visuallyImpairedButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
@@ -49,8 +98,6 @@ extension IdentitySelectionViewController {
         visuallyImpairedButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
         visuallyImpairedButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        visuallyImpairedButton.isEnabled = true
         
         visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
         
@@ -107,7 +154,7 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: volunteerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: volunteerButton, attribute: .top, relatedBy: .equal, toItem: visuallyImpairedButton, attribute: .bottom, multiplier: 1, constant: 40).isActive = true
+        NSLayoutConstraint(item: volunteerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
         
         volunteerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
         
@@ -116,8 +163,6 @@ extension IdentitySelectionViewController {
         volunteerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
         volunteerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        volunteerButton.isEnabled = true
         
         volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
         

@@ -19,9 +19,15 @@ class UserProfileView: UIView {
                 
                 profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
                 
+                LKProgressHUD.dismiss()
+                
             } else {
                 
+                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                
                 profileImageView.loadImage(imageUrl)
+                
+                LKProgressHUD.dismiss()
             }
         }
     }
@@ -161,6 +167,8 @@ class UserProfileView: UIView {
         profileImageView.layer.borderColor = UIColor.black.cgColor
         
         profileImageView.layer.borderWidth = 1
+        
+        profileImageView.contentMode = .scaleAspectFill
     
     }
     

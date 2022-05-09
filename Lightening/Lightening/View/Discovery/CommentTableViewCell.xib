@@ -23,7 +23,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="adt-G0-uCY">
                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="26P-md-N3u"/>
+                                    <constraint firstAttribute="width" constant="48" id="26P-md-N3u"/>
                                     <constraint firstAttribute="width" secondItem="adt-G0-uCY" secondAttribute="height" multiplier="1:1" id="bWY-S0-fiD"/>
                                 </constraints>
                             </imageView>
@@ -46,11 +46,25 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-P2-e9d">
+                        <rect key="frame" x="324" y="64" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="b6e-Cl-jVW"/>
+                            <constraint firstAttribute="height" constant="16" id="u7c-jC-fOg"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="" image="option">
+                            <color key="titleColor" red="0.074509803921568626" green="0.14901960784313725" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="90R-do-Tyz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="1S2-OU-Oeg"/>
                     <constraint firstAttribute="bottom" secondItem="90R-do-Tyz" secondAttribute="bottom" constant="16" id="1fD-Pu-UEZ"/>
+                    <constraint firstAttribute="trailing" secondItem="iKs-P2-e9d" secondAttribute="trailing" constant="16" id="3lw-55-rsg"/>
                     <constraint firstAttribute="trailing" secondItem="90R-do-Tyz" secondAttribute="trailing" constant="16" id="KLx-Uw-KS0"/>
+                    <constraint firstItem="iKs-P2-e9d" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fAC-FH-i0D"/>
                     <constraint firstItem="90R-do-Tyz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="nrb-ww-b2A"/>
                 </constraints>
             </tableViewCellContentView>
@@ -60,8 +74,12 @@
                 <outlet property="authorImageView" destination="adt-G0-uCY" id="xXG-xp-9yK"/>
                 <outlet property="authorNameLabel" destination="Tqr-1H-RqY" id="AOc-ps-yox"/>
                 <outlet property="commentTextLabel" destination="9kV-90-f2g" id="9JJ-eN-vmR"/>
+                <outlet property="moreButton" destination="iKs-P2-e9d" id="Ec4-wU-gaC"/>
             </connections>
             <point key="canvasLocation" x="163.768115942029" y="122.54464285714285"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="option" width="512" height="512"/>
+    </resources>
 </document>

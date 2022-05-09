@@ -32,15 +32,64 @@ class MapViewController: BaseViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
-        let center = CLLocationCoordinate2D(latitude: 24.5, longitude: 121.0)
-        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
-        mapView.setRegion(mRegion, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        mapView.removeAnnotations(self.audioAnnotations)
+        
+        notifyBlockUser()
+        
+    }
+    
+    func notifyBlockUser() {
+        
+        PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            switch result {
+            
+            case .success(let audios):
+                
+                self?.audios = []
+                
+                if let blockList = UserManager.shared.currentUser?.blockList {
+                    
+                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                        
+                        self?.audios.append(audio)
+                        
+                    }
+                } else {
+                    
+                    self?.audios = audios
+                }
+                
+                self?.audioAnnotations = []
+                
+                self?.audios.forEach { audio in
+                    
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
+                        coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
+                    
+                }
+                
+                self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
+                
+                LKProgressHUD.dismiss()
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
+            }
+            
+        }
     }
     
     func determineCurrentLocation() {
         locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
 
         if CLLocationManager.locationServicesEnabled() {
@@ -52,32 +101,16 @@ class MapViewController: BaseViewController {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let mUserLocation: CLLocation = locations[0] as CLLocation
+
+        let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
-            
-            switch result {
-            
-            case .success(let audios):
-                
-                self?.audios = audios
-                
-                audios.forEach { audio in
-                    
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
-                        coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
-                    
-                }
-                
-                self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-            
+        let mRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
+        mapView.setRegion(mRegion, animated: true)
+        
+        locationManager.stopUpdatingLocation()
+        
         }
-        
-    }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error - locationManager: \(error.localizedDescription)")
@@ -91,6 +124,7 @@ extension MapViewController: MKMapViewDelegate {
         _ mapView: MKMapView,
         viewFor annotation: MKAnnotation
       ) -> MKAnnotationView? {
+          
         // 2
         guard let annotation = annotation as? AudioAnnotation else {
           return nil
@@ -111,6 +145,10 @@ extension MapViewController: MKMapViewDelegate {
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
             
+          let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.viewLongPress))
+            
+          view.addGestureRecognizer(longPress)
+            
           let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             button.setImage(UIImage(named: "black_vinyl-PhotoRoom"), for: .normal)
           view.rightCalloutAccessoryView = button
@@ -120,20 +158,27 @@ extension MapViewController: MKMapViewDelegate {
       }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         let annotation = view.annotation as? AudioAnnotation
         let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
+        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
         let audioPlayerViewController = AudioPlayerViewController()
         self.addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
-        audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 80, width: width, height: 80)
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         self.view.addSubview(audioPlayerViewController.view)
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0001,
-                       options: .curveEaseInOut,
-                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - 130, width: width, height: 80)},
-                       completion: {_ in })
+        audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
         
     }
     
@@ -154,6 +199,12 @@ extension MapViewController {
         mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        mapView.layer.cornerRadius = 10
+        
+    }
+    
+    @objc func viewLongPress() {
         
     }
 }

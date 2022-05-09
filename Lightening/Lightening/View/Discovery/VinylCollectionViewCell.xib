@@ -37,12 +37,13 @@
                                                 <attributes>
                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <font key="NSFont" size="14" name="AmericanTypewriter-Semibold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewe-il-Hox">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewe-il-Hox">
                                         <rect key="frame" x="0.0" y="24.5" width="279" height="16.5"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
                                         <color key="textColor" red="0.074509803920000006" green="0.14901960780000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -65,12 +66,22 @@
                             <constraint firstAttribute="height" constant="60" id="x0g-Me-gLA"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aB-YZ-e2D">
+                        <rect key="frame" x="0.0" y="221" width="311" height="2"/>
+                        <color key="backgroundColor" white="1" alpha="0.50543253311258274" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="h3n-3d-edG"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="FHA-sF-hfm" secondAttribute="trailing" constant="16" id="5fR-mI-mtM"/>
                 <constraint firstItem="ML3-Jm-ocI" firstAttribute="centerY" secondItem="csP-L6-7O9" secondAttribute="centerY" id="8mo-6B-3cV"/>
+                <constraint firstItem="9aB-YZ-e2D" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Gro-YT-d5K"/>
+                <constraint firstAttribute="trailing" secondItem="9aB-YZ-e2D" secondAttribute="trailing" id="Qkz-ib-ttk"/>
+                <constraint firstAttribute="bottom" secondItem="9aB-YZ-e2D" secondAttribute="bottom" id="Yru-9A-5sB"/>
                 <constraint firstItem="ML3-Jm-ocI" firstAttribute="centerX" secondItem="csP-L6-7O9" secondAttribute="centerX" id="gze-ar-2fV"/>
                 <constraint firstItem="FHA-sF-hfm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="kpv-FB-OOG"/>
                 <constraint firstItem="FHA-sF-hfm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="scx-nk-hMe"/>

@@ -56,7 +56,7 @@ class AudioPlayer: NSObject {
         
         guard let player = player else { return }
         guard !player.isPlaying else { return }
-    
+        player.volume = 300.0
         player.play()
         self.scheduleTimer()
         self.playerStateChangeHandler?(.play)

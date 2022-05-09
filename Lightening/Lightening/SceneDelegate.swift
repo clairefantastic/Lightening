@@ -10,8 +10,11 @@ import FirebaseAuth
 import CryptoKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    internal var window: UIWindow?
+    
+    // swiftlint:disable force_cast
+    static let shared = UIApplication.shared.delegate as! AppDelegate
+    // swiftlint:enable force_cast
+    var window: UIWindow?
     
     private var userIdentity: Int?
 
@@ -20,9 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 //        guard let _ = (scene as? UIWindowScene) else { return }
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        
         window?.windowScene = windowScene
         ElementsStyle.styleViewBackground(window ?? UIWindow())
         self.buildMainViewController() { rootViewController in

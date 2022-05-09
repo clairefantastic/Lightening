@@ -39,9 +39,9 @@ class AddDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
-        
         layoutUploadButton()
+        
+        setupTableView()
         
         animationView = .init(name: "lf30_editor_6v2ghoza")
           
@@ -62,6 +62,8 @@ class AddDetailsViewController: BaseViewController {
 
     private func setupTableView() {
         
+        ElementsStyle.styleViewBackground(tableView)
+        
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +72,7 @@ class AddDetailsViewController: BaseViewController {
         
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: uploadButton.topAnchor, constant: -16).isActive = true
         
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
@@ -108,11 +110,11 @@ class AddDetailsViewController: BaseViewController {
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -30).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
@@ -124,54 +126,89 @@ class AddDetailsViewController: BaseViewController {
         
         uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
         
-        uploadButton.isEnabled = true
-        
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
 
     }
     
     @objc func uploadFile(_ sender: UIButton) {
         
-        print("Upload file")
+        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
         
-        DispatchQueue.main.async {
-            self.view.stickSubView(self.animationView)
-            self.animationView.play() 
-        }
-    
-        guard let localUrl = localUrl else {
-            return
-        }
-
-        PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
+        if self.audio.title == "" {
             
-            self?.audio.audioUrl = downloadUrl
+            let titleEmptyAlert = UIAlertController(title: "Error", message: "Title should not be empty.", preferredStyle: .alert)
+            titleEmptyAlert.addAction(action)
+            present(titleEmptyAlert, animated: true)
             
-            self?.audio.createdTime = Date().timeIntervalSince1970
-
-            guard var publishAudio = self?.audio else {
-                    return
+        } else if self.audio.description == "" {
+            
+            let descriptionEmptyAlert = UIAlertController(title: "Error", message: "Description should not be empty.", preferredStyle: .alert)
+            descriptionEmptyAlert.addAction(action)
+            present(descriptionEmptyAlert, animated: true)
+            
+        } else if self.audio.topic == "" {
+            
+            let topicEmptyAlert = UIAlertController(title: "Error", message: "Topic should not be empty.", preferredStyle: .alert)
+            topicEmptyAlert.addAction(action)
+            present(topicEmptyAlert, animated: true)
+            
+        } else if self.audio.cover == "" {
+            
+            let topicEmptyAlert = UIAlertController(title: "Error", message: "Cover should not be empty.", preferredStyle: .alert)
+            topicEmptyAlert.addAction(action)
+            present(topicEmptyAlert, animated: true)
+            
+        } else {
+           
+            self.navigationController?.navigationBar.isUserInteractionEnabled = false
+            
+            print("Upload file")
+            
+            DispatchQueue.main.async {
+                self.view.stickSubView(self.animationView)
+                self.animationView.play()
             }
-            
-            PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
-                switch result {
+        
+            guard let localUrl = localUrl else {
+                return
+            }
 
-                case .success:
-
-                    print("onTapPublish, success")
-                    
-                    self?.animationView.removeFromSuperview()
-                    
-                    guard let count = self?.navigationController?.viewControllers.count else { return }
+            PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
                 
-                    if let preController = self?.navigationController?.viewControllers[count - 3] {
+                self?.audio.audioUrl = downloadUrl
+                
+                self?.audio.createdTime = Date().timeIntervalSince1970
 
-                        self?.navigationController?.popToViewController(preController, animated: true)
+                guard var publishAudio = self?.audio else {
+                        return
+                }
+                
+                PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
+                    switch result {
+
+                    case .success:
+
+                        print("onTapPublish, success")
+                        
+                        self?.animationView.removeFromSuperview()
+                        
+                        LKProgressHUD.showSuccess()
+                        
+                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
+                        
+                        self?.navigationController?.popToRootViewController(animated: true)
+                        
+                        self?.tabBarController?.selectedIndex = 1
+                        
+                    case .failure(let error):
+
+                        print("publishArticle.failure: \(error)")
+                        
+                        LKProgressHUD.showFailure()
+                        
+                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
                     }
                     
-                case .failure(let error):
-
-                    print("publishArticle.failure: \(error)")
                 }
                 
             }
@@ -197,6 +234,8 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
                     
             else { return UITableViewCell() }
+            
+            cell.index = indexPath.row
             
             cell.delegate = self
             

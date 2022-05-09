@@ -50,7 +50,6 @@ class AudioPlayerViewController: UIViewController {
         addPlayerView()
         playerView.likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-        tapGestureRecognizer.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
     }
@@ -89,9 +88,13 @@ class AudioPlayerViewController: UIViewController {
                     }
                 }
                 
+                LKProgressHUD.dismiss()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
+                
+                LKProgressHUD.showFailure(text: "Fail to fetch like status")
             }
             
         }
