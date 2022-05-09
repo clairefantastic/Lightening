@@ -24,7 +24,7 @@ class MyProfileViewController: ImpairedProfileViewController {
     
     private var myAudios: [Audio]?
     
-    private var likedAudios: [Audio]?
+    private var myLikedAudios: [Audio]?
     
     private var hideLeftLightBeam: Bool? {
         
@@ -119,8 +119,21 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
             case .success(let likedAudios):
                 
-                self?.likedAudios = likedAudios
-                
+                if let blockList = UserManager.shared.currentUser?.blockList {
+                    
+                    self?.myLikedAudios = []
+                    
+                    for likedAudio in likedAudios where blockList.contains(likedAudio.authorId ?? "") == false {
+                        
+                        self?.myLikedAudios?.append(likedAudio)
+                        
+                    }
+                    
+                } else {
+                    
+                    self?.myLikedAudios = likedAudios
+                }
+            
                 LKProgressHUD.dismiss()
                 
             case .failure(let error):
@@ -369,7 +382,7 @@ extension MyProfileViewController {
     @objc func didTapSeeMoreLikedAudios() {
         
         let likedAudioListViewController = LikedAudioListViewController()
-        likedAudioListViewController.audios = likedAudios
+        likedAudioListViewController.audios = myLikedAudios
         self.navigationController?.pushViewController(likedAudioListViewController, animated: true)
     }
 }
