@@ -23,7 +23,7 @@ class AddDetailsViewController: BaseViewController {
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
     
-    private let image = ["nature", "city", "pet", "meaningful", "pure"]
+    private let image = ["nature", "sea", "city", "pet", "meaningful", "pure"]
     
     private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
                               topic: "",

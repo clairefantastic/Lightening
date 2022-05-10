@@ -23,7 +23,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["nature", "city", "pet", "meaningful", "pure"]
+    private let coverArray = ["nature", "sea", "city", "pet", "meaningful", "pure"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,7 +38,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
 
 extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
