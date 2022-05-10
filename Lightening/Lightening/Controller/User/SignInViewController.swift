@@ -161,6 +161,8 @@ extension SignInViewController {
         emailTextField.layer.cornerRadius = 25
         
         emailTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
+        emailTextField.keyboardType = .emailAddress
     }
     
     private func configurePasswordLabel() {

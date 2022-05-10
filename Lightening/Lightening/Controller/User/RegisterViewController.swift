@@ -176,6 +176,8 @@ extension RegisterViewController {
         emailTextField.layer.cornerRadius = 25
         
         emailTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
+        emailTextField.keyboardType = .emailAddress
     }
     
     private func configurePasswordLabel() {
@@ -335,7 +337,6 @@ extension RegisterViewController {
         } else {
             
             UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
-                
                 
                 if let error = error {
                     LKProgressHUD.showFailure(text: "Firebase signUp fail")
