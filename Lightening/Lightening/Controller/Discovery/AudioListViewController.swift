@@ -15,6 +15,8 @@ class AudioListViewController: BaseViewController {
         
         didSet {
             
+            tableView.reloadData()
+            
             if audios?.isEmpty == true {
                 
                 configureNoContentLabel()
@@ -25,6 +27,8 @@ class AudioListViewController: BaseViewController {
     
     private var tableView = UITableView()
     
+    let audioPlayerViewController = AudioPlayerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +36,14 @@ class AudioListViewController: BaseViewController {
         
         setUpTableView()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if let player = audioPlayerViewController.playerView.player {
+            player.pause()
+        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
 }
 
@@ -169,7 +181,7 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        let audioPlayerViewController = AudioPlayerViewController()
+        audioPlayerViewController.view.removeFromSuperview()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audios?[indexPath.row]
 //        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)

@@ -19,6 +19,8 @@ class MapViewController: BaseViewController {
     
     private var audios: [Audio] = []
     
+    let audioPlayerViewController = AudioPlayerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +43,14 @@ class MapViewController: BaseViewController {
         
         notifyBlockUser()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if let player = audioPlayerViewController.playerView.player {
+            player.pause()
+        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
     
     func notifyBlockUser() {
@@ -163,7 +173,7 @@ extension MapViewController: MKMapViewDelegate {
         let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        let audioPlayerViewController = AudioPlayerViewController()
+        audioPlayerViewController.view.removeFromSuperview()
         self.addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
