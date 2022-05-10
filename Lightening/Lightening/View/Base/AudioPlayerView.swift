@@ -206,31 +206,42 @@ extension AudioPlayerView {
     }
     
     func setUpPlayPauseButton() {
+        
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         playPauseButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
         
         playPauseButton.addTarget(self, action: #selector(playPauseAudio), for: .touchUpInside)
+
     }
     
     @objc func playPauseAudio(_ sender: UIButton) {
         
-        if isPlaying {
+        if let player = player {
             
-            player.pause()
-            stopRotateHandler?()
-            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            
-            isPlaying = false
+            if isPlaying {
+                
+                player.pause()
+                stopRotateHandler?()
+                sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                
+                isPlaying = false
 
+            } else {
+                
+                player.play()
+                startRotateHandler?()
+                sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+                
+                isPlaying = true
+
+            }
+            
         } else {
             
-            player.play()
-            startRotateHandler?()
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             
-            isPlaying = true
-
         }
+        
+       
     }
     
     func layoutProgressSlider() {
