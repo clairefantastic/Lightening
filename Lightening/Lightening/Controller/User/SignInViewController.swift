@@ -37,6 +37,12 @@ class SignInViewController: BaseViewController {
     
     private let identitySelectionViewController = IdentitySelectionViewController()
     
+    private let agreementLabel = UILabel()
+    
+    private let privacyPolicyButton = UIButton()
+    
+    private let endUserLicenseAgreementButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +63,10 @@ class SignInViewController: BaseViewController {
         configureNoAccountLabel()
         
         configureRegisterButton()
+        
+        configureAgreementLabel()
+        
+        configureAgreementButtons()
         
     }
     
@@ -318,6 +328,96 @@ extension SignInViewController {
         registerViewController.modalPresentationStyle = .fullScreen
         
         self.present(registerViewController, animated: true)
+    }
+    
+    private func configureAgreementLabel() {
+        
+        view.addSubview(agreementLabel)
+        
+        agreementLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: agreementLabel, attribute: .top, relatedBy: .equal, toItem: registerButton, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: agreementLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 5).isActive = true
+        
+        NSLayoutConstraint(item: agreementLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: agreementLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        agreementLabel.text = "After log in or registration, you agree to our"
+        agreementLabel.font = UIFont(name: "American Typewriter", size: 12)
+        agreementLabel.adjustsFontForContentSizeCategory = true
+        agreementLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        agreementLabel.textAlignment = .center
+        agreementLabel.numberOfLines = 0
+        agreementLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+
+        
+    }
+    
+    private func configureAgreementButtons() {
+        
+        view.addSubview(privacyPolicyButton)
+        
+        privacyPolicyButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: privacyPolicyButton, attribute: .top, relatedBy: .equal, toItem: agreementLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
+        
+        NSLayoutConstraint(item: privacyPolicyButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+        
+        NSLayoutConstraint(item: privacyPolicyButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: privacyPolicyButton, attribute: .leading, relatedBy: .equal, toItem: agreementLabel, attribute: .leading, multiplier: 1, constant: -4).isActive = true
+        
+        privacyPolicyButton.setTitle("Privacy Policy &", for: .normal)
+        
+        privacyPolicyButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
+        
+        privacyPolicyButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        privacyPolicyButton.isEnabled = true
+        
+        privacyPolicyButton.addTarget(self, action: #selector(presentPrivacyPolicy), for: .touchUpInside)
+        
+        view.addSubview(endUserLicenseAgreementButton)
+        
+        endUserLicenseAgreementButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .top, relatedBy: .equal, toItem: agreementLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
+        
+        NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
+        
+        NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .leading, relatedBy: .equal, toItem: privacyPolicyButton, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        
+        endUserLicenseAgreementButton.setTitle("End User License Agreements", for: .normal)
+        
+        endUserLicenseAgreementButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
+        
+        endUserLicenseAgreementButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        
+        endUserLicenseAgreementButton.isEnabled = true
+        
+        endUserLicenseAgreementButton.addTarget(self, action: #selector(presentEULA), for: .touchUpInside)
+        
+    }
+    
+    @objc func presentPrivacyPolicy() {
+        
+        let privacyPolicyViewController = PrivacyPolicyViewController()
+        
+        self.present(privacyPolicyViewController, animated: true, completion: nil)
+        
+    }
+    
+    @objc func presentEULA() {
+        
+        let eulaViewController = EULAViewController()
+        
+        self.present(eulaViewController, animated: true, completion: nil)
+        
     }
     
     @objc func handleNativeSignIn() {
