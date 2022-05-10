@@ -9,6 +9,8 @@ import UIKit
 
 class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
     
+    let audioPlayerViewController = AudioPlayerViewController()
+    
     override func viewDidLoad() {
         fetchData()
         configureCollectionView()
@@ -18,6 +20,16 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         self.navigationItem.title = "Discovery"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if let player = audioPlayerViewController.playerView.player {
+            player.pause()
+        }
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
     }
 }
 
@@ -29,7 +41,6 @@ extension VolunteerDiscoveryViewController {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
         
-        let audioPlayerViewController = AudioPlayerViewController()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)

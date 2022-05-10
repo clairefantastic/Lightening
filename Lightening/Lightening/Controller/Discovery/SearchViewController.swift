@@ -32,6 +32,8 @@ class SearchViewController: BaseViewController {
     
     private let searchController = UISearchController()
     
+    let audioPlayerViewController = AudioPlayerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +58,16 @@ class SearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if let player = audioPlayerViewController.playerView.player {
+            player.pause()
+        }
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
     }
     
     private func fetchData() {
@@ -89,6 +101,7 @@ class SearchViewController: BaseViewController {
             
         }
     }
+
 }
 
 extension SearchViewController {
@@ -200,8 +213,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        
-        let audioPlayerViewController = AudioPlayerViewController()
+    
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = filteredAudioFiles?[indexPath.row]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
