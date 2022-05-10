@@ -65,9 +65,7 @@ class SearchViewController: BaseViewController {
         if let player = audioPlayerViewController.playerView.player {
             player.pause()
         }
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
     
     private func fetchData() {
@@ -213,7 +211,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-    
+        audioPlayerViewController.view.removeFromSuperview()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = filteredAudioFiles?[indexPath.row]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)

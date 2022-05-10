@@ -50,9 +50,7 @@ class MapViewController: BaseViewController {
         if let player = audioPlayerViewController.playerView.player {
             player.pause()
         }
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
     
     func notifyBlockUser() {
@@ -175,7 +173,7 @@ extension MapViewController: MKMapViewDelegate {
         let audioFile = audios.filter { $0.audioUrl == annotation?.audioUrl }
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        
+        audioPlayerViewController.view.removeFromSuperview()
         self.addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audioFile[0]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)

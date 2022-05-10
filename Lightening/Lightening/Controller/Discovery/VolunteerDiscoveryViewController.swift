@@ -27,9 +27,7 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         if let player = audioPlayerViewController.playerView.player {
             player.pause()
         }
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
 }
 
@@ -40,6 +38,8 @@ extension VolunteerDiscoveryViewController {
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
+        
+        audioPlayerViewController.view.removeFromSuperview()
         
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = sections[indexPath.section].audios[indexPath.row]
@@ -62,7 +62,7 @@ extension VolunteerDiscoveryViewController {
                 cell.vinylImageView.rotate()
                 cell.audioCoverImageView.rotate()
                 
-                audioPlayerViewController.playerView.stopRotateHandler = { [weak self] in
+                self?.audioPlayerViewController.playerView.stopRotateHandler = { [weak self] in
                     if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
                         cell.vinylImageView.layer.removeAnimation(forKey: "rotationAnimation")
                         cell.audioCoverImageView.layer.removeAnimation(forKey: "rotationAnimation")

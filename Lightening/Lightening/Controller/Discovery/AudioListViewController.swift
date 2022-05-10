@@ -43,9 +43,7 @@ class AudioListViewController: BaseViewController {
         if let player = audioPlayerViewController.playerView.player {
             player.pause()
         }
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
+        audioPlayerViewController.view.removeFromSuperview()
     }
 }
 
@@ -183,6 +181,7 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
+        audioPlayerViewController.view.removeFromSuperview()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = audios?[indexPath.row]
 //        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
