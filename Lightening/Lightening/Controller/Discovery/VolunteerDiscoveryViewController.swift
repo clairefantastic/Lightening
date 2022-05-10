@@ -90,7 +90,7 @@ extension VolunteerDiscoveryViewController {
         
         let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
         
-        let audioPlayerViewController = AudioPlayerViewController()
+        audioPlayerViewController.view.removeFromSuperview()
         addChild(audioPlayerViewController)
         audioPlayerViewController.audio = self.audios[Int.random(in: 0..<self.audios.count)]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
