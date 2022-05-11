@@ -26,10 +26,6 @@ class PublishManager {
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
         
         let fileName = NSUUID().uuidString + ".m4a"
-//        if FileManager.default.fileExists(atPath: destinationUrl.path) {
-//            print("The file already exists at path")
-////            audiooPlayer?.play()
-//        } else {
 
             do {
 
