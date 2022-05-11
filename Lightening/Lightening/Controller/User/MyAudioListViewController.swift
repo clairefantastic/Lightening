@@ -36,7 +36,9 @@ class MyAudioListViewController: AudioListViewController {
                 
                 self.audios?.remove(at: indexPath.row)
 
-                tableView.deleteRows(at: [indexPath], with: .fade)
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+//                tableView.reloadData()
                 
                 print("success")
                 
