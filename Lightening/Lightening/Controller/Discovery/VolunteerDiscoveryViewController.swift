@@ -92,7 +92,8 @@ extension VolunteerDiscoveryViewController {
         
         audioPlayerViewController.view.removeFromSuperview()
         addChild(audioPlayerViewController)
-        audioPlayerViewController.audio = self.audios[Int.random(in: 0..<self.audios.count)]
+        let filteredAudios = self.audios.filter { $0.authorId != UserManager.shared.currentUser?.userId }
+        audioPlayerViewController.audio = filteredAudios[Int.random(in: 0..<filteredAudios.count)]
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
         view.addSubview(audioPlayerViewController.view)
         audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
