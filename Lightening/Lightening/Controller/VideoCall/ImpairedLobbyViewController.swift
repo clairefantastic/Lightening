@@ -31,6 +31,8 @@ class ImpairedLobbyViewController: BaseViewController {
     
     private var oppositePerson = ""
     
+    private var deletePerson = ""
+    
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient ) {
       self.signalClient = signalClient
       self.webRTCClient = webRTCClient
@@ -80,8 +82,9 @@ class ImpairedLobbyViewController: BaseViewController {
             self.rtcStatus?.textColor = UIColor.green
               
             let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-              vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
-              vc.oppositePerson = self.oppositePerson
+            vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+            vc.oppositePerson = self.oppositePerson
+              vc.oppositePerson = self.deletePerson
               
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
@@ -235,6 +238,7 @@ extension ImpairedLobbyViewController {
         self.signalClient.listenVolunteers()
         self.signalClient.getVolunteerHandler = { userId in
             self.oppositePerson = userId
+            self.deletePerson = userId
             self.webRTCClient.offer { (sdp) in
                 self.hasLocalSdp = true
                 self.signalClient.send(sdp: sdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
