@@ -7,11 +7,18 @@
 
 import UIKit
 
+protocol SelectTopicDelegate: AnyObject {
+    
+    func didSelectTopic(_ cell: SelectTopicCollectionViewCell)
+}
+
 class SelectTopicCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var topicButton: UIButton!
     
-    var selectTopicHandler: (() -> Void)?
+    weak var delegate: SelectTopicDelegate?
+    
+    var topic: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,13 +27,13 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
         topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
     }
     
-    private func layoutTopicButton() {
+    func layoutTopicButton() {
+        
+        topicButton.setTitle(topic, for: .normal)
         
         topicButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
         topicButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
         topicButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
-        topicButton.layer.borderWidth = 1
-        topicButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
         
         topicButton.layer.cornerRadius = 10
         
@@ -34,7 +41,7 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
     
     @objc func selectTopic() {
         
-        selectTopicHandler?()
+        delegate?.didSelectTopic(self)
     }
 
 }

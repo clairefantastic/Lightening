@@ -11,6 +11,8 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
 
     var topicButtonArray: [UIButton?] = []
     
+    var selectedIndex: Int?
+    
     weak var delegate: AddDetailsTableViewCellDelegate?
 
     @IBOutlet weak var categoryLabel: UILabel!
@@ -65,6 +67,24 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     
 }
 
+extension AddDetailsTopicTableViewCell: SelectTopicDelegate {
+    
+    func didSelectTopic(_ cell: SelectTopicCollectionViewCell) {
+        selectedIndex = selectTopicCollectionView.indexPath(for: cell)?.item
+        
+        guard let cells = selectTopicCollectionView.visibleCells as? [SelectTopicCollectionViewCell] else { return }
+        for cell in cells {
+            cell.topicButton.layer.borderWidth = 0
+        }
+        
+        cell.topicButton.layer.borderWidth = 2
+        cell.topicButton.layer.borderColor = UIColor.black.cgColor
+        
+        self.delegate?.didSelectTopic(cell.topicButton.titleLabel?.text ?? "")
+    }
+    
+}
+
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,30 +95,23 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionVi
         
         let nibName = "SelectTopicCollectionViewCell"
         guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
-      
-        cell.topicButton.setTitle(AudioTopics.getSection(indexPath.row).rawValue, for: .normal)
         
-        cell.topicButton.setTitle(AudioTopics.getSection(indexPath.row).rawValue, for: .selected)
+        cell.delegate = self
         
-        if topicButtonArray.count < AudioTopics.numberOfSetions() {
-            topicButtonArray.append(cell.topicButton)
-        }
+        cell.topic = AudioTopics.getSection(indexPath.item).rawValue
         
-        cell.selectTopicHandler = { [weak self] in
-            
-            self?.topicButtonArray.forEach { button in
-                button?.layer.borderWidth = 0
-            }
+        cell.layoutTopicButton()
+        
+        if indexPath.item == selectedIndex {
             
             cell.topicButton.layer.borderWidth = 2
             
             cell.topicButton.layer.borderColor = UIColor.black.cgColor
             
-            self?.delegate?.didSelectTopic(cell.topicButton.titleLabel?.text ?? "")
-           
+        } else {
+            
+            cell.topicButton.layer.borderWidth = 0
         }
-        
-        
         
         return cell
     }
