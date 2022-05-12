@@ -11,10 +11,13 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var topicButton: UIButton!
     
+    var selectTopicHandler: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         layoutTopicButton()
+        topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
     }
     
     private func layoutTopicButton() {
@@ -27,6 +30,11 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
         
         topicButton.layer.cornerRadius = 10
         
+    }
+    
+    @objc func selectTopic() {
+        
+        selectTopicHandler?()
     }
 
 }

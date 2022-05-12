@@ -20,11 +20,21 @@ struct DiscoverySection: Hashable {
 
 extension DiscoverySection {
   static var allSections: [DiscoverySection] = [
-    DiscoverySection(topic: "Nature", audios: [
+    DiscoverySection(topic: "Pop", audios: [
+    ]),
+    DiscoverySection(topic: "Indie", audios: [
+    ]),
+    DiscoverySection(topic: "Folk", audios: [
     ]),
     DiscoverySection(topic: "City", audios: [
     ]),
-    DiscoverySection(topic: "Pet", audios: [
+    DiscoverySection(topic: "Cafe", audios: [
+    ]),
+    DiscoverySection(topic: "Meaningful", audios: [
+    ]),
+    DiscoverySection(topic: "Nature", audios: [
+    ]),
+    DiscoverySection(topic: "Animal", audios: [
     ]),
     DiscoverySection(topic: "Others", audios: [
     ])

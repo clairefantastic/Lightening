@@ -7,14 +7,32 @@
 
 import Foundation
 
-enum AudioTopic {
+enum AudioTopics: String, CaseIterable {
     
-    case nature
+    case pop = "Pop"
     
-    case city
+    case indie = "Indie"
     
-    case pet
+    case folk = "Folk"
     
-    case others
+    case city = "City"
+    
+    case cafe = "Cafe"
+    
+    case meaningful = "Meaningful"
+    
+    case nature = "Nature"
+    
+    case animal = "Animal"
+    
+    case others = "Others"
+    
+    static func numberOfSetions() -> Int {
+        return self.allCases.count
+    }
+    
+    static func getSection(_ section: Int) -> AudioTopics {
+        return self.allCases[section]
+    }
 
 }

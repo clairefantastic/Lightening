@@ -290,15 +290,20 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
     
+    func didSelectTopic(_ topic: String) {
+        audio.topic = topic
+    }
+    
+    
     func didSelectCover(_ index: Int) {
         
         audio.cover = image[index]
     }
     
-    func didSelectTopic(_ button: UIButton) {
-        
-        audio.topic = button.titleLabel?.text
-    }
+//    func didSelectTopic(_ button: UIButton) {
+//        
+//        audio.topic = button.titleLabel?.text
+//    }
 
     func endEditing(_ cell: AddDetailsContentCell) {
     
