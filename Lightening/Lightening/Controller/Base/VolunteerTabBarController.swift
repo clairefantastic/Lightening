@@ -155,6 +155,7 @@ class VolunteerTabBarController: UITabBarController {
     
     @objc func endCall() {
         self.lobbyTabBarItem.badgeValue = nil
+        count = 0
     }
 
 }
