@@ -98,6 +98,9 @@ extension AudioListViewController {
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
         
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
         let touchPoint = sender.location(in: self.tableView)
         
         if (sender.state == UIGestureRecognizer.State.ended) {
