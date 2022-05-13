@@ -11,7 +11,7 @@ protocol AddDetailsTableViewCellDelegate: AnyObject {
     
     func endEditing(_ cell: AddDetailsContentCell)
     
-    func didSelectTopic(_ button: UIButton)
+    func didSelectTopic(_ topic: String)
     
     func didSelectCover(_ index: Int)
     

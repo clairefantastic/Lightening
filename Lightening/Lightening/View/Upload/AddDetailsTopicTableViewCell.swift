@@ -8,10 +8,12 @@
 import UIKit
 
 class AddDetailsTopicTableViewCell: UITableViewCell {
+
+    var topicButtonArray: [UIButton?] = []
+    
+    var selectedIndex: Int?
     
     weak var delegate: AddDetailsTableViewCellDelegate?
-    
-    var topicButtonArray = [UIButton()]
 
     @IBOutlet weak var categoryLabel: UILabel!
     
@@ -38,53 +40,83 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @objc func selectTopic(_ sender: UIButton) {
+//    @objc func selectTopic(_ sender: UIButton) {
+//
+//        sender.isSelected = true
+//
+//        for button in topicButtonArray {
+//
+//            if button != sender {
+//                button.isSelected = false
+//            }
+//        }
+//
+//        for button in topicButtonArray {
+//
+//            if button.isSelected == true {
+//                button.layer.borderWidth = 2
+//                button.layer.borderColor = UIColor.black.cgColor
+//                button.setTitleColor(.black, for: .selected)
+//
+//            } else {
+//                button.layer.borderWidth = 0
+//            }
+//        }
+//
+//    }
+    
+}
+
+extension AddDetailsTopicTableViewCell: SelectTopicDelegate {
+    
+    func didSelectTopic(_ cell: SelectTopicCollectionViewCell) {
+        selectedIndex = selectTopicCollectionView.indexPath(for: cell)?.item
         
-        sender.isSelected = true
-        
-        for button in topicButtonArray {
-        
-            if button != sender {
-                button.isSelected = false
-            }
+        guard let cells = selectTopicCollectionView.visibleCells as? [SelectTopicCollectionViewCell] else { return }
+        for cell in cells {
+            cell.topicButton.layer.borderWidth = 0
         }
         
-        for button in topicButtonArray {
-            
-            if button.isSelected == true {
-                button.layer.borderWidth = 2
-                button.layer.borderColor = UIColor.black.cgColor
-                button.setTitleColor(.black, for: .selected)
-                delegate?.didSelectTopic(button)
-            } else {
-                button.layer.borderWidth = 0
-            }
-        }
+        cell.topicButton.layer.borderWidth = 2
+        cell.topicButton.layer.borderColor = UIColor.black.cgColor
         
+        self.delegate?.didSelectTopic(cell.topicButton.titleLabel?.text ?? "")
     }
     
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return AudioTopics.numberOfSetions()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let nibName = "SelectTopicCollectionViewCell"
         guard let cell = selectTopicCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectTopicCollectionViewCell else { return UICollectionViewCell() }
-      
-        cell.topicButton.setTitle(topicArray[indexPath.row], for: .normal)
         
-        cell.topicButton.setTitle(topicArray[indexPath.row], for: .selected)
+        cell.delegate = self
         
-        topicButtonArray.append(cell.topicButton)
+        cell.topic = AudioTopics.getSection(indexPath.item).rawValue
         
-        cell.topicButton.addTarget(self, action: #selector(selectTopic), for: .touchUpInside)
+        cell.layoutTopicButton()
+        
+        if indexPath.item == selectedIndex {
+            
+            cell.topicButton.layer.borderWidth = 2
+            
+            cell.topicButton.layer.borderColor = UIColor.black.cgColor
+            
+        } else {
+            
+            cell.topicButton.layer.borderWidth = 0
+        }
         
         return cell
     }
+        
+        
 }
 
 extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -92,7 +124,7 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let layout = selectTopicCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.scrollDirection = .horizontal
-        return CGSize(width: 100, height: 70)
+        return CGSize(width: 130, height: 70)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
