@@ -154,13 +154,13 @@ extension AudioDetailsViewController {
         
         NSLayoutConstraint(item: moreButtonView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
-        NSLayoutConstraint(item: moreButtonView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        NSLayoutConstraint(item: moreButtonView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
-        NSLayoutConstraint(item: moreButtonView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        NSLayoutConstraint(item: moreButtonView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
         moreButtonView.backgroundColor = .white.withAlphaComponent(0.8)
         
-        moreButtonView.layer.cornerRadius = 12
+        moreButtonView.layer.cornerRadius = 18
         
         self.view.addSubview(moreButton)
         
@@ -170,9 +170,9 @@ extension AudioDetailsViewController {
         
         NSLayoutConstraint(item: moreButton, attribute: .centerX, relatedBy: .equal, toItem: moreButtonView, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: moreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: moreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
-        NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
         moreButton.setImage(UIImage(named: "option"), for: .normal)
         
