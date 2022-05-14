@@ -25,6 +25,8 @@ class AudioDetailsViewController: BaseViewController {
     
     private let moreButton = UIButton()
     
+    private let moreButtonView = UIView()
+    
     private let headerView = StretchyTableHeaderView(frame: CGRect(x: 0, y: 0, width: width, height: width))
     
     var comments: [Comment] = [] {
@@ -116,7 +118,10 @@ class AudioDetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTableView()
+        configureNoCommentsLabel()
+        configureMoreButton()
         configureSendOutTextButton()
         configureEnterCommentTextField()
 
@@ -126,35 +131,176 @@ class AudioDetailsViewController: BaseViewController {
 extension AudioDetailsViewController {
     
     private func configureTableView() {
+        tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         tableView.layer.cornerRadius = 10
 
-        view.stickSubView(tableView, inset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        view.stickSubView(tableView, inset: UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = headerView
+        tableView.allowsSelection = false
+    }
+    
+    private func configureMoreButton() {
+        
+        self.view.addSubview(moreButtonView)
+        
+        moreButtonView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: moreButtonView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: moreButtonView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: moreButtonView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        
+        NSLayoutConstraint(item: moreButtonView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
+        
+        moreButtonView.backgroundColor = .white.withAlphaComponent(0.8)
+        
+        moreButtonView.layer.cornerRadius = 12
+        
+        self.view.addSubview(moreButton)
+        
+        moreButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: moreButton, attribute: .centerY, relatedBy: .equal, toItem: moreButtonView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .centerX, relatedBy: .equal, toItem: moreButtonView, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        
+        moreButton.setImage(UIImage(named: "option"), for: .normal)
+        
+        moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        moreButton.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
+        
+    }
+    
+    @objc func tapMoreButton() {
+        
+        let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        blockUserAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
+
+        let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+            
+            let controller = UIAlertController(title: "Are you sure?",
+                                               message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                               preferredStyle: .alert)
+            let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+                
+                UserManager.shared.blockUser(userId: self.audio?.authorId ?? "") { result in
+                    switch result {
+                    case .success(let success):
+                        print(success)
+                        self.navigationController?.popToRootViewController(animated: true)
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                }
+               
+            }
+            controller.addAction(blockAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            controller.addAction(cancelAction)
+            self.present(controller, animated: true, completion: nil)
+
+        }
+              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                  blockUserAlertController.dismiss(animated: true, completion: nil)
+              }
+
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+
+        present(blockUserAlertController, animated: true, completion: nil)
     }
 }
 
 extension AudioDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        comments.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(CommentTableViewCell.self)", for: indexPath) as? CommentTableViewCell
-            else { return UITableViewCell() }
-            
-            cell.authorNameLabel.text = "1"
-            
-            return cell
-        
-        
-//        cell.moreButton.addTarget(self, action: #selector(tapCommentMoreButton), for: .touchUpInside)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(CommentTableViewCell.self)", for: indexPath) as? CommentTableViewCell
+        else { return UITableViewCell() }
+        cell.comment = comments[indexPath.row]
+        cell.moreButton.addTarget(self, action: #selector(tapCommentMoreButton), for: .touchUpInside)
+        return cell
         
     }
     
+    @objc func tapCommentMoreButton(_ sender: UIButton) {
+        
+        let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        blockUserAlertController
+                let xOrigin = self.view.bounds.width / 2
+                
+                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+                
+        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+                
+        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
+
+        let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+            
+            let controller = UIAlertController(title: "Are you sure?",
+                                               message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                               preferredStyle: .alert)
+            let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+                
+                let point = sender.convert(CGPoint.zero, to: self.tableView)
+                
+                if let indexPath = self.tableView.indexPathForRow(at: point) {
+                    
+                    UserManager.shared.blockUser(userId: self.comments[indexPath.row].authorId ?? "") { result in
+                        switch result {
+                        case .success(let success):
+                            print(success)
+                            self.navigationController?.popToRootViewController(animated: true)
+                        case .failure(let error):
+                            print(error)
+                        }
+                        
+                    }
+                }
+               
+            }
+            controller.addAction(blockAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            controller.addAction(cancelAction)
+            self.present(controller, animated: true, completion: nil)
+
+        }
+              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                  blockUserAlertController.dismiss(animated: true, completion: nil)
+              }
+
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+
+        present(blockUserAlertController, animated: true, completion: nil)
+    }
 }
 
 extension AudioDetailsViewController: UIScrollViewDelegate {
@@ -169,7 +315,7 @@ extension AudioDetailsViewController: UIScrollViewDelegate {
 
 extension AudioDetailsViewController {
     
-    private func configureNoContentLabel() {
+    private func configureNoCommentsLabel() {
         
         self.view.addSubview(noCommentsLabel)
         
@@ -183,7 +329,7 @@ extension AudioDetailsViewController {
         
         NSLayoutConstraint(item: noCommentsLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: noCommentsLabel, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: noCommentsLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: width + 60).isActive = true
         
         noCommentsLabel.text = "No comments yet!"
         noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
@@ -202,7 +348,7 @@ extension AudioDetailsViewController {
         
         sendOutTextButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: sendOutTextButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        NSLayoutConstraint(item: sendOutTextButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -24).isActive = true
         
         NSLayoutConstraint(item: sendOutTextButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -24).isActive = true
         
@@ -244,7 +390,7 @@ extension AudioDetailsViewController {
         
         enterCommentTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: enterCommentTextField, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -24).isActive = true
+        NSLayoutConstraint(item: enterCommentTextField, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
         
         NSLayoutConstraint(item: enterCommentTextField, attribute: .trailing, relatedBy: .equal, toItem: sendOutTextButton, attribute: .leading, multiplier: 1, constant: -16).isActive = true
         
@@ -267,6 +413,8 @@ extension AudioDetailsViewController {
         enterCommentTextField.rightViewMode = .always
         
         enterCommentTextField.font = UIFont(name: "American Typewriter", size: 16)
+        
+        enterCommentTextField.layer.cornerRadius = 24
     }
     
 }

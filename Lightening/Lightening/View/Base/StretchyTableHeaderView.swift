@@ -88,12 +88,9 @@ class StretchyTableHeaderView: UIView {
     private func createViews() {
         addSubview(containerView)
         containerView.addSubview(imageView)
-        containerView.addSubview(audioTitleView)
-//        containerView.addSubview(audioTitleLabel)
-        containerView.addSubview(audioAuthorView)
-//        containerView.addSubview(audioAuthorLabel)
         containerView.addSubview(audioDescriptionView)
-        
+        containerView.addSubview(audioAuthorView)
+        containerView.addSubview(audioTitleView)
     }
     
     func setViewConstraints() {
@@ -115,51 +112,13 @@ class StretchyTableHeaderView: UIView {
         imageViewHeight = imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor)
         imageViewHeight.isActive = true
         
-        audioTitleView.translatesAutoresizingMaskIntoConstraints = false
-        
-        audioTitleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
-
-        audioTitleView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -120).isActive = true
-        
-//        audioTitleView.widthAnchor.constraint(equalToConstant: 250).isActive = true
-//
-//        audioTitleView.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        
-        audioTitleView.addSubview(audioTitleLabel)
-        
-        audioTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        audioTitleLabel.leadingAnchor.constraint(equalTo: audioTitleView.leadingAnchor, constant: 16).isActive = true
-
-        audioTitleLabel.bottomAnchor.constraint(equalTo: audioTitleView.bottomAnchor, constant: -8).isActive = true
-        
-        audioTitleLabel.topAnchor.constraint(equalTo: audioTitleView.topAnchor, constant: 8).isActive = true
-
-        audioTitleLabel.trailingAnchor.constraint(equalTo: audioTitleView.trailingAnchor, constant: -16).isActive = true
-        
-        audioAuthorView.translatesAutoresizingMaskIntoConstraints = false
-        
-        audioAuthorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
-
-        audioAuthorView.topAnchor.constraint(equalTo: audioTitleView.bottomAnchor, constant: 8).isActive = true
-        
-        audioAuthorView.addSubview(audioAuthorLabel)
-        
-        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        audioAuthorLabel.leadingAnchor.constraint(equalTo: audioAuthorView.leadingAnchor, constant: 16).isActive = true
-        
-        audioAuthorLabel.topAnchor.constraint(equalTo: audioAuthorView.topAnchor, constant: 8).isActive = true
-        
-        audioAuthorLabel.bottomAnchor.constraint(equalTo: audioAuthorView.bottomAnchor, constant: -8).isActive = true
-        
-        audioAuthorLabel.trailingAnchor.constraint(equalTo: audioAuthorView.trailingAnchor, constant: -16).isActive = true
-        
         audioDescriptionView.translatesAutoresizingMaskIntoConstraints = false
         
         audioDescriptionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
 
-        audioDescriptionView.topAnchor.constraint(equalTo: audioAuthorView.bottomAnchor, constant: 8).isActive = true
+        audioDescriptionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16).isActive = true
+        
+        audioDescriptionView.trailingAnchor.constraint(lessThanOrEqualTo: containerView.trailingAnchor, constant: 0).isActive = true
         
         audioDescriptionView.addSubview(audioDescriptionLabel)
         
@@ -172,9 +131,43 @@ class StretchyTableHeaderView: UIView {
         audioDescriptionLabel.bottomAnchor.constraint(equalTo: audioDescriptionView.bottomAnchor, constant: -8).isActive = true
         
         audioDescriptionLabel.trailingAnchor.constraint(equalTo: audioDescriptionView.trailingAnchor, constant: -16).isActive = true
+        
+        audioAuthorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioAuthorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+
+        audioAuthorView.bottomAnchor.constraint(equalTo: audioDescriptionView.topAnchor, constant: -8).isActive = true
+        
+        audioAuthorView.addSubview(audioAuthorLabel)
+        
+        audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioAuthorLabel.leadingAnchor.constraint(equalTo: audioAuthorView.leadingAnchor, constant: 16).isActive = true
+        
+        audioAuthorLabel.topAnchor.constraint(equalTo: audioAuthorView.topAnchor, constant: 8).isActive = true
+        
+        audioAuthorLabel.bottomAnchor.constraint(equalTo: audioAuthorView.bottomAnchor, constant: -8).isActive = true
+        
+        audioAuthorLabel.trailingAnchor.constraint(equalTo: audioAuthorView.trailingAnchor, constant: -16).isActive = true
 
         
+        audioTitleView.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioTitleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
 
+        audioTitleView.bottomAnchor.constraint(equalTo: audioAuthorView.topAnchor, constant: -8).isActive = true
+        
+        audioTitleView.addSubview(audioTitleLabel)
+        
+        audioTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioTitleLabel.leadingAnchor.constraint(equalTo: audioTitleView.leadingAnchor, constant: 16).isActive = true
+
+        audioTitleLabel.bottomAnchor.constraint(equalTo: audioTitleView.bottomAnchor, constant: -8).isActive = true
+        
+        audioTitleLabel.topAnchor.constraint(equalTo: audioTitleView.topAnchor, constant: 8).isActive = true
+
+        audioTitleLabel.trailingAnchor.constraint(equalTo: audioTitleView.trailingAnchor, constant: -16).isActive = true
         
     }
     
