@@ -52,6 +52,24 @@ class StretchyTableHeaderView: UIView {
         return audioAuthorView
     }()
     
+    public let audioDescriptionLabel: UILabel = {
+        let audioDescriptionLabel = UILabel()
+        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
+        audioDescriptionLabel.adjustsFontForContentSizeCategory = true
+        audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioDescriptionLabel.textAlignment = .left
+        audioDescriptionLabel.numberOfLines = 0
+        audioDescriptionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        return audioDescriptionLabel
+    }()
+    
+    public let audioDescriptionView: UIView = {
+        let audioDescriptionView = UIView()
+        audioDescriptionView.backgroundColor = .white.withAlphaComponent(0.8)
+        return audioDescriptionView
+    }()
+    
     private var imageViewHeight = NSLayoutConstraint()
     private var imageViewBottom = NSLayoutConstraint()
     private var containerView = UIView()
@@ -73,7 +91,8 @@ class StretchyTableHeaderView: UIView {
         containerView.addSubview(audioTitleView)
 //        containerView.addSubview(audioTitleLabel)
         containerView.addSubview(audioAuthorView)
-        containerView.addSubview(audioAuthorLabel)
+//        containerView.addSubview(audioAuthorLabel)
+        containerView.addSubview(audioDescriptionView)
         
     }
     
@@ -100,7 +119,7 @@ class StretchyTableHeaderView: UIView {
         
         audioTitleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
 
-        audioTitleView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -60).isActive = true
+        audioTitleView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -120).isActive = true
         
 //        audioTitleView.widthAnchor.constraint(equalToConstant: 250).isActive = true
 //
@@ -124,6 +143,8 @@ class StretchyTableHeaderView: UIView {
 
         audioAuthorView.topAnchor.constraint(equalTo: audioTitleView.bottomAnchor, constant: 8).isActive = true
         
+        audioAuthorView.addSubview(audioAuthorLabel)
+        
         audioAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
         
         audioAuthorLabel.leadingAnchor.constraint(equalTo: audioAuthorView.leadingAnchor, constant: 16).isActive = true
@@ -133,6 +154,24 @@ class StretchyTableHeaderView: UIView {
         audioAuthorLabel.bottomAnchor.constraint(equalTo: audioAuthorView.bottomAnchor, constant: -8).isActive = true
         
         audioAuthorLabel.trailingAnchor.constraint(equalTo: audioAuthorView.trailingAnchor, constant: -16).isActive = true
+        
+        audioDescriptionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioDescriptionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+
+        audioDescriptionView.topAnchor.constraint(equalTo: audioAuthorView.bottomAnchor, constant: 8).isActive = true
+        
+        audioDescriptionView.addSubview(audioDescriptionLabel)
+        
+        audioDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioDescriptionLabel.leadingAnchor.constraint(equalTo: audioDescriptionView.leadingAnchor, constant: 16).isActive = true
+        
+        audioDescriptionLabel.topAnchor.constraint(equalTo: audioDescriptionView.topAnchor, constant: 8).isActive = true
+        
+        audioDescriptionLabel.bottomAnchor.constraint(equalTo: audioDescriptionView.bottomAnchor, constant: -8).isActive = true
+        
+        audioDescriptionLabel.trailingAnchor.constraint(equalTo: audioDescriptionView.trailingAnchor, constant: -16).isActive = true
 
         
 

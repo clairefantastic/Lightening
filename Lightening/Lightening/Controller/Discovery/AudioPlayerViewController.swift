@@ -108,7 +108,7 @@ class AudioPlayerViewController: UIViewController {
     @objc func didTapView() {
         let audioDescriptionViewController = AudioDetailsViewController()
         
-//        audioDescriptionViewController.audio = audio
+        audioDescriptionViewController.audio = audio
         
         self.present(audioDescriptionViewController, animated: true, completion: nil)
     
