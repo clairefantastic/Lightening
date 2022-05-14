@@ -55,6 +55,8 @@ class AudioDetailsViewController: BaseViewController {
             if audio?.authorId == UserManager.shared.currentUser?.userId {
                 
                 moreButton.isHidden = true
+                
+                moreButtonView.isHidden = true
             }
             
             headerView.audioTitleLabel.text = self.audio?.title
