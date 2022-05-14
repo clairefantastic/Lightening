@@ -16,7 +16,7 @@ extension UIImageView {
         
         let url = URL(string: urlString!)
 
-        self.kf.setImage(with: url, placeholder: placeHolder)
+        self.kf.setImage(with: url, placeholder: UIImage(named: "black_vinyl-PhotoRoom"))
     }
 }
 

@@ -153,6 +153,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
                 
                 cell?.addGestureRecognizer(longPress)
+                
                 return cell
                 
             })
@@ -192,6 +193,9 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     }
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
         
         let touchPoint = sender.location(in: self.collectionView)
         

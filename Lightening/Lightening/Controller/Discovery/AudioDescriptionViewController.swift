@@ -9,6 +9,8 @@ import UIKit
 
 class AudioDescriptionViewController: BaseViewController {
     
+    private let noCommentsLabel = UILabel()
+    
     private let audioTitleLabel = UILabel()
     
     private let audioAuthorLabel = UILabel()
@@ -26,7 +28,16 @@ class AudioDescriptionViewController: BaseViewController {
     var comments: [Comment] = [] {
         
         didSet {
-            
+                    
+            if comments.isEmpty == true {
+                
+                noCommentsLabel.isHidden = false
+                
+            } else {
+                
+                noCommentsLabel.isHidden = true
+            }
+        
             commentsTableView.reloadData()
         }
     }
@@ -127,6 +138,8 @@ class AudioDescriptionViewController: BaseViewController {
         setUpCommentsTableView()
         
         configureMoreButton()
+        
+        configureNoContentLabel()
         
     }
     
@@ -490,4 +503,34 @@ extension AudioDescriptionViewController: UITableViewDelegate, UITableViewDataSo
         present(blockUserAlertController, animated: true, completion: nil)
     }
     
+}
+
+extension AudioDescriptionViewController {
+    
+    private func configureNoContentLabel() {
+        
+        self.view.addSubview(noCommentsLabel)
+        
+        noCommentsLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.bringSubviewToFront(noCommentsLabel)
+        
+        NSLayoutConstraint(item: noCommentsLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        
+        NSLayoutConstraint(item: noCommentsLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noCommentsLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: noCommentsLabel, attribute: .top, relatedBy: .equal, toItem: commentsTableView, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        
+        noCommentsLabel.text = "No comments yet!"
+        noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
+        noCommentsLabel.adjustsFontForContentSizeCategory = true
+        noCommentsLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noCommentsLabel.textAlignment = .center
+        noCommentsLabel.numberOfLines = 0
+        noCommentsLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+    }
 }
