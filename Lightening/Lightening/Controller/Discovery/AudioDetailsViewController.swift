@@ -184,18 +184,27 @@ extension AudioDetailsViewController {
     
     @objc func tapMoreButton() {
         
+        
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
         // iPad specific code
         blockUserAlertController
-                let xOrigin = self.view.bounds.width / 2
-                
-                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-                
+        let xOrigin = self.view.bounds.width / 2
+        
+        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+        
         blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
-                
+        
         blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
-
+        
+        let shareAction = UIAlertAction(title: "Share This Audio", style: .default) { _ in
+            
+            let shareUrl = self.audio?.audioUrl
+            let items: [Any] = [shareUrl as Any]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            self.present(ac, animated: true, completion: nil)
+        }
+        
         let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
             
             let controller = UIAlertController(title: "Are you sure?",
@@ -213,22 +222,23 @@ extension AudioDetailsViewController {
                     }
                     
                 }
-               
+                
             }
             controller.addAction(blockAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             controller.addAction(cancelAction)
             self.present(controller, animated: true, completion: nil)
-
+            
         }
-              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-
-                  blockUserAlertController.dismiss(animated: true, completion: nil)
-              }
-
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+            blockUserAlertController.dismiss(animated: true, completion: nil)
+        }
+        
+        blockUserAlertController.addAction(shareAction)
         blockUserAlertController.addAction(blockUserAction)
         blockUserAlertController.addAction(cancelAction)
-
+        
         present(blockUserAlertController, animated: true, completion: nil)
     }
 }
