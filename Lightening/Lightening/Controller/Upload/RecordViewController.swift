@@ -11,8 +11,6 @@ import Lottie
 
 import AVFoundation
 
-import SoundWave
-
 class RecordViewController: BaseViewController {
     
     private let limitLengthLabel = UILabel()
@@ -41,7 +39,7 @@ class RecordViewController: BaseViewController {
         
         configureLimitLengthLabel()
         
-        animationView = .init(name: "86332-sound-animation")
+        animationView = .init(name: "7054-soundcloud-social-media-icon")
           
         animationView.frame = view.bounds
           
@@ -57,9 +55,9 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: animationView, attribute: .top, relatedBy: .equal, toItem: limitLengthLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
         
-        NSLayoutConstraint(item: animationView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
         
-        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
         
         NSLayoutConstraint(item: animationView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
