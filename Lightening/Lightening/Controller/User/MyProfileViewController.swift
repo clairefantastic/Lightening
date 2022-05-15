@@ -74,6 +74,10 @@ class MyProfileViewController: ImpairedProfileViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(editName))
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        
         configureVinylImageView()
         addUserProfileView()
         configureLightImageView()
@@ -86,10 +90,56 @@ class MyProfileViewController: ImpairedProfileViewController {
         self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
     
+    @objc func editName() {
+        
+        let controller = UIAlertController(title: "Change Display Name", message: "Please enter a new name.", preferredStyle: .alert)
+        controller.addTextField { textField in
+           textField.placeholder = "Name"
+            textField.keyboardType = UIKeyboardType.default
+        }
+        controller.textFields?[0].delegate = self
+        let okAction = UIAlertAction(title: "OK", style: .default) { [unowned controller] _ in
+            
+            if let name = controller.textFields?[0].text {
+                PublishManager.shared.publishName(name: name) { result in
+                    switch result {
+                    case .success(_):
+                        LKProgressHUD.dismiss()
+                        self.navigationItem.title = "\(name)'s Profile"
+                    case .failure(_):
+                        LKProgressHUD.showFailure(text: "Fail to update display name!")
+                    }
+                    
+                }
+
+            } else {
+                return
+            }
+          
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        controller.addAction(cancelAction)
+        present(controller, animated: true, completion: nil)
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        
+        
+        if let name = UserManager.shared.currentUser?.displayName {
+            
+            self.navigationItem.title = "\(name)'s Profile"
+        } else {
+            self.navigationItem.title = "Lighty's Profile"
+        }
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         fetchMyAudios()
         fetchLikedAudios()
+        
     }
     
     private func fetchMyAudios() {
@@ -412,5 +462,19 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
         }
         
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MyProfileViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let countOfWords = string.count + textField.text!.count - range.length
+    
+        if countOfWords > 15 {
+            return false
+        }
+        
+        return true
     }
 }

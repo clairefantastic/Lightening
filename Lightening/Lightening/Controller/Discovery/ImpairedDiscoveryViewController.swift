@@ -91,19 +91,39 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 
                 self?.sections[0].audios = []
                 
-                self?.sections[0].audios.append(contentsOf: self?.audios.filter { $0.topic == "Nature"} ?? [])
+                self?.sections[0].audios.append(contentsOf: self?.audios.filter { $0.topic == "Pop"} ?? [])
                 
                 self?.sections[1].audios = []
                 
-                self?.sections[1].audios.append(contentsOf: self?.audios.filter { $0.topic == "City"} ?? [])
+                self?.sections[1].audios.append(contentsOf: self?.audios.filter { $0.topic == "Indie"} ?? [])
                 
                 self?.sections[2].audios = []
                 
-                self?.sections[2].audios.append(contentsOf: self?.audios.filter { $0.topic == "Pet"} ?? [])
+                self?.sections[2].audios.append(contentsOf: self?.audios.filter { $0.topic == "Folk"} ?? [])
                 
                 self?.sections[3].audios = []
                 
-                self?.sections[3].audios.append(contentsOf: self?.audios.filter { $0.topic == "Others"} ?? [])
+                self?.sections[3].audios.append(contentsOf: self?.audios.filter { $0.topic == "City"} ?? [])
+                
+                self?.sections[4].audios = []
+                
+                self?.sections[4].audios.append(contentsOf: self?.audios.filter { $0.topic == "Cafe"} ?? [])
+                
+                self?.sections[5].audios = []
+                
+                self?.sections[5].audios.append(contentsOf: self?.audios.filter { $0.topic == "Meaningful"} ?? [])
+                
+                self?.sections[6].audios = []
+                
+                self?.sections[6].audios.append(contentsOf: self?.audios.filter { $0.topic == "Nature"} ?? [])
+                
+                self?.sections[7].audios = []
+                
+                self?.sections[7].audios.append(contentsOf: self?.audios.filter { $0.topic == "Animal"} ?? [])
+                
+                self?.sections[8].audios = []
+                
+                self?.sections[8].audios.append(contentsOf: self?.audios.filter { $0.topic == "Others"} ?? [])
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
@@ -133,6 +153,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
                 
                 cell?.addGestureRecognizer(longPress)
+                
                 return cell
                 
             })
@@ -173,6 +194,9 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
         
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
         let touchPoint = sender.location(in: self.collectionView)
         
         if (sender.state == UIGestureRecognizer.State.ended) {
@@ -192,7 +216,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                         
                 blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
-                let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+                let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
                     
                     let controller = UIAlertController(title: "Are you sure?",
                                                        message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",

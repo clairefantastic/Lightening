@@ -21,23 +21,23 @@
                         <rect key="frame" x="16" y="16" width="332" height="120"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="adt-G0-uCY">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="26P-md-N3u"/>
                                     <constraint firstAttribute="width" secondItem="adt-G0-uCY" secondAttribute="height" multiplier="1:1" id="bWY-S0-fiD"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1kt-Sz-ue5">
-                                <rect key="frame" x="76" y="0.0" width="256" height="57"/>
+                                <rect key="frame" x="64" y="0.0" width="268" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqr-1H-RqY">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="268" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kV-90-f2g">
-                                        <rect key="frame" x="0.0" y="36.5" width="256" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="268" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -46,11 +46,11 @@
                             </stackView>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-P2-e9d">
-                        <rect key="frame" x="324" y="64" width="24" height="24"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-P2-e9d">
+                        <rect key="frame" x="332" y="68" width="16" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="b6e-Cl-jVW"/>
-                            <constraint firstAttribute="height" constant="16" id="u7c-jC-fOg"/>
+                            <constraint firstAttribute="height" constant="16" id="3C7-Z1-tyJ"/>
+                            <constraint firstAttribute="width" constant="16" id="qly-AE-Fwc"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" title="" image="option">
