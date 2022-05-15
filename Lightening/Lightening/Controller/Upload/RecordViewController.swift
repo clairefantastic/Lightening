@@ -201,8 +201,10 @@ class RecordViewController: BaseViewController {
     @objc func playAudio(_ sender: UIButton) {
         if !self.audioManager.isPlaying {
             self.audioManager.startPlayer()
+            animationView.play()
         } else {
             self.audioManager.stopPlaying()
+            animationView.pause()
         }
     }
     
@@ -367,6 +369,7 @@ extension RecordViewController: AudioManagerDelegate {
             
         case .finish:
             playButton.setTitle("Play again", for: .normal)
+            animationView.stop()
             
         case .failed(let error):
             recordButton.setTitle(error.localizedDescription, for: .normal)
