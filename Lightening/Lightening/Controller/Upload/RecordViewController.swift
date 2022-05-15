@@ -41,7 +41,7 @@ class RecordViewController: BaseViewController {
         
         configureLimitLengthLabel()
         
-        animationView = .init(name: "lf30_editor_sgfaitmz")
+        animationView = .init(name: "86332-sound-animation")
           
         animationView.frame = view.bounds
           
