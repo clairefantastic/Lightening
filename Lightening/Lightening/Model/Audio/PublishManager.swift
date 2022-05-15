@@ -336,4 +336,26 @@ class PublishManager {
             
         }
     }
+    
+    func publishName(name: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        LKProgressHUD.show()
+
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        
+        guard let userId = currentUser.userId else { return }
+        
+        let document = db.collection("users").document("\(userId)")
+            
+            try document.updateData(["displayName" : name]) { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
+                } else {
+                    
+                    completion(.success("Success"))
+                }
+            }
+    }
 }

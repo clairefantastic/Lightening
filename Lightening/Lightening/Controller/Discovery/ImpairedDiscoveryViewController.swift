@@ -216,7 +216,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                         
                 blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
-                let blockUserAction = UIAlertAction(title: "Block This User", style: .default) { _ in
+                let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
                     
                     let controller = UIAlertController(title: "Are you sure?",
                                                        message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",

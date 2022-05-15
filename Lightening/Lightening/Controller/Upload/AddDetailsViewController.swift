@@ -16,14 +16,15 @@ class AddDetailsViewController: BaseViewController {
     private var tableView = UITableView() {
         didSet {
             tableView.reloadData()
+            
         }
     }
     
     private var animationView = AnimationView()
     
-    private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on map"]
+    private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on current location"]
     
-    private let image = ["nature", "sea", "city", "pet", "meaningful", "pure"]
+    private let image = ["wave", "line", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity", "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
     
     private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
                               topic: "",
@@ -77,6 +78,8 @@ class AddDetailsViewController: BaseViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         tableView.separatorStyle = .none
+        
+        tableView.allowsSelection = false
         
         tableView.registerCellWithNib(identifier:
             String(describing: AddDetailsContentCell.self),
