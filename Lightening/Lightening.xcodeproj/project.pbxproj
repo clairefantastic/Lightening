@@ -66,6 +66,7 @@
 		7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */; };
 		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
 		7E74EA322830E70300818F19 /* 86332-sound-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E74EA312830E70300818F19 /* 86332-sound-animation.json */; };
+		7E74EA362831246C00818F19 /* 7054-soundcloud-social-media-icon.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E74EA352831246C00818F19 /* 7054-soundcloud-social-media-icon.json */; };
 		7E87C4D228283C85001759C9 /* lf30_editor_ewa07nyv.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -175,6 +176,7 @@
 		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7E74EA312830E70300818F19 /* 86332-sound-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86332-sound-animation.json"; sourceTree = "<group>"; };
+		7E74EA352831246C00818F19 /* 7054-soundcloud-social-media-icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "7054-soundcloud-social-media-icon.json"; sourceTree = "<group>"; };
 		7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_ewa07nyv.json; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */,
 				7EA73F64281502040071D197 /* 23559-microphone.json */,
 				7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */,
+				7E74EA352831246C00818F19 /* 7054-soundcloud-social-media-icon.json */,
 				7E74EA312830E70300818F19 /* 86332-sound-animation.json */,
 				7EA73F6A28155EE10071D197 /* lf30_editor_6v2ghoza.json */,
 			);
@@ -618,6 +621,7 @@
 				7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */,
 				7EA023582800452C00C73205 /* Assets.xcassets in Resources */,
 				7EA73F65281502040071D197 /* 23559-microphone.json in Resources */,
+				7E74EA362831246C00818F19 /* 7054-soundcloud-social-media-icon.json in Resources */,
 				7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */,
 				7EA73F6B28155EE20071D197 /* lf30_editor_6v2ghoza.json in Resources */,
 				7E44B7D8280BEAAD00CF24AC /* AddDetailsTopicTableViewCell.xib in Resources */,
