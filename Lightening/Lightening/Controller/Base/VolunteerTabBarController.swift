@@ -140,7 +140,7 @@ class VolunteerTabBarController: UITabBarController {
         
         let content = UNMutableNotificationContent()
         content.title = "Light up your day!"
-        content.body = "Check your daily pick :)"
+        content.body = "Check your daily picks :)"
         content.sound = UNNotificationSound.default
         
         var dateComponents = DateComponents()
