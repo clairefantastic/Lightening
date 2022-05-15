@@ -459,8 +459,9 @@ extension SignInViewController {
                                     return
                                 }
                                 if userIdentity == 0 {
-                                    self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
-                                    
+                                    if self?.presentingViewController == nil {
+                                        self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                                    }
                                 } else {
                                     if self?.presentingViewController == nil {
                                         self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
@@ -514,11 +515,13 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
                             return
                         }
                         if userIdentity == 0 {
-                            self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
-                            
+                            if self?.presentingViewController == nil {
+                                self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                            }
                         } else {
-                            self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
-                            
+                            if self?.presentingViewController == nil {
+                                self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                            }
                         }
                         self?.nextViewController.modalPresentationStyle = .fullScreen
 
