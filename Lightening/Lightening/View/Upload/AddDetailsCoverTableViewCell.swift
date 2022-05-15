@@ -8,6 +8,8 @@
 import UIKit
 
 class AddDetailsCoverTableViewCell: UITableViewCell {
+    
+    var selectedIndex: Int?
 
     weak var delegate: AddDetailsTableViewCellDelegate?
     
@@ -23,7 +25,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["nature", "sea", "city", "pet", "meaningful", "pure"]
+    private let coverArray = ["dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity", "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,7 +40,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
 
 extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return coverArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -46,6 +48,13 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
         let nibName = "SelectCoverCollectionViewCell"
         
         guard let cell = selectCoverCollectionView.dequeueReusableCell(withReuseIdentifier: nibName, for: indexPath) as? SelectCoverCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.coverImageView.layer.borderWidth = 0
+        
+        if indexPath.item == selectedIndex {
+            cell.coverImageView.layer.borderWidth = 2
+            cell.coverImageView.layer.borderColor = UIColor.black.cgColor
+        }
         
         cell.coverImageView?.image = UIImage(named: "\(coverArray[indexPath.row])")
         
@@ -55,6 +64,7 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if let cell = collectionView.cellForItem(at: indexPath) as? SelectCoverCollectionViewCell {
+            selectedIndex = indexPath.item
             cell.coverImageView.layer.borderWidth = 2
             cell.coverImageView.layer.borderColor = UIColor.black.cgColor
         }
