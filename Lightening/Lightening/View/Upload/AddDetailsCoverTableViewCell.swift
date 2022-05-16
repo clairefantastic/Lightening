@@ -25,8 +25,6 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["wave", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity",
-                              "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,7 +39,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
 
 extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coverArray.count
+        return CoverImage.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,7 +55,7 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionVi
             cell.coverImageView.layer.borderColor = UIColor.black.cgColor
         }
         
-        cell.coverImageView?.image = UIImage(named: "\(coverArray[indexPath.row])")
+        cell.coverImageView?.image = UIImage.asset(CoverImage.allCases[indexPath.item])
         
         return cell
     }

@@ -28,8 +28,6 @@ class AddDetailsViewController: BaseViewController {
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on current location"]
     
-    private let image = ["wave", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity", "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
-    
     private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
                               topic: "",
                               title: "",
@@ -305,7 +303,7 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
     
     func didSelectCover(_ index: Int) {
         
-        audio.cover = image[index]
+        audio.cover = CoverImage.allCases[index]
     }
     
 //    func didSelectTopic(_ button: UIButton) {
