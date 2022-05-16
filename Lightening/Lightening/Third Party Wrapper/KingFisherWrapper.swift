@@ -19,4 +19,3 @@ extension UIImageView {
         self.kf.setImage(with: url, placeholder: UIImage(named: "black_vinyl-PhotoRoom"))
     }
 }
-

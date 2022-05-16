@@ -25,7 +25,7 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
         }
     }
     
-    private let coverArray = ["wave", "line", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity",
+    private let coverArray = ["wave", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity",
                               "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
     override func awakeFromNib() {
         super.awakeFromNib()
