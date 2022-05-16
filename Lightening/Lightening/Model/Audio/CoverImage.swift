@@ -10,21 +10,37 @@ import UIKit
 enum CoverImage: String, CaseIterable {
     
     case wave
+    
     case dot
+    
     case flower
+    
     case nature
+    
     case sea
+    
     case seaView
+    
     case city
+    
     case grayCity
+    
     case cafe
+    
     case coffee
+    
     case dog
+    
     case cat
+    
     case meaningful
+    
     case pure
+    
     case light
+    
     case wall
+    
     case camera
     
 }
@@ -37,5 +53,3 @@ extension UIImage {
     }
     
 }
-
-
