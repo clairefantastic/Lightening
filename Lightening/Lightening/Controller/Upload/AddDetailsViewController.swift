@@ -22,6 +22,10 @@ class AddDetailsViewController: BaseViewController {
     
     private var animationView = AnimationView()
     
+    private let currentWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+    
+    private let maskView = UIView()
+    
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on current location"]
     
     private let image = ["wave", "line", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity", "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
@@ -162,9 +166,13 @@ class AddDetailsViewController: BaseViewController {
             present(topicEmptyAlert, animated: true)
             
         } else {
-           
-            self.navigationController?.navigationBar.isUserInteractionEnabled = false
             
+            maskView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+            
+            maskView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+            
+            currentWindow?.addSubview(maskView)
+           
             print("Upload file")
             
             DispatchQueue.main.async {
@@ -195,13 +203,11 @@ class AddDetailsViewController: BaseViewController {
                         
                         self?.animationView.removeFromSuperview()
                         
+                        self?.maskView.removeFromSuperview()
+                        
                         LKProgressHUD.showSuccess()
                         
-                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
-                        
                         self?.navigationController?.popToRootViewController(animated: true)
-                        
-                        self?.tabBarController?.selectedIndex = 1
                         
                     case .failure(let error):
 
@@ -209,7 +215,6 @@ class AddDetailsViewController: BaseViewController {
                         
                         LKProgressHUD.showFailure()
                         
-                        self?.navigationController?.navigationBar.isUserInteractionEnabled = true
                     }
                     
                 }
