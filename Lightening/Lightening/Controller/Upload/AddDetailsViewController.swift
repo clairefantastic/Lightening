@@ -303,7 +303,7 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
     
     func didSelectCover(_ index: Int) {
         
-        audio.cover = CoverImage.allCases[index]
+        audio.cover = CoverImage.allCases[index].rawValue
     }
     
 //    func didSelectTopic(_ button: UIButton) {
