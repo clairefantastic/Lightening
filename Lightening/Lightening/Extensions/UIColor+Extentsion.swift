@@ -7,43 +7,40 @@
 
 import UIKit
 
-//private enum STColor: String {
-//
-//    // swiftlint:disable identifier_name
-//    case B1
-//
-//    case B2
-//
-//    case B3
-//
-//    case B4
-//
-//    case B5
-//
-//    case B6
-//
-//    case G1
-//
-//}
+private enum Color: String {
+    
+    case lightBlue
+
+    case darkBlue
+
+    case green
+
+    case beige
+
+    case orange
+
+    case pink
+    
+}
 
 extension UIColor {
 
-//    static let B1 = STColor(.B1)
-//
-//    static let B2 = STColor(.B2)
-//
-//    static let B4 = STColor(.B4)
-//
-//    static let B5 = STColor(.B6)
-//
-//    static let G1 = STColor(.G1)
+    static let lightBlue = Color(.lightBlue)
+
+    static let darkBlue = Color(.darkBlue)
+
+    static let green = Color(.green)
+
+    static let beige = Color(.beige)
+
+    static let orange = Color(.orange)
     
-    // swiftlint:enable identifier_name
+    static let pink = Color(.pink)
     
-//    private static func STColor(_ color: STColor) -> UIColor? {
-//
-//        return UIColor(named: color.rawValue)
-//    }
+    private static func Color(_ color: Color) -> UIColor? {
+
+        return UIColor(named: color.rawValue)
+    }
 
     static func hexStringToUIColor(hex: String) -> UIColor {
 
