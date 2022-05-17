@@ -29,7 +29,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
         
         label.font = UIFont(name: "American Typewriter Bold", size: 20)
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        label.textColor = UIColor.darkBlue
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(
@@ -44,7 +44,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
         button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
 //        button.setTitle(">", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        button.tintColor = UIColor.darkBlue
         button.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
@@ -54,7 +54,6 @@ class SectionHeaderReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-//        backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
         addSubview(titleLabel)
         addSubview(titleButton)
         titleButton.addTarget(self, action: #selector(self.didTapTopic), for: .touchUpInside)

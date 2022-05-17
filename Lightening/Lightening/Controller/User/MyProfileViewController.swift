@@ -55,7 +55,7 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 seeLikedAudiosButton.isHidden = false
                 
-                likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+                likedAudiosButton.tintColor = UIColor.darkBlue
                 
             } else {
                 
@@ -63,7 +63,7 @@ class MyProfileViewController: ImpairedProfileViewController {
                 
                 seeLikedAudiosButton.isHidden = true
                 
-                likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#F1E6B9")
+                likedAudiosButton.tintColor = UIColor.beige
             }
         }
     }
@@ -315,9 +315,9 @@ extension MyProfileViewController {
         
         myAudiosButton.setTitle("My Audios", for: .normal)
         
-        myAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        myAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         
-        myAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .selected)
+        myAudiosButton.setTitleColor(UIColor.darkBlue, for: .selected)
         
         myAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
@@ -337,7 +337,7 @@ extension MyProfileViewController {
         
         seeMyAudiosButton.setTitle("See More", for: .normal)
         
-        seeMyAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        seeMyAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         
         seeMyAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
         
@@ -357,7 +357,7 @@ extension MyProfileViewController {
         
         likedAudiosButton.setImage(UIImage(systemName: "heart"), for: .normal)
         
-        likedAudiosButton.tintColor = UIColor.hexStringToUIColor(hex: "#F1E6B9")
+        likedAudiosButton.tintColor = UIColor.beige
         
         likedAudiosButton.addTarget(self, action: #selector(selectLikedAudiosButton), for: .touchUpInside)
         
@@ -375,7 +375,7 @@ extension MyProfileViewController {
         
         seeLikedAudiosButton.setTitle("See More", for: .normal)
         
-        seeLikedAudiosButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        seeLikedAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         
         seeLikedAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
         

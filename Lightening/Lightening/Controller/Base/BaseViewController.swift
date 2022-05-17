@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
         
         ElementsStyle.styleViewBackground(view)
         
-        navigationController?.navigationBar.barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        navigationController?.navigationBar.barTintColor = UIColor.lightBlue
         
         navigationController?.navigationBar.tintColor = UIColor.black
         

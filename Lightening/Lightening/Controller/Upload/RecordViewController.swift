@@ -97,7 +97,7 @@ class RecordViewController: BaseViewController {
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
         limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
-        limitLengthLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        limitLengthLabel.textColor = UIColor.darkBlue
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
         limitLengthLabel.setContentCompressionResistancePriority(
@@ -123,7 +123,7 @@ class RecordViewController: BaseViewController {
         
         timerLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
         
-        timerLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        timerLabel.textColor = UIColor.beige
         
         timerLabel.textAlignment = .center
         
@@ -145,7 +145,7 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#C64D39")
+        recordButton.backgroundColor = UIColor.red
         
         recordButton.setImage(UIImage(named: "record"), for: .normal)
         
@@ -186,7 +186,7 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: playButton, attribute: .trailing, relatedBy: .equal, toItem: recordButton, attribute: .leading, multiplier: 1, constant: -36).isActive = true
         
-        playButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D").withAlphaComponent(0.6)
+        playButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
         playButton.setImage(UIImage(named: "play"), for: .normal)
         
@@ -220,7 +220,7 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: resetButton, attribute: .leading, relatedBy: .equal, toItem: recordButton, attribute: .trailing, multiplier: 1, constant: 36).isActive = true
         
-        resetButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D").withAlphaComponent(0.6)
+        resetButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
         resetButton.setImage(UIImage(named: "replay"), for: .normal)
         
@@ -253,13 +253,13 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        finishRecordingButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        finishRecordingButton.backgroundColor = UIColor.darkBlue
         
         finishRecordingButton.setTitle("Finish Recording", for: .normal)
         
         finishRecordingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        finishRecordingButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        finishRecordingButton.setTitleColor(UIColor.beige, for: .normal)
         
         finishRecordingButton.isEnabled = true
         

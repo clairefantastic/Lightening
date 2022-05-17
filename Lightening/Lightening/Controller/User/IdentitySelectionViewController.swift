@@ -70,7 +70,7 @@ extension IdentitySelectionViewController {
         instructionLabel.text = "Please select an identity"
         instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
         instructionLabel.adjustsFontForContentSizeCategory = true
-        instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        instructionLabel.textColor = UIColor.darkBlue
         instructionLabel.textAlignment = .center
         instructionLabel.numberOfLines = 0
         instructionLabel.setContentCompressionResistancePriority(
@@ -91,13 +91,13 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: visuallyImpairedButton, attribute: .bottom, relatedBy: .equal, toItem: volunteerButton, attribute: .top, multiplier: 1, constant: -24).isActive = true
         
-        visuallyImpairedButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        visuallyImpairedButton.backgroundColor = UIColor.darkBlue
         
         visuallyImpairedButton.setTitle("I need visual assistance!", for: .normal)
         
         visuallyImpairedButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        visuallyImpairedButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        visuallyImpairedButton.setTitleColor(UIColor.beige, for: .normal)
         
         visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
         
@@ -156,13 +156,13 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: volunteerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
         
-        volunteerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        volunteerButton.backgroundColor = UIColor.darkBlue
         
         volunteerButton.setTitle("I want to be a volunteer!", for: .normal)
         
         volunteerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        volunteerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        volunteerButton.setTitleColor(UIColor.beige, for: .normal)
         
         volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
         

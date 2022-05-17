@@ -20,7 +20,7 @@ class StretchyTableHeaderView: UIView {
         let audioTitleLabel = UILabel()
         audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
         audioTitleLabel.adjustsFontForContentSizeCategory = true
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioTitleLabel.textColor = UIColor.darkBlue
         audioTitleLabel.textAlignment = .left
         audioTitleLabel.numberOfLines = 0
         audioTitleLabel.setContentCompressionResistancePriority(
@@ -32,7 +32,7 @@ class StretchyTableHeaderView: UIView {
         let audioAuthorLabel = UILabel()
         audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
         audioAuthorLabel.adjustsFontForContentSizeCategory = true
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioAuthorLabel.textColor = UIColor.darkBlue
         audioAuthorLabel.textAlignment = .left
         audioAuthorLabel.numberOfLines = 0
         audioAuthorLabel.setContentCompressionResistancePriority(
@@ -56,7 +56,7 @@ class StretchyTableHeaderView: UIView {
         let audioDescriptionLabel = UILabel()
         audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
         audioDescriptionLabel.adjustsFontForContentSizeCategory = true
-        audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioDescriptionLabel.textColor = UIColor.darkBlue
         audioDescriptionLabel.textAlignment = .left
         audioDescriptionLabel.numberOfLines = 0
         audioDescriptionLabel.setContentCompressionResistancePriority(

@@ -168,7 +168,7 @@ extension AudioDescriptionViewController {
         
         audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
         audioTitleLabel.adjustsFontForContentSizeCategory = true
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioTitleLabel.textColor = UIColor.darkBlue
         audioTitleLabel.textAlignment = .left
         audioTitleLabel.numberOfLines = 0
         audioTitleLabel.setContentCompressionResistancePriority(
@@ -192,7 +192,7 @@ extension AudioDescriptionViewController {
         
         audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
         audioAuthorLabel.adjustsFontForContentSizeCategory = true
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioAuthorLabel.textColor = UIColor.darkBlue
         audioAuthorLabel.textAlignment = .left
         audioAuthorLabel.numberOfLines = 0
         audioAuthorLabel.setContentCompressionResistancePriority(
@@ -216,7 +216,7 @@ extension AudioDescriptionViewController {
         
         audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
         audioDescriptionLabel.adjustsFontForContentSizeCategory = true
-        audioDescriptionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioDescriptionLabel.textColor = UIColor.darkBlue
         audioDescriptionLabel.textAlignment = .left
         audioDescriptionLabel.numberOfLines = 0
         audioDescriptionLabel.setContentCompressionResistancePriority(
@@ -262,7 +262,7 @@ extension AudioDescriptionViewController {
         
         sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         
-        sendOutTextButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        sendOutTextButton.tintColor = UIColor.darkBlue
         
         sendOutTextButton.addTarget(self, action: #selector(sendOutText), for: .touchUpInside)
         
@@ -307,9 +307,9 @@ extension AudioDescriptionViewController {
         
         enterCommentTextField.layer.borderWidth = 2
         
-        enterCommentTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        enterCommentTextField.layer.borderColor = UIColor.darkBlue?.cgColor
         
-        enterCommentTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        enterCommentTextField.backgroundColor = UIColor.beige
         
         enterCommentTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: enterCommentTextField.frame.height))
         
@@ -345,7 +345,7 @@ extension AudioDescriptionViewController {
         
 //        commentsTableView.layer.borderWidth = 2
         
-        commentsTableView.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        commentsTableView.layer.borderColor = UIColor.darkBlue?.cgColor
         
         commentsTableView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         
@@ -377,7 +377,7 @@ extension AudioDescriptionViewController {
         
         moreButton.setImage(UIImage(named: "option"), for: .normal)
         
-        moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        moreButton.tintColor = UIColor.beige
         
         moreButton.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
         
@@ -526,7 +526,7 @@ extension AudioDescriptionViewController {
         noCommentsLabel.text = "No comments yet!"
         noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
         noCommentsLabel.adjustsFontForContentSizeCategory = true
-        noCommentsLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noCommentsLabel.textColor = UIColor.darkBlue
         noCommentsLabel.textAlignment = .center
         noCommentsLabel.numberOfLines = 0
         noCommentsLabel.setContentCompressionResistancePriority(

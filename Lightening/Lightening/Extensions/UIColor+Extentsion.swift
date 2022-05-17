@@ -21,6 +21,10 @@ private enum Color: String {
 
     case pink
     
+    case red
+    
+    case yellow
+    
 }
 
 extension UIColor {
@@ -36,6 +40,10 @@ extension UIColor {
     static let orange = Color(.orange)
     
     static let pink = Color(.pink)
+    
+    static let red = Color(.red)
+    
+    static let yellow = Color(.yellow)
     
     private static func Color(_ color: Color) -> UIColor? {
 

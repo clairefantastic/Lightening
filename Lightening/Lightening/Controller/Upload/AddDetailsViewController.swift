@@ -123,13 +123,13 @@ class AddDetailsViewController: BaseViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        uploadButton.backgroundColor = UIColor.darkBlue
         
         uploadButton.setTitle("Upload File", for: .normal)
         
         uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        uploadButton.setTitleColor(UIColor.beige, for: .normal)
         
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
 

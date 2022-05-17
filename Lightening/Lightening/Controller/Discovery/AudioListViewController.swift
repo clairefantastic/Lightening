@@ -66,7 +66,7 @@ extension AudioListViewController {
         noContentLabel.text = "No audio files yet!"
         noContentLabel.font = UIFont(name: "American Typewriter", size: 20)
         noContentLabel.adjustsFontForContentSizeCategory = true
-        noContentLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noContentLabel.textColor = UIColor.darkBlue
         noContentLabel.textAlignment = .center
         noContentLabel.numberOfLines = 0
         noContentLabel.setContentCompressionResistancePriority(

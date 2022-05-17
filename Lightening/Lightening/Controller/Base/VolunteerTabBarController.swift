@@ -119,7 +119,7 @@ class VolunteerTabBarController: UITabBarController {
         if #available(iOS 15.0, *) {
            let appearance = UITabBarAppearance()
            appearance.configureWithOpaqueBackground()
-           appearance.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+           appearance.backgroundColor = UIColor.lightBlue
            
            self.tabBar.standardAppearance = appearance
            self.tabBar.scrollEdgeAppearance = appearance
@@ -128,11 +128,11 @@ class VolunteerTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.black // tab bar icon tint color
         self.tabBar.isTranslucent = false
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
-        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
+        UITabBar.appearance().barTintColor = UIColor.lightBlue // tab bar background color
 
         lobbyTabBarItem = viewControllers?[0].tabBarItem
 
-        lobbyTabBarItem.badgeColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        lobbyTabBarItem.badgeColor = UIColor.orange
         
         NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
         

@@ -24,7 +24,7 @@ class CommentTableViewCell: UITableViewCell {
             
             authorNameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
             
-            authorNameLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            authorNameLabel.textColor = UIColor.darkBlue
             
             authorNameLabel.numberOfLines = 0
             
@@ -39,7 +39,7 @@ class CommentTableViewCell: UITableViewCell {
             
             commentTextLabel.font = UIFont(name: "American Typewriter", size: 14)
             
-            commentTextLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            commentTextLabel.textColor = UIColor.darkBlue
             
             commentTextLabel.numberOfLines = 0
             
@@ -52,7 +52,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            moreButton.tintColor = UIColor.darkBlue
         }
     }
     

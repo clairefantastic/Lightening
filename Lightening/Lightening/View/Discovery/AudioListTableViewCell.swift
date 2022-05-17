@@ -31,12 +31,12 @@ class AudioListTableViewCell: UITableViewCell {
     private func layoutLabels() {
         
         audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioTitleLabel.textColor = UIColor.darkBlue
         audioTitleLabel.numberOfLines = 0
         audioTitleLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
         audioAuthorLabel.font = UIFont(name: "American Typewriter", size: 16)
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioAuthorLabel.textColor = UIColor.darkBlue
         audioAuthorLabel.numberOfLines = 0
         audioAuthorLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)

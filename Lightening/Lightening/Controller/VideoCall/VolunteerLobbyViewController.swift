@@ -198,11 +198,13 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
         let textColor: UIColor
         switch state {
         case .connected, .completed:
-            textColor = .green
+            textColor = .brown
+//            textColor = .green
         case .disconnected:
-            textColor = .orange
+            textColor = .gray
+//            textColor = .orange
         case .failed, .closed:
-            textColor = .red
+            textColor = .black
         case .new, .checking, .count:
             textColor = .black
         @unknown default:
@@ -291,7 +293,7 @@ extension VolunteerLobbyViewController {
         
         answerVideoCallButton.layer.borderWidth = 2
         
-        answerVideoCallButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        answerVideoCallButton.layer.borderColor = UIColor.beige?.cgColor
 
         answerVideoCallButton.setTitle("Answer a Call", for: .normal)
         
@@ -301,7 +303,7 @@ extension VolunteerLobbyViewController {
 
         answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 14)
 
-        answerVideoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        answerVideoCallButton.setTitleColor(UIColor.beige, for: .normal)
 
         answerVideoCallButton.isEnabled = false
 
@@ -344,7 +346,7 @@ extension VolunteerLobbyViewController {
         
         statusSwitch.offImage = UIImage(named: "black_vinyl-PhotoRoom")
         
-        statusSwitch.onTintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        statusSwitch.onTintColor = UIColor.darkBlue
         
         statusSwitch.isOn = true
         
@@ -368,7 +370,7 @@ extension VolunteerLobbyViewController {
         instructionLabel.text = "Switch for receiving calls or not"
         instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         instructionLabel.adjustsFontForContentSizeCategory = true
-        instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        instructionLabel.textColor = UIColor.darkBlue
         instructionLabel.textAlignment = .center
         instructionLabel.numberOfLines = 0
         instructionLabel.setContentCompressionResistancePriority(
@@ -389,7 +391,7 @@ extension VolunteerLobbyViewController {
         birdInstructionLabel.text = "Call will be notified by a bird"
         birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         birdInstructionLabel.adjustsFontForContentSizeCategory = true
-        birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        birdInstructionLabel.textColor = UIColor.darkBlue
         birdInstructionLabel.textAlignment = .center
         birdInstructionLabel.numberOfLines = 0
         birdInstructionLabel.setContentCompressionResistancePriority(
@@ -398,15 +400,15 @@ extension VolunteerLobbyViewController {
     
     @objc func changeStatus() {
         if statusSwitch.isOn == true {
-            self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            self.view.backgroundColor = UIColor.lightBlue
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
-            self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
-            self.birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            self.instructionLabel.textColor = UIColor.darkBlue
+            self.birdInstructionLabel.textColor = UIColor.darkBlue
         } else {
-            self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            self.view.backgroundColor = UIColor.darkBlue
             self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
-            self.instructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
-            self.birdInstructionLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+            self.instructionLabel.textColor = UIColor.beige
+            self.birdInstructionLabel.textColor = UIColor.beige
         }
     }
     

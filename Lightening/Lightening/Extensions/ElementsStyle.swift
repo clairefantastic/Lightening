@@ -11,19 +11,7 @@ class ElementsStyle {
     
     static func styleViewBackground(_ view: UIView) {
          
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-        
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = view.bounds
-//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-//        gradientLayer.locations = [0.4, 0.8]
-//        let darkBlueColor = UIColor.hexStringToUIColor(hex: "041C32").cgColor
-//
-//        let lightBlueColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-//
-//        gradientLayer.colors = [darkBlueColor, lightBlueColor]
-//        view.layer.addSublayer(gradientLayer)
+        view.backgroundColor = UIColor.lightBlue
         
     }
     
@@ -40,9 +28,9 @@ class ElementsStyle {
         
         textField.layer.borderWidth = 2
         
-        textField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        textField.layer.borderColor = UIColor.darkBlue?.cgColor
         
-        textField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        textField.backgroundColor = UIColor.beige
         
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
         

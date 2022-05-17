@@ -110,7 +110,7 @@ extension SignInViewController {
         welcomeLabel.text = "Welcome, Lightening!"
         welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
         welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textColor = UIColor.darkBlue
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
         welcomeLabel.setContentCompressionResistancePriority(
@@ -135,7 +135,7 @@ extension SignInViewController {
         emailLabel.text = "Email"
         emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         emailLabel.adjustsFontForContentSizeCategory = true
-        emailLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        emailLabel.textColor = UIColor.darkBlue
         emailLabel.textAlignment = .left
         emailLabel.numberOfLines = 0
         emailLabel.setContentCompressionResistancePriority(
@@ -182,7 +182,7 @@ extension SignInViewController {
         passwordLabel.text = "Password"
         passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         passwordLabel.adjustsFontForContentSizeCategory = true
-        passwordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        passwordLabel.textColor = UIColor.darkBlue
         passwordLabel.textAlignment = .left
         passwordLabel.numberOfLines = 0
         passwordLabel.setContentCompressionResistancePriority(
@@ -226,13 +226,13 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: logInButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        logInButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        logInButton.backgroundColor = UIColor.darkBlue
         
         logInButton.setTitle("Log in", for: .normal)
         
         logInButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        logInButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        logInButton.setTitleColor(UIColor.beige, for: .normal)
         
         logInButton.isEnabled = true
         
@@ -285,7 +285,7 @@ extension SignInViewController {
         haveNoAccountLabel.text = "Have no account yet?"
         haveNoAccountLabel.font = UIFont(name: "American Typewriter", size: 14)
         haveNoAccountLabel.adjustsFontForContentSizeCategory = true
-        haveNoAccountLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        haveNoAccountLabel.textColor = UIColor.darkBlue
         haveNoAccountLabel.textAlignment = .center
         haveNoAccountLabel.numberOfLines = 0
         haveNoAccountLabel.setContentCompressionResistancePriority(
@@ -307,13 +307,13 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        registerButton.backgroundColor = UIColor.darkBlue
         
         registerButton.setTitle("Registration", for: .normal)
         
         registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        registerButton.setTitleColor(UIColor.beige, for: .normal)
         
         registerButton.isEnabled = true
         
@@ -349,7 +349,7 @@ extension SignInViewController {
         agreementLabel.text = "After log in or registration, you agree to our"
         agreementLabel.font = UIFont(name: "American Typewriter", size: 12)
         agreementLabel.adjustsFontForContentSizeCategory = true
-        agreementLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        agreementLabel.textColor = UIColor.darkBlue
         agreementLabel.textAlignment = .center
         agreementLabel.numberOfLines = 0
         agreementLabel.setContentCompressionResistancePriority(
@@ -376,7 +376,7 @@ extension SignInViewController {
         
         privacyPolicyButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
         
-        privacyPolicyButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        privacyPolicyButton.setTitleColor(UIColor.beige, for: .normal)
         
         privacyPolicyButton.isEnabled = true
         
@@ -398,7 +398,7 @@ extension SignInViewController {
         
         endUserLicenseAgreementButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
         
-        endUserLicenseAgreementButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        endUserLicenseAgreementButton.setTitleColor(UIColor.beige, for: .normal)
         
         endUserLicenseAgreementButton.isEnabled = true
         

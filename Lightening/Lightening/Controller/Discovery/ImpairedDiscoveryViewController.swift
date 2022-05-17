@@ -55,7 +55,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         
         view.stickSubView(collectionView)
         
-        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        collectionView.backgroundColor = UIColor.lightBlue
         
         collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         

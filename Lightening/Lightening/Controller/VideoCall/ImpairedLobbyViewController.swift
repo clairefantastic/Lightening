@@ -171,13 +171,13 @@ extension ImpairedLobbyViewController: WebRTCClientDelegate {
     
     switch state {
     case .connected, .completed:
-      textColor = .green
+//      textColor = .green
         self.signalingConnected = true
     case .disconnected:
-      textColor = .orange
+//        textColor = .orange 
         self.signalingConnected = false
     case .failed, .closed:
-      textColor = .red
+//      textColor = .red
         self.signalingConnected = false
     case .new, .checking, .count:
       textColor = .black
@@ -188,7 +188,7 @@ extension ImpairedLobbyViewController: WebRTCClientDelegate {
     }
     DispatchQueue.main.async {
       self.rtcStatus?.text = state.description.capitalized
-      self.rtcStatus?.textColor = textColor
+//      self.rtcStatus?.textColor = textColor
     }
   }
   
@@ -218,13 +218,13 @@ extension ImpairedLobbyViewController {
         
         NSLayoutConstraint(item: videoCallButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        videoCallButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        videoCallButton.backgroundColor = UIColor.darkBlue
         
         videoCallButton.setTitle("Call a volunteer", for: .normal)
         
         videoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
         
-        videoCallButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        videoCallButton.setTitleColor(UIColor.beige, for: .normal)
         
         videoCallButton.isEnabled = true
         

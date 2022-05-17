@@ -107,7 +107,7 @@ class UploadViewController: BaseViewController {
         
         NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        selectFileButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        selectFileButton.layer.borderColor = UIColor.beige?.cgColor
         
         selectFileButton.layer.borderWidth = 1
         
@@ -115,7 +115,7 @@ class UploadViewController: BaseViewController {
         
         selectFileButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        selectFileButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        selectFileButton.setTitleColor(UIColor.beige, for: .normal)
         
         selectFileButton.isEnabled = true
         
@@ -137,7 +137,7 @@ class UploadViewController: BaseViewController {
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        recordButton.layer.borderColor = UIColor.beige?.cgColor
         
         recordButton.layer.borderWidth = 1
         
@@ -145,7 +145,7 @@ class UploadViewController: BaseViewController {
         
         recordButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        recordButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        recordButton.setTitleColor(UIColor.beige, for: .normal)
         
         recordButton.isEnabled = true
         

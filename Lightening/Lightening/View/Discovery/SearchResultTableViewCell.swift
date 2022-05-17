@@ -34,12 +34,13 @@ class SearchResultTableViewCell: UITableViewCell {
     private func layoutLabels() {
         
         searchResultTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
-        searchResultTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        searchResultTitleLabel.textColor = UIColor.darkBlue
+        
         searchResultTitleLabel.numberOfLines = 0
         searchResultTitleLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
         searchResultAuthorLabel.font = UIFont(name: "American Typewriter", size: 16)
-        searchResultAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        searchResultAuthorLabel.textColor = UIColor.darkBlue
         searchResultAuthorLabel.numberOfLines = 0
         searchResultAuthorLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)

@@ -80,7 +80,7 @@ extension RegisterViewController {
         welcomeLabel.text = "Be a Lighty!"
         welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
         welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textColor = UIColor.darkBlue
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
         welcomeLabel.setContentCompressionResistancePriority(
@@ -105,7 +105,7 @@ extension RegisterViewController {
         nameLabel.text = "Display Name"
         nameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         nameLabel.adjustsFontForContentSizeCategory = true
-        nameLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        nameLabel.textColor = UIColor.darkBlue
         nameLabel.textAlignment = .left
         nameLabel.numberOfLines = 0
         nameLabel.setContentCompressionResistancePriority(
@@ -150,7 +150,7 @@ extension RegisterViewController {
         emailLabel.text = "Email"
         emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         emailLabel.adjustsFontForContentSizeCategory = true
-        emailLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        emailLabel.textColor = UIColor.darkBlue
         emailLabel.textAlignment = .left
         emailLabel.numberOfLines = 0
         emailLabel.setContentCompressionResistancePriority(
@@ -197,7 +197,7 @@ extension RegisterViewController {
         passwordLabel.text = "Password"
         passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         passwordLabel.adjustsFontForContentSizeCategory = true
-        passwordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        passwordLabel.textColor = UIColor.darkBlue
         passwordLabel.textAlignment = .left
         passwordLabel.numberOfLines = 0
         passwordLabel.setContentCompressionResistancePriority(
@@ -245,7 +245,7 @@ extension RegisterViewController {
         checkPasswordLabel.text = "Check Password"
         checkPasswordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         checkPasswordLabel.adjustsFontForContentSizeCategory = true
-        checkPasswordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        checkPasswordLabel.textColor = UIColor.darkBlue
         checkPasswordLabel.textAlignment = .left
         checkPasswordLabel.numberOfLines = 0
         checkPasswordLabel.setContentCompressionResistancePriority(
@@ -290,13 +290,13 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        registerButton.backgroundColor = UIColor.darkBlue
         
         registerButton.setTitle("Registration", for: .normal)
         
         registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        registerButton.setTitleColor(UIColor.beige, for: .normal)
         
         registerButton.isEnabled = true
         
@@ -372,7 +372,7 @@ extension RegisterViewController {
         
         dismissButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        dismissButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B").withAlphaComponent(0.5)
+        dismissButton.tintColor = UIColor.darkBlue?.withAlphaComponent(0.5)
         
         dismissButton.isEnabled = true
         

@@ -176,8 +176,7 @@ extension AudioDetailsViewController {
         
         moreButton.setImage(UIImage(named: "option"), for: .normal)
         
-        moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
+        moreButton.tintColor = UIColor.darkBlue
         moreButton.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
         
     }
@@ -346,7 +345,7 @@ extension AudioDetailsViewController {
         noCommentsLabel.text = "No comments yet!"
         noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
         noCommentsLabel.adjustsFontForContentSizeCategory = true
-        noCommentsLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        noCommentsLabel.textColor = UIColor.darkBlue
         noCommentsLabel.textAlignment = .center
         noCommentsLabel.numberOfLines = 0
         noCommentsLabel.setContentCompressionResistancePriority(
@@ -370,7 +369,7 @@ extension AudioDetailsViewController {
         
         sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         
-        sendOutTextButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        sendOutTextButton.tintColor = UIColor.darkBlue
         
         sendOutTextButton.addTarget(self, action: #selector(sendOutText), for: .touchUpInside)
         
@@ -412,9 +411,9 @@ extension AudioDetailsViewController {
         
         enterCommentTextField.layer.borderWidth = 2
         
-        enterCommentTextField.layer.borderColor = UIColor.hexStringToUIColor(hex: "#13263B").cgColor
+        enterCommentTextField.layer.borderColor = UIColor.darkBlue?.cgColor
         
-        enterCommentTextField.backgroundColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        enterCommentTextField.backgroundColor = UIColor.beige
         
         enterCommentTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: enterCommentTextField.frame.height))
         

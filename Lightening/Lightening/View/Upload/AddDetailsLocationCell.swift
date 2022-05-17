@@ -29,7 +29,7 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
         super.awakeFromNib()
 
         // Initialization code
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        self.backgroundColor = UIColor.lightBlue
         
         mapView.delegate = self
         

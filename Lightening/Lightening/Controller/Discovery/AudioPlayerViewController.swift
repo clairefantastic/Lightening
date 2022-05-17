@@ -35,7 +35,7 @@ class AudioPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
+        self.view.backgroundColor = UIColor.green
         playerView.layoutImageView()
         playerView.configureTitleLabel()
         playerView.configureAuthorLabel()

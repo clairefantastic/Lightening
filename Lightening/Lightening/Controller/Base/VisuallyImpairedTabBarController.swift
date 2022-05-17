@@ -85,7 +85,7 @@ class VisuallyImpairedTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.black // tab bar icon tint color
         self.tabBar.isTranslucent = false
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
-        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
+        UITabBar.appearance().barTintColor = UIColor.lightBlue // tab bar background color
     }
 
 }

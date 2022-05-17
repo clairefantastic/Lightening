@@ -75,7 +75,7 @@ extension ImpairedProfileViewController {
         NSLayoutConstraint(item: logOutButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
         logOutButton.setTitle("Settings", for: .normal)
-        logOutButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
+        logOutButton.setTitleColor(UIColor.beige, for: .normal)
         logOutButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         logOutButton.layer.borderWidth = 1
         logOutButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor

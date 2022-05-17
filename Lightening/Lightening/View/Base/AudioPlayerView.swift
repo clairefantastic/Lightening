@@ -141,7 +141,7 @@ extension AudioPlayerView {
         
         audioTitleLabel.font = UIFont(name: "American Typewriter", size: 16)
         
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioTitleLabel.textColor = UIColor.beige
         
         audioTitleLabel.numberOfLines = 0
         
@@ -163,7 +163,7 @@ extension AudioPlayerView {
         
         audioAuthorLabel.font = UIFont(name: "American Typewriter", size: 14)
         
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioAuthorLabel.textColor = UIColor.beige
         
     }
     
@@ -187,7 +187,7 @@ extension AudioPlayerView {
         
         dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         
-        dismissButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        dismissButton.tintColor = UIColor.beige
     }
     
     func layoutPlayPauseButton() {
@@ -208,7 +208,7 @@ extension AudioPlayerView {
     func setUpPlayPauseButton() {
         
         playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playPauseButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        playPauseButton.tintColor = UIColor.beige
         
         playPauseButton.addTarget(self, action: #selector(playPauseAudio), for: .touchUpInside)
 
@@ -260,7 +260,7 @@ extension AudioPlayerView {
         
         audioProgressSlider.thumbTintColor = .clear
         
-        audioProgressSlider.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        audioProgressSlider.tintColor = UIColor.pink
         
     }
     
@@ -281,7 +281,7 @@ extension AudioPlayerView {
     
     func setUpLikeButton() {
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        likeButton.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        likeButton.tintColor = UIColor.pink
     
     }
         

@@ -37,13 +37,13 @@ class CheckAudioLengthViewController: UIViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerY, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        uploadButton.backgroundColor = UIColor.darkBlue
         
         uploadButton.setTitle("Confirm Audio File", for: .normal)
         
         uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
         
-        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        uploadButton.setTitleColor(UIColor.beige, for: .normal)
         
         uploadButton.isEnabled = true
         
@@ -102,7 +102,7 @@ class CheckAudioLengthViewController: UIViewController {
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
         limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
-        limitLengthLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        limitLengthLabel.textColor = UIColor.darkBlue
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
         limitLengthLabel.setContentCompressionResistancePriority(

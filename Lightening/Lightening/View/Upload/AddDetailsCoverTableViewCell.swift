@@ -28,9 +28,9 @@ class AddDetailsCoverTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        self.backgroundColor = UIColor.lightBlue
         
-        selectCoverCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        selectCoverCollectionView.backgroundColor = UIColor.lightBlue
     
         selectCoverCollectionView.registerCellWithNib(identifier: String(describing: SelectCoverCollectionViewCell.self), bundle: nil)
         
