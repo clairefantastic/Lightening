@@ -32,25 +32,9 @@ class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
         // Initialization code
         self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
         
-        layoutTextView()
+        ElementsStyle.styleTextView(contentTextView)
         
         contentTextView.delegate = self
-        
-    }
-    
-    private func layoutTextView() {
-        
-        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "13263B").cgColor
-        
-        contentTextView.layer.cornerRadius = contentTextView.frame.height / 2
-        
-        contentTextView.backgroundColor = UIColor.hexStringToUIColor(hex: "FCEED8")
-        
-        contentTextView.layer.borderWidth = 2
-        
-        contentTextView.textContainerInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
-        
-        contentTextView.font = UIFont(name: "American Typewriter", size: 16)
         
     }
     

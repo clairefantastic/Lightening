@@ -52,4 +52,21 @@ class ElementsStyle {
         
         textField.rightViewMode = .always
     }
+    
+    static func styleTextView(_ textView: UITextView) {
+        
+        textView.layer.borderColor = UIColor.darkBlue?.cgColor
+        
+        textView.layer.cornerRadius = textView.frame.height / 2
+        
+        textView.backgroundColor = UIColor.beige
+        
+        textView.layer.borderWidth = 2
+        
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+        
+        textView.font = UIFont(name: "American Typewriter", size: 16)
+        
+        
+    }
 }
