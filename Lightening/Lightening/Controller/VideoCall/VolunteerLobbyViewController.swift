@@ -7,7 +7,6 @@
 
 import UIKit
 import WebRTC
-import Lottie
 
 class VolunteerLobbyViewController: BaseViewController {
     
@@ -72,7 +71,6 @@ class VolunteerLobbyViewController: BaseViewController {
         self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
         
         LKProgressHUD.dismiss()
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,7 +104,7 @@ class VolunteerLobbyViewController: BaseViewController {
             if remoteCandidateCount >= 1 {
                 NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
                 
-                answerVideoCallButton.layer.add(createAnimation(keyPath: "transform.scale", toValue: 0.5), forKey: nil)
+                answerVideoCallButton.layer.add(CustomAnimationHandler.setScaleAnimation(keyPath: "transform.scale", fromValue: 1.2, toValue: 0.8), forKey: nil)
                 
                 answerVideoCallButton.isEnabled = true
                 
@@ -115,20 +113,6 @@ class VolunteerLobbyViewController: BaseViewController {
                 answerVideoCallButton.isEnabled = false
             }
         }
-    }
-    
-    fileprivate func createAnimation (keyPath: String, toValue: CGFloat) -> CABasicAnimation {
-        //創建動畫對象
-        let scaleAni = CABasicAnimation()
-        //設置動畫屬性
-        scaleAni.keyPath = keyPath
-        //設置動畫的起始位置。也就是動畫從哪裡到哪裡。不指定起點，默認就從position開始
-        scaleAni.toValue = toValue
-        //動畫持續時間
-        scaleAni.duration = 2;
-        //動畫重複次數
-        scaleAni.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
-        return scaleAni;
     }
 
 }
