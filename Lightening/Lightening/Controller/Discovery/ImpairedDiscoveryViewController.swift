@@ -89,41 +89,12 @@ class ImpairedDiscoveryViewController: BaseViewController {
                     self?.audios = audios
                 }
                 
-                self?.sections[0].audios = []
-                
-                self?.sections[0].audios.append(contentsOf: self?.audios.filter { $0.topic == "Pop"} ?? [])
-                
-                self?.sections[1].audios = []
-                
-                self?.sections[1].audios.append(contentsOf: self?.audios.filter { $0.topic == "Indie"} ?? [])
-                
-                self?.sections[2].audios = []
-                
-                self?.sections[2].audios.append(contentsOf: self?.audios.filter { $0.topic == "Folk"} ?? [])
-                
-                self?.sections[3].audios = []
-                
-                self?.sections[3].audios.append(contentsOf: self?.audios.filter { $0.topic == "City"} ?? [])
-                
-                self?.sections[4].audios = []
-                
-                self?.sections[4].audios.append(contentsOf: self?.audios.filter { $0.topic == "Cafe"} ?? [])
-                
-                self?.sections[5].audios = []
-                
-                self?.sections[5].audios.append(contentsOf: self?.audios.filter { $0.topic == "Meaningful"} ?? [])
-                
-                self?.sections[6].audios = []
-                
-                self?.sections[6].audios.append(contentsOf: self?.audios.filter { $0.topic == "Nature"} ?? [])
-                
-                self?.sections[7].audios = []
-                
-                self?.sections[7].audios.append(contentsOf: self?.audios.filter { $0.topic == "Animal"} ?? [])
-                
-                self?.sections[8].audios = []
-                
-                self?.sections[8].audios.append(contentsOf: self?.audios.filter { $0.topic == "Others"} ?? [])
+                for topic in 0...(self?.sections.count ?? 0) - 1 {
+                    
+                    self?.sections[topic].audios = []
+                    
+                    self?.sections[topic].audios.append(contentsOf: self?.audios.filter { $0.topic == AudioTopics.allCases[topic].rawValue} ?? [])
+                }
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
