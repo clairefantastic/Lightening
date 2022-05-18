@@ -20,13 +20,35 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let vinylCloudView = VinylCloudView()
     
-    private let answerVideoCallButton = UIButton()
-    
     private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
     private var oppositePerson = ""
     
     let notificationKey1 = "com.volunteer.receiveCall"
+    
+    private var signalingConnected = false
+    
+    private var hasLocalSdp = false
+    
+    private var localCandidateCount = 0
+    
+    private var hasRemoteSdp = false
+    
+    var remoteCandidateCount: Int = 0 {
+        didSet {
+            if remoteCandidateCount >= 1 {
+                NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
+                
+                doorView.answerVideoCallButton.layer.add(CustomAnimationHandler.setScaleAnimation(keyPath: "transform.scale", fromValue: 1.2, toValue: 0.8), forKey: nil)
+                
+                doorView.answerVideoCallButton.isEnabled = true
+                
+            } else {
+                
+                doorView.answerVideoCallButton.isEnabled = false
+            }
+        }
+    }
     
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient) {
         self.signalClient = signalClient
@@ -47,16 +69,11 @@ class VolunteerLobbyViewController: BaseViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
-        layoutAnswerButton()
+        configureDoorView()
         configureInstructionLabel()
         configureVinylCloudView()
         configureSwitch()
         
-        self.signalingConnected = false
-        self.hasLocalSdp = false
-        self.hasRemoteSdp = false
-        self.localCandidateCount = 0
-        self.remoteCandidateCount = 0
         self.signalClient.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
         self.signalClient.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
         self.webRTCClient.delegate = self
@@ -66,48 +83,6 @@ class VolunteerLobbyViewController: BaseViewController {
         self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
         
         LKProgressHUD.dismiss()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        answerVideoCallButton.layer.cornerRadius = 30
-    }
-    
-    private var signalingConnected: Bool = false {
-        didSet {
-        }
-    }
-    
-    private var hasLocalSdp: Bool = false {
-        didSet {
-        }
-    }
-    
-    private var localCandidateCount: Int = 0 {
-        didSet {
-        }
-    }
-    
-    private var hasRemoteSdp: Bool = false {
-        didSet {
-            
-        }
-    }
-    
-    var remoteCandidateCount: Int = 0 {
-        didSet {
-            if remoteCandidateCount >= 1 {
-                NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
-                
-                answerVideoCallButton.layer.add(CustomAnimationHandler.setScaleAnimation(keyPath: "transform.scale", fromValue: 1.2, toValue: 0.8), forKey: nil)
-                
-                answerVideoCallButton.isEnabled = true
-                
-            } else {
-                
-                answerVideoCallButton.isEnabled = false
-            }
-        }
     }
 
 }
@@ -197,7 +172,7 @@ extension VolunteerLobbyViewController {
         
     }
     
-    private func layoutAnswerButton() {
+    private func configureDoorView() {
         
         self.view.addSubview(doorView)
         
@@ -207,37 +182,8 @@ extension VolunteerLobbyViewController {
         doorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         doorView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         doorView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    
-        self.view.addSubview(answerVideoCallButton)
         
-        answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .centerY, relatedBy: .equal, toItem: doorView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .trailing, multiplier: 1, constant: -8).isActive = true
-        
-        answerVideoCallButton.layer.borderWidth = 2
-        
-        answerVideoCallButton.layer.borderColor = UIColor.beige?.cgColor
-
-        answerVideoCallButton.setTitle("Answer a Call", for: .normal)
-        
-        answerVideoCallButton.titleLabel?.numberOfLines = 0
-        
-        answerVideoCallButton.titleLabel?.textAlignment = .center
-
-        answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 14)
-
-        answerVideoCallButton.setTitleColor(UIColor.beige, for: .normal)
-
-        answerVideoCallButton.isEnabled = false
-
-        answerVideoCallButton.addTarget(self, action: #selector(answerVideoCall), for: .touchUpInside)
-        
+        doorView.answerVideoCallButton.addTarget(self, action: #selector(answerVideoCall), for: .touchUpInside)
     }
     
     @objc func answerVideoCall() {
@@ -270,10 +216,6 @@ extension VolunteerLobbyViewController {
         NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
         NSLayoutConstraint(item: statusSwitch, attribute: .leading, relatedBy: .equal, toItem: instructionLabel, attribute: .trailing, multiplier: 1, constant: 8).isActive = true
-        
-        statusSwitch.onImage = UIImage(named: "black_vinyl-PhotoRoom")
-        
-        statusSwitch.offImage = UIImage(named: "black_vinyl-PhotoRoom")
         
         statusSwitch.onTintColor = UIColor.darkBlue
         
