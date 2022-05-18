@@ -14,6 +14,12 @@ class BaseViewController: UIViewController {
         
         ElementsStyle.styleViewBackground(view)
         
+        setNavigationBar()
+        
+    }
+    
+    private func setNavigationBar() {
+        
         navigationController?.navigationBar.barTintColor = UIColor.lightBlue
         
         navigationController?.navigationBar.tintColor = UIColor.black
