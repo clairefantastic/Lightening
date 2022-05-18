@@ -61,14 +61,11 @@ class DoorView: UIView {
         self.addSubview(answerVideoCallButton)
         
         answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-
-        NSLayoutConstraint(item: answerVideoCallButton, attribute: .trailing, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -8).isActive = true
+        
+        answerVideoCallButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+        answerVideoCallButton.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        answerVideoCallButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        answerVideoCallButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         answerVideoCallButton.layer.borderWidth = 2
         
