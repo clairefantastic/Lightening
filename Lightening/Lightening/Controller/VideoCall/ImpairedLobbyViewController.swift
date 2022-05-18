@@ -19,16 +19,6 @@ class ImpairedLobbyViewController: BaseViewController {
     
     private let videoCallButton = UIButton()
     
-    @IBOutlet weak var localSDP: UILabel!
-    
-    @IBOutlet weak var localCandidates: UILabel!
-    
-    @IBOutlet weak var remoteSDP: UILabel!
-    
-    @IBOutlet weak var remoteCandidates: UILabel!
-    
-    @IBOutlet weak var rtcStatus: UILabel!
-    
     private var oppositePerson = ""
     
     private var deletePerson = ""
@@ -43,6 +33,35 @@ class ImpairedLobbyViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var signalingConnected: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                if self.signalingConnected {
+                    
+                    let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
+                    vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+                    vc.oppositePerson = self.oppositePerson
+                    vc.oppositePerson = self.deletePerson
+                    
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                    
+                } else {
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    private var hasLocalSdp = false
+    
+    private var localCandidateCount = 0
+    
+    private var hasRemoteSdp = false
+    
+    private var remoteCandidateCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,13 +69,9 @@ class ImpairedLobbyViewController: BaseViewController {
         
         configureVideoCallButton()
         
-        self.signalingConnected = false
-        self.hasLocalSdp = false
-        self.hasRemoteSdp = false
-        self.localCandidateCount = 0
-        self.remoteCandidateCount = 0
         self.signalClient.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
         self.signalClient.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
+        
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         
@@ -71,61 +86,6 @@ class ImpairedLobbyViewController: BaseViewController {
             
             self.signalingConnected = connectedStatus
             
-        }
-    }
-    
-    private var signalingConnected: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                if self.signalingConnected {
-                    self.rtcStatus?.text = "Connected"
-                    self.rtcStatus?.textColor = UIColor.green
-                    
-                    let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-                    vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
-                    vc.oppositePerson = self.oppositePerson
-                    vc.oppositePerson = self.deletePerson
-                    
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                    
-                } else {
-                    self.rtcStatus?.text = "Not connected"
-                    self.rtcStatus?.textColor = UIColor.red
-                }
-            }
-        }
-    }
-    
-    private var hasLocalSdp: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                self.localSDP?.text = self.hasLocalSdp ? "✅" : "❌"
-            }
-        }
-    }
-    
-    private var localCandidateCount: Int = 0 {
-        didSet {
-            DispatchQueue.main.async {
-                self.localCandidates?.text = "\(self.localCandidateCount)"
-            }
-        }
-    }
-    
-    private var hasRemoteSdp: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                self.remoteSDP?.text = self.hasRemoteSdp ? "✅" : "❌"
-            }
-        }
-    }
-    
-    private var remoteCandidateCount: Int = 0 {
-        didSet {
-            DispatchQueue.main.async {
-                self.remoteCandidates?.text = "\(self.remoteCandidateCount)"
-            }
         }
     }
     
@@ -185,10 +145,6 @@ extension ImpairedLobbyViewController: WebRTCClientDelegate {
         @unknown default:
             textColor = .black
             self.signalingConnected = false
-        }
-        DispatchQueue.main.async {
-            self.rtcStatus?.text = state.description.capitalized
-            //      self.rtcStatus?.textColor = textColor
         }
     }
     
