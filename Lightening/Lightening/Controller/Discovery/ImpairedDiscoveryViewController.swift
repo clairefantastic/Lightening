@@ -28,15 +28,14 @@ class ImpairedDiscoveryViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Audio Files"
- 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         fetchData()
         configureCollectionView()
         configureLayout()
-        
     }
     
     func setPlayer(url: URL) {
@@ -56,8 +55,6 @@ class ImpairedDiscoveryViewController: BaseViewController {
         view.stickSubView(collectionView)
         
         collectionView.backgroundColor = UIColor.lightBlue
-        
-        collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
         
         collectionView.registerCellWithNib(identifier: String(describing: VinylCollectionViewCell.self), bundle: nil)
         
