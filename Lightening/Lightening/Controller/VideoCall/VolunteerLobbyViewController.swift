@@ -12,7 +12,7 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let statusSwitch = UISwitch()
     
-    private let instructionLabel = DarkBlueLabel()
+    private let switchInstructionLabel = DarkBlueLabel()
     
     private let birdInstructionLabel = DarkBlueLabel()
     
@@ -157,14 +157,89 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
 
 extension VolunteerLobbyViewController {
     
+    private func configureInstructionLabel() {
+        
+        self.view.addSubview(switchInstructionLabel)
+        
+        switchInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: switchInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        
+        NSLayoutConstraint(item: switchInstructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 3/4, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: switchInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: switchInstructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+        
+        switchInstructionLabel.text = "Switch for receiving calls or not"
+        switchInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        switchInstructionLabel.adjustsFontForContentSizeCategory = true
+        switchInstructionLabel.textAlignment = .center
+        switchInstructionLabel.numberOfLines = 0
+        switchInstructionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+        
+        self.view.addSubview(birdInstructionLabel)
+        
+        birdInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .leading, multiplier: 1, constant: -16).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
+        
+        NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
+        
+        birdInstructionLabel.text = "Call will be notified by a bird"
+        birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+        birdInstructionLabel.adjustsFontForContentSizeCategory = true
+        birdInstructionLabel.textAlignment = .center
+        birdInstructionLabel.numberOfLines = 0
+        birdInstructionLabel.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
+    
+    private func configureSwitch() {
+        
+        view.addSubview(statusSwitch)
+        
+        statusSwitch.translatesAutoresizingMaskIntoConstraints = false
+        
+        statusSwitch.leadingAnchor.constraint(equalTo: switchInstructionLabel.trailingAnchor, constant: 8).isActive = true
+        statusSwitch.centerYAnchor.constraint(equalTo: switchInstructionLabel.centerYAnchor, constant: 0).isActive = true
+        statusSwitch.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        statusSwitch.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        
+        statusSwitch.onTintColor = UIColor.darkBlue
+        
+        statusSwitch.isOn = true
+        
+        statusSwitch.addTarget(self, action: #selector(changeStatus), for: .valueChanged)
+    }
+    
+    @objc func changeStatus() {
+        if statusSwitch.isOn == true {
+            self.view.backgroundColor = UIColor.lightBlue
+            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+            self.switchInstructionLabel.textColor = UIColor.darkBlue
+            self.birdInstructionLabel.textColor = UIColor.darkBlue
+        } else {
+            self.view.backgroundColor = UIColor.darkBlue
+            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
+            self.switchInstructionLabel.textColor = UIColor.beige
+            self.birdInstructionLabel.textColor = UIColor.beige
+        }
+    }
+    
     private func configureVinylCloudView() {
         
-        self.view.addSubview(vinylCloudView)
+        view.addSubview(vinylCloudView)
         
         vinylCloudView.translatesAutoresizingMaskIntoConstraints = false
         
         vinylCloudView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        vinylCloudView.topAnchor.constraint(equalTo: self.instructionLabel.bottomAnchor, constant: 0).isActive = true
+        vinylCloudView.topAnchor.constraint(equalTo: self.switchInstructionLabel.bottomAnchor, constant: 0).isActive = true
         vinylCloudView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         vinylCloudView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
@@ -174,7 +249,7 @@ extension VolunteerLobbyViewController {
     
     private func configureDoorView() {
         
-        self.view.addSubview(doorView)
+        view.addSubview(doorView)
         
         doorView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -201,83 +276,5 @@ extension VolunteerLobbyViewController {
         
         videoCallViewController.modalPresentationStyle = .fullScreen
         self.present(videoCallViewController, animated: true, completion: nil)
-    }
-    
-    private func configureSwitch() {
-        
-        self.view.addSubview(statusSwitch)
-        
-        statusSwitch.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: statusSwitch, attribute: .centerY, relatedBy: .equal, toItem: instructionLabel, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: statusSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
-        NSLayoutConstraint(item: statusSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
-        
-        NSLayoutConstraint(item: statusSwitch, attribute: .leading, relatedBy: .equal, toItem: instructionLabel, attribute: .trailing, multiplier: 1, constant: 8).isActive = true
-        
-        statusSwitch.onTintColor = UIColor.darkBlue
-        
-        statusSwitch.isOn = true
-        
-        statusSwitch.addTarget(self, action: #selector(changeStatus), for: .valueChanged)
-    }
-    
-    private func configureInstructionLabel() {
-        
-        self.view.addSubview(instructionLabel)
-        
-        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 3/4, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
-        
-        instructionLabel.text = "Switch for receiving calls or not"
-        instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        instructionLabel.adjustsFontForContentSizeCategory = true
-        instructionLabel.textAlignment = .center
-        instructionLabel.numberOfLines = 0
-        instructionLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
-        self.view.addSubview(birdInstructionLabel)
-        
-        birdInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: birdInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: birdInstructionLabel, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .leading, multiplier: 1, constant: -16).isActive = true
-        
-        NSLayoutConstraint(item: birdInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
-        
-        birdInstructionLabel.text = "Call will be notified by a bird"
-        birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        birdInstructionLabel.adjustsFontForContentSizeCategory = true
-        birdInstructionLabel.textAlignment = .center
-        birdInstructionLabel.numberOfLines = 0
-        birdInstructionLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-    }
-    
-    @objc func changeStatus() {
-        if statusSwitch.isOn == true {
-            self.view.backgroundColor = UIColor.lightBlue
-            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
-            self.instructionLabel.textColor = UIColor.darkBlue
-            self.birdInstructionLabel.textColor = UIColor.darkBlue
-        } else {
-            self.view.backgroundColor = UIColor.darkBlue
-            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
-            self.instructionLabel.textColor = UIColor.beige
-            self.birdInstructionLabel.textColor = UIColor.beige
-        }
     }
 }
