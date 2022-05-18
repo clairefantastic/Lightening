@@ -55,7 +55,6 @@ class VolunteerLobbyViewController: BaseViewController {
         configureVinylImageView()
         configureCloudImageView()
         configureSwitch()
-        addUpAndDownAnimation()
         
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -366,18 +365,6 @@ extension VolunteerLobbyViewController {
             self.instructionLabel.textColor = UIColor.beige
             self.birdInstructionLabel.textColor = UIColor.beige
         }
-    }
-    
-    func addUpAndDownAnimation() {
-        let animation = CABasicAnimation(keyPath: "transform.translation.y")
-        animation.isRemovedOnCompletion = false
-        animation.duration = 2.0
-        animation.autoreverses = true
-        animation.repeatCount = MAXFLOAT
-        animation.fromValue = NSNumber(value: 0)
-        animation.toValue = NSNumber(value: 40)
-        vinylImageView.layer.add(animation, forKey: "bounce")
-        cloudImageView.layer.add(animation, forKey: "bounce")
     }
 
 }

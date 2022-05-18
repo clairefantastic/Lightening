@@ -24,6 +24,24 @@ class CustomAnimationHandler {
         scaleAnimation.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
         
         return scaleAnimation
+    }
+    
+    static func addUpAndDownAnimation() -> CABasicAnimation {
         
+        let animation = CABasicAnimation(keyPath: "transform.translation.y")
+        
+        animation.isRemovedOnCompletion = false
+        
+        animation.duration = 2.0
+        
+        animation.autoreverses = true
+        
+        animation.repeatCount = MAXFLOAT
+        
+        animation.fromValue = NSNumber(value: 0)
+        
+        animation.toValue = NSNumber(value: 40)
+        
+        return animation
     }
 }
