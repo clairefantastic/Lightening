@@ -14,7 +14,7 @@ class ImpairedProfileViewController: BaseViewController {
     
     let userProfileView = UserProfileView()
     
-    let logOutButton = UIButton()
+    let settingButton = UIButton()
     
     override func viewDidLoad() {
         
@@ -24,7 +24,7 @@ class ImpairedProfileViewController: BaseViewController {
         
         configureVinylImageView()
         addUserProfileView()
-        configureLogOutButton()
+        configureSettingButton()
         ElementsStyle.styleViewBackground(userProfileView)
         self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
@@ -60,26 +60,26 @@ extension ImpairedProfileViewController {
         
     }
     
-    func configureLogOutButton() {
+    func configureSettingButton() {
         
-        view.addSubview(logOutButton)
+        view.addSubview(settingButton)
         
-        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: logOutButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
+        NSLayoutConstraint(item: settingButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
         
-        NSLayoutConstraint(item: logOutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        NSLayoutConstraint(item: settingButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
         
-        NSLayoutConstraint(item: logOutButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
+        NSLayoutConstraint(item: settingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
         
-        NSLayoutConstraint(item: logOutButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        NSLayoutConstraint(item: settingButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
         
-        logOutButton.setTitle("Settings", for: .normal)
-        logOutButton.setTitleColor(UIColor.beige, for: .normal)
-        logOutButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        logOutButton.layer.borderWidth = 1
-        logOutButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
-        logOutButton.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
+        settingButton.setTitle("Settings", for: .normal)
+        settingButton.setTitleColor(UIColor.beige, for: .normal)
+        settingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        settingButton.layer.borderWidth = 1
+        settingButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        settingButton.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
         
     }
     

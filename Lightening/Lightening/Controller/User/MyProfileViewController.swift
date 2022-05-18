@@ -82,7 +82,7 @@ class MyProfileViewController: ImpairedProfileViewController {
         addUserProfileView()
         configureLightImageView()
         configureButtons()
-        configureLogOutButton()
+        configureSettingButton()
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
