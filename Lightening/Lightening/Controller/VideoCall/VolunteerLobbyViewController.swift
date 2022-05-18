@@ -227,10 +227,6 @@ extension VolunteerLobbyViewController {
         
         self.view.addSubview(doorView)
         
-        doorView.configureRectView()
-        
-        doorView.configureHalfCircleView()
-        
         doorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: doorView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true

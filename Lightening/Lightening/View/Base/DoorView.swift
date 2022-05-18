@@ -15,13 +15,15 @@ class DoorView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureRectView()
+        configureHalfCircleView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func configureRectView() {
+    private func configureRectView() {
         
         self.addSubview(rectView)
         
@@ -38,7 +40,7 @@ class DoorView: UIView {
         rectView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
     }
     
-    func configureHalfCircleView() {
+    private func configureHalfCircleView() {
         
         self.addSubview(halfCircleView)
         
