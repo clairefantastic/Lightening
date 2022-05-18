@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDelegate {
+class ImpairedDiscoveryViewController: BaseViewController {
     
     var player: AVPlayer!
     
@@ -204,17 +204,8 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
             let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
             
             if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
-                let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
                 
-                // iPad specific code
-                blockUserAlertController
-                        let xOrigin = self.view.bounds.width / 2
-                        
-                        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-                        
-                blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
-                        
-                blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
+                showBlockUserAlert()
 
                 let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
                     
@@ -254,7 +245,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     }
 }
 
-extension ImpairedDiscoveryViewController {
+extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -306,12 +297,5 @@ extension ImpairedDiscoveryViewController {
             section.boundarySupplementaryItems = [sectionHeader]
             return section
         })
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { context in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)
     }
 }

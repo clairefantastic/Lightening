@@ -27,5 +27,23 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
     }
+    
+    private func showBlockUserAlert() {
+        
+        let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        
+        // iPad specific code
+        blockUserAlertController.popoverPresentationController?.sourceView = self.view
+        
+        let xOrigin = self.view.bounds.width / 2
+        
+        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+        
+        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
+        
+        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
+        
+        
+    }
 
 }
