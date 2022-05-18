@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
         
     }
     
-    private func showBlockUserAlert() {
+    func showBlockUserAlert(blockUserId: String) {
         
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
@@ -43,7 +43,40 @@ class BaseViewController: UIViewController {
         
         blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
         
-        
+        let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
+            
+            let controller = UIAlertController(title: "Are you sure?",
+                                               message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
+                                               preferredStyle: .alert)
+            let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
+                
+                UserManager.shared.blockUser(userId: blockUserId) { result in
+                    switch result {
+                    case .success(_):
+                        LKProgressHUD.dismiss()
+                        self.navigationController?.popToRootViewController(animated: true)
+                    case .failure(_):
+                        LKProgressHUD.showFailure(text: "Fail to block this user!")
+                    }
+                    
+                }
+               
+            }
+            controller.addAction(blockAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            controller.addAction(cancelAction)
+            self.present(controller, animated: true, completion: nil)
+
+        }
+              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+                  blockUserAlertController.dismiss(animated: true, completion: nil)
+              }
+
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+
+        present(blockUserAlertController, animated: true, completion: nil)
     }
 
 }

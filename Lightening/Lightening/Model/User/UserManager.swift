@@ -268,6 +268,8 @@ class UserManager {
     }
     
     func blockUser(userId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        LKProgressHUD.show()
 
         guard let currentUser = currentUser else {
             return

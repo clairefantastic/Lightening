@@ -205,41 +205,8 @@ class ImpairedDiscoveryViewController: BaseViewController {
             
             if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
                 
-                showBlockUserAlert()
+                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "")
 
-                let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
-                    
-                    let controller = UIAlertController(title: "Are you sure?",
-                                                       message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
-                                                       preferredStyle: .alert)
-                    let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
-                        
-                        UserManager.shared.blockUser(userId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "") { result in
-                            switch result {
-                            case .success(let success):
-                                print(success)
-                            case .failure(let error):
-                                print(error)
-                            }
-                            
-                        }
-                       
-                    }
-                    controller.addAction(blockAction)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    controller.addAction(cancelAction)
-                    self.present(controller, animated: true, completion: nil)
-
-                }
-                      let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-
-                          blockUserAlertController.dismiss(animated: true, completion: nil)
-                      }
-
-                blockUserAlertController.addAction(blockUserAction)
-                blockUserAlertController.addAction(cancelAction)
-
-                present(blockUserAlertController, animated: true, completion: nil)
             }
         }
     }

@@ -213,11 +213,11 @@ extension AudioDetailsViewController {
                 
                 UserManager.shared.blockUser(userId: self.audio?.authorId ?? "") { result in
                     switch result {
-                    case .success(let success):
-                        print(success)
+                    case .success(_):
+                        LKProgressHUD.dismiss()
                         self.navigationController?.popToRootViewController(animated: true)
-                    case .failure(let error):
-                        print(error)
+                    case .failure(_):
+                        LKProgressHUD.showFailure(text: "Fail to block this user!")
                     }
                     
                 }
