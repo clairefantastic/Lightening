@@ -76,7 +76,6 @@
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
 		7EA023582800452C00C73205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023572800452C00C73205 /* Assets.xcassets */; };
 		7EA0235B2800452C00C73205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA023592800452C00C73205 /* LaunchScreen.storyboard */; };
-		7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */; };
 		7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F422811D81E0071D197 /* AudioPlayerView.swift */; };
 		7EA73F4C281273EB0071D197 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F4A281273EB0071D197 /* CommentTableViewCell.swift */; };
 		7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */; };
@@ -190,7 +189,6 @@
 		7EA023572800452C00C73205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA0235A2800452C00C73205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA0235C2800452C00C73205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDescriptionViewController.swift; sourceTree = "<group>"; };
 		7EA73F422811D81E0071D197 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		7EA73F4A281273EB0071D197 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
@@ -314,7 +312,6 @@
 				7E2730122810E6260096DB72 /* SearchViewController.swift */,
 				7E27300B281006750096DB72 /* MapViewController.swift */,
 				7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */,
-				7EA73F3E281183DF0071D197 /* AudioDescriptionViewController.swift */,
 				7E48D4702819F4FD0080476E /* AudioListViewController.swift */,
 				7E74EA332831060100818F19 /* ViewController.swift */,
 				7E14F2B0282E55A70007C7E9 /* AudioDetailsViewController.swift */,
@@ -757,7 +754,6 @@
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
-				7EA73F3F281183DF0071D197 /* AudioDescriptionViewController.swift in Sources */,
 				7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
