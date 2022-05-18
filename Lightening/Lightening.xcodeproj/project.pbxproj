@@ -71,6 +71,7 @@
 		7E74EA3C2833DABB00818F19 /* DarkBlueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74EA3B2833DABB00818F19 /* DarkBlueLabel.swift */; };
 		7E74EA432834828100818F19 /* VolunteerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74EA422834828100818F19 /* VolunteerStatus.swift */; };
 		7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74EA44283493E600818F19 /* CustomAnimationHandler.swift */; };
+		7E74EA47283498DD00818F19 /* VinylCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74EA46283498DD00818F19 /* VinylCloudView.swift */; };
 		7E87C4D228283C85001759C9 /* lf30_editor_ewa07nyv.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */; };
 		7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0234E2800452A00C73205 /* AppDelegate.swift */; };
 		7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA023502800452A00C73205 /* SceneDelegate.swift */; };
@@ -184,6 +185,7 @@
 		7E74EA3B2833DABB00818F19 /* DarkBlueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkBlueLabel.swift; sourceTree = "<group>"; };
 		7E74EA422834828100818F19 /* VolunteerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerStatus.swift; sourceTree = "<group>"; };
 		7E74EA44283493E600818F19 /* CustomAnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationHandler.swift; sourceTree = "<group>"; };
+		7E74EA46283498DD00818F19 /* VinylCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinylCloudView.swift; sourceTree = "<group>"; };
 		7E87C4D128283C85001759C9 /* lf30_editor_ewa07nyv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_ewa07nyv.json; sourceTree = "<group>"; };
 		7EA0234B2800452A00C73205 /* Lightening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA0234E2800452A00C73205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
 				7E4297CA281F6DC600649458 /* AnimationView.swift */,
 				7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */,
+				7E74EA46283498DD00818F19 /* VinylCloudView.swift */,
 				7E225862281FCCA900FE8694 /* DoorView.swift */,
 			);
 			path = Base;
@@ -745,6 +748,7 @@
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
 				7EBB998C282A366C00B8A02C /* EULAViewController.swift in Sources */,
 				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
+				7E74EA47283498DD00818F19 /* VinylCloudView.swift in Sources */,
 				7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */,
 				7EB3F502280D740900C6E385 /* DiscoverySection.swift in Sources */,
 				7E14F2B1282E55A70007C7E9 /* AudioDetailsViewController.swift in Sources */,

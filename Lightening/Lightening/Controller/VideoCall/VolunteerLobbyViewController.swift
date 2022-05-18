@@ -18,9 +18,7 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let doorView = DoorView()
     
-    private let cloudImageView = UIImageView()
-    
-    private let vinylImageView = UIImageView()
+    private let vinylCloudView = VinylCloudView()
     
     private let answerVideoCallButton = UIButton()
     
@@ -51,9 +49,7 @@ class VolunteerLobbyViewController: BaseViewController {
         
         layoutAnswerButton()
         configureInstructionLabel()
-        configureCloudImageView()
-        configureVinylImageView()
-        configureCloudImageView()
+        configureVinylCloudView()
         configureSwitch()
         
         self.signalingConnected = false
@@ -186,39 +182,18 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
 
 extension VolunteerLobbyViewController {
     
-    private func configureCloudImageView() {
+    private func configureVinylCloudView() {
         
-        self.view.addSubview(cloudImageView)
+        self.view.addSubview(vinylCloudView)
         
-        cloudImageView.translatesAutoresizingMaskIntoConstraints = false
+        vinylCloudView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: cloudImageView, attribute: .top, relatedBy: .equal, toItem: self.instructionLabel, attribute: .bottom, multiplier: 1, constant: 24).isActive = true
+        vinylCloudView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        vinylCloudView.topAnchor.constraint(equalTo: self.instructionLabel.bottomAnchor, constant: 0).isActive = true
+        vinylCloudView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        vinylCloudView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
-        NSLayoutConstraint(item: cloudImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300).isActive = true
-        
-        NSLayoutConstraint(item: cloudImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
-        
-        NSLayoutConstraint(item: cloudImageView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
-        cloudImageView.image = UIImage(named: "cloud")
-        
-    }
-    
-    private func configureVinylImageView() {
-        
-        self.view.addSubview(vinylImageView)
-        
-        vinylImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: vinylImageView, attribute: .centerX, relatedBy: .equal, toItem: cloudImageView, attribute: .centerX, multiplier: 1, constant: -60).isActive = true
-        
-        NSLayoutConstraint(item: vinylImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: vinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: vinylImageView, attribute: .centerY, relatedBy: .equal, toItem: cloudImageView, attribute: .centerY, multiplier: 1, constant: -24).isActive = true
-        
-        vinylImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        vinylCloudView.layer.add(CustomAnimationHandler.addUpAndDownAnimation(), forKey: "bounce")
         
     }
     
