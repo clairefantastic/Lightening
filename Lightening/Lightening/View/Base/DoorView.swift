@@ -29,13 +29,10 @@ class DoorView: UIView {
         
         rectView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: rectView, attribute: .trailing, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: rectView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
-        
-        NSLayoutConstraint(item: rectView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
-        
-        NSLayoutConstraint(item: rectView, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
+        rectView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        rectView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
+        rectView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        rectView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         rectView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
     }

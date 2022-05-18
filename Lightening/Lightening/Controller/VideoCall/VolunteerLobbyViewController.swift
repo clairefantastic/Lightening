@@ -203,14 +203,11 @@ extension VolunteerLobbyViewController {
         
         doorView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: doorView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: doorView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
-        
-        NSLayoutConstraint(item: doorView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
-        
-        NSLayoutConstraint(item: doorView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
-        
+        doorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -36).isActive = true
+        doorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        doorView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        doorView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    
         self.view.addSubview(answerVideoCallButton)
         
         answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
@@ -341,5 +338,4 @@ extension VolunteerLobbyViewController {
             self.birdInstructionLabel.textColor = UIColor.beige
         }
     }
-
 }
