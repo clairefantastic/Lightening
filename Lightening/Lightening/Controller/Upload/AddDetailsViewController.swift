@@ -14,9 +14,10 @@ class AddDetailsViewController: BaseViewController {
     private let uploadButton = UIButton()
     
     private var tableView = UITableView() {
+        
         didSet {
-            tableView.reloadData()
             
+            tableView.reloadData()
         }
     }
     
@@ -137,31 +138,21 @@ class AddDetailsViewController: BaseViewController {
     
     @objc func uploadFile(_ sender: UIButton) {
         
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
         if self.audio.title == "" {
             
-            let titleEmptyAlert = UIAlertController(title: "Error", message: "Title should not be empty.", preferredStyle: .alert)
-            titleEmptyAlert.addAction(action)
-            present(titleEmptyAlert, animated: true)
+            showIncompleteAlert(incompleteData: "Title")
             
         } else if self.audio.description == "" {
             
-            let descriptionEmptyAlert = UIAlertController(title: "Error", message: "Description should not be empty.", preferredStyle: .alert)
-            descriptionEmptyAlert.addAction(action)
-            present(descriptionEmptyAlert, animated: true)
+            showIncompleteAlert(incompleteData: "Description")
             
         } else if self.audio.topic == "" {
             
-            let topicEmptyAlert = UIAlertController(title: "Error", message: "Topic should not be empty.", preferredStyle: .alert)
-            topicEmptyAlert.addAction(action)
-            present(topicEmptyAlert, animated: true)
+            showIncompleteAlert(incompleteData: "Topic")
             
         } else if self.audio.cover == "" {
             
-            let topicEmptyAlert = UIAlertController(title: "Error", message: "Cover should not be empty.", preferredStyle: .alert)
-            topicEmptyAlert.addAction(action)
-            present(topicEmptyAlert, animated: true)
+            showIncompleteAlert(incompleteData: "Cover Image")
             
         } else {
             
@@ -170,8 +161,6 @@ class AddDetailsViewController: BaseViewController {
             maskView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
             
             currentWindow?.addSubview(maskView)
-           
-            print("Upload file")
             
             DispatchQueue.main.async {
                 self.view.stickSubView(self.animationView)
@@ -196,8 +185,6 @@ class AddDetailsViewController: BaseViewController {
                     switch result {
 
                     case .success:
-
-                        print("onTapPublish, success")
                         
                         self?.animationView.removeFromSuperview()
                         
@@ -207,12 +194,9 @@ class AddDetailsViewController: BaseViewController {
                         
                         self?.navigationController?.popToRootViewController(animated: true)
                         
-                    case .failure(let error):
-
-                        print("publishArticle.failure: \(error)")
+                    case .failure:
                         
-                        LKProgressHUD.showFailure()
-                        
+                        LKProgressHUD.showFailure(text: "Fail to upload audio file.")
                     }
                     
                 }

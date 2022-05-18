@@ -78,5 +78,15 @@ class BaseViewController: UIViewController {
 
         present(blockUserAlertController, animated: true, completion: nil)
     }
+    
+    func showIncompleteAlert(incompleteData: String) {
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
+        
+        let alert = UIAlertController(title: "Error", message: "\(incompleteData) should not be empty.", preferredStyle: .alert)
+        alert.addAction(action)
+        present(alert, animated: true)
+        
+    }
 
 }
