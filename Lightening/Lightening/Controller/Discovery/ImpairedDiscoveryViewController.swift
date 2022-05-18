@@ -28,14 +28,16 @@ class ImpairedDiscoveryViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Audio Files"
+        
+        configureCollectionView()
+        
+        configureLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         fetchData()
-        configureCollectionView()
-        configureLayout()
     }
     
     func setPlayer(url: URL) {
@@ -193,6 +195,7 @@ extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
         DispatchQueue.main.async {
             LKProgressHUD.show()
         }
+        
         DispatchQueue.global().async {
             self.setPlayer(url: audio.audioUrl)
         }

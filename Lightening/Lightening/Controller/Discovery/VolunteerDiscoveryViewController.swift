@@ -12,14 +12,16 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
     let audioPlayerViewController = AudioPlayerViewController()
     
     override func viewDidLoad() {
-        fetchData()
-        configureCollectionView()
-        configureLayout()
-        layoutBarItem()
         
         self.navigationItem.title = "Discovery"
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+
+        configureCollectionView()
+        
+        configureLayout()
+        
+        layoutBarItem()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
