@@ -58,6 +58,10 @@ class ImpairedDiscoveryViewController: BaseViewController {
         
         collectionView.registerCellWithNib(identifier: String(describing: VinylCollectionViewCell.self), bundle: nil)
         
+        collectionView.register(SectionHeaderReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)
+        
         collectionView.delegate = self
         
         collectionView.isAccessibilityElement = false
