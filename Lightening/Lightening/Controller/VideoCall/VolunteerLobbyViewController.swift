@@ -13,9 +13,9 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let statusSwitch = UISwitch()
     
-    private let instructionLabel = UILabel()
+    private let instructionLabel = DarkBlueLabel()
     
-    private let birdInstructionLabel = UILabel()
+    private let birdInstructionLabel = DarkBlueLabel()
     
     private let doorView = DoorView()
     
@@ -370,7 +370,6 @@ extension VolunteerLobbyViewController {
         instructionLabel.text = "Switch for receiving calls or not"
         instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         instructionLabel.adjustsFontForContentSizeCategory = true
-        instructionLabel.textColor = UIColor.darkBlue
         instructionLabel.textAlignment = .center
         instructionLabel.numberOfLines = 0
         instructionLabel.setContentCompressionResistancePriority(
@@ -391,7 +390,6 @@ extension VolunteerLobbyViewController {
         birdInstructionLabel.text = "Call will be notified by a bird"
         birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
         birdInstructionLabel.adjustsFontForContentSizeCategory = true
-        birdInstructionLabel.textColor = UIColor.darkBlue
         birdInstructionLabel.textAlignment = .center
         birdInstructionLabel.numberOfLines = 0
         birdInstructionLabel.setContentCompressionResistancePriority(

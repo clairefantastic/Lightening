@@ -9,7 +9,7 @@ import UIKit
 
 class AudioDetailsViewController: BaseViewController {
     
-    private let noCommentsLabel = UILabel()
+    private let noCommentsLabel = DarkBlueLabel()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -345,7 +345,6 @@ extension AudioDetailsViewController {
         noCommentsLabel.text = "No comments yet!"
         noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
         noCommentsLabel.adjustsFontForContentSizeCategory = true
-        noCommentsLabel.textColor = UIColor.darkBlue
         noCommentsLabel.textAlignment = .center
         noCommentsLabel.numberOfLines = 0
         noCommentsLabel.setContentCompressionResistancePriority(

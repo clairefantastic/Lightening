@@ -24,12 +24,11 @@ class SectionHeaderReusableView: UICollectionReusableView {
     }
   
     lazy var titleLabel: UILabel = {
-        let label = UILabel()
+        let label = DarkBlueLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.font = UIFont(name: "American Typewriter Bold", size: 20)
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = UIColor.darkBlue
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(

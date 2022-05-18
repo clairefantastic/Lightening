@@ -11,7 +11,7 @@ import AVFoundation
 
 class CheckAudioLengthViewController: UIViewController {
     
-    private let limitLengthLabel = UILabel()
+    private let limitLengthLabel = DarkBlueLabel()
     
     private let uploadButton = UIButton()
     
@@ -102,7 +102,6 @@ class CheckAudioLengthViewController: UIViewController {
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
         limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
-        limitLengthLabel.textColor = UIColor.darkBlue
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
         limitLengthLabel.setContentCompressionResistancePriority(
