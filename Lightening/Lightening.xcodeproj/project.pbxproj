@@ -12,7 +12,6 @@
 		7E14F2B3282E57810007C7E9 /* StretchyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */; };
 		7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */; };
 		7E225863281FCCA900FE8694 /* DoorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225862281FCCA900FE8694 /* DoorView.swift */; };
-		7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225864281FF5F000FE8694 /* AirBallonView.swift */; };
 		7E22586828201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */; };
 		7E22586B282056B100FE8694 /* VinylCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */; };
 		7E22586C282056B100FE8694 /* VinylCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */; };
@@ -64,7 +63,6 @@
 		7E498D592808188300389D1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E498D582808188300389D1C /* UploadViewController.swift */; };
 		7E55BEAE281B71AA00F6A8AC /* MyAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */; };
 		7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */; };
-		7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */; };
 		7E74EA322830E70300818F19 /* 86332-sound-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E74EA312830E70300818F19 /* 86332-sound-animation.json */; };
 		7E74EA342831060100818F19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74EA332831060100818F19 /* ViewController.swift */; };
 		7E74EA362831246C00818F19 /* 7054-soundcloud-social-media-icon.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E74EA352831246C00818F19 /* 7054-soundcloud-social-media-icon.json */; };
@@ -126,7 +124,6 @@
 		7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyTableHeaderView.swift; sourceTree = "<group>"; };
 		7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "16873-flying-pigeon (2).json"; path = "../../../../Downloads/16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7E225862281FCCA900FE8694 /* DoorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorView.swift; sourceTree = "<group>"; };
-		7E225864281FF5F000FE8694 /* AirBallonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBallonView.swift; sourceTree = "<group>"; };
 		7E22586728201B4900FE8694 /* 87530-frequencies-fork-lottie-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "87530-frequencies-fork-lottie-animation.json"; sourceTree = "<group>"; };
 		7E225869282056B100FE8694 /* VinylCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinylCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E22586A282056B100FE8694 /* VinylCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VinylCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -178,7 +175,6 @@
 		7E498D582808188300389D1C /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		7E55BEAD281B71AA00F6A8AC /* MyAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioListViewController.swift; sourceTree = "<group>"; };
 		7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDiscoveryViewController.swift; sourceTree = "<group>"; };
-		7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscoveryViewController.swift; sourceTree = "<group>"; };
 		7E55BEB3281D873100F6A8AC /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
 		7E74EA312830E70300818F19 /* 86332-sound-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86332-sound-animation.json"; sourceTree = "<group>"; };
 		7E74EA332831060100818F19 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +286,6 @@
 				7E4297CA281F6DC600649458 /* AnimationView.swift */,
 				7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */,
 				7E225862281FCCA900FE8694 /* DoorView.swift */,
-				7E225864281FF5F000FE8694 /* AirBallonView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -326,7 +321,6 @@
 				7E74EA332831060100818F19 /* ViewController.swift */,
 				7E14F2B0282E55A70007C7E9 /* AudioDetailsViewController.swift */,
 				7E55BEAF281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift */,
-				7E55BEB1281D5A3B00F6A8AC /* NewDiscoveryViewController.swift */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -792,8 +786,6 @@
 				7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */,
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E74EA432834828100818F19 /* VolunteerStatus.swift in Sources */,
-				7E55BEB2281D5A3B00F6A8AC /* NewDiscoveryViewController.swift in Sources */,
-				7E225865281FF5F000FE8694 /* AirBallonView.swift in Sources */,
 				7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */,
 				7E74EA342831060100818F19 /* ViewController.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
