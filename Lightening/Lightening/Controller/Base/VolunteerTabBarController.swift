@@ -26,14 +26,14 @@ private enum VolunteerTab {
         
         let config = Config.default
         
-        let signalClientforVolunteer = SignalingClientForVolunteer()
+        let signalClient = SignalingClient()
         
         let webRTCClient = WebRTCClient(iceServers: config.webRTCIceServers)
 
         switch self {
 
         case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
-            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
+            signalClient: signalClient, webRTCClient: webRTCClient))
             
         case .discovery: controller = UINavigationController(rootViewController: VolunteerDiscoveryViewController())
         

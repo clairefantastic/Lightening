@@ -25,14 +25,14 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private let answerVideoCallButton = UIButton()
     
-    private let signalClientforVolunteer: SignalingClientForVolunteer
+    private let signalClient: SignalingClient
     private let webRTCClient: WebRTCClient
     private var oppositePerson = ""
     
     let notificationKey1 = "com.volunteer.receiveCall"
     
-    init(signalClientforVolunteer: SignalingClientForVolunteer, webRTCClient: WebRTCClient) {
-        self.signalClientforVolunteer = signalClientforVolunteer
+    init(signalClient: SignalingClient, webRTCClient: WebRTCClient) {
+        self.signalClient = signalClient
         self.webRTCClient = webRTCClient
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,24 +63,15 @@ class VolunteerLobbyViewController: BaseViewController {
         self.hasRemoteSdp = false
         self.localCandidateCount = 0
         self.remoteCandidateCount = 0
-        self.signalClientforVolunteer.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
-        self.signalClientforVolunteer.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
+        self.signalClient.listenSdp(to: UserManager.shared.currentUser?.userId ?? "")
+        self.signalClient.listenCandidate(to: UserManager.shared.currentUser?.userId ?? "")
         self.webRTCClient.delegate = self
-        self.signalClientforVolunteer.delegate = self
+        self.signalClient.delegate = self
         self.webRTCClient.unmuteAudio()
         
-        self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+        self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
         
         LKProgressHUD.dismiss()
-        
-//        let popUpViewController = PopUpViewController()
-//        popUpViewController.modalPresentationStyle = .overCurrentContext
-//        popUpViewController.modalTransitionStyle = .crossDissolve
-//        self.present(popUpViewController, animated: true, completion: nil)
-//
-//        answerVideoCallButton.layer.add(createAnimation(keyPath: "transform.scale", toValue: 0.5), forKey: nil)
-//
-//        answerVideoCallButton.isEnabled = true
 
     }
     
@@ -131,7 +122,7 @@ class VolunteerLobbyViewController: BaseViewController {
         let scaleAni = CABasicAnimation()
         //設置動畫屬性
         scaleAni.keyPath = keyPath
-        //設置動畫的起始位置。也就是動畫從哪裡到哪裡。不指定起點，默認就從positoin開始
+        //設置動畫的起始位置。也就是動畫從哪裡到哪裡。不指定起點，默認就從position開始
         scaleAni.toValue = toValue
         //動畫持續時間
         scaleAni.duration = 2;
@@ -139,25 +130,12 @@ class VolunteerLobbyViewController: BaseViewController {
         scaleAni.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
         return scaleAni;
     }
-    
-    @IBAction func answerDidTap(_ sender: Any) {
-        self.webRTCClient.answer { (localSdp) in
-            self.hasLocalSdp = true
-            
-            self.signalClientforVolunteer.send(sdp: localSdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
-        }
-        
-        let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
-        
-        videoCallViewController.currentPerson = UserManager.shared.currentUser?.userId ?? ""
-        
-        videoCallViewController.modalPresentationStyle = .fullScreen
-        self.present(videoCallViewController, animated: true, completion: nil)
-    }
+
 }
 
-extension VolunteerLobbyViewController: SignalClientForVolunteerDelegate {
-    func signalClient(_ signalClient: SignalingClientForVolunteer, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
+extension VolunteerLobbyViewController: SignalClientDelegate {
+    
+    func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
         print("Received remote sdp")
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
             self.hasRemoteSdp = true
@@ -168,15 +146,15 @@ extension VolunteerLobbyViewController: SignalClientForVolunteerDelegate {
         
     }
     
-    func signalClientDidConnect(_ signalClient: SignalingClientForVolunteer) {
+    func signalClientDidConnect(_ signalClient: SignalingClient) {
         self.signalingConnected = true
     }
     
-    func signalClientDidDisconnect(_ signalClient: SignalingClientForVolunteer) {
+    func signalClientDidDisconnect(_ signalClient: SignalingClient) {
         self.signalingConnected = false
     }
     
-    func signalClient(_ signalClient: SignalingClientForVolunteer, didReceiveCandidate candidate: RTCIceCandidate) {
+    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
         print("Received remote candidate")
         self.remoteCandidateCount += 1
         
@@ -190,7 +168,7 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("discovered local candidate")
         self.localCandidateCount += 1
-        self.signalClientforVolunteer.send(candidate: candidate, to: self.oppositePerson)
+        self.signalClient.send(candidate: candidate, to: self.oppositePerson)
         
     }
     
@@ -316,7 +294,7 @@ extension VolunteerLobbyViewController {
         self.webRTCClient.answer { (localSdp) in
             self.hasLocalSdp = true
             
-            self.signalClientforVolunteer.send(sdp: localSdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
+            self.signalClient.send(sdp: localSdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
         }
         
         let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
@@ -399,27 +377,27 @@ extension VolunteerLobbyViewController {
     @objc func changeStatus() {
         if statusSwitch.isOn == true {
             self.view.backgroundColor = UIColor.lightBlue
-            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
+            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.available)
             self.instructionLabel.textColor = UIColor.darkBlue
             self.birdInstructionLabel.textColor = UIColor.darkBlue
         } else {
             self.view.backgroundColor = UIColor.darkBlue
-            self.signalClientforVolunteer.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
+            self.signalClient.updateStatus(for: UserManager.shared.currentUser?.userId ?? "", status: VolunteerStatus.unavailable)
             self.instructionLabel.textColor = UIColor.beige
             self.birdInstructionLabel.textColor = UIColor.beige
         }
     }
     
     func addUpAndDownAnimation() {
-        let animatioan = CABasicAnimation(keyPath: "transform.translation.y")
-        animatioan.isRemovedOnCompletion = false
-        animatioan.duration = 2.0
-        animatioan.autoreverses = true
-        animatioan.repeatCount = MAXFLOAT
-        animatioan.fromValue = NSNumber(value: 0)
-        animatioan.toValue = NSNumber(value: 40)
-        vinylImageView.layer.add(animatioan, forKey: "bounce")
-        cloudImageView.layer.add(animatioan, forKey: "bounce")
+        let animation = CABasicAnimation(keyPath: "transform.translation.y")
+        animation.isRemovedOnCompletion = false
+        animation.duration = 2.0
+        animation.autoreverses = true
+        animation.repeatCount = MAXFLOAT
+        animation.fromValue = NSNumber(value: 0)
+        animation.toValue = NSNumber(value: 40)
+        vinylImageView.layer.add(animation, forKey: "bounce")
+        cloudImageView.layer.add(animation, forKey: "bounce")
     }
 
 }
