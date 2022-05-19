@@ -27,8 +27,6 @@ class AudioListViewController: BaseViewController {
     
     private var tableView = UITableView()
     
-    let audioPlayerViewController = AudioPlayerViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,14 +34,6 @@ class AudioListViewController: BaseViewController {
         
         setUpTableView()
         
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        if let player = audioPlayerViewController.playerView.player {
-            player.pause()
-        }
-        audioPlayerViewController.view.removeFromSuperview()
     }
 }
 
@@ -138,28 +128,9 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        audioPlayerViewController.view.removeFromSuperview()
-        addChild(audioPlayerViewController)
-        audioPlayerViewController.audio = audios?[indexPath.row]
-//        audioPlayerViewController.view.frame = CGRect(x: 0, y: 1000, width: width, height: 80)
-        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
-        view.addSubview(audioPlayerViewController.view)
-        audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
-                           toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
-                           toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
-//        UIView.animate(withDuration: 0.25,
-//                       delay: 0.0001,
-//                       options: .curveEaseInOut,
-//                       animations: { audioPlayerViewController.view.frame = CGRect(x: 0, y: height - tabBarHeight - 80, width: width, height: 80)},
-//                       completion: {_ in })
+        if let audio = audios?[indexPath.row] {
+            
+            showPlayer(audio: audio)
+        }
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    let audioPlayerViewController = AudioPlayerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,15 @@ class BaseViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if let player = audioPlayerViewController.playerView.player {
+            player.pause()
+        }
+        audioPlayerViewController.view.removeFromSuperview()
+    }
+    
     private func setNavigationBar() {
         
         navigationController?.navigationBar.barTintColor = UIColor.lightBlue
@@ -26,6 +37,35 @@ class BaseViewController: UIViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
         
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        
+    }
+    
+    func showPlayer(audio: Audio) {
+        
+        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
+        
+        audioPlayerViewController.view.removeFromSuperview()
+        
+        addChild(audioPlayerViewController)
+    
+        audioPlayerViewController.audio = audio
+        
+        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
+        view.addSubview(audioPlayerViewController.view)
+        audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
+                           toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        
+        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
     }
     
     func showBlockUserAlert(blockUserId: String) {

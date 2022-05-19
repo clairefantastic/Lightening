@@ -32,8 +32,6 @@ class SearchViewController: BaseViewController {
     
     private let searchController = UISearchController()
     
-    let audioPlayerViewController = AudioPlayerViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,14 +56,6 @@ class SearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchData()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        if let player = audioPlayerViewController.playerView.player {
-            player.pause()
-        }
-        audioPlayerViewController.view.removeFromSuperview()
     }
     
     private func fetchData() {
@@ -169,25 +159,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        audioPlayerViewController.view.removeFromSuperview()
-        addChild(audioPlayerViewController)
-        audioPlayerViewController.audio = filteredAudioFiles?[indexPath.row]
-        audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
-        view.addSubview(audioPlayerViewController.view)
-        
-        audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
-                           toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
-                           toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
-        
+        if let audio = filteredAudioFiles?[indexPath.row] {
+            
+            showPlayer(audio: audio)
+        }
     }
 }
 
