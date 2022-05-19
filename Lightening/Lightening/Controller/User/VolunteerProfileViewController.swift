@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class MyProfileViewController: ImpairedProfileViewController {
+class VolunteerProfileViewController: ImpairedProfileViewController {
     
     private let lightImageView = UIImageView()
     
@@ -136,7 +136,7 @@ class MyProfileViewController: ImpairedProfileViewController {
             self.navigationItem.title = "Lighty's Profile"
         }
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         fetchMyAudios()
         fetchLikedAudios()
         
@@ -211,55 +211,47 @@ class MyProfileViewController: ImpairedProfileViewController {
         let imagePickerAlertController = UIAlertController(title: "Upload Profile Photo", message: "Please select a photo for your profile", preferredStyle: .actionSheet)
         
         // iPad specific code
-        imagePickerAlertController
-                let xOrigin = self.view.bounds.width / 2
-                
-                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
+        imagePickerController.popoverPresentationController?.sourceView = self.view
+        
+        let xOrigin = self.view.bounds.width / 2
+        
+        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
                 
         imagePickerAlertController.popoverPresentationController?.sourceRect = popoverRect
                 
         imagePickerAlertController.popoverPresentationController?.permittedArrowDirections = .up
 
-              // 建立三個 UIAlertAction 的實體
-              // 新增 UIAlertAction 在 UIAlertController actionSheet 的 動作 (action) 與標題
         let imageFromLibAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
 
-                  // 判斷是否可以從照片圖庫取得照片來源
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-
-                      // 如果可以，指定 UIImagePickerController 的照片來源為 照片圖庫 (.photoLibrary)，並 present UIImagePickerController
+                
                 imagePickerController.sourceType = .photoLibrary
                 self.present(imagePickerController, animated: true, completion: nil)
             }
         }
               let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
 
-                  // 判斷是否可以從相機取得照片來源
                   if UIImagePickerController.isSourceTypeAvailable(.camera) {
 
-                      // 如果可以，指定 UIImagePickerController 的照片來源為 照片圖庫 (.camera)，並 present UIImagePickerController
                       imagePickerController.sourceType = .camera
                       self.present(imagePickerController, animated: true, completion: nil)
                   }
               }
-
-              // 新增一個取消動作，讓使用者可以跳出 UIAlertController
+        
               let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
 
                   imagePickerAlertController.dismiss(animated: true, completion: nil)
               }
-
-              // 將上面三個 UIAlertAction 動作加入 UIAlertController
+        
               imagePickerAlertController.addAction(imageFromLibAction)
               imagePickerAlertController.addAction(imageFromCameraAction)
               imagePickerAlertController.addAction(cancelAction)
 
-              // 當使用者按下 uploadBtnAction 時會 present 剛剛建立好的三個 UIAlertAction 動作與
               present(imagePickerAlertController, animated: true, completion: nil)
     }
 }
 
-extension MyProfileViewController {
+extension VolunteerProfileViewController {
     
     private func configureLightImageView() {
         
@@ -319,7 +311,7 @@ extension MyProfileViewController {
         
         myAudiosButton.setTitleColor(UIColor.darkBlue, for: .selected)
         
-        myAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        myAudiosButton.titleLabel?.font = UIFont.bold(size: 16)
         
         myAudiosButton.addTarget(self, action: #selector(selectMyAudiosButton), for: .touchUpInside)
         
@@ -339,7 +331,7 @@ extension MyProfileViewController {
         
         seeMyAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         
-        seeMyAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
+        seeMyAudiosButton.titleLabel?.font = UIFont.regular(size: 14)
         
         seeMyAudiosButton.addTarget(self, action: #selector(didTapSeeMoreMyAudios), for: .touchUpInside)
         
@@ -377,7 +369,7 @@ extension MyProfileViewController {
         
         seeLikedAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         
-        seeLikedAudiosButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 14)
+        seeLikedAudiosButton.titleLabel?.font = UIFont.regular(size: 14)
         
         seeLikedAudiosButton.addTarget(self, action: #selector(didTapSeeMoreLikedAudios), for: .touchUpInside)
     }
@@ -441,7 +433,7 @@ extension MyProfileViewController {
     }
 }
 
-extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension VolunteerProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -465,7 +457,7 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
     }
 }
 
-extension MyProfileViewController: UITextFieldDelegate {
+extension VolunteerProfileViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         

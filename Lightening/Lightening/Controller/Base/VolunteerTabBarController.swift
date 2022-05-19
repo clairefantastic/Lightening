@@ -41,7 +41,7 @@ private enum VolunteerTab {
         case .map: controller = UINavigationController(rootViewController: MapViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: MyProfileViewController())
+            UINavigationController(rootViewController: VolunteerProfileViewController())
 
         }
 
