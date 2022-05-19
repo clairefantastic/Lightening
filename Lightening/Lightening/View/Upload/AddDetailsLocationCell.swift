@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationManagerDelegate {
+class AddDetailsLocationCell: AddDetailsBasicCell, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     

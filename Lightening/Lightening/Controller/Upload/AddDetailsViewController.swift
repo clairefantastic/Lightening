@@ -48,22 +48,22 @@ class AddDetailsViewController: BaseViewController {
         setupTableView()
         
         animationView = .init(name: "lf30_editor_6v2ghoza")
-          
+        
         animationView.frame = self.view.bounds
-          
+        
         animationView.contentMode = .scaleAspectFit
-          
+        
         animationView.loopMode = .loop
-          
+        
         animationView.animationSpeed = 1
-          
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         uploadButton.layer.cornerRadius = uploadButton.frame.height / 2
     }
-
+    
     private func setupTableView() {
         
         ElementsStyle.styleViewBackground(tableView)
@@ -85,33 +85,33 @@ class AddDetailsViewController: BaseViewController {
         tableView.allowsSelection = false
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsContentCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsContentCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsTopicTableViewCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsTopicTableViewCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsCoverTableViewCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsCoverTableViewCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsLocationCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsLocationCell.self),
+                                      bundle: nil
         )
         
         tableView.dataSource = self
-
+        
         tableView.delegate = self
-    
+        
     }
     
     private func layoutUploadButton() {
-    
+        
         view.addSubview(uploadButton)
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
@@ -133,26 +133,26 @@ class AddDetailsViewController: BaseViewController {
         uploadButton.setTitleColor(UIColor.beige, for: .normal)
         
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
-
+        
     }
     
     @objc func uploadFile(_ sender: UIButton) {
         
         if self.audio.title == "" {
             
-            showIncompleteAlert(incompleteData: "Title")
+            showIncompleteAlert(incompleteData: AddDetailsSection.title.rawValue)
             
         } else if self.audio.description == "" {
             
-            showIncompleteAlert(incompleteData: "Description")
+            showIncompleteAlert(incompleteData: AddDetailsSection.description.rawValue)
             
         } else if self.audio.topic == "" {
             
-            showIncompleteAlert(incompleteData: "Topic")
+            showIncompleteAlert(incompleteData: AddDetailsSection.topic.rawValue)
             
         } else if self.audio.cover == "" {
             
-            showIncompleteAlert(incompleteData: "Cover Image")
+            showIncompleteAlert(incompleteData: AddDetailsSection.coverImage.rawValue)
             
         } else {
             
@@ -166,24 +166,24 @@ class AddDetailsViewController: BaseViewController {
                 self.view.stickSubView(self.animationView)
                 self.animationView.play()
             }
-        
+            
             guard let localUrl = localUrl else {
                 return
             }
-
+            
             PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
                 
                 self?.audio.audioUrl = downloadUrl
                 
                 self?.audio.createdTime = Date().timeIntervalSince1970
-
+                
                 guard var publishAudio = self?.audio else {
-                        return
+                    return
                 }
                 
                 PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
                     switch result {
-
+                        
                     case .success:
                         
                         self?.animationView.removeFromSuperview()
@@ -213,13 +213,15 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return AddDetailsSection.allCases.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row <= 1 {
+    
+        switch AddDetailsSection.allCases[indexPath.row] {
+            
+        case .title, .description:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
                     
@@ -227,43 +229,43 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.index = indexPath.row
             
-            cell.delegate = self
+            cell.layoutCell(title: AddDetailsSection.title.rawValue)
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.delegate = self
             
             return cell
             
-        } else if indexPath.row == 2 {
+        case .topic:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
-            
+                    
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.topic.rawValue)
             
             cell.delegate = self
             
             return cell
             
-        } else if indexPath.row == 3 {
+        case .coverImage:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsCoverTableViewCell.self)", for: indexPath) as? AddDetailsCoverTableViewCell
-            
+                    
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.coverImage.rawValue)
             
             cell.delegate = self
             
             return cell
             
-        } else {
-            
+        case .currentLocation:
+        
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsLocationCell.self)", for: indexPath) as? AddDetailsLocationCell
                     
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.currentLocation.rawValue)
             
             cell.determineCurrentLocation()
             
@@ -273,7 +275,6 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-    
     }
     
 }
@@ -284,19 +285,13 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
         audio.topic = topic
     }
     
-    
     func didSelectCover(_ index: Int) {
         
         audio.cover = CoverImage.allCases[index].rawValue
     }
     
-//    func didSelectTopic(_ button: UIButton) {
-//        
-//        audio.topic = button.titleLabel?.text
-//    }
-
     func endEditing(_ cell: AddDetailsContentCell) {
-    
+        
         guard let tappedIndexPath = tableView.indexPath(for: cell) else { return }
         
         if tappedIndexPath.row == 0 {
@@ -310,3 +305,4 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
         }
     }
 }
+

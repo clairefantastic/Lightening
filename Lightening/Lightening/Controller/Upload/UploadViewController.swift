@@ -198,12 +198,6 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 checkAudioLengthViewController.localUrl = localUrl
                 
                 self?.navigationController?.pushViewController(checkAudioLengthViewController, animated: true)
-                
-//                let addDetailsViewController = AddDetailsViewController()
-//
-//                addDetailsViewController.localUrl = localUrl
-//
-//                self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
             }
             
         }

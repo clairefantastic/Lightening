@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddDetailsTopicTableViewCell: UITableViewCell {
+class AddDetailsTopicTableViewCell: AddDetailsBasicCell {
 
     var topicButtonArray: [UIButton?] = []
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddDetailsCoverTableViewCell: UITableViewCell {
+class AddDetailsCoverTableViewCell: AddDetailsBasicCell {
     
     var selectedIndex: Int?
 

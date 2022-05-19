@@ -17,7 +17,7 @@ protocol AddDetailsTableViewCellDelegate: AnyObject {
     
 }
 
-class AddDetailsContentCell: UITableViewCell, UITextViewDelegate {
+class AddDetailsContentCell: AddDetailsBasicCell, UITextViewDelegate {
     
     weak var delegate: AddDetailsTableViewCellDelegate?
     
