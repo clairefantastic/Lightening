@@ -20,7 +20,7 @@ class ImpairedProfileViewController: BaseViewController {
         
         self.navigationItem.title = "Profile"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureVinylImageView()
         addUserProfileView()
@@ -76,11 +76,8 @@ extension ImpairedProfileViewController {
         
         settingButton.setTitle("Settings", for: .normal)
         settingButton.setTitleColor(UIColor.beige, for: .normal)
-        settingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        settingButton.layer.borderWidth = 1
-        settingButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
+        settingButton.titleLabel?.font = UIFont.bold(size: 16)
         settingButton.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
-        
     }
     
     func logOut() {

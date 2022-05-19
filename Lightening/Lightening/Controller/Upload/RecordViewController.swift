@@ -93,7 +93,7 @@ class RecordViewController: BaseViewController {
         NSLayoutConstraint(item: limitLengthLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
-        limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
+        limitLengthLabel.font = UIFont.bold(size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
@@ -118,7 +118,7 @@ class RecordViewController: BaseViewController {
         
         timerLabel.text = "00:00"
         
-        timerLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        timerLabel.font = UIFont.bold(size: 20)
         
         timerLabel.textColor = UIColor.beige
         

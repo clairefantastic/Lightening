@@ -35,7 +35,7 @@ class BaseViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = UIColor.black
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         navigationItem.rightBarButtonItem?.tintColor = .black
         

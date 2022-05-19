@@ -13,8 +13,6 @@ class UploadViewController: BaseViewController {
     
     private let vinylImageView = UIImageView()
     
-    private let uploadManager = PublishManager()
-    
     private let selectFileButton = UIButton()
     
     private let recordButton = UIButton()
@@ -26,7 +24,7 @@ class UploadViewController: BaseViewController {
         
         self.navigationItem.title = "Upload"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureVinylImageView()
     
@@ -74,6 +72,10 @@ class UploadViewController: BaseViewController {
         
         recordButton.layer.cornerRadius = recordButton.frame.height / 2
     }
+
+}
+
+extension UploadViewController {
     
     private func configureVinylImageView() {
         
@@ -113,7 +115,7 @@ class UploadViewController: BaseViewController {
         
         selectFileButton.setTitle("Select File", for: .normal)
         
-        selectFileButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        selectFileButton.titleLabel?.font = UIFont.bold(size: 16)
         
         selectFileButton.setTitleColor(UIColor.beige, for: .normal)
         
@@ -143,7 +145,7 @@ class UploadViewController: BaseViewController {
         
         recordButton.setTitle("Record", for: .normal)
         
-        recordButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        recordButton.titleLabel?.font = UIFont.bold(size: 16)
         
         recordButton.setTitleColor(UIColor.beige, for: .normal)
         
@@ -180,7 +182,7 @@ class UploadViewController: BaseViewController {
         
         navigationController?.pushViewController(recordViewController, animated: true)
     }
-
+    
 }
 
 extension UploadViewController: UIDocumentPickerDelegate {

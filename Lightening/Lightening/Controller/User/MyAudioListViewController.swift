@@ -14,17 +14,15 @@ class MyAudioListViewController: AudioListViewController {
         
         self.navigationItem.title = "My Audios"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         layoutTableView()
         
         setUpTableView()
-
     }
     
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let deleteAudioIndex = indexPath.row
             
         guard let audio = audios?[indexPath.row] else { return }
             

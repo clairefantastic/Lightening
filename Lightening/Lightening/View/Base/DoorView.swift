@@ -77,7 +77,7 @@ class DoorView: UIView {
         
         answerVideoCallButton.titleLabel?.textAlignment = .center
 
-        answerVideoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 14)
+        answerVideoCallButton.titleLabel?.font = UIFont.bold(size: 14)
 
         answerVideoCallButton.setTitleColor(UIColor.beige, for: .normal)
         

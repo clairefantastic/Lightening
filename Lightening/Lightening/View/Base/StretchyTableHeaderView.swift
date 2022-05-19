@@ -18,7 +18,7 @@ class StretchyTableHeaderView: UIView {
     
     public let audioTitleLabel: UILabel = {
         let audioTitleLabel = UILabel()
-        audioTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        audioTitleLabel.font = UIFont.bold(size: 24)
         audioTitleLabel.adjustsFontForContentSizeCategory = true
         audioTitleLabel.textColor = UIColor.darkBlue
         audioTitleLabel.textAlignment = .left
@@ -30,7 +30,7 @@ class StretchyTableHeaderView: UIView {
     
     public let audioAuthorLabel: UILabel = {
         let audioAuthorLabel = UILabel()
-        audioAuthorLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        audioAuthorLabel.font = UIFont.bold(size: 20)
         audioAuthorLabel.adjustsFontForContentSizeCategory = true
         audioAuthorLabel.textColor = UIColor.darkBlue
         audioAuthorLabel.textAlignment = .left
@@ -54,7 +54,7 @@ class StretchyTableHeaderView: UIView {
     
     public let audioDescriptionLabel: UILabel = {
         let audioDescriptionLabel = UILabel()
-        audioDescriptionLabel.font = UIFont(name: "American Typewriter", size: 16)
+        audioDescriptionLabel.font = UIFont.regular(size: 16)
         audioDescriptionLabel.adjustsFontForContentSizeCategory = true
         audioDescriptionLabel.textColor = UIColor.darkBlue
         audioDescriptionLabel.textAlignment = .left

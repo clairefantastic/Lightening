@@ -200,7 +200,7 @@ extension SearchViewController {
         NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
         noContentLabel.text = "No audio files yet!"
-        noContentLabel.font = UIFont(name: "American Typewriter", size: 20)
+        noContentLabel.font = UIFont.regular(size: 20)
         noContentLabel.adjustsFontForContentSizeCategory = true
         noContentLabel.textColor = UIColor.darkBlue
         noContentLabel.textAlignment = .center

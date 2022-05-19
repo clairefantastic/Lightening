@@ -32,6 +32,7 @@
 		7E3501B9283539070090E061 /* AddDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501B8283539070090E061 /* AddDetailsSection.swift */; };
 		7E3501BB2835E2620090E061 /* LottieAnimationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */; };
 		7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */; };
+		7E3501BF283624440090E061 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BE283624440090E061 /* UIFont+Extension.swift */; };
 		7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
@@ -144,6 +145,7 @@
 		7E3501B8283539070090E061 /* AddDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsSection.swift; sourceTree = "<group>"; };
 		7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationWrapper.swift; sourceTree = "<group>"; };
 		7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHandler.swift; sourceTree = "<group>"; };
+		7E3501BE283624440090E061 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserAlertController.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				7E74EA44283493E600818F19 /* CustomAnimationHandler.swift */,
 				7E44B7D3280B0F1F00CF24AC /* UICollectionView+Extension.swift */,
 				7E74EA3728324D4C00818F19 /* UIImage+Extension.swift */,
+				7E3501BE283624440090E061 /* UIFont+Extension.swift */,
 				7E44B7BA280A981500CF24AC /* UIColor+Extentsion.swift */,
 				7E44B7C3280AEF8A00CF24AC /* UIView+Extension.swift */,
 				7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */,
@@ -815,6 +818,7 @@
 				7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */,
 				7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */,
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
+				7E3501BF283624440090E061 /* UIFont+Extension.swift in Sources */,
 				7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */,
 				7E3501BB2835E2620090E061 /* LottieAnimationWrapper.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,

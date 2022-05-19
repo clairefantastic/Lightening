@@ -32,7 +32,7 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
         topicButton.setTitle(topic, for: .normal)
         
         topicButton.setTitleColor(UIColor.darkBlue, for: .normal)
-        topicButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
+        topicButton.titleLabel?.font = UIFont.regular(size: 16)
         topicButton.backgroundColor = UIColor.pink
         
         topicButton.layer.cornerRadius = 10

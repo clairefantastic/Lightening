@@ -343,7 +343,7 @@ extension AudioDetailsViewController {
         NSLayoutConstraint(item: noCommentsLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: width + 60).isActive = true
         
         noCommentsLabel.text = "No comments yet!"
-        noCommentsLabel.font = UIFont(name: "American Typewriter", size: 20)
+        noCommentsLabel.font = UIFont.regular(size: 20)
         noCommentsLabel.adjustsFontForContentSizeCategory = true
         noCommentsLabel.textAlignment = .center
         noCommentsLabel.numberOfLines = 0
@@ -422,9 +422,8 @@ extension AudioDetailsViewController {
         
         enterCommentTextField.rightViewMode = .always
         
-        enterCommentTextField.font = UIFont(name: "American Typewriter", size: 16)
+        enterCommentTextField.font = UIFont.regular(size: 16)
         
         enterCommentTextField.layer.cornerRadius = 24
     }
-    
 }

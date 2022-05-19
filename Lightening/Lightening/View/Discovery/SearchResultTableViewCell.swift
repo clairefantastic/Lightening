@@ -33,7 +33,8 @@ class SearchResultTableViewCell: UITableViewCell {
     
     private func layoutLabels() {
         
-        searchResultTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        searchResultTitleLabel.font = UIFont.bold(size: 20)
+
         searchResultTitleLabel.textColor = UIColor.darkBlue
         
         searchResultTitleLabel.numberOfLines = 0
@@ -41,7 +42,7 @@ class SearchResultTableViewCell: UITableViewCell {
         searchResultTitleLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
         
-        searchResultAuthorLabel.font = UIFont(name: "American Typewriter", size: 16)
+        searchResultAuthorLabel.font = UIFont.regular(size: 16)
         
         searchResultAuthorLabel.textColor = UIColor.darkBlue
         

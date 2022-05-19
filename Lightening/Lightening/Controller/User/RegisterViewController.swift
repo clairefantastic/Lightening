@@ -78,7 +78,7 @@ extension RegisterViewController {
         NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         welcomeLabel.text = "Be a Lighty!"
-        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        welcomeLabel.font = UIFont.bold(size: 24)
         welcomeLabel.adjustsFontForContentSizeCategory = true
         welcomeLabel.textColor = UIColor.darkBlue
         welcomeLabel.textAlignment = .center
@@ -102,14 +102,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: nameLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        nameLabel.text = "Display Name"
-        nameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        nameLabel.adjustsFontForContentSizeCategory = true
-        nameLabel.textColor = UIColor.darkBlue
+        ElementsStyle.styleLabel(nameLabel, text: "DisplayName")
+        
         nameLabel.textAlignment = .left
-        nameLabel.numberOfLines = 0
-        nameLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
     
     private func configureNameTextField() {
@@ -130,7 +125,7 @@ extension RegisterViewController {
         
         nameTextField.layer.cornerRadius = 25
         
-        nameTextField.font = UIFont(name: "American Typewriter", size: 16)
+        nameTextField.font = UIFont.regular(size: 16)
     }
     
     private func configureEmailLabel() {
@@ -147,14 +142,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        emailLabel.text = "Email"
-        emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        emailLabel.adjustsFontForContentSizeCategory = true
-        emailLabel.textColor = UIColor.darkBlue
+        ElementsStyle.styleLabel(emailLabel, text: "Email")
+        
         emailLabel.textAlignment = .left
-        emailLabel.numberOfLines = 0
-        emailLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
 
     private func configureEmailTextField() {
@@ -175,7 +165,7 @@ extension RegisterViewController {
         
         emailTextField.layer.cornerRadius = 25
         
-        emailTextField.font = UIFont(name: "American Typewriter", size: 16)
+        emailTextField.font = UIFont.regular(size: 16)
         
         emailTextField.keyboardType = .emailAddress
     }
@@ -194,15 +184,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        passwordLabel.text = "Password"
-        passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        passwordLabel.adjustsFontForContentSizeCategory = true
-        passwordLabel.textColor = UIColor.darkBlue
+        ElementsStyle.styleLabel(passwordLabel, text: "Password")
+    
         passwordLabel.textAlignment = .left
-        passwordLabel.numberOfLines = 0
-        passwordLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
     }
 
     private func configurePasswordTextField() {
@@ -223,7 +207,7 @@ extension RegisterViewController {
         
         passwordTextField.layer.cornerRadius = 25
         
-        passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        passwordTextField.font = UIFont.regular(size: 16)
         
         passwordTextField.isSecureTextEntry = true
     }
@@ -242,15 +226,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: checkPasswordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        checkPasswordLabel.text = "Check Password"
-        checkPasswordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        checkPasswordLabel.adjustsFontForContentSizeCategory = true
-        checkPasswordLabel.textColor = UIColor.darkBlue
-        checkPasswordLabel.textAlignment = .left
-        checkPasswordLabel.numberOfLines = 0
-        checkPasswordLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        ElementsStyle.styleLabel(checkPasswordLabel, text: "Check Password")
         
+        checkPasswordLabel.textAlignment = .left
     }
     
     private func configureCheckPasswordTextField() {
@@ -271,7 +249,7 @@ extension RegisterViewController {
         
         checkPasswordTextField.layer.cornerRadius = 25
         
-        checkPasswordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        checkPasswordTextField.font = UIFont.regular(size: 16)
         
         checkPasswordTextField.isSecureTextEntry = true
     }

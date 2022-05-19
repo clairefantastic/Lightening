@@ -22,7 +22,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            authorNameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+            authorNameLabel.font = UIFont.bold(size: 16)
             
             authorNameLabel.textColor = UIColor.darkBlue
             
@@ -37,7 +37,7 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            commentTextLabel.font = UIFont(name: "American Typewriter", size: 14)
+            commentTextLabel.font = UIFont.regular(size: 14)
             
             commentTextLabel.textColor = UIColor.darkBlue
             

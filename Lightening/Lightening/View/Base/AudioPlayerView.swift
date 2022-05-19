@@ -139,7 +139,7 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
         
-        audioTitleLabel.font = UIFont(name: "American Typewriter", size: 16)
+        audioTitleLabel.font = UIFont.regular(size: 16)
         
         audioTitleLabel.textColor = UIColor.beige
         
@@ -161,7 +161,7 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
         
-        audioAuthorLabel.font = UIFont(name: "American Typewriter", size: 14)
+        audioAuthorLabel.font = UIFont.regular(size: 14)
         
         audioAuthorLabel.textColor = UIColor.beige
         

@@ -128,7 +128,7 @@ class AddDetailsViewController: BaseViewController {
         
         uploadButton.setTitle("Upload File", for: .normal)
         
-        uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        uploadButton.titleLabel?.font = UIFont.bold(size: 16)
         
         uploadButton.setTitleColor(UIColor.beige, for: .normal)
         

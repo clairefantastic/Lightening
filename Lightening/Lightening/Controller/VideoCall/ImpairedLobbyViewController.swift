@@ -178,7 +178,7 @@ extension ImpairedLobbyViewController {
         
         videoCallButton.setTitle("Call a volunteer", for: .normal)
         
-        videoCallButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
+        videoCallButton.titleLabel?.font = UIFont.bold(size: 20)
         
         videoCallButton.setTitleColor(UIColor.beige, for: .normal)
         

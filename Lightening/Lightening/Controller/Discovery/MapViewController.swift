@@ -30,7 +30,7 @@ class MapViewController: BaseViewController {
         
         self.navigationItem.title = "Map"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
     }
     

@@ -68,7 +68,7 @@ extension IdentitySelectionViewController {
         NSLayoutConstraint(item: instructionLabel, attribute: .bottom, relatedBy: .equal, toItem: visuallyImpairedButton, attribute: .top, multiplier: 1, constant: -16).isActive = true
         
         instructionLabel.text = "Please select an identity"
-        instructionLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        instructionLabel.font = UIFont.bold(size: 20)
         instructionLabel.adjustsFontForContentSizeCategory = true
         instructionLabel.textColor = UIColor.darkBlue
         instructionLabel.textAlignment = .center

@@ -67,7 +67,7 @@ class VolunteerLobbyViewController: BaseViewController {
         
         self.navigationItem.title = "Video Call"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureDoorView()
         configureInstructionLabel()
@@ -171,13 +171,9 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: switchInstructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
         
-        switchInstructionLabel.text = "Switch for receiving calls or not"
-        switchInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        switchInstructionLabel.adjustsFontForContentSizeCategory = true
+        ElementsStyle.styleLabel(switchInstructionLabel, text: "Switch for receiving calls or not")
+        
         switchInstructionLabel.textAlignment = .center
-        switchInstructionLabel.numberOfLines = 0
-        switchInstructionLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
         
         self.view.addSubview(birdInstructionLabel)
         
@@ -191,13 +187,9 @@ extension VolunteerLobbyViewController {
         
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
         
-        birdInstructionLabel.text = "Call will be notified by a bird"
-        birdInstructionLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        birdInstructionLabel.adjustsFontForContentSizeCategory = true
+        ElementsStyle.styleLabel(birdInstructionLabel, text: "Call will be notified by a bird")
+        
         birdInstructionLabel.textAlignment = .center
-        birdInstructionLabel.numberOfLines = 0
-        birdInstructionLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
     
     private func configureSwitch() {

@@ -27,7 +27,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
         let label = DarkBlueLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.font = UIFont(name: "American Typewriter Bold", size: 20)
+        label.font = UIFont.bold(size: 20)
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -41,10 +41,9 @@ class SectionHeaderReusableView: UICollectionReusableView {
     lazy var titleButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
-//        button.setTitle(">", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.darkBlue
-        button.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 20)
+        button.titleLabel?.font = UIFont.bold(size: 20)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
         return button
