@@ -84,7 +84,6 @@
 		7EA73F4D281273EB0071D197 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */; };
 		7EA73F542813E0AA0071D197 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F532813E0AA0071D197 /* BaseViewController.swift */; };
 		7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F562813EBE80071D197 /* UserProfileView.swift */; };
-		7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA73F5828145AA70071D197 /* ProfileSection.swift */; };
 		7EA73F612814F9310071D197 /* lf30_editor_lcvwieey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */; };
 		7EA73F67281504960071D197 /* lf30_editor_6mtolrvz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */; };
 		7EA73F6928152AA00071D197 /* lf30_editor_sgfaitmz.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */; };
@@ -200,7 +199,6 @@
 		7EA73F4B281273EB0071D197 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		7EA73F532813E0AA0071D197 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7EA73F562813EBE80071D197 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
-		7EA73F5828145AA70071D197 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
 		7EA73F602814F9300071D197 /* lf30_editor_lcvwieey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_lcvwieey.json; sourceTree = "<group>"; };
 		7EA73F66281504960071D197 /* lf30_editor_6mtolrvz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6mtolrvz.json; sourceTree = "<group>"; };
 		7EA73F6828152A9F0071D197 /* lf30_editor_sgfaitmz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_sgfaitmz.json; sourceTree = "<group>"; };
@@ -473,7 +471,6 @@
 				7E44B7B82809AEB800CF24AC /* Audio.swift */,
 				7EB3F501280D740800C6E385 /* DiscoverySection.swift */,
 				7E3501B8283539070090E061 /* AddDetailsSection.swift */,
-				7EA73F5828145AA70071D197 /* ProfileSection.swift */,
 				7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */,
 				7E44B7B0280966A100CF24AC /* PublishManager.swift */,
 				7E74EA3928326FB300818F19 /* CoverImage.swift */,
@@ -809,7 +806,6 @@
 				7E273006280FB06C0096DB72 /* AddDetailsLocationCell.swift in Sources */,
 				7EA73F742816EDA70071D197 /* User.swift in Sources */,
 				7E44B7C4280AEF8A00CF24AC /* UIView+Extension.swift in Sources */,
-				7EA73F5928145AA70071D197 /* ProfileSection.swift in Sources */,
 				7EA0234F2800452A00C73205 /* AppDelegate.swift in Sources */,
 				7E272FFA280EEDA10096DB72 /* AudioRecorder.swift in Sources */,
 				7EC6BABE28260DFE00556429 /* JGProgressHUDWrapper.swift in Sources */,
