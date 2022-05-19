@@ -51,22 +51,22 @@ private enum VisuallyImpairedTab {
         case .lobby:
             return UITabBarItem(
                 title: "Video Call",
-                image: UIImage(systemName: "video"),
-                selectedImage: UIImage(systemName: "video")
+                image: UIImage.systemAsset(ImageAsset.video),
+                selectedImage: UIImage.systemAsset(ImageAsset.video)
             )
             
         case .discovery:
             return UITabBarItem(
                 title: "Audio Files",
-                image: UIImage(systemName: "rectangle.grid.2x2"),
-                selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
+                image: UIImage.systemAsset(ImageAsset.discovery),
+                selectedImage: UIImage.systemAsset(ImageAsset.discoveryFill)
             )
         
         case .profile:
             return UITabBarItem(
                 title: "Profile",
-                image: UIImage(systemName: "person.circle"),
-                selectedImage: UIImage(systemName: "person.circle.fill")
+                image: UIImage.systemAsset(ImageAsset.person),
+                selectedImage: UIImage.systemAsset(ImageAsset.personFill)
             )
             
         }

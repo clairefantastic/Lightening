@@ -60,7 +60,7 @@ class UploadViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         animationView.play()
     }
@@ -79,7 +79,7 @@ extension UploadViewController {
     
     private func configureVinylImageView() {
         
-        vinylImageView.image = UIImage(named: "uploadVinyl")
+        vinylImageView.image = UIImage.asset(ImageAsset.uploadVinyl)
         
         view.addSubview(vinylImageView)
         

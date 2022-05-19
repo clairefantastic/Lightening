@@ -37,7 +37,7 @@ class DoorView: UIView {
         rectView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         rectView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        rectView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
+        rectView.backgroundColor = UIColor(patternImage: UIImage.asset(ImageAsset.wooden) ?? UIImage())
     }
     
     private func configureHalfCircleView() {
@@ -51,7 +51,7 @@ class DoorView: UIView {
         halfCircleView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         halfCircleView.heightAnchor.constraint(equalTo: rectView.widthAnchor).isActive = true
         
-        halfCircleView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
+        halfCircleView.backgroundColor = UIColor(patternImage: UIImage.asset(ImageAsset.wooden) ?? UIImage())
         
         halfCircleView.layer.cornerRadius = 75
     }

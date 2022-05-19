@@ -34,10 +34,9 @@ extension ImpairedProfileViewController {
     
     func configureVinylImageView() {
         
-        vinylImageView.image = UIImage(named: "profileVinyl")
+        vinylImageView.image = UIImage.asset(ImageAsset.profileVinyl)
         
         view.stickSubView(vinylImageView)
-        
     }
     
     func addUserProfileView() {

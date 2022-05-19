@@ -50,7 +50,7 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: rotationVinylImageView, attribute: .bottom, relatedBy: .equal, toItem: instructionLabel, attribute: .top, multiplier: 1, constant: -36).isActive = true
         
-        rotationVinylImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        rotationVinylImageView.image = UIImage.asset(ImageAsset.blackVinyl)
     }
     
     private func configureInstructionLabel() {

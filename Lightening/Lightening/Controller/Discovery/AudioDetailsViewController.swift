@@ -174,7 +174,7 @@ extension AudioDetailsViewController {
         
         NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
-        moreButton.setImage(UIImage(named: "option"), for: .normal)
+        moreButton.setImage(UIImage.asset(ImageAsset.more), for: .normal)
         
         moreButton.tintColor = UIColor.darkBlue
         moreButton.addTarget(self, action: #selector(tapMoreButton), for: .touchUpInside)
@@ -321,7 +321,7 @@ extension AudioDetailsViewController {
         
         NSLayoutConstraint(item: sendOutTextButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
-        sendOutTextButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        sendOutTextButton.setImage(UIImage.systemAsset(ImageAsset.send), for: .normal)
         
         sendOutTextButton.tintColor = UIColor.darkBlue
         

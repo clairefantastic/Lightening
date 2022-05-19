@@ -17,13 +17,11 @@ class UserProfileView: UIView {
             
             if imageUrl == nil {
                 
-                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                profileImageView.image = UIImage.asset(ImageAsset.blackVinyl)
                 
                 LKProgressHUD.dismiss()
                 
             } else {
-                
-                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
                 
                 profileImageView.loadImage(imageUrl)
                 

@@ -326,7 +326,7 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: dismissButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
         
-        dismissButton.setImage(UIImage(named: "close"), for: .normal)
+        dismissButton.setImage(UIImage.systemAsset(ImageAsset.xMark), for: .normal)
         
         dismissButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         

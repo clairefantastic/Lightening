@@ -99,7 +99,7 @@ class AudioPlayerView: UIView {
     @objc func playerDidFinishPlaying(note: NSNotification) {
         stopRotateHandler?()
         print("Video Finished")
-        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playPauseButton.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
         
         let targetTime: CMTime = CMTimeMake(value: Int64(0), timescale: 1)
         player?.seek(to: targetTime)
@@ -185,7 +185,7 @@ extension AudioPlayerView {
     
     func setUpDismissButton() {
         
-        dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissButton.setImage(UIImage.systemAsset(ImageAsset.xMark), for: .normal)
         
         dismissButton.tintColor = UIColor.beige
     }
@@ -207,7 +207,7 @@ extension AudioPlayerView {
     
     func setUpPlayPauseButton() {
         
-        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playPauseButton.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
         playPauseButton.tintColor = UIColor.beige
         
         playPauseButton.addTarget(self, action: #selector(playPauseAudio), for: .touchUpInside)
@@ -222,7 +222,7 @@ extension AudioPlayerView {
                 
                 player.pause()
                 stopRotateHandler?()
-                sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                sender.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
                 
                 isPlaying = false
 
@@ -230,7 +230,7 @@ extension AudioPlayerView {
                 
                 player.play()
                 startRotateHandler?()
-                sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+                sender.setImage(UIImage.systemAsset(ImageAsset.pause), for: .normal)
                 
                 isPlaying = true
 
@@ -280,7 +280,7 @@ extension AudioPlayerView {
     }
     
     func setUpLikeButton() {
-        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        likeButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
         likeButton.tintColor = UIColor.pink
     
     }

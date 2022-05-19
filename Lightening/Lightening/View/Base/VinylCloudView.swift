@@ -34,7 +34,7 @@ class VinylCloudView: UIView {
         cloudImageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         cloudImageView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
-        cloudImageView.image = UIImage(named: "cloud")
+        cloudImageView.image = UIImage.asset(ImageAsset.cloud)
     }
     
     private func configureVinylImageView() {
@@ -48,6 +48,6 @@ class VinylCloudView: UIView {
         vinylImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         vinylImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
-        vinylImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        vinylImageView.image = UIImage.asset(ImageAsset.blackVinyl)
     }
 }

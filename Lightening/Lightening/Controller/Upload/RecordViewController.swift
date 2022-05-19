@@ -144,7 +144,7 @@ class RecordViewController: BaseViewController {
         
         recordButton.backgroundColor = UIColor.red
         
-        recordButton.setImage(UIImage(named: "record"), for: .normal)
+        recordButton.setImage(UIImage.asset(ImageAsset.record), for: .normal)
         
         recordButton.isEnabled = true
         
@@ -185,7 +185,7 @@ class RecordViewController: BaseViewController {
         
         playButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
-        playButton.setImage(UIImage(named: "play"), for: .normal)
+        playButton.setImage(UIImage.asset(ImageAsset.recordPlay), for: .normal)
         
         playButton.isEnabled = true
         
@@ -219,7 +219,7 @@ class RecordViewController: BaseViewController {
         
         resetButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
-        resetButton.setImage(UIImage(named: "replay"), for: .normal)
+        resetButton.setImage(UIImage.asset(ImageAsset.replay), for: .normal)
         
         resetButton.isEnabled = true
         

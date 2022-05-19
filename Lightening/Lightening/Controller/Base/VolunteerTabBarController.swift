@@ -59,36 +59,36 @@ private enum VolunteerTab {
         case .lobby:
             return UITabBarItem(
                 title: "Video Call",
-                image: UIImage(systemName: "video"),
-                selectedImage: UIImage(systemName: "video")
+                image: UIImage.systemAsset(ImageAsset.video),
+                selectedImage: UIImage.systemAsset(ImageAsset.video)
             )
             
         case .discovery:
             return UITabBarItem(
                 title: "Discovery",
-                image: UIImage(systemName: "rectangle.grid.2x2"),
-                selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
+                image: UIImage.systemAsset(ImageAsset.discovery),
+                selectedImage: UIImage.systemAsset(ImageAsset.discoveryFill)
             )
         
         case .upload:
             return UITabBarItem(
                 title: "Upload",
-                image: UIImage(systemName: "arrow.up.heart"),
-                selectedImage: UIImage(systemName: "arrow.up.heart")
+                image: UIImage.systemAsset(ImageAsset.upload),
+                selectedImage: UIImage.systemAsset(ImageAsset.upload)
             )
             
         case .map:
             return UITabBarItem(
                 title: "Map",
-                image: UIImage(systemName: "map"),
-                selectedImage: UIImage(systemName: "map.fill")
+                image: UIImage.systemAsset(ImageAsset.map),
+                selectedImage: UIImage.systemAsset(ImageAsset.mapFill)
             )
         
         case .profile:
             return UITabBarItem(
                 title: "Profile",
-                image: UIImage(systemName: "person.circle"),
-                selectedImage: UIImage(systemName: "person.circle.fill")
+                image: UIImage.systemAsset(ImageAsset.person),
+                selectedImage: UIImage.systemAsset(ImageAsset.personFill)
             )
             
         }

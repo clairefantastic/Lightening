@@ -29,7 +29,7 @@ class VinylCollectionViewCell: UICollectionViewCell {
     
     var audio: Audio? {
       didSet {
-          vinylImageView?.image = UIImage(named: "black_vinyl-PhotoRoom")
+          vinylImageView?.image = UIImage.asset(ImageAsset.blackVinyl)
           audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
           audioTitleLabel?.text = audio?.title
           audioAuthorLabel?.text = audio?.author?.displayName

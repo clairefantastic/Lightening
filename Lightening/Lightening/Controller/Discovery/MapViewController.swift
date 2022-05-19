@@ -35,12 +35,11 @@ class MapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         mapView.removeAnnotations(self.audioAnnotations)
         
         notifyBlockUser()
-        
     }
     
     func notifyBlockUser() {
@@ -150,7 +149,7 @@ extension MapViewController: MKMapViewDelegate {
           view.addGestureRecognizer(longPress)
             
           let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-            button.setImage(UIImage(named: "black_vinyl-PhotoRoom"), for: .normal)
+            button.setImage(UIImage.asset(ImageAsset.blackVinyl), for: .normal)
           view.rightCalloutAccessoryView = button
         
         }

@@ -40,7 +40,7 @@ class SectionHeaderReusableView: UICollectionReusableView {
     
     lazy var titleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
+        button.setImage(UIImage.systemAsset(ImageAsset.arrow), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.darkBlue
         button.titleLabel?.font = UIFont.bold(size: 20)

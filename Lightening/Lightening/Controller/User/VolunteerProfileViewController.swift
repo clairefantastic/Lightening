@@ -75,7 +75,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(editName))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.systemAsset(ImageAsset.edit), style: UIBarButtonItem.Style.plain, target: self, action: #selector(editName))
         self.navigationItem.rightBarButtonItem?.tintColor = .black
         
         configureVinylImageView()
@@ -125,9 +125,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        
+        super.viewWillAppear(animated)
         
         if let name = UserManager.shared.currentUser?.displayName {
             
@@ -267,7 +265,7 @@ extension VolunteerProfileViewController {
         
         NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
         
-        lightImageView.image = UIImage(named: "leftLight")
+        lightImageView.image = UIImage.asset(ImageAsset.light)
         
         hideLeftLightBeam = true
         
@@ -283,7 +281,7 @@ extension VolunteerProfileViewController {
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
         
-        rightLightImageView.image = UIImage(named: "leftLight")
+        rightLightImageView.image = UIImage.asset(ImageAsset.light)
         
         hideLeftLightBeam = true
         
@@ -347,7 +345,7 @@ extension VolunteerProfileViewController {
         
         NSLayoutConstraint(item: likedAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
-        likedAudiosButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        likedAudiosButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
         
         likedAudiosButton.tintColor = UIColor.beige
         

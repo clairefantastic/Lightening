@@ -51,9 +51,9 @@ extension VolunteerDiscoveryViewController {
     
     private func layoutBarItem() {
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.systemAsset(ImageAsset.search), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "sparkles"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(dailyPicks))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.systemAsset(ImageAsset.random), style: UIBarButtonItem.Style.plain, target: self, action: #selector(dailyPicks))
     }
     
     @objc func pushSearchPage(_ sender: UIBarButtonItem) {

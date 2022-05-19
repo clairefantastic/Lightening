@@ -65,7 +65,7 @@ class SearchResultTableViewCell: UITableViewCell {
           
           searchResultAuthorLabel?.text = audio?.author?.displayName
           
-          cloudImageView?.image = UIImage(named: "cloud")
+          cloudImageView?.image = UIImage.asset(ImageAsset.cloud)
       }
     }
     
