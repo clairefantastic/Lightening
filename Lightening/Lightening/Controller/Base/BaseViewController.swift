@@ -10,18 +10,17 @@ import UIKit
 class BaseViewController: UIViewController {
     
     let audioPlayerViewController = AudioPlayerViewController()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ElementsStyle.styleViewBackground(view)
         
         setNavigationBar()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+        super.viewWillDisappear(animated)
         
         if let player = audioPlayerViewController.playerView.player {
             player.pause()
@@ -50,7 +49,7 @@ class BaseViewController: UIViewController {
         audioPlayerViewController.view.removeFromSuperview()
         
         addChild(audioPlayerViewController)
-    
+        
         audioPlayerViewController.audio = audio
         
         audioPlayerViewController.view.backgroundColor?.withAlphaComponent(0)
@@ -95,38 +94,29 @@ class BaseViewController: UIViewController {
                     case .success(_):
                         LKProgressHUD.dismiss()
                         self.navigationController?.popToRootViewController(animated: true)
+                        self.dismiss(animated: true)
                     case .failure(_):
                         LKProgressHUD.showFailure(text: "Fail to block this user!")
                     }
                     
                 }
-               
+                
             }
             controller.addAction(blockAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             controller.addAction(cancelAction)
             self.present(controller, animated: true, completion: nil)
-
+            
         }
-              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-
-                  blockUserAlertController.dismiss(animated: true, completion: nil)
-              }
-
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+            blockUserAlertController.dismiss(animated: true, completion: nil)
+        }
+        
         blockUserAlertController.addAction(blockUserAction)
         blockUserAlertController.addAction(cancelAction)
-
+        
         present(blockUserAlertController, animated: true, completion: nil)
-    }
-    
-    func showIncompleteAlert(incompleteData: String) {
-        
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
-        let alert = UIAlertController(title: "Error", message: "\(incompleteData) should not be empty.", preferredStyle: .alert)
-        alert.addAction(action)
-        present(alert, animated: true)
-        
     }
 
 }

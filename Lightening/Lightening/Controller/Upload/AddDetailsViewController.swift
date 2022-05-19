@@ -140,19 +140,19 @@ class AddDetailsViewController: BaseViewController {
         
         if self.audio.title == "" {
             
-            showIncompleteAlert(incompleteData: AddDetailsSection.title.rawValue)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.title.rawValue)
             
         } else if self.audio.description == "" {
             
-            showIncompleteAlert(incompleteData: AddDetailsSection.description.rawValue)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.description.rawValue)
             
         } else if self.audio.topic == "" {
             
-            showIncompleteAlert(incompleteData: AddDetailsSection.topic.rawValue)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.topic.rawValue)
             
         } else if self.audio.cover == "" {
             
-            showIncompleteAlert(incompleteData: AddDetailsSection.coverImage.rawValue)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.coverImage.rawValue)
             
         } else {
             

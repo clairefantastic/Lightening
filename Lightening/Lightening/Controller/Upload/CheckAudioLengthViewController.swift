@@ -61,13 +61,6 @@ class CheckAudioLengthViewController: UIViewController {
                 navigationController?.pushViewController(addDetailsViewController, animated: true)
                 
             } else {
-                
-                let controller = UIAlertController(title: "Wrong audio length",
-                                                   message: "Only support uploading audio files from 3 to 30 seconds. Go back and select a new file.",
-                                                   preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                   controller.addAction(okAction)
-                   present(controller, animated: true, completion: nil)
             }
             
         } catch let error {

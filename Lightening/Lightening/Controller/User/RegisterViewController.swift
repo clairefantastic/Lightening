@@ -276,31 +276,21 @@ extension RegisterViewController {
     
     @objc func handleRegister() {
         
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
         if nameTextField.text == "" {
             
-            let nameEmptyAlert = UIAlertController(title: "Error", message: "Name should not be empty.", preferredStyle: .alert)
-            nameEmptyAlert.addAction(action)
-            present(nameEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Display Name")
             
         } else if emailTextField.text == "" {
             
-            let emailEmptyAlert = UIAlertController(title: "Error", message: "Email should not be empty.", preferredStyle: .alert)
-            emailEmptyAlert.addAction(action)
-            present(emailEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Email")
             
         } else if passwordTextField.text == "" {
             
-            let passwordEmptyAlert = UIAlertController(title: "Error", message: "Password should not be empty.", preferredStyle: .alert)
-            passwordEmptyAlert.addAction(action)
-            present(passwordEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Password")
             
         } else if checkPasswordTextField.text != passwordTextField.text {
             
-            let checkPasswordFailAlert = UIAlertController(title: "Error", message: "Check password should be same as password", preferredStyle: .alert)
-            checkPasswordFailAlert.addAction(action)
-            present(checkPasswordFailAlert, animated: true)
+            AlertManager.shared.showIncorrectAlert(at: self, message: "Check Password should be same as Password")
             
         } else {
             
