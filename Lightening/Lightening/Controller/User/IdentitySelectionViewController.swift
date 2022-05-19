@@ -83,7 +83,7 @@ extension IdentitySelectionViewController {
         
         visuallyImpairedButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
         NSLayoutConstraint(item: visuallyImpairedButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
         
@@ -91,13 +91,7 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: visuallyImpairedButton, attribute: .bottom, relatedBy: .equal, toItem: volunteerButton, attribute: .top, multiplier: 1, constant: -24).isActive = true
         
-        visuallyImpairedButton.backgroundColor = UIColor.darkBlue
-        
-        visuallyImpairedButton.setTitle("I need visual assistance!", for: .normal)
-        
-        visuallyImpairedButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        visuallyImpairedButton.setTitleColor(UIColor.beige, for: .normal)
+        ElementsStyle.styleButton(visuallyImpairedButton, title: "I need visual assistance!")
         
         visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
         
@@ -148,7 +142,7 @@ extension IdentitySelectionViewController {
         
         volunteerButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: volunteerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
+        NSLayoutConstraint(item: volunteerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
         
         NSLayoutConstraint(item: volunteerButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
         
@@ -156,13 +150,7 @@ extension IdentitySelectionViewController {
         
         NSLayoutConstraint(item: volunteerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
         
-        volunteerButton.backgroundColor = UIColor.darkBlue
-        
-        volunteerButton.setTitle("I want to be a volunteer!", for: .normal)
-        
-        volunteerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        volunteerButton.setTitleColor(UIColor.beige, for: .normal)
+        ElementsStyle.styleButton(volunteerButton, title: "I want to be a volunteer!")
         
         volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
         
@@ -195,7 +183,6 @@ extension IdentitySelectionViewController {
                             
                             print("fetchData.failure: \(error)")
                         }
-                        
                 }
                 
                 print("Volunteer sign in success")

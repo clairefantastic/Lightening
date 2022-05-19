@@ -250,15 +250,7 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        finishRecordingButton.backgroundColor = UIColor.darkBlue
-        
-        finishRecordingButton.setTitle("Finish Recording", for: .normal)
-        
-        finishRecordingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        finishRecordingButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        finishRecordingButton.isEnabled = true
+        ElementsStyle.styleButton(finishRecordingButton, title: "Finish Recording")
         
         finishRecordingButton.addTarget(self, action: #selector(finishRecordingAudio), for: .touchUpInside)
         

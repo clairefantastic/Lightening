@@ -290,19 +290,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.darkBlue
-        
-        registerButton.setTitle("Registration", for: .normal)
-        
-        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        registerButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        registerButton.isEnabled = true
+        ElementsStyle.styleButton(registerButton, title: "Registration")
         
         registerButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
-        
-        registerButton.layer.cornerRadius = 25
     
     }
     

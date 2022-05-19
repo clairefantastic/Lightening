@@ -20,9 +20,17 @@ class ElementsStyle {
         view.backgroundColor = UIColor.clear
     }
     
-    static func styleButton(_ button: UIButton) {
+    static func styleButton(_ button: UIButton, title: String) {
         
+        button.backgroundColor = UIColor.darkBlue
         
+        button.setTitle(title, for: .normal)
+        
+        button.setTitleColor(UIColor.beige, for: .normal)
+        
+        button.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        
+        button.layer.cornerRadius = 25
     }
     
     static func styleTextField(_ textField: UITextField) {

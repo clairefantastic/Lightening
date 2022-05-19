@@ -226,19 +226,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: logInButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        logInButton.backgroundColor = UIColor.darkBlue
-        
-        logInButton.setTitle("Log in", for: .normal)
-        
-        logInButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        logInButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        logInButton.isEnabled = true
+        ElementsStyle.styleButton(logInButton, title: "Log in")
         
         logInButton.addTarget(self, action: #selector(handleNativeSignIn), for: .touchUpInside)
-        
-        logInButton.layer.cornerRadius = 25
 
     }
     
@@ -307,19 +297,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.darkBlue
-        
-        registerButton.setTitle("Registration", for: .normal)
-        
-        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        registerButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        registerButton.isEnabled = true
+        ElementsStyle.styleButton(registerButton, title: "Registration")
         
         registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
-        
-        registerButton.layer.cornerRadius = 25
 
     }
     
