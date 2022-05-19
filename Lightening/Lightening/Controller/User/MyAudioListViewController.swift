@@ -33,15 +33,8 @@ class MyAudioListViewController: AudioListViewController {
             case.success(_):
                 
                 self.audios?.remove(at: indexPath.row)
-
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-                
-//                tableView.reloadData()
-                
-                print("success")
                 
             case .failure(_):
-                print("fail")
                 
                 LKProgressHUD.showFailure(text: "Fail to delete audio")
             }
