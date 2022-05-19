@@ -25,4 +25,15 @@ class AVPlayerHandler {
         
         player.play()
     }
+    
+    func checkAudioLength(url: URL) -> Float64 {
+        
+        let asset = AVAsset(url: url)
+        
+        let playerItem = AVPlayerItem(asset: asset)
+        
+        let duration = playerItem.asset.duration
+        
+        return CMTimeGetSeconds(duration)
+    }
 }

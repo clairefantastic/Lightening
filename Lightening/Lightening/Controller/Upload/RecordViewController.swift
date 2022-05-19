@@ -260,28 +260,20 @@ class RecordViewController: BaseViewController {
         
         guard let url = audioManager.localUrl else { return }
         
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            let duration = playerItem.asset.duration
-            let seconds = CMTimeGetSeconds(duration)
+        let seconds = AVPlayerHandler.shared.checkAudioLength(url: url)
+        
+        if seconds >= 3.0 && seconds <= 30.0 {
             
-            if seconds >= 3.0 && seconds <= 30.0 {
-                let addDetailsViewController = AddDetailsViewController()
-                
-                addDetailsViewController.localUrl = audioManager.localUrl
-                
-                navigationController?.pushViewController(addDetailsViewController, animated: true)
-            } else {
-            }
-//            player = AVPlayer(playerItem: playerItem)
-//            player.volume = 100.0
-//            player.play()
+            let addDetailsViewController = AddDetailsViewController()
             
-        } catch let error {
-            print(error.localizedDescription)
+            addDetailsViewController.localUrl = audioManager.localUrl
+            
+            navigationController?.pushViewController(addDetailsViewController, animated: true)
+            
+        } else {
+            
+            AlertManager.shared.showWrongLengthAlert(at: self)
         }
-                
     }
 }
 
