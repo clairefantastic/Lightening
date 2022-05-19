@@ -6,12 +6,9 @@
 //
 
 import UIKit
-import AVFoundation
 
 class ImpairedDiscoveryViewController: BaseViewController {
-    
-    var player: AVPlayer!
-    
+
     var sections = DiscoverySection.allSections
     
     var audios: [Audio] = []
@@ -38,18 +35,6 @@ class ImpairedDiscoveryViewController: BaseViewController {
         super.viewWillAppear(true)
         
         fetchData()
-    }
-    
-    func setPlayer(url: URL) {
-        
-        let asset = AVAsset(url: url)
-        let playerItem = AVPlayerItem(asset: asset)
-            
-        player = AVPlayer(playerItem: playerItem)
-        player.volume = 300.0
-        
-        player.play()
-
     }
     
     func configureCollectionView() {
@@ -197,7 +182,7 @@ extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
         }
         
         DispatchQueue.global().async {
-            self.setPlayer(url: audio.audioUrl)
+            AVPlayerHandler.shared.setPlayer(url: audio.audioUrl)
         }
         
         DispatchQueue.main.async {

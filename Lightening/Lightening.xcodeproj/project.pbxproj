@@ -31,6 +31,7 @@
 		7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */; };
 		7E3501B9283539070090E061 /* AddDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501B8283539070090E061 /* AddDetailsSection.swift */; };
 		7E3501BB2835E2620090E061 /* LottieAnimationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */; };
+		7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */; };
 		7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
@@ -144,6 +145,7 @@
 		7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		7E3501B8283539070090E061 /* AddDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsSection.swift; sourceTree = "<group>"; };
 		7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationWrapper.swift; sourceTree = "<group>"; };
+		7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHandler.swift; sourceTree = "<group>"; };
 		7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserAlertController.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				7E272FF7280EED7B0096DB72 /* AudioManager.swift */,
 				7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */,
 				7E272FFB280EEDC40096DB72 /* AudioPlayer.swift */,
+				7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */,
 				7E272FFD280EEDDE0096DB72 /* AudioFileManager.swift */,
 			);
 			path = Audio;
@@ -767,6 +770,7 @@
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
+				7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */,
 				7E14F2B3282E57810007C7E9 /* StretchyTableHeaderView.swift in Sources */,
 				7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */,
 				7EB9DAE42803D1E0009B89D0 /* SessionDescription.swift in Sources */,
