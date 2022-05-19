@@ -30,6 +30,7 @@
 		7E27301628114B620096DB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */; };
 		7E27301728114B620096DB72 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */; };
 		7E3501B9283539070090E061 /* AddDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501B8283539070090E061 /* AddDetailsSection.swift */; };
+		7E3501BB2835E2620090E061 /* LottieAnimationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */; };
 		7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
@@ -142,6 +143,7 @@
 		7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		7E27301528114B620096DB72 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		7E3501B8283539070090E061 /* AddDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsSection.swift; sourceTree = "<group>"; };
+		7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationWrapper.swift; sourceTree = "<group>"; };
 		7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserAlertController.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			children = (
 				7E44B7C6280AF18600CF24AC /* KingFisherWrapper.swift */,
 				7EC6BABD28260DFE00556429 /* JGProgressHUDWrapper.swift */,
+				7E3501BA2835E2620090E061 /* LottieAnimationWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				7E44B7C0280AEA1800CF24AC /* ImpairedDiscoveryViewController.swift in Sources */,
 				7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */,
 				7E55BEB0281BC6F700F6A8AC /* VolunteerDiscoveryViewController.swift in Sources */,
+				7E3501BB2835E2620090E061 /* LottieAnimationWrapper.swift in Sources */,
 				7E44B7B1280966A200CF24AC /* PublishManager.swift in Sources */,
 				7EB3F4FF280D6CDB00C6E385 /* GalleryCollectionViewCell.swift in Sources */,
 				7EA023512800452A00C73205 /* SceneDelegate.swift in Sources */,

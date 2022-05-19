@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
 import Lottie
-
 import AVFoundation
 
 class RecordViewController: BaseViewController {
