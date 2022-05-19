@@ -56,18 +56,18 @@ extension VolunteerDiscoveryViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "sparkles"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(dailyPicks))
     }
     
-    @objc func dailyPicks(_ sender: UIBarButtonItem) {
-        
-        let filteredAudios = self.audios.filter { $0.authorId != UserManager.shared.currentUser?.userId }
-        showPlayer(audio: filteredAudios[Int.random(in: 0..<filteredAudios.count)])
-        
-    }
-    
     @objc func pushSearchPage(_ sender: UIBarButtonItem) {
         
         let searchViewController = SearchViewController()
         
         navigationController?.pushViewController(searchViewController, animated: true)
+    }
+    
+    @objc func dailyPicks(_ sender: UIBarButtonItem) {
+        
+        let filteredAudios = self.audios.filter { $0.authorId != UserManager.shared.currentUser?.userId }
+        showPlayer(audio: filteredAudios[Int.random(in: 0..<filteredAudios.count)])
+        
     }
 }
 
