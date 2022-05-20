@@ -10,6 +10,7 @@ import UIKit
 class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.navigationItem.title = "Discovery"
         
@@ -30,20 +31,24 @@ extension VolunteerDiscoveryViewController {
         showPlayer(audio: sections[indexPath.section].audios[indexPath.row])
         
         audioPlayerViewController.playerView.startRotateHandler = { [weak self] in
+            
             if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
+                
                 cell.vinylImageView.rotate()
+                
                 cell.audioCoverImageView.rotate()
                 
                 self?.audioPlayerViewController.playerView.stopRotateHandler = { [weak self] in
-                    if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
-                        cell.vinylImageView.layer.removeAnimation(forKey: "rotationAnimation")
-                        cell.audioCoverImageView.layer.removeAnimation(forKey: "rotationAnimation")
                     
+                    if let cell = collectionView.cellForItem(at: indexPath) as? VinylCollectionViewCell {
+                        
+                        cell.vinylImageView.layer.removeAnimation(forKey: "rotationAnimation")
+                        
+                        cell.audioCoverImageView.layer.removeAnimation(forKey: "rotationAnimation")
                     }
                 }
             }
         }
-        
     }
 }
 

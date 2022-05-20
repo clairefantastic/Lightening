@@ -80,7 +80,8 @@ class ImpairedLobbyViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        
         let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
         vc.connectedHandler? = {(connectedStatus) in
             
