@@ -11,8 +11,6 @@ import AuthenticationServices
 import FirebaseAuth
 import FirebaseFirestore
 
-let notificationKey3 = "com.blockUser"
-
 class UserManager {
     
     static let shared = UserManager()
@@ -21,62 +19,53 @@ class UserManager {
     
     fileprivate var currentNonce: String?
     
-    var currentUserName: String?
-    
-    var currentUser: User? {
-        
-        didSet {
-                NotificationCenter.default.post(name: NSNotification.Name (notificationKey3), object: nil)
-        }
-    }
-    
-//    var user: User?
+    var currentUser: User?
     
     private func randomNonceString(length: Int = 32) -> String {
-      precondition(length > 0)
-      let charset: [Character] =
+        precondition(length > 0)
+        let charset: [Character] =
         Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-      var result = ""
-      var remainingLength = length
-
-      while remainingLength > 0 {
-        let randoms: [UInt8] = (0 ..< 16).map { _ in
-          var random: UInt8 = 0
-          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-          if errorCode != errSecSuccess {
-            fatalError(
-              "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
-            )
-          }
-          return random
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError(
+                        "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+                    )
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
         }
-
-        randoms.forEach { random in
-          if remainingLength == 0 {
-            return
-          }
-
-          if random < charset.count {
-            result.append(charset[Int(random)])
-            remainingLength -= 1
-          }
-        }
-      }
-
-      return result
+        
+        return result
     }
     
     @available(iOS 13, *)
     private func sha256(_ input: String) -> String {
-      let inputData = Data(input.utf8)
-      let hashedData = SHA256.hash(data: inputData)
-      let hashString = hashedData.compactMap {
-        String(format: "%02x", $0)
-      }.joined()
-
-      return hashString
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
     }
-
+    
     @available(iOS 13, *)
     func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -103,37 +92,37 @@ class UserManager {
                 print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
-      // Initialize a Firebase credential.
+            // Initialize a Firebase credential.
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
-                                                rawNonce: nonce)
-      // Sign in with Firebase.
+                                                      rawNonce: nonce)
+            // Sign in with Firebase.
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if (error != nil) {
-          // Error. If error.code == .MissingOrInvalidNonce, make sure
-          // you're sending the SHA256-hashed nonce as a hex string with
-          // your request to Apple.
+                    // Error. If error.code == .MissingOrInvalidNonce, make sure
+                    // you're sending the SHA256-hashed nonce as a hex string with
+                    // your request to Apple.
                     print(error?.localizedDescription as Any)
                     return
                 }
-        // User is signed in to Firebase with Apple.
-        // ...
+                // User is signed in to Firebase with Apple.
+                // ...
                 completion(authResult)
             }
         }
-  
+        
     }
     
     func registerAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: self.currentUserName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
+        user = User(displayName: self.currentUser?.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
         
         let document = db.collection("users").document(currentUser.uid)
         
         do {
-           try document.setData(from: user) { error in
+            try document.setData(from: user) { error in
                 
                 if let error = error {
                     
@@ -152,12 +141,12 @@ class UserManager {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: self.currentUserName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
+        user = User(displayName: self.currentUser?.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
         
         let document = db.collection("users").document(currentUser.uid)
         
         do {
-           try document.setData(from: user) { error in
+            try document.setData(from: user) { error in
                 
                 if let error = error {
                     
@@ -181,15 +170,13 @@ class UserManager {
                 let user = authDataResult?.user,
                 let email = user.email,
                 let self = self
-                
+                    
             else {
                 
                 completion(error)
                 
                 return
             }
-            
-            self.currentUserName = displayName
             
             print("user registeration success! User: \(user.uid), \(user.email)")
             
@@ -244,43 +231,22 @@ class UserManager {
             }
             
         }
-        
-//        db.collection("users").whereField("userId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
-//
-//            if let error = error {
-//                completion(.failure(error))
-//            } else {
-//
-//                    do {
-//                        if let user = try querySnapshot!.documents.first?.data(as: User.self, decoder: Firestore.Decoder()) {
-//                            self.currentUser = user
-//                            completion(.success(self.currentUser))
-//                        } else {
-//                            completion(.success(nil))
-//                        }
-//                    } catch {
-//                        completion(.failure(error))
-//    //                            completion(.failure(FirebaseError.documentError)
-//                    }
-//
-//            }
-//        }
     }
     
     func blockUser(userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         LKProgressHUD.show()
-
+        
         guard let currentUser = currentUser else {
             return
         }
-
+        
         let document = db.collection("users").document(currentUser.userId ?? "")
         
         do {
-           try document.updateData([
-            "blockList": FieldValue.arrayUnion([userId])
-        ]) { error in
+            try document.updateData([
+                "blockList": FieldValue.arrayUnion([userId])
+            ]) { error in
                 
                 if let error = error {
                     
@@ -294,7 +260,7 @@ class UserManager {
             
             completion(.failure(error))
         }
-
+        
     }
     
     func deleteAccount(completion: @escaping (Result<String, Error>) -> Void) {
@@ -339,32 +305,32 @@ class UserManager {
                                 for document in documents {
                                     
                                     document.reference.collection("comments").whereField("authorId",
-                                                                                                   isEqualTo: userId).getDocuments { (querySnapshot, error) in
-
-                             if let error = error {
-                                 completion(.failure(error))
-    
-                             } else {
-    
-                                 guard let documents = querySnapshot?.documents else { return }
-    
-                                 for document in documents {
-                                     document.reference.delete()
-                                 }
-    
-                                 completion(.success("Success"))
-                             }
-                         
+                                                                                         isEqualTo: userId).getDocuments { (querySnapshot, error) in
+                                        
+                                        if let error = error {
+                                            completion(.failure(error))
+                                            
+                                        } else {
+                                            
+                                            guard let documents = querySnapshot?.documents else { return }
+                                            
+                                            for document in documents {
+                                                document.reference.delete()
+                                            }
+                                            
+                                            completion(.success("Success"))
+                                        }
+                                        
+                                    }
                                 }
+                                
                             }
                             
                         }
-                                                
+                    }
+                    
                 }
-            }
-            
             }
         }
     }
-}
 }
