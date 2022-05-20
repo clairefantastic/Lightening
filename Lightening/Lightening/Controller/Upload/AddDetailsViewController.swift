@@ -29,14 +29,7 @@ class AddDetailsViewController: BaseViewController {
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on current location"]
     
-    private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
-                              topic: "",
-                              title: "",
-                              description: "",
-                              cover: "",
-                              createdTime: 0.0,
-                              location: Location(latitude: 0.0, longitude: 0.0),
-                              author: UserManager.shared.currentUser)
+    private var audio = Audio()
     
     var localUrl: URL?
     
@@ -296,11 +289,11 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
         
         if tappedIndexPath.row == 0 {
             
-            audio.title = cell.contentTextView?.text
+            audio.title = cell.contentTextView?.text ?? ""
             
         } else {
             
-            audio.description = cell.contentTextView?.text
+            audio.description = cell.contentTextView?.text ?? ""
             
         }
     }

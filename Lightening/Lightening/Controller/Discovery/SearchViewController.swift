@@ -173,7 +173,7 @@ extension SearchViewController: UISearchResultsUpdating {
         
         if let searchText = searchController.searchBar.text,
                    searchText.isEmpty == false  {
-            self.filteredAudioFiles = audios.filter { $0.title?.localizedStandardContains(searchText) == true } ?? []
+            self.filteredAudioFiles = audios.filter { $0.title.localizedStandardContains(searchText) == true } ?? []
                 } else {
                     self.filteredAudioFiles = []
                 }
