@@ -14,7 +14,7 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         
         self.navigationItem.title = "Discovery"
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
 
         configureCollectionView()
         
@@ -71,8 +71,7 @@ extension VolunteerDiscoveryViewController {
     @objc func dailyPicks(_ sender: UIBarButtonItem) {
         
         let filteredAudios = self.audios.filter { $0.authorId != UserManager.shared.currentUser?.userId }
-        showPlayer(audio: filteredAudios[Int.random(in: 0..<filteredAudios.count)])
         
+        showPlayer(audio: filteredAudios[Int.random(in: 0..<filteredAudios.count)])
     }
 }
-

@@ -58,6 +58,9 @@ class ImpairedDiscoveryViewController: BaseViewController {
     
     func fetchData() {
         PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            // self
+            
             switch result {
                 
             case .success(let audios):
@@ -69,7 +72,6 @@ class ImpairedDiscoveryViewController: BaseViewController {
                     for audio in audios where blockList.contains(audio.authorId ?? "") == false {
                         
                         self?.audios.append(audio)
-                        
                     }
                     
                 } else {
@@ -77,7 +79,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
                     self?.audios = audios
                 }
                 
-                for topic in 0...(self?.sections.count ?? 0) - 1 {
+                for topic in 0..<(self?.sections.count ?? 0) {
                     
                     self?.sections[topic].audios = []
                     
@@ -88,11 +90,9 @@ class ImpairedDiscoveryViewController: BaseViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
+            case .failure(_):
                 
-                print("fetchData.failure: \(error)")
-                
-                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data")
+                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data.")
             }
             
         }
@@ -127,7 +127,9 @@ class ImpairedDiscoveryViewController: BaseViewController {
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
+            
             view?.title = section.topic
+            
             view?.didTapSectionHandler = { [weak self] in
                 let audioListViewController = AudioListViewController()
                 audioListViewController.audios = section.audios
@@ -139,7 +141,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
     }
     
     private func applySnapshot(animatingDifferences: Bool = true) {
-        // 2
+        // 2 //
         var snapshot = Snapshot()
         // 3
         snapshot.appendSections(sections)
@@ -158,10 +160,10 @@ class ImpairedDiscoveryViewController: BaseViewController {
         
         let touchPoint = sender.location(in: self.collectionView)
         
-        if (sender.state == UIGestureRecognizer.State.ended) {
+        if sender.state == .ended {
             
             let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
-            
+            //
             if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
                 
                 showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "")
@@ -185,7 +187,7 @@ extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
             AVPlayerHandler.shared.setPlayer(url: audio.audioUrl)
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { // ?
             LKProgressHUD.dismiss()
         }
         
