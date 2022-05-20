@@ -10,11 +10,11 @@ import FirebaseAuth
 
 class ImpairedProfileViewController: BaseViewController {
     
-    let vinylImageView = UIImageView()
+    private let vinylImageView = UIImageView()
     
     let userProfileView = UserProfileView()
     
-    let settingButton = UIButton()
+    private let settingButton = UIButton()
     
     override func viewDidLoad() {
         
@@ -23,10 +23,12 @@ class ImpairedProfileViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureVinylImageView()
+        
         addUserProfileView()
-        configureSettingButton()
+        
         ElementsStyle.styleViewBackground(userProfileView)
-        self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
+        
+        configureSettingButton()
     }
 }
 
@@ -47,16 +49,12 @@ extension ImpairedProfileViewController {
         
         userProfileView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: userProfileView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        userProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        userProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        userProfileView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        userProfileView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         
-        NSLayoutConstraint(item: userProfileView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: userProfileView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
-        
-        NSLayoutConstraint(item: userProfileView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
-        
-        //        self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
-        
+        userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
     
     func configureSettingButton() {
@@ -65,13 +63,10 @@ extension ImpairedProfileViewController {
         
         settingButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: settingButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
-        
-        NSLayoutConstraint(item: settingButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: settingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: settingButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
+        settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        settingButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        settingButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         settingButton.setTitle("Settings", for: .normal)
         settingButton.setTitleColor(UIColor.beige, for: .normal)
@@ -82,7 +77,6 @@ extension ImpairedProfileViewController {
     func logOut() {
         
         UserManager.shared.signOut()
-        print(Auth.auth().currentUser?.email)
         view.window?.rootViewController = SignInViewController()
         view.window?.makeKeyAndVisible()
     }
@@ -150,8 +144,9 @@ extension ImpairedProfileViewController {
         let user = Auth.auth().currentUser
         
         user?.delete { error in
-            if let error = error {
-                // An error happened.
+            if error != nil {
+                
+                LKProgressHUD.showFailure(text: "Fail to delete account in Firebase.")
             } else {
                 
                 UserManager.shared.deleteAccount() { result in
@@ -164,7 +159,6 @@ extension ImpairedProfileViewController {
                         print("Fail to delete all information of this user.")
                     }
                 }
-                // Account deleted.
             }
         }
         
