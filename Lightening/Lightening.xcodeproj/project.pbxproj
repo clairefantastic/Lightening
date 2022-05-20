@@ -34,6 +34,7 @@
 		7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */; };
 		7E3501BF283624440090E061 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BE283624440090E061 /* UIFont+Extension.swift */; };
 		7E3501C4283637160090E061 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501C3283637160090E061 /* AlertManager.swift */; };
+		7E3501CC28365CD50090E061 /* LighteningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501CB28365CD50090E061 /* LighteningTests.swift */; };
 		7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
@@ -120,6 +121,16 @@
 		7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7E3501CD28365CD50090E061 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EA023432800452A00C73205 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EA0234A2800452A00C73205;
+			remoteInfo = Lightening;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
 		7E14F2B0282E55A70007C7E9 /* AudioDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDetailsViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +159,8 @@
 		7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHandler.swift; sourceTree = "<group>"; };
 		7E3501BE283624440090E061 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		7E3501C3283637160090E061 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		7E3501C928365CD50090E061 /* LighteningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LighteningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E3501CB28365CD50090E061 /* LighteningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTests.swift; sourceTree = "<group>"; };
 		7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserAlertController.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
@@ -242,6 +255,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7E3501C628365CD50090E061 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EA023482800452A00C73205 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,6 +297,14 @@
 				7E3501C3283637160090E061 /* AlertManager.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		7E3501CA28365CD50090E061 /* LighteningTests */ = {
+			isa = PBXGroup;
+			children = (
+				7E3501CB28365CD50090E061 /* LighteningTests.swift */,
+			);
+			path = LighteningTests;
 			sourceTree = "<group>";
 		};
 		7E409323281E64530027D8B5 /* Recovered References */ = {
@@ -406,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA0234D2800452A00C73205 /* Lightening */,
+				7E3501CA28365CD50090E061 /* LighteningTests */,
 				7EA0234C2800452A00C73205 /* Products */,
 				2FAC819CF43EB4034E4E8714 /* Pods */,
 				B6494955E2310280A84E8C75 /* Frameworks */,
@@ -417,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA0234B2800452A00C73205 /* Lightening.app */,
+				7E3501C928365CD50090E061 /* LighteningTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -580,6 +610,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7E3501C828365CD50090E061 /* LighteningTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E3501CF28365CD50090E061 /* Build configuration list for PBXNativeTarget "LighteningTests" */;
+			buildPhases = (
+				7E3501C528365CD50090E061 /* Sources */,
+				7E3501C628365CD50090E061 /* Frameworks */,
+				7E3501C728365CD50090E061 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E3501CE28365CD50090E061 /* PBXTargetDependency */,
+			);
+			name = LighteningTests;
+			productName = LighteningTests;
+			productReference = 7E3501C928365CD50090E061 /* LighteningTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7EA0234A2800452A00C73205 /* Lightening */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EA0235F2800452C00C73205 /* Build configuration list for PBXNativeTarget "Lightening" */;
@@ -608,9 +656,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					7E3501C828365CD50090E061 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 7EA0234A2800452A00C73205;
+					};
 					7EA0234A2800452A00C73205 = {
 						CreatedOnToolsVersion = 13.3;
 					};
@@ -630,11 +682,19 @@
 			projectRoot = "";
 			targets = (
 				7EA0234A2800452A00C73205 /* Lightening */,
+				7E3501C828365CD50090E061 /* LighteningTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7E3501C728365CD50090E061 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EA023492800452A00C73205 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -747,6 +807,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7E3501C528365CD50090E061 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E3501CC28365CD50090E061 /* LighteningTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EA023472800452A00C73205 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,6 +910,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7E3501CE28365CD50090E061 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EA0234A2800452A00C73205 /* Lightening */;
+			targetProxy = 7E3501CD28365CD50090E061 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7EA023592800452C00C73205 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -854,6 +930,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7E3501D028365CD50090E061 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9H6DPAU9ML;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ClaireChiou.LighteningTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lightening.app/Lightening";
+			};
+			name = Debug;
+		};
+		7E3501D128365CD50090E061 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9H6DPAU9ML;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ClaireChiou.LighteningTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lightening.app/Lightening";
+			};
+			name = Release;
+		};
 		7EA0235D2800452C00C73205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1050,6 +1164,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7E3501CF28365CD50090E061 /* Build configuration list for PBXNativeTarget "LighteningTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E3501D028365CD50090E061 /* Debug */,
+				7E3501D128365CD50090E061 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7EA023462800452A00C73205 /* Build configuration list for PBXProject "Lightening" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
