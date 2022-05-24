@@ -65,7 +65,7 @@ class VolunteerLobbyViewController: BaseViewController {
         
         LKProgressHUD.show()
         
-        self.navigationItem.title = "Video Call"
+        self.navigationItem.title = VolunteerTab.lobby.tabBarItem().title
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         

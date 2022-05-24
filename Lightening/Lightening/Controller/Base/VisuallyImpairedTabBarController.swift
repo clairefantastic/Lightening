@@ -7,7 +7,7 @@
 
 import UIKit
 
-private enum VisuallyImpairedTab {
+enum VisuallyImpairedTab {
 
     case lobby
     

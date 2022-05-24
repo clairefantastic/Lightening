@@ -18,7 +18,7 @@ class ImpairedProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         
-        self.navigationItem.title = "Profile"
+        self.navigationItem.title = VisuallyImpairedTab.profile.tabBarItem().title
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         

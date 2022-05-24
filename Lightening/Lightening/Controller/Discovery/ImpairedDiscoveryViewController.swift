@@ -24,7 +24,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Audio Files"
+        self.navigationItem.title = VisuallyImpairedTab.discovery.tabBarItem().title
         
         configureCollectionView()
         

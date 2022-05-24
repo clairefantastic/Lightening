@@ -22,7 +22,7 @@ class UploadViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Upload"
+        self.navigationItem.title = VolunteerTab.upload.tabBarItem().title
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         

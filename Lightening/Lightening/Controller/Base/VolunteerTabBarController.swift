@@ -7,7 +7,7 @@
 
 import UIKit
 
-private enum VolunteerTab {
+enum VolunteerTab {
 
     case lobby
     

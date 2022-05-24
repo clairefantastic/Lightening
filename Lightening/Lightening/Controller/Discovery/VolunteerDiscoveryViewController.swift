@@ -12,7 +12,7 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Discovery"
+        self.navigationItem.title = VolunteerTab.discovery.tabBarItem().title
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
 

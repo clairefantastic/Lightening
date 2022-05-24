@@ -65,7 +65,7 @@ class ImpairedLobbyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Video Call"
+        self.navigationItem.title = VisuallyImpairedTab.lobby.tabBarItem().title
         
         configureVideoCallButton()
         

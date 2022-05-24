@@ -28,7 +28,7 @@ class MapViewController: BaseViewController {
         
         determineCurrentLocation()
         
-        self.navigationItem.title = "Map"
+        self.navigationItem.title = VolunteerTab.map.tabBarItem().title
         
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
