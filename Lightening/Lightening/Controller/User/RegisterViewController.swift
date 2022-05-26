@@ -301,6 +301,8 @@ extension RegisterViewController {
                 } else {
                     let identitySelectionViewController = IdentitySelectionViewController()
                     
+                    identitySelectionViewController.name = self.nameTextField.text ?? ""
+                    
                     identitySelectionViewController.modalPresentationStyle = .fullScreen
                     
                     self.present(identitySelectionViewController, animated: true)

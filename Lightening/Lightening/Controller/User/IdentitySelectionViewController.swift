@@ -17,6 +17,8 @@ class IdentitySelectionViewController: BaseViewController {
     
     private let instructionLabel = UILabel()
     
+    var name: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVolunteerButton()
@@ -101,7 +103,7 @@ extension IdentitySelectionViewController {
         
         var user = User(userIdentity: 0)
         
-        UserManager.shared.registerAsVisuallyImpaired(user: &user) { result in
+        UserManager.shared.registerAsVisuallyImpaired(name: name ?? "Lighty", user: &user) { result in
             
             switch result {
             
@@ -160,7 +162,7 @@ extension IdentitySelectionViewController {
     
         var user = User(userIdentity: 1)
         
-        UserManager.shared.registerAsVolunteer(user: &user) { result in
+        UserManager.shared.registerAsVolunteer(name: name ?? "Lighty", user: &user) { result in
             
             switch result {
             

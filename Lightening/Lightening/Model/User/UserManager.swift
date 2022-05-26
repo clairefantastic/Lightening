@@ -113,11 +113,11 @@ class UserManager {
         
     }
     
-    func registerAsVolunteer(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVolunteer(name: String, user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: self.currentUser?.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
+        user = User(displayName: name, email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
         
         let document = db.collection("users").document(currentUser.uid)
         
@@ -137,11 +137,11 @@ class UserManager {
         }
     }
     
-    func registerAsVisuallyImpaired(user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVisuallyImpaired(name: String, user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
-        user = User(displayName: self.currentUser?.displayName ?? "Lighty", email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
+        user = User(displayName: name, email: currentUser.email, userId: currentUser.uid, userIdentity: 0)
         
         let document = db.collection("users").document(currentUser.uid)
         
@@ -199,6 +199,7 @@ class UserManager {
         
         do {
             try Auth.auth().signOut()
+            UserManager.shared.currentUser = nil
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
