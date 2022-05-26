@@ -44,8 +44,6 @@ class BaseViewController: UIViewController {
     
     func showPlayer(audio: Audio) {
         
-        let tabBarHeight = self.tabBarController?.tabBar.intrinsicContentSize.height ?? 50
-        
         audioPlayerViewController.view.removeFromSuperview()
         
         addChild(audioPlayerViewController)
