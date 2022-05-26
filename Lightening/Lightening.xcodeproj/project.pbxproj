@@ -41,7 +41,6 @@
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* VolunteerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */; };
 		7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */; };
-		7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297CA281F6DC600649458 /* AnimationView.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -172,7 +171,6 @@
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileViewController.swift; sourceTree = "<group>"; };
 		7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedProfileViewController.swift; sourceTree = "<group>"; };
-		7E4297CA281F6DC600649458 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 				7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
-				7E4297CA281F6DC600649458 /* AnimationView.swift */,
 				7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */,
 				7E74EA46283498DD00818F19 /* VinylCloudView.swift */,
 				7E225862281FCCA900FE8694 /* DoorView.swift */,
@@ -897,7 +894,6 @@
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
-				7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
