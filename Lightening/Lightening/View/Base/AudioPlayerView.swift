@@ -99,7 +99,7 @@ class AudioPlayerView: UIView {
     @objc func playerDidFinishPlaying(note: NSNotification) {
         stopRotateHandler?()
         print("Video Finished")
-        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playPauseButton.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
         
         let targetTime: CMTime = CMTimeMake(value: Int64(0), timescale: 1)
         player?.seek(to: targetTime)
@@ -139,9 +139,9 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioTitleLabel, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
         
-        audioTitleLabel.font = UIFont(name: "American Typewriter", size: 16)
+        audioTitleLabel.font = UIFont.regular(size: 16)
         
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioTitleLabel.textColor = UIColor.beige
         
         audioTitleLabel.numberOfLines = 0
         
@@ -161,9 +161,9 @@ extension AudioPlayerView {
         
         NSLayoutConstraint(item: audioAuthorLabel, attribute: .top, relatedBy: .equal, toItem: audioTitleLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
         
-        audioAuthorLabel.font = UIFont(name: "American Typewriter", size: 14)
+        audioAuthorLabel.font = UIFont.regular(size: 14)
         
-        audioAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        audioAuthorLabel.textColor = UIColor.beige
         
     }
     
@@ -185,9 +185,9 @@ extension AudioPlayerView {
     
     func setUpDismissButton() {
         
-        dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissButton.setImage(UIImage.systemAsset(ImageAsset.xMark), for: .normal)
         
-        dismissButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        dismissButton.tintColor = UIColor.beige
     }
     
     func layoutPlayPauseButton() {
@@ -207,8 +207,8 @@ extension AudioPlayerView {
     
     func setUpPlayPauseButton() {
         
-        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playPauseButton.tintColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        playPauseButton.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
+        playPauseButton.tintColor = UIColor.beige
         
         playPauseButton.addTarget(self, action: #selector(playPauseAudio), for: .touchUpInside)
 
@@ -222,7 +222,7 @@ extension AudioPlayerView {
                 
                 player.pause()
                 stopRotateHandler?()
-                sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                sender.setImage(UIImage.systemAsset(ImageAsset.play), for: .normal)
                 
                 isPlaying = false
 
@@ -230,7 +230,7 @@ extension AudioPlayerView {
                 
                 player.play()
                 startRotateHandler?()
-                sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+                sender.setImage(UIImage.systemAsset(ImageAsset.pause), for: .normal)
                 
                 isPlaying = true
 
@@ -260,7 +260,7 @@ extension AudioPlayerView {
         
         audioProgressSlider.thumbTintColor = .clear
         
-        audioProgressSlider.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        audioProgressSlider.tintColor = UIColor.pink
         
     }
     
@@ -280,8 +280,8 @@ extension AudioPlayerView {
     }
     
     func setUpLikeButton() {
-        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        likeButton.tintColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        likeButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
+        likeButton.tintColor = UIColor.pink
     
     }
         

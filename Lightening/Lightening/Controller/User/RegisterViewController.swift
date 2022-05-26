@@ -27,7 +27,7 @@ class RegisterViewController: BaseViewController {
     
     private let checkPasswordTextField = UITextField()
     
-    private let registerButton = UIButton()
+    private let registerButton = BeigeTitleButton()
     
     private let dismissButton = UIButton()
     
@@ -78,9 +78,9 @@ extension RegisterViewController {
         NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         welcomeLabel.text = "Be a Lighty!"
-        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        welcomeLabel.font = UIFont.bold(size: 24)
         welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textColor = UIColor.darkBlue
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
         welcomeLabel.setContentCompressionResistancePriority(
@@ -102,14 +102,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: nameLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        nameLabel.text = "Display Name"
-        nameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        nameLabel.adjustsFontForContentSizeCategory = true
-        nameLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        ElementsStyle.styleLabel(nameLabel, text: "Display Name")
+        
         nameLabel.textAlignment = .left
-        nameLabel.numberOfLines = 0
-        nameLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
     
     private func configureNameTextField() {
@@ -130,7 +125,7 @@ extension RegisterViewController {
         
         nameTextField.layer.cornerRadius = 25
         
-        nameTextField.font = UIFont(name: "American Typewriter", size: 16)
+        nameTextField.font = UIFont.regular(size: 16)
     }
     
     private func configureEmailLabel() {
@@ -147,14 +142,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        emailLabel.text = "Email"
-        emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        emailLabel.adjustsFontForContentSizeCategory = true
-        emailLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        ElementsStyle.styleLabel(emailLabel, text: "Email")
+        
         emailLabel.textAlignment = .left
-        emailLabel.numberOfLines = 0
-        emailLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
 
     private func configureEmailTextField() {
@@ -175,7 +165,7 @@ extension RegisterViewController {
         
         emailTextField.layer.cornerRadius = 25
         
-        emailTextField.font = UIFont(name: "American Typewriter", size: 16)
+        emailTextField.font = UIFont.regular(size: 16)
         
         emailTextField.keyboardType = .emailAddress
     }
@@ -194,15 +184,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        passwordLabel.text = "Password"
-        passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        passwordLabel.adjustsFontForContentSizeCategory = true
-        passwordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        ElementsStyle.styleLabel(passwordLabel, text: "Password")
+    
         passwordLabel.textAlignment = .left
-        passwordLabel.numberOfLines = 0
-        passwordLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
     }
 
     private func configurePasswordTextField() {
@@ -223,7 +207,7 @@ extension RegisterViewController {
         
         passwordTextField.layer.cornerRadius = 25
         
-        passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        passwordTextField.font = UIFont.regular(size: 16)
         
         passwordTextField.isSecureTextEntry = true
     }
@@ -242,15 +226,9 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: checkPasswordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        checkPasswordLabel.text = "Check Password"
-        checkPasswordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        checkPasswordLabel.adjustsFontForContentSizeCategory = true
-        checkPasswordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        checkPasswordLabel.textAlignment = .left
-        checkPasswordLabel.numberOfLines = 0
-        checkPasswordLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        ElementsStyle.styleLabel(checkPasswordLabel, text: "Check Password")
         
+        checkPasswordLabel.textAlignment = .left
     }
     
     private func configureCheckPasswordTextField() {
@@ -271,7 +249,7 @@ extension RegisterViewController {
         
         checkPasswordTextField.layer.cornerRadius = 25
         
-        checkPasswordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        checkPasswordTextField.font = UIFont.regular(size: 16)
         
         checkPasswordTextField.isSecureTextEntry = true
     }
@@ -290,49 +268,29 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        registerButton.setTitle("Registration", for: .normal)
-        
-        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        registerButton.isEnabled = true
+        ElementsStyle.styleButton(registerButton, title: "Registration")
         
         registerButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
-        
-        registerButton.layer.cornerRadius = 25
     
     }
     
     @objc func handleRegister() {
         
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
         if nameTextField.text == "" {
             
-            let nameEmptyAlert = UIAlertController(title: "Error", message: "Name should not be empty.", preferredStyle: .alert)
-            nameEmptyAlert.addAction(action)
-            present(nameEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Display Name")
             
         } else if emailTextField.text == "" {
             
-            let emailEmptyAlert = UIAlertController(title: "Error", message: "Email should not be empty.", preferredStyle: .alert)
-            emailEmptyAlert.addAction(action)
-            present(emailEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Email")
             
         } else if passwordTextField.text == "" {
             
-            let passwordEmptyAlert = UIAlertController(title: "Error", message: "Password should not be empty.", preferredStyle: .alert)
-            passwordEmptyAlert.addAction(action)
-            present(passwordEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Password")
             
         } else if checkPasswordTextField.text != passwordTextField.text {
             
-            let checkPasswordFailAlert = UIAlertController(title: "Error", message: "Check password should be same as password", preferredStyle: .alert)
-            checkPasswordFailAlert.addAction(action)
-            present(checkPasswordFailAlert, animated: true)
+            AlertManager.shared.showIncorrectAlert(at: self, message: "Check Password should be same as Password")
             
         } else {
             
@@ -342,6 +300,8 @@ extension RegisterViewController {
                     LKProgressHUD.showFailure(text: "Firebase signUp fail")
                 } else {
                     let identitySelectionViewController = IdentitySelectionViewController()
+                    
+                    identitySelectionViewController.name = self.nameTextField.text ?? ""
                     
                     identitySelectionViewController.modalPresentationStyle = .fullScreen
                     
@@ -368,11 +328,11 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: dismissButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -36).isActive = true
         
-        dismissButton.setImage(UIImage(named: "close"), for: .normal)
+        dismissButton.setImage(UIImage.systemAsset(ImageAsset.xMark), for: .normal)
         
         dismissButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        dismissButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B").withAlphaComponent(0.5)
+        dismissButton.tintColor = UIColor.darkBlue?.withAlphaComponent(0.5)
         
         dismissButton.isEnabled = true
         

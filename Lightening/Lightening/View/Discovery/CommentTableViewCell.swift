@@ -22,9 +22,9 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            authorNameLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
+            authorNameLabel.font = UIFont.bold(size: 16)
             
-            authorNameLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            authorNameLabel.textColor = UIColor.darkBlue
             
             authorNameLabel.numberOfLines = 0
             
@@ -37,9 +37,9 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            commentTextLabel.font = UIFont(name: "American Typewriter", size: 14)
+            commentTextLabel.font = UIFont.regular(size: 14)
             
-            commentTextLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            commentTextLabel.textColor = UIColor.darkBlue
             
             commentTextLabel.numberOfLines = 0
             
@@ -52,14 +52,14 @@ class CommentTableViewCell: UITableViewCell {
         
         didSet {
             
-            moreButton.tintColor = UIColor.hexStringToUIColor(hex: "#13263B")
+            moreButton.tintColor = UIColor.darkBlue
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        authorImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+        authorImageView.image = UIImage.asset(ImageAsset.blackVinyl)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -77,7 +77,7 @@ class CommentTableViewCell: UITableViewCell {
             }
             
             if comment?.authorImage == nil {
-                authorImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                authorImageView.image = UIImage.asset(ImageAsset.blackVinyl)
             } else {
                 authorImageView.loadImage(comment?.authorImage?.absoluteString)
             }

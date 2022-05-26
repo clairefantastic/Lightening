@@ -21,9 +21,9 @@ class SignInViewController: BaseViewController {
     
     private let passwordTextField = UITextField()
     
-    private let logInButton = UIButton()
+    private let logInButton = BeigeTitleButton()
     
-    private let registerButton = UIButton()
+    private let registerButton = BeigeTitleButton()
     
     private let haveNoAccountLabel = UILabel()
     
@@ -108,9 +108,9 @@ extension SignInViewController {
         NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         welcomeLabel.text = "Welcome, Lightening!"
-        welcomeLabel.font = UIFont(name: "American Typewriter Bold", size: 24)
+        welcomeLabel.font = UIFont.bold(size: 24)
         welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        welcomeLabel.textColor = UIColor.darkBlue
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
         welcomeLabel.setContentCompressionResistancePriority(
@@ -132,14 +132,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        emailLabel.text = "Email"
-        emailLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        emailLabel.adjustsFontForContentSizeCategory = true
-        emailLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        ElementsStyle.styleLabel(emailLabel, text: "Email")
+        
         emailLabel.textAlignment = .left
-        emailLabel.numberOfLines = 0
-        emailLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
     
     private func configureEmailTextField() {
@@ -160,7 +155,7 @@ extension SignInViewController {
         
         emailTextField.layer.cornerRadius = 25
         
-        emailTextField.font = UIFont(name: "American Typewriter", size: 16)
+        emailTextField.font = UIFont.regular(size: 16)
         
         emailTextField.keyboardType = .emailAddress
     }
@@ -179,14 +174,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        passwordLabel.text = "Password"
-        passwordLabel.font = UIFont(name: "American Typewriter Bold", size: 16)
-        passwordLabel.adjustsFontForContentSizeCategory = true
-        passwordLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        ElementsStyle.styleLabel(passwordLabel, text: "Password")
+        
         passwordLabel.textAlignment = .left
-        passwordLabel.numberOfLines = 0
-        passwordLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
     }
     
     private func configurePasswordTextField() {
@@ -207,7 +197,7 @@ extension SignInViewController {
         
         passwordTextField.layer.cornerRadius = 25
         
-        passwordTextField.font = UIFont(name: "American Typewriter", size: 16)
+        passwordTextField.font = UIFont.regular(size: 16)
         
         passwordTextField.isSecureTextEntry = true
     }
@@ -226,19 +216,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: logInButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        logInButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        logInButton.setTitle("Log in", for: .normal)
-        
-        logInButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        logInButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        logInButton.isEnabled = true
+        ElementsStyle.styleButton(logInButton, title: "Log in")
         
         logInButton.addTarget(self, action: #selector(handleNativeSignIn), for: .touchUpInside)
-        
-        logInButton.layer.cornerRadius = 25
 
     }
     
@@ -283,9 +263,9 @@ extension SignInViewController {
         NSLayoutConstraint(item: haveNoAccountLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         haveNoAccountLabel.text = "Have no account yet?"
-        haveNoAccountLabel.font = UIFont(name: "American Typewriter", size: 14)
+        haveNoAccountLabel.font = UIFont.regular(size: 14)
         haveNoAccountLabel.adjustsFontForContentSizeCategory = true
-        haveNoAccountLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        haveNoAccountLabel.textColor = UIColor.darkBlue
         haveNoAccountLabel.textAlignment = .center
         haveNoAccountLabel.numberOfLines = 0
         haveNoAccountLabel.setContentCompressionResistancePriority(
@@ -307,19 +287,9 @@ extension SignInViewController {
         
         NSLayoutConstraint(item: registerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        registerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        registerButton.setTitle("Registration", for: .normal)
-        
-        registerButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        registerButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        registerButton.isEnabled = true
+        ElementsStyle.styleButton(registerButton, title: "Registration")
         
         registerButton.addTarget(self, action: #selector(presentRegisterPage), for: .touchUpInside)
-        
-        registerButton.layer.cornerRadius = 25
 
     }
     
@@ -347,9 +317,9 @@ extension SignInViewController {
         NSLayoutConstraint(item: agreementLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         agreementLabel.text = "After log in or registration, you agree to our"
-        agreementLabel.font = UIFont(name: "American Typewriter", size: 12)
+        agreementLabel.font = UIFont.regular(size: 12)
         agreementLabel.adjustsFontForContentSizeCategory = true
-        agreementLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        agreementLabel.textColor = UIColor.darkBlue
         agreementLabel.textAlignment = .center
         agreementLabel.numberOfLines = 0
         agreementLabel.setContentCompressionResistancePriority(
@@ -374,9 +344,9 @@ extension SignInViewController {
         
         privacyPolicyButton.setTitle("Privacy Policy &", for: .normal)
         
-        privacyPolicyButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
+        privacyPolicyButton.titleLabel?.font = UIFont.regular(size: 12)
         
-        privacyPolicyButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        privacyPolicyButton.setTitleColor(UIColor.beige, for: .normal)
         
         privacyPolicyButton.isEnabled = true
         
@@ -396,9 +366,9 @@ extension SignInViewController {
         
         endUserLicenseAgreementButton.setTitle("End User License Agreements", for: .normal)
         
-        endUserLicenseAgreementButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 12)
+        endUserLicenseAgreementButton.titleLabel?.font = UIFont.regular(size: 12)
         
-        endUserLicenseAgreementButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        endUserLicenseAgreementButton.setTitleColor(UIColor.beige, for: .normal)
         
         endUserLicenseAgreementButton.isEnabled = true
         
@@ -424,19 +394,13 @@ extension SignInViewController {
     
     @objc func handleNativeSignIn() {
         
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
         if emailTextField.text == "" {
             
-            let emailEmptyAlert = UIAlertController(title: "Error", message: "Email should not be empty.", preferredStyle: .alert)
-            emailEmptyAlert.addAction(action)
-            present(emailEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: "Email")
             
         } else if passwordTextField.text == "" {
-            
-            let passwordEmptyAlert = UIAlertController(title: "Error", message: "Password should not be empty.", preferredStyle: .alert)
-            passwordEmptyAlert.addAction(action)
-            present(passwordEmptyAlert, animated: true)
+        
+            AlertManager.shared.showEmptyAlert(at: self, title: "Password")
             
         } else {
             

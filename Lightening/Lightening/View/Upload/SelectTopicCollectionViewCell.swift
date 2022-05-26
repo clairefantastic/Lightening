@@ -31,9 +31,9 @@ class SelectTopicCollectionViewCell: UICollectionViewCell {
         
         topicButton.setTitle(topic, for: .normal)
         
-        topicButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#13263B"), for: .normal)
-        topicButton.titleLabel?.font = UIFont(name: "American Typewriter", size: 16)
-        topicButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F7E3E8")
+        topicButton.setTitleColor(UIColor.darkBlue, for: .normal)
+        topicButton.titleLabel?.font = UIFont.regular(size: 16)
+        topicButton.backgroundColor = UIColor.pink
         
         topicButton.layer.cornerRadius = 10
         

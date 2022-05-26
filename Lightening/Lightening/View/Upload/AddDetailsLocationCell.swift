@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationManagerDelegate {
+class AddDetailsLocationCell: AddDetailsBasicCell, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -29,7 +29,7 @@ class AddDetailsLocationCell: UITableViewCell, MKMapViewDelegate, CLLocationMana
         super.awakeFromNib()
 
         // Initialization code
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        self.backgroundColor = UIColor.lightBlue
         
         mapView.delegate = self
         

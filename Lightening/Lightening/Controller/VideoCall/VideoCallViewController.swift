@@ -13,8 +13,7 @@ class VideoCallViewController: UIViewController {
     @IBOutlet private weak var localVideoView: UIView?
     
     private let signalClient = SignalingClient()
-    
-    private let signalClientforVolunteer = SignalingClientForVolunteer()
+
     private let webRTCClient: WebRTCClient
     
     var currentPerson = ""

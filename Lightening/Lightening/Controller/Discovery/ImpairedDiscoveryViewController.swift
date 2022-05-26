@@ -6,12 +6,9 @@
 //
 
 import UIKit
-import AVFoundation
 
-class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDelegate {
-    
-    var player: AVPlayer!
-    
+class ImpairedDiscoveryViewController: BaseViewController {
+
     var sections = DiscoverySection.allSections
     
     var audios: [Audio] = []
@@ -27,39 +24,30 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Audio Files"
- 
+        self.navigationItem.title = VisuallyImpairedTab.discovery.tabBarItem().title
+        
+        configureCollectionView()
+        
+        configureLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        
         fetchData()
-        configureCollectionView()
-        configureLayout()
-        
-    }
-    
-    func setPlayer(url: URL) {
-        
-        let asset = AVAsset(url: url)
-        let playerItem = AVPlayerItem(asset: asset)
-            
-        player = AVPlayer(playerItem: playerItem)
-        player.volume = 300.0
-        
-        player.play()
-
     }
     
     func configureCollectionView() {
         
         view.stickSubView(collectionView)
         
-        collectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
-        
-        collectionView.registerCellWithNib(identifier: String(describing: GalleryCollectionViewCell.self), bundle: nil)
+        collectionView.backgroundColor = UIColor.lightBlue
         
         collectionView.registerCellWithNib(identifier: String(describing: VinylCollectionViewCell.self), bundle: nil)
+        
+        collectionView.register(SectionHeaderReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)
         
         collectionView.delegate = self
         
@@ -70,6 +58,9 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     
     func fetchData() {
         PublishManager.shared.fetchAudios() { [weak self] result in
+            
+            // self
+            
             switch result {
                 
             case .success(let audios):
@@ -81,7 +72,6 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                     for audio in audios where blockList.contains(audio.authorId ?? "") == false {
                         
                         self?.audios.append(audio)
-                        
                     }
                     
                 } else {
@@ -89,51 +79,20 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                     self?.audios = audios
                 }
                 
-                self?.sections[0].audios = []
-                
-                self?.sections[0].audios.append(contentsOf: self?.audios.filter { $0.topic == "Pop"} ?? [])
-                
-                self?.sections[1].audios = []
-                
-                self?.sections[1].audios.append(contentsOf: self?.audios.filter { $0.topic == "Indie"} ?? [])
-                
-                self?.sections[2].audios = []
-                
-                self?.sections[2].audios.append(contentsOf: self?.audios.filter { $0.topic == "Folk"} ?? [])
-                
-                self?.sections[3].audios = []
-                
-                self?.sections[3].audios.append(contentsOf: self?.audios.filter { $0.topic == "City"} ?? [])
-                
-                self?.sections[4].audios = []
-                
-                self?.sections[4].audios.append(contentsOf: self?.audios.filter { $0.topic == "Cafe"} ?? [])
-                
-                self?.sections[5].audios = []
-                
-                self?.sections[5].audios.append(contentsOf: self?.audios.filter { $0.topic == "Meaningful"} ?? [])
-                
-                self?.sections[6].audios = []
-                
-                self?.sections[6].audios.append(contentsOf: self?.audios.filter { $0.topic == "Nature"} ?? [])
-                
-                self?.sections[7].audios = []
-                
-                self?.sections[7].audios.append(contentsOf: self?.audios.filter { $0.topic == "Animal"} ?? [])
-                
-                self?.sections[8].audios = []
-                
-                self?.sections[8].audios.append(contentsOf: self?.audios.filter { $0.topic == "Others"} ?? [])
+                for topic in 0..<(self?.sections.count ?? 0) {
+                    
+                    self?.sections[topic].audios = []
+                    
+                    self?.sections[topic].audios.append(contentsOf: self?.audios.filter { $0.topic == AudioTopics.allCases[topic].rawValue} ?? [])
+                }
                 
                 self?.applySnapshot(animatingDifferences: false)
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
+            case .failure(_):
                 
-                print("fetchData.failure: \(error)")
-                
-                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data")
+                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data.")
             }
             
         }
@@ -168,7 +127,9 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
                 ofKind: kind,
                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
                 for: indexPath) as? SectionHeaderReusableView
+            
             view?.title = section.topic
+            
             view?.didTapSectionHandler = { [weak self] in
                 let audioListViewController = AudioListViewController()
                 audioListViewController.audios = section.audios
@@ -180,7 +141,7 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
     }
     
     private func applySnapshot(animatingDifferences: Bool = true) {
-        // 2
+        // 2 //
         var snapshot = Snapshot()
         // 3
         snapshot.appendSections(sections)
@@ -199,62 +160,20 @@ class ImpairedDiscoveryViewController: BaseViewController, UICollectionViewDeleg
         
         let touchPoint = sender.location(in: self.collectionView)
         
-        if (sender.state == UIGestureRecognizer.State.ended) {
+        if sender.state == .ended {
             
             let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
-            
+            //
             if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
-                let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
                 
-                // iPad specific code
-                blockUserAlertController
-                        let xOrigin = self.view.bounds.width / 2
-                        
-                        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-                        
-                blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
-                        
-                blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
+                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "")
 
-                let blockUserAction = UIAlertAction(title: "Block This User", style: .destructive) { _ in
-                    
-                    let controller = UIAlertController(title: "Are you sure?",
-                                                       message: "You can't see this user's audio files and comments after blocking, and you won't have chance to unblock this user in the future.",
-                                                       preferredStyle: .alert)
-                    let blockAction = UIAlertAction(title: "Block", style: .destructive) { _ in
-                        
-                        UserManager.shared.blockUser(userId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "") { result in
-                            switch result {
-                            case .success(let success):
-                                print(success)
-                            case .failure(let error):
-                                print(error)
-                            }
-                            
-                        }
-                       
-                    }
-                    controller.addAction(blockAction)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    controller.addAction(cancelAction)
-                    self.present(controller, animated: true, completion: nil)
-
-                }
-                      let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-
-                          blockUserAlertController.dismiss(animated: true, completion: nil)
-                      }
-
-                blockUserAlertController.addAction(blockUserAction)
-                blockUserAlertController.addAction(cancelAction)
-
-                present(blockUserAlertController, animated: true, completion: nil)
             }
         }
     }
 }
 
-extension ImpairedDiscoveryViewController {
+extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
     
     func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -263,11 +182,12 @@ extension ImpairedDiscoveryViewController {
         DispatchQueue.main.async {
             LKProgressHUD.show()
         }
+        
         DispatchQueue.global().async {
-            self.setPlayer(url: audio.audioUrl)
+            AVPlayerHandler.shared.setPlayer(url: audio.audioUrl)
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { // ?
             LKProgressHUD.dismiss()
         }
         
@@ -306,12 +226,5 @@ extension ImpairedDiscoveryViewController {
             section.boundarySupplementaryItems = [sectionHeader]
             return section
         })
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { context in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)
     }
 }

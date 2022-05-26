@@ -17,13 +17,11 @@ class UserProfileView: UIView {
             
             if imageUrl == nil {
                 
-                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
+                profileImageView.image = UIImage.asset(ImageAsset.blackVinyl)
                 
                 LKProgressHUD.dismiss()
                 
             } else {
-                
-                profileImageView.image = UIImage(named: "black_vinyl-PhotoRoom")
                 
                 profileImageView.loadImage(imageUrl)
                 
@@ -34,12 +32,12 @@ class UserProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        addProfileImageView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        addProfileImageView()
     }
     
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
@@ -134,14 +132,14 @@ class UserProfileView: UIView {
                                context: context, radius: 60,
                                angle: -30,
                                colour: UIColor.black,
-                               font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
+                               font: UIFont.regular(size: 16) ?? UIFont(),
                                clockwise: true)
         centreArcPerpendicular(text: "C  a  r  p  e   D  i  e  m",
                                context: context,
                                radius: 60,
                                angle: 29.7,
                                colour: UIColor.black,
-                               font: UIFont(name: "American Typewriter", size: 16) ?? UIFont.systemFont(ofSize: 16),
+                               font: UIFont.regular(size: 16) ?? UIFont(),
                                clockwise: false)
         
     }

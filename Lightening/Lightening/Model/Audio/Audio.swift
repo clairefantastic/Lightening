@@ -13,27 +13,27 @@ struct Audio: Codable, Hashable {
     
     let uuid = UUID()
     
-    var audioId: String?
+    var audioId = ""
     
-    var audioUrl: URL
+    var audioUrl = URL(fileURLWithPath: "")
     
-    var topic: String?
+    var topic = ""
     
-    var title: String?
+    var title = ""
     
-    var description: String?
+    var description = ""
     
-    var cover: String?
+    var cover = ""
     
-    var createdTime: Double?
+    var createdTime = 0.0
     
     var location: Location?
     
     var comments: Comment?
     
-    var author: User?
+    var author = UserManager.shared.currentUser
     
-    var authorId: String?
+    var authorId = ""
     
     static func ==(lhs: Audio, rhs: Audio) -> Bool {
         return lhs.uuid == rhs.uuid

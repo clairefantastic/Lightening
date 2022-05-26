@@ -22,14 +22,14 @@ class VinylCollectionViewCell: UICollectionViewCell {
         // Initialization code
         ElementsStyle.styleClearBackground(self)
         audioCoverImageView.layer.cornerRadius = 30
-        audioTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        audioTitleLabel.textColor = UIColor.darkBlue
 //        self.layer.borderWidth = 1
         
     }
     
     var audio: Audio? {
       didSet {
-          vinylImageView?.image = UIImage(named: "black_vinyl-PhotoRoom")
+          vinylImageView?.image = UIImage.asset(ImageAsset.blackVinyl)
           audioCoverImageView?.image = UIImage(named: audio?.cover ?? "")
           audioTitleLabel?.text = audio?.title
           audioAuthorLabel?.text = audio?.author?.displayName

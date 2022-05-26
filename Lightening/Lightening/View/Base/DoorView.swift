@@ -13,48 +13,76 @@ class DoorView: UIView {
     
     private let halfCircleView = UIView()
     
+    let answerVideoCallButton = UIButton()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureRectView()
+        configureHalfCircleView()
+        configureAnswerVideoCallButton()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func configureRectView() {
+    private func configureRectView() {
         
         self.addSubview(rectView)
         
         rectView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: rectView, attribute: .trailing, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        rectView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        rectView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
+        rectView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        rectView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        NSLayoutConstraint(item: rectView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
-        
-        NSLayoutConstraint(item: rectView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
-        
-        NSLayoutConstraint(item: rectView, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 24).isActive = true
-        
-        rectView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
+        rectView.backgroundColor = UIColor(patternImage: UIImage.asset(ImageAsset.wooden) ?? UIImage())
     }
     
-    func configureHalfCircleView() {
+    private func configureHalfCircleView() {
         
         self.addSubview(halfCircleView)
         
         halfCircleView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: halfCircleView, attribute: .trailing, relatedBy: .equal, toItem: rectView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        halfCircleView.trailingAnchor.constraint(equalTo: rectView.trailingAnchor).isActive = true
+        halfCircleView.topAnchor.constraint(equalTo: rectView.topAnchor, constant: -76).isActive = true
+        halfCircleView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        halfCircleView.heightAnchor.constraint(equalTo: rectView.widthAnchor).isActive = true
         
-        NSLayoutConstraint(item: halfCircleView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150).isActive = true
-        
-        NSLayoutConstraint(item: halfCircleView, attribute: .height, relatedBy: .equal, toItem: rectView, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: halfCircleView, attribute: .top, relatedBy: .equal, toItem: rectView, attribute: .top, multiplier: 1, constant: -76).isActive = true
-        
-        halfCircleView.backgroundColor = UIColor(patternImage: UIImage(named: "wooden") ?? UIImage())
+        halfCircleView.backgroundColor = UIColor(patternImage: UIImage.asset(ImageAsset.wooden) ?? UIImage())
         
         halfCircleView.layer.cornerRadius = 75
     }
     
+    private func configureAnswerVideoCallButton() {
+        
+        self.addSubview(answerVideoCallButton)
+        
+        answerVideoCallButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        answerVideoCallButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+        answerVideoCallButton.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        answerVideoCallButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        answerVideoCallButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        answerVideoCallButton.layer.borderWidth = 2
+        
+        answerVideoCallButton.layer.borderColor = UIColor.beige?.cgColor
+
+        answerVideoCallButton.setTitle("Answer a Call", for: .normal)
+        
+        answerVideoCallButton.titleLabel?.numberOfLines = 0
+        
+        answerVideoCallButton.titleLabel?.textAlignment = .center
+
+        answerVideoCallButton.titleLabel?.font = UIFont.bold(size: 14)
+
+        answerVideoCallButton.setTitleColor(UIColor.beige, for: .normal)
+        
+        answerVideoCallButton.layer.cornerRadius = 30
+        
+        answerVideoCallButton.isEnabled = false
+    }
 }

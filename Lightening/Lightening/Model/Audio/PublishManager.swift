@@ -1,5 +1,5 @@
 //
-//  UploadManager.swift
+//  PublishManager.swift
 //  Lightening
 //
 //  Created by claire on 2022/4/15.
@@ -9,7 +9,6 @@ import Foundation
 import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import AVFoundation
 
 class PublishManager {
     
@@ -105,10 +104,8 @@ class PublishManager {
     }
     
     func deleteAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
-
-        guard let audioId = audio.audioId else { return }
         
-        let document = db.collection("audioFiles").document(audioId)
+        let document = db.collection("audioFiles").document(audio.audioId)
     
            document.delete() { error in
                 
