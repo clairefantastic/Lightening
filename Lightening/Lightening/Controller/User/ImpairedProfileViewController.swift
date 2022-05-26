@@ -10,23 +10,19 @@ import FirebaseAuth
 
 class ImpairedProfileViewController: BaseViewController {
     
-    let vinylImageView = UIImageView()
-    
+    private let vinylImageView = UIImageView()
+    private let settingButton = BeigeTitleButton()
     let userProfileView = UserProfileView()
     
-    let logOutButton = UIButton()
-    
     override func viewDidLoad() {
+        super.viewDidLoad()
         
-        self.navigationItem.title = "Profile"
-        
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        self.navigationItem.title = VisuallyImpairedTab.profile.tabBarItem().title
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureVinylImageView()
-        addUserProfileView()
-        configureLogOutButton()
-        ElementsStyle.styleViewBackground(userProfileView)
-        self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
+        configureSettingButton()
+        configureUserProfileView()
     }
 }
 
@@ -34,76 +30,35 @@ extension ImpairedProfileViewController {
     
     func configureVinylImageView() {
         
-        vinylImageView.image = UIImage(named: "profileVinyl")
-        
         view.stickSubView(vinylImageView)
         
+        vinylImageView.image = UIImage.asset(ImageAsset.profileVinyl)
     }
     
-    func addUserProfileView() {
+    func configureSettingButton() {
         
-        userProfileView.addProfileImageView()
+        view.addSubview(settingButton)
         
-        view.addSubview(userProfileView)
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
         
-        userProfileView.translatesAutoresizingMaskIntoConstraints = false
+        settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        settingButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        settingButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
-        NSLayoutConstraint(item: userProfileView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
-        
-        NSLayoutConstraint(item: userProfileView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: userProfileView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
-        
-        NSLayoutConstraint(item: userProfileView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 160).isActive = true
-        
-        //        self.view.stickSubView(userProfileView, inset: UIEdgeInsets(top: 80, left: width - 160, bottom: height - 240, right: 24))
-        
+        settingButton.setTitle("Settings", for: .normal)
+        settingButton.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
     }
     
-    func configureLogOutButton() {
-        
-        view.addSubview(logOutButton)
-        
-        logOutButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: logOutButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
-        
-        NSLayoutConstraint(item: logOutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: logOutButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
-        
-        NSLayoutConstraint(item: logOutButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
-        
-        logOutButton.setTitle("Settings", for: .normal)
-        logOutButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#F1E6B9"), for: .normal)
-        logOutButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        logOutButton.layer.borderWidth = 1
-        logOutButton.layer.borderColor = UIColor.black.withAlphaComponent(0).cgColor
-        logOutButton.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
-        
-    }
-    
-    func logOut() {
-        
-        UserManager.shared.signOut()
-        print(Auth.auth().currentUser?.email)
-        view.window?.rootViewController = SignInViewController()
-        view.window?.makeKeyAndVisible()
-    }
-    
-    @objc func tapSettings() {
+    @objc func didTapSettings() {
         
         let userSettingsAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
         // iPad specific code
         userSettingsAlertController.popoverPresentationController?.sourceView = self.view
-                
-                let xOrigin = self.view.bounds.width / 2
-                
-                let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-                
+        let xOrigin = self.view.bounds.width / 2
+        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
         userSettingsAlertController.popoverPresentationController?.sourceRect = popoverRect
-                
         userSettingsAlertController.popoverPresentationController?.permittedArrowDirections = .up
         
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { _ in
@@ -136,7 +91,6 @@ extension ImpairedProfileViewController {
         let privacyPolicyAction = UIAlertAction(title: "Privacy Policy", style: .default) { _ in
             
             let privacyPolicyViewController = PrivacyPolicyViewController()
-            
             self.present(privacyPolicyViewController, animated: true, completion: nil)
             
         }
@@ -149,28 +103,41 @@ extension ImpairedProfileViewController {
         present(userSettingsAlertController, animated: true, completion: nil)
     }
     
+    func configureUserProfileView() {
+        
+        view.addSubview(userProfileView)
+        
+        userProfileView.translatesAutoresizingMaskIntoConstraints = false
+        
+        userProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        userProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        userProfileView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        userProfileView.widthAnchor.constraint(equalToConstant: 160).isActive = true
+        
+        ElementsStyle.styleViewBackground(userProfileView)
+        userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
+    }
+
+    func logOut() {
+        
+        UserManager.shared.signOut()
+        view.window?.rootViewController = SignInViewController()
+        view.window?.makeKeyAndVisible()
+    }
+    
     func deleteAccount() {
         
-        let user = Auth.auth().currentUser
-        
-        user?.delete { error in
-            if let error = error {
-                // An error happened.
-            } else {
-                
-                UserManager.shared.deleteAccount() { result in
-                    switch result {
-                    case .success(_):
-                        print("Successfully delete all information of this user.")
-                        self.view.window?.rootViewController = SignInViewController()
-                        self.view.window?.makeKeyAndVisible()
-                    case .failure(_):
-                        print("Fail to delete all information of this user.")
-                    }
+        UserManager.shared.deleteAccount() { result in
+            switch result {
+            case .success(_):
+                LKProgressHUD.dismiss()
+                self.view.window?.rootViewController = SignInViewController()
+                self.view.window?.makeKeyAndVisible()
+            case .failure(let error):
+                if let deleteAccountError = error as? DeleteAccountError {
+                    LKProgressHUD.showFailure(text: deleteAccountError.errorMessage)
                 }
-                // Account deleted.
             }
         }
-        
     }
 }

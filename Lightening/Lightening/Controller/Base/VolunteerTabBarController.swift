@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import Lottie
 
-private enum VolunteerTab {
+enum VolunteerTab {
 
     case lobby
     
@@ -26,14 +25,14 @@ private enum VolunteerTab {
         
         let config = Config.default
         
-        let signalClientforVolunteer = SignalingClientForVolunteer()
+        let signalClient = SignalingClient()
         
         let webRTCClient = WebRTCClient(iceServers: config.webRTCIceServers)
 
         switch self {
 
         case .lobby: controller = UINavigationController(rootViewController: VolunteerLobbyViewController(
-            signalClientforVolunteer: signalClientforVolunteer, webRTCClient: webRTCClient))
+            signalClient: signalClient, webRTCClient: webRTCClient))
             
         case .discovery: controller = UINavigationController(rootViewController: VolunteerDiscoveryViewController())
         
@@ -42,7 +41,7 @@ private enum VolunteerTab {
         case .map: controller = UINavigationController(rootViewController: MapViewController())
             
         case .profile: controller =
-            UINavigationController(rootViewController: MyProfileViewController())
+            UINavigationController(rootViewController: VolunteerProfileViewController())
 
         }
 
@@ -60,36 +59,36 @@ private enum VolunteerTab {
         case .lobby:
             return UITabBarItem(
                 title: "Video Call",
-                image: UIImage(systemName: "video"),
-                selectedImage: UIImage(systemName: "video")
+                image: UIImage.systemAsset(ImageAsset.video),
+                selectedImage: UIImage.systemAsset(ImageAsset.video)
             )
             
         case .discovery:
             return UITabBarItem(
                 title: "Discovery",
-                image: UIImage(systemName: "rectangle.grid.2x2"),
-                selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill")
+                image: UIImage.systemAsset(ImageAsset.discovery),
+                selectedImage: UIImage.systemAsset(ImageAsset.discoveryFill)
             )
         
         case .upload:
             return UITabBarItem(
                 title: "Upload",
-                image: UIImage(systemName: "arrow.up.heart"),
-                selectedImage: UIImage(systemName: "arrow.up.heart")
+                image: UIImage.systemAsset(ImageAsset.upload),
+                selectedImage: UIImage.systemAsset(ImageAsset.upload)
             )
             
         case .map:
             return UITabBarItem(
                 title: "Map",
-                image: UIImage(systemName: "map"),
-                selectedImage: UIImage(systemName: "map.fill")
+                image: UIImage.systemAsset(ImageAsset.map),
+                selectedImage: UIImage.systemAsset(ImageAsset.mapFill)
             )
         
         case .profile:
             return UITabBarItem(
                 title: "Profile",
-                image: UIImage(systemName: "person.circle"),
-                selectedImage: UIImage(systemName: "person.circle.fill")
+                image: UIImage.systemAsset(ImageAsset.person),
+                selectedImage: UIImage.systemAsset(ImageAsset.personFill)
             )
             
         }
@@ -119,7 +118,7 @@ class VolunteerTabBarController: UITabBarController {
         if #available(iOS 15.0, *) {
            let appearance = UITabBarAppearance()
            appearance.configureWithOpaqueBackground()
-           appearance.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+           appearance.backgroundColor = UIColor.lightBlue
            
            self.tabBar.standardAppearance = appearance
            self.tabBar.scrollEdgeAppearance = appearance
@@ -128,11 +127,11 @@ class VolunteerTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.black // tab bar icon tint color
         self.tabBar.isTranslucent = false
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 10)!], for: .normal)
-        UITabBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6") // tab bar background color
+        UITabBar.appearance().barTintColor = UIColor.lightBlue // tab bar background color
 
         lobbyTabBarItem = viewControllers?[0].tabBarItem
 
-        lobbyTabBarItem.badgeColor = UIColor.hexStringToUIColor(hex: "#D65831")
+        lobbyTabBarItem.badgeColor = UIColor.orange
         
         NotificationCenter.default.addObserver(self, selector: #selector(notifyIncomingCall), name: NSNotification.Name (notificationKey1), object: nil)
         
@@ -140,7 +139,7 @@ class VolunteerTabBarController: UITabBarController {
         
         let content = UNMutableNotificationContent()
         content.title = "Light up your day!"
-        content.body = "Check your daily picks :)"
+        content.body = "Check out your daily picks :)"
         content.sound = UNNotificationSound.default
         
         var dateComponents = DateComponents()

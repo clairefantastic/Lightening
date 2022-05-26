@@ -13,8 +13,6 @@ class UploadViewController: BaseViewController {
     
     private let vinylImageView = UIImageView()
     
-    private let uploadManager = PublishManager()
-    
     private let selectFileButton = UIButton()
     
     private let recordButton = UIButton()
@@ -24,9 +22,9 @@ class UploadViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Upload"
+        self.navigationItem.title = VolunteerTab.upload.tabBarItem().title
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "American Typewriter Bold", size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
         configureVinylImageView()
     
@@ -62,7 +60,7 @@ class UploadViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         animationView.play()
     }
@@ -74,10 +72,14 @@ class UploadViewController: BaseViewController {
         
         recordButton.layer.cornerRadius = recordButton.frame.height / 2
     }
+
+}
+
+extension UploadViewController {
     
     private func configureVinylImageView() {
         
-        vinylImageView.image = UIImage(named: "uploadVinyl")
+        vinylImageView.image = UIImage.asset(ImageAsset.uploadVinyl)
         
         view.addSubview(vinylImageView)
         
@@ -107,15 +109,15 @@ class UploadViewController: BaseViewController {
         
         NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        selectFileButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        selectFileButton.layer.borderColor = UIColor.beige?.cgColor
         
         selectFileButton.layer.borderWidth = 1
         
         selectFileButton.setTitle("Select File", for: .normal)
         
-        selectFileButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        selectFileButton.titleLabel?.font = UIFont.bold(size: 16)
         
-        selectFileButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        selectFileButton.setTitleColor(UIColor.beige, for: .normal)
         
         selectFileButton.isEnabled = true
         
@@ -137,15 +139,15 @@ class UploadViewController: BaseViewController {
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.layer.borderColor = UIColor.hexStringToUIColor(hex: "#FCEED8").cgColor
+        recordButton.layer.borderColor = UIColor.beige?.cgColor
         
         recordButton.layer.borderWidth = 1
         
         recordButton.setTitle("Record", for: .normal)
         
-        recordButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        recordButton.titleLabel?.font = UIFont.bold(size: 16)
         
-        recordButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        recordButton.setTitleColor(UIColor.beige, for: .normal)
         
         recordButton.isEnabled = true
         
@@ -180,7 +182,7 @@ class UploadViewController: BaseViewController {
         
         navigationController?.pushViewController(recordViewController, animated: true)
     }
-
+    
 }
 
 extension UploadViewController: UIDocumentPickerDelegate {
@@ -198,12 +200,6 @@ extension UploadViewController: UIDocumentPickerDelegate {
                 checkAudioLengthViewController.localUrl = localUrl
                 
                 self?.navigationController?.pushViewController(checkAudioLengthViewController, animated: true)
-                
-//                let addDetailsViewController = AddDetailsViewController()
-//
-//                addDetailsViewController.localUrl = localUrl
-//
-//                self?.navigationController?.pushViewController(addDetailsViewController, animated: true)
             }
             
         }

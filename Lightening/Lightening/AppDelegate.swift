@@ -35,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         IQKeyboardManager.shared.enable = true
     
         if #available(iOS 15, *) {
-            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().barTintColor = UIColor.lightBlue
             UINavigationBar.appearance().tintColor = UIColor.black
             UINavigationBar.appearance().isTranslucent = false
         } else {
-            UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+            UINavigationBar.appearance().barTintColor = UIColor.lightBlue
             UINavigationBar.appearance().tintColor = UIColor.black
             UINavigationBar.appearance().isTranslucent = false
         }

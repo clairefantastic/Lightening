@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddDetailsTopicTableViewCell: UITableViewCell {
+class AddDetailsTopicTableViewCell: AddDetailsBasicCell {
 
     var topicButtonArray: [UIButton?] = []
     
@@ -24,12 +24,12 @@ class AddDetailsTopicTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        self.backgroundColor = UIColor.lightBlue
         // Initialization code
         selectTopicCollectionView.delegate = self
         selectTopicCollectionView.dataSource = self
         
-        selectTopicCollectionView.backgroundColor = UIColor.hexStringToUIColor(hex: "#A2BDC6")
+        selectTopicCollectionView.backgroundColor = UIColor.lightBlue
         
         selectTopicCollectionView.registerCellWithNib(identifier: "SelectTopicCollectionViewCell", bundle: nil)
     }

@@ -18,10 +18,10 @@ class AudioPlayerViewController: UIViewController {
             
             if isLiked == true {
                 
-                playerView.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                playerView.likeButton.setImage(UIImage.systemAsset(ImageAsset.heartFill), for: .normal)
             } else {
                 
-                playerView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                playerView.likeButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
             }
             
         }
@@ -35,7 +35,7 @@ class AudioPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#163B34")
+        self.view.backgroundColor = UIColor.green
         playerView.layoutImageView()
         playerView.configureTitleLabel()
         playerView.configureAuthorLabel()
@@ -47,6 +47,7 @@ class AudioPlayerViewController: UIViewController {
         playerView.layoutProgressSlider()
         playerView.layoutLikeButton()
         playerView.setUpLikeButton()
+//        playerView.setupUI()//
         addPlayerView()
         playerView.likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
@@ -59,6 +60,7 @@ class AudioPlayerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         fetchLikedAudios()
     }

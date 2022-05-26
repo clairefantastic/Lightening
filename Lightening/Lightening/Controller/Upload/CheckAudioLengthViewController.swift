@@ -7,19 +7,19 @@
 
 import UIKit
 
-import AVFoundation
-
-class CheckAudioLengthViewController: UIViewController {
+class CheckAudioLengthViewController: BaseViewController {
     
-    private let limitLengthLabel = UILabel()
+    private let limitLengthLabel = DarkBlueLabel()
     
-    private let uploadButton = UIButton()
+    private let uploadButton = BeigeTitleButton()
     
     var localUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureLimitLengthLabel()
+        
         configureUploadButton()
     }
     
@@ -37,56 +37,33 @@ class CheckAudioLengthViewController: UIViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerY, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        uploadButton.setTitle("Confirm Audio File", for: .normal)
-        
-        uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        uploadButton.isEnabled = true
-        
-        uploadButton.layer.cornerRadius = 25
+        ElementsStyle.styleButton(uploadButton, title: "Confirm Audio File")
         
         uploadButton.addTarget(self, action: #selector(goToUpload), for: .touchUpInside)
-        
     }
     
     @objc func goToUpload() {
         
         guard let url = self.localUrl else { return }
         
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            let duration = playerItem.asset.duration
-            let seconds = CMTimeGetSeconds(duration)
+        let seconds = AVPlayerHandler.shared.checkAudioLength(url: url)
+        
+        if seconds >= 3.0 && seconds <= 30.0 {
             
-            if seconds >= 3.0 && seconds <= 30.0 {
-                let addDetailsViewController = AddDetailsViewController()
-                
-                addDetailsViewController.localUrl = url
-                
-                navigationController?.pushViewController(addDetailsViewController, animated: true)
-                
-            } else {
-                
-                let controller = UIAlertController(title: "Wrong audio length",
-                                                   message: "Only support uploading audio files from 3 to 30 seconds. Go back and select a new file.",
-                                                   preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                   controller.addAction(okAction)
-                   present(controller, animated: true, completion: nil)
-            }
+            let addDetailsViewController = AddDetailsViewController()
             
-        } catch let error {
-            print(error.localizedDescription)
+            addDetailsViewController.localUrl = url
+            
+            navigationController?.pushViewController(addDetailsViewController, animated: true)
+            
+        } else {
+            
+            AlertManager.shared.showWrongLengthAlert(at: self)
         }
     }
     
     private func configureLimitLengthLabel() {
-    
+        
         view.addSubview(limitLengthLabel)
         
         limitLengthLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -100,13 +77,12 @@ class CheckAudioLengthViewController: UIViewController {
         NSLayoutConstraint(item: limitLengthLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
-        limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
+        limitLengthLabel.font = UIFont.bold(size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
-        limitLengthLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
         limitLengthLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
-
+        
     }
 }

@@ -20,5 +20,8 @@ target 'Lightening' do
   pod ‘Firebase/Auth’
   pod 'JGProgressHUD'
   pod 'Firebase/Crashlytics'
-
+  target 'LighteningTests' do
+        inherit! :search_paths
+        pod 'Firebase'
+   end
 end

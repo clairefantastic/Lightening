@@ -14,9 +14,10 @@ class AddDetailsViewController: BaseViewController {
     private let uploadButton = UIButton()
     
     private var tableView = UITableView() {
+        
         didSet {
-            tableView.reloadData()
             
+            tableView.reloadData()
         }
     }
     
@@ -28,16 +29,7 @@ class AddDetailsViewController: BaseViewController {
     
     private let categories = ["Title", "Description", "Topic", "Cover image", "Pin on current location"]
     
-    private let image = ["wave", "line", "dot", "flower", "nature", "sea", "seaView", "highway", "city", "grayCity", "cafe", "coffee", "dog", "cat", "meaningful", "pure", "light", "wall", "camera"]
-    
-    private var audio = Audio(audioUrl: URL(fileURLWithPath: ""),
-                              topic: "",
-                              title: "",
-                              description: "",
-                              cover: "",
-                              createdTime: 0.0,
-                              location: Location(latitude: 0.0, longitude: 0.0),
-                              author: UserManager.shared.currentUser)
+    private var audio = Audio()
     
     var localUrl: URL?
     
@@ -49,22 +41,22 @@ class AddDetailsViewController: BaseViewController {
         setupTableView()
         
         animationView = .init(name: "lf30_editor_6v2ghoza")
-          
+        
         animationView.frame = self.view.bounds
-          
+        
         animationView.contentMode = .scaleAspectFit
-          
+        
         animationView.loopMode = .loop
-          
+        
         animationView.animationSpeed = 1
-          
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         uploadButton.layer.cornerRadius = uploadButton.frame.height / 2
     }
-
+    
     private func setupTableView() {
         
         ElementsStyle.styleViewBackground(tableView)
@@ -86,33 +78,33 @@ class AddDetailsViewController: BaseViewController {
         tableView.allowsSelection = false
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsContentCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsContentCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsTopicTableViewCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsTopicTableViewCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsCoverTableViewCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsCoverTableViewCell.self),
+                                      bundle: nil
         )
         
         tableView.registerCellWithNib(identifier:
-            String(describing: AddDetailsLocationCell.self),
-                                         bundle: nil
+                                        String(describing: AddDetailsLocationCell.self),
+                                      bundle: nil
         )
         
         tableView.dataSource = self
-
+        
         tableView.delegate = self
-    
+        
     }
     
     private func layoutUploadButton() {
-    
+        
         view.addSubview(uploadButton)
         
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
@@ -125,45 +117,35 @@ class AddDetailsViewController: BaseViewController {
         
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        uploadButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        uploadButton.backgroundColor = UIColor.darkBlue
         
         uploadButton.setTitle("Upload File", for: .normal)
         
-        uploadButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
+        uploadButton.titleLabel?.font = UIFont.bold(size: 16)
         
-        uploadButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
+        uploadButton.setTitleColor(UIColor.beige, for: .normal)
         
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
-
+        
     }
     
     @objc func uploadFile(_ sender: UIButton) {
         
-        let action = UIAlertAction(title: "OK", style: .default, handler: {action in})
-        
         if self.audio.title == "" {
             
-            let titleEmptyAlert = UIAlertController(title: "Error", message: "Title should not be empty.", preferredStyle: .alert)
-            titleEmptyAlert.addAction(action)
-            present(titleEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.title.rawValue)
             
         } else if self.audio.description == "" {
             
-            let descriptionEmptyAlert = UIAlertController(title: "Error", message: "Description should not be empty.", preferredStyle: .alert)
-            descriptionEmptyAlert.addAction(action)
-            present(descriptionEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.description.rawValue)
             
         } else if self.audio.topic == "" {
             
-            let topicEmptyAlert = UIAlertController(title: "Error", message: "Topic should not be empty.", preferredStyle: .alert)
-            topicEmptyAlert.addAction(action)
-            present(topicEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.topic.rawValue)
             
         } else if self.audio.cover == "" {
             
-            let topicEmptyAlert = UIAlertController(title: "Error", message: "Cover should not be empty.", preferredStyle: .alert)
-            topicEmptyAlert.addAction(action)
-            present(topicEmptyAlert, animated: true)
+            AlertManager.shared.showEmptyAlert(at: self, title: AddDetailsSection.coverImage.rawValue)
             
         } else {
             
@@ -172,34 +154,30 @@ class AddDetailsViewController: BaseViewController {
             maskView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
             
             currentWindow?.addSubview(maskView)
-           
-            print("Upload file")
             
             DispatchQueue.main.async {
                 self.view.stickSubView(self.animationView)
                 self.animationView.play()
             }
-        
+            
             guard let localUrl = localUrl else {
                 return
             }
-
+            
             PublishManager.shared.getFileRemoteUrl(destinationUrl: localUrl) { [weak self] downloadUrl in
                 
                 self?.audio.audioUrl = downloadUrl
                 
                 self?.audio.createdTime = Date().timeIntervalSince1970
-
+                
                 guard var publishAudio = self?.audio else {
-                        return
+                    return
                 }
                 
                 PublishManager.shared.publishAudioFile(audio: &publishAudio) { [weak self] result in
                     switch result {
-
+                        
                     case .success:
-
-                        print("onTapPublish, success")
                         
                         self?.animationView.removeFromSuperview()
                         
@@ -209,12 +187,9 @@ class AddDetailsViewController: BaseViewController {
                         
                         self?.navigationController?.popToRootViewController(animated: true)
                         
-                    case .failure(let error):
-
-                        print("publishArticle.failure: \(error)")
+                    case .failure:
                         
-                        LKProgressHUD.showFailure()
-                        
+                        LKProgressHUD.showFailure(text: "Fail to upload audio file.")
                     }
                     
                 }
@@ -231,13 +206,15 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return AddDetailsSection.allCases.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row <= 1 {
+    
+        switch AddDetailsSection.allCases[indexPath.row] {
+            
+        case .title, .description:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
                     
@@ -245,43 +222,43 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.index = indexPath.row
             
-            cell.delegate = self
+            cell.layoutCell(title: AddDetailsSection.title.rawValue)
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.delegate = self
             
             return cell
             
-        } else if indexPath.row == 2 {
+        case .topic:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsTopicTableViewCell.self)", for: indexPath) as? AddDetailsTopicTableViewCell
-            
+                    
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.topic.rawValue)
             
             cell.delegate = self
             
             return cell
             
-        } else if indexPath.row == 3 {
+        case .coverImage:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsCoverTableViewCell.self)", for: indexPath) as? AddDetailsCoverTableViewCell
-            
+                    
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.coverImage.rawValue)
             
             cell.delegate = self
             
             return cell
             
-        } else {
-            
+        case .currentLocation:
+        
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsLocationCell.self)", for: indexPath) as? AddDetailsLocationCell
                     
             else { return UITableViewCell() }
             
-            cell.categoryLabel.text = categories[indexPath.row]
+            cell.layoutCell(title: AddDetailsSection.currentLocation.rawValue)
             
             cell.determineCurrentLocation()
             
@@ -291,7 +268,6 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-    
     }
     
 }
@@ -302,29 +278,24 @@ extension AddDetailsViewController: AddDetailsTableViewCellDelegate {
         audio.topic = topic
     }
     
-    
     func didSelectCover(_ index: Int) {
         
-        audio.cover = image[index]
+        audio.cover = CoverImage.allCases[index].rawValue
     }
     
-//    func didSelectTopic(_ button: UIButton) {
-//        
-//        audio.topic = button.titleLabel?.text
-//    }
-
     func endEditing(_ cell: AddDetailsContentCell) {
-    
+        
         guard let tappedIndexPath = tableView.indexPath(for: cell) else { return }
         
         if tappedIndexPath.row == 0 {
             
-            audio.title = cell.contentTextView?.text
+            audio.title = cell.contentTextView?.text ?? ""
             
         } else {
             
-            audio.description = cell.contentTextView?.text
+            audio.description = cell.contentTextView?.text ?? ""
             
         }
     }
 }
+

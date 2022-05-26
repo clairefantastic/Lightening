@@ -19,9 +19,9 @@ class SearchResultTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layer.borderColor = UIColor.black.cgColor
-//        self.layer.borderWidth = 1
+        
         ElementsStyle.styleClearBackground(self)
+        
         layoutLabels()
     }
 
@@ -33,32 +33,39 @@ class SearchResultTableViewCell: UITableViewCell {
     
     private func layoutLabels() {
         
-        searchResultTitleLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
-        searchResultTitleLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        searchResultTitleLabel.font = UIFont.bold(size: 20)
+
+        searchResultTitleLabel.textColor = UIColor.darkBlue
+        
         searchResultTitleLabel.numberOfLines = 0
+        
         searchResultTitleLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
-        searchResultAuthorLabel.font = UIFont(name: "American Typewriter", size: 16)
-        searchResultAuthorLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
+        
+        searchResultAuthorLabel.font = UIFont.regular(size: 16)
+        
+        searchResultAuthorLabel.textColor = UIColor.darkBlue
+        
         searchResultAuthorLabel.numberOfLines = 0
+        
         searchResultAuthorLabel.setContentCompressionResistancePriority(
             .defaultHigh, for: .horizontal)
         
         searchResultImageView.layer.masksToBounds = true
 
         searchResultImageView.layer.cornerRadius = searchResultImageView.frame.height / 2
-
-//        searchResultImageView.layer.borderColor = UIColor.black.cgColor
-//
-//        searchResultImageView.layer.borderWidth = 1
     }
     
     var audio: Audio? {
       didSet {
+          
           searchResultImageView?.image = UIImage(named: audio?.cover ?? "")
+          
           searchResultTitleLabel?.text = audio?.title ?? ""
+          
           searchResultAuthorLabel?.text = audio?.author?.displayName
-          cloudImageView?.image = UIImage(named: "cloud")
+          
+          cloudImageView?.image = UIImage.asset(ImageAsset.cloud)
       }
     }
     

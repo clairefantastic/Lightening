@@ -22,9 +22,13 @@ final class WebRTCClient: NSObject {
     // The `RTCPeerConnectionFactory` is in charge of creating new RTCPeerConnection instances.
     // A new RTCPeerConnection should be created every new call, but the factory is shared.
     private static let factory: RTCPeerConnectionFactory = {
+        
         RTCInitializeSSL()
+        
         let videoEncoderFactory = RTCDefaultVideoEncoderFactory()
+        
         let videoDecoderFactory = RTCDefaultVideoDecoderFactory()
+        
         return RTCPeerConnectionFactory(encoderFactory: videoEncoderFactory, decoderFactory: videoDecoderFactory)
     }()
     
@@ -38,26 +42,38 @@ final class WebRTCClient: NSObject {
     
     private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]
+    
     private var videoCapturer: RTCVideoCapturer?
+    
     private var localVideoTrack: RTCVideoTrack?
+    
     private var remoteVideoTrack: RTCVideoTrack?
+    
     private var localDataChannel: RTCDataChannel?
+    
     private var remoteDataChannel: RTCDataChannel?
+    
     private var iceServers: [String]
     
     @available(*, unavailable)
     override init() {
+        
         fatalError("WebRTCClient:init is unavailable")
     }
     
     required init(iceServers: [String]) {
+        
         self.iceServers = iceServers
+        
         super.init()
+        
         createPeerConnection()
     }
     
     func createPeerConnection() {
+        
         let config = RTCConfiguration()
+        
         config.iceServers = [RTCIceServer(urlStrings: iceServers)]
         
         // Unified plan is more superior than planB
@@ -69,23 +85,30 @@ final class WebRTCClient: NSObject {
         let constraints = RTCMediaConstraints(
             mandatoryConstraints: nil,
             optionalConstraints: ["DtlsSrtpKeyAgreement": kRTCMediaConstraintsValueTrue])
+        
         self.peerConnection = WebRTCClient.factory.peerConnection(with: config, constraints: constraints, delegate: self)
         
         self.createMediaSenders()
+        
         self.configureAudioSession()
     }
     
     func closePeerConnection() {
+        
         self.peerConnection!.close()
+        
         self.peerConnection = nil
     }
     
     // MARK: Signaling
     func offer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void) {
+        
         let constrains = RTCMediaConstraints(
             mandatoryConstraints: self.mediaConstrains,
             optionalConstraints: nil)
+        
         self.peerConnection!.offer(for: constrains) { (sdp, error) in
+            
             guard let sdp = sdp else {
                 return
             }
@@ -97,30 +120,39 @@ final class WebRTCClient: NSObject {
     }
     
     func answer(completion: @escaping (_ sdp: RTCSessionDescription) -> Void)  {
+        
         let constrains = RTCMediaConstraints(mandatoryConstraints: self.mediaConstrains,
                                              optionalConstraints: nil)
+        
         self.peerConnection!.answer(for: constrains) { (sdp, error) in
+            
             guard let sdp = sdp else {
+                
                 return
             }
             
             self.peerConnection!.setLocalDescription(sdp, completionHandler: { (error) in
+                
                 completion(sdp)
             })
         }
     }
     
     func set(remoteSdp: RTCSessionDescription, completion: @escaping (Error?) -> ()) {
+        
         self.peerConnection!.setRemoteDescription(remoteSdp, completionHandler: completion)
     }
     
     func set(remoteCandidate: RTCIceCandidate) {
+        
         self.peerConnection!.add(remoteCandidate)
     }
     
     // MARK: Media
     func startCaptureLocalVideo(renderer: RTCVideoRenderer) {
+        
         guard let capturer = self.videoCapturer as? RTCCameraVideoCapturer else {
+            
             return
         }
         
@@ -144,6 +176,7 @@ final class WebRTCClient: NSObject {
     }
     
     func renderRemoteVideo(to renderer: RTCVideoRenderer) {
+        
         self.remoteVideoTrack?.add(renderer)
     }
     
@@ -188,11 +221,11 @@ final class WebRTCClient: NSObject {
     private func createVideoTrack() -> RTCVideoTrack {
         let videoSource = WebRTCClient.factory.videoSource()
         
-#if TARGET_OS_SIMULATOR
-        self.videoCapturer = RTCFileVideoCapturer(delegate: videoSource)
-#else
-        self.videoCapturer = RTCCameraVideoCapturer(delegate: videoSource)
-#endif
+        #if TARGET_OS_SIMULATOR
+            self.videoCapturer = RTCFileVideoCapturer(delegate: videoSource)
+        #else
+            self.videoCapturer = RTCCameraVideoCapturer(delegate: videoSource)
+        #endif
         
         let videoTrack = WebRTCClient.factory.videoTrack(with: videoSource, trackId: "video0")
         return videoTrack

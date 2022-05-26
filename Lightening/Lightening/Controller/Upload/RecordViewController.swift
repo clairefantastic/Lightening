@@ -6,14 +6,12 @@
 //
 
 import UIKit
-
 import Lottie
-
 import AVFoundation
 
 class RecordViewController: BaseViewController {
     
-    private let limitLengthLabel = UILabel()
+    private let limitLengthLabel = DarkBlueLabel()
     
     private let recordButton = UIButton()
     
@@ -21,7 +19,7 @@ class RecordViewController: BaseViewController {
     
     private let resetButton = UIButton()
     
-    private let finishRecordingButton = UIButton()
+    private let finishRecordingButton = BeigeTitleButton()
     
     private let timerLabel = UILabel()
     
@@ -95,9 +93,8 @@ class RecordViewController: BaseViewController {
         NSLayoutConstraint(item: limitLengthLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         limitLengthLabel.text = "Only support uploading audio files from 3 to 30 seconds"
-        limitLengthLabel.font = UIFont(name: "American Typewriter Bold", size: 18)
+        limitLengthLabel.font = UIFont.bold(size: 18)
         limitLengthLabel.adjustsFontForContentSizeCategory = true
-        limitLengthLabel.textColor = UIColor.hexStringToUIColor(hex: "#13263B")
         limitLengthLabel.textAlignment = .center
         limitLengthLabel.numberOfLines = 0
         limitLengthLabel.setContentCompressionResistancePriority(
@@ -121,9 +118,9 @@ class RecordViewController: BaseViewController {
         
         timerLabel.text = "00:00"
         
-        timerLabel.font = UIFont(name: "American Typewriter Bold", size: 20)
+        timerLabel.font = UIFont.bold(size: 20)
         
-        timerLabel.textColor = UIColor.hexStringToUIColor(hex: "#FCEED8")
+        timerLabel.textColor = UIColor.beige
         
         timerLabel.textAlignment = .center
         
@@ -145,9 +142,9 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        recordButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#C64D39")
+        recordButton.backgroundColor = UIColor.red
         
-        recordButton.setImage(UIImage(named: "record"), for: .normal)
+        recordButton.setImage(UIImage.asset(ImageAsset.record), for: .normal)
         
         recordButton.isEnabled = true
         
@@ -186,9 +183,9 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: playButton, attribute: .trailing, relatedBy: .equal, toItem: recordButton, attribute: .leading, multiplier: 1, constant: -36).isActive = true
         
-        playButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D").withAlphaComponent(0.6)
+        playButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
-        playButton.setImage(UIImage(named: "play"), for: .normal)
+        playButton.setImage(UIImage.asset(ImageAsset.recordPlay), for: .normal)
         
         playButton.isEnabled = true
         
@@ -220,9 +217,9 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: resetButton, attribute: .leading, relatedBy: .equal, toItem: recordButton, attribute: .trailing, multiplier: 1, constant: 36).isActive = true
         
-        resetButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#F4EC7D").withAlphaComponent(0.6)
+        resetButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
         
-        resetButton.setImage(UIImage(named: "replay"), for: .normal)
+        resetButton.setImage(UIImage.asset(ImageAsset.replay), for: .normal)
         
         resetButton.isEnabled = true
         
@@ -253,15 +250,7 @@ class RecordViewController: BaseViewController {
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        finishRecordingButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#13263B")
-        
-        finishRecordingButton.setTitle("Finish Recording", for: .normal)
-        
-        finishRecordingButton.titleLabel?.font = UIFont(name: "American Typewriter Bold", size: 16)
-        
-        finishRecordingButton.setTitleColor(UIColor.hexStringToUIColor(hex: "#FCEED8"), for: .normal)
-        
-        finishRecordingButton.isEnabled = true
+        ElementsStyle.styleButton(finishRecordingButton, title: "Finish Recording")
         
         finishRecordingButton.addTarget(self, action: #selector(finishRecordingAudio), for: .touchUpInside)
         
@@ -271,33 +260,20 @@ class RecordViewController: BaseViewController {
         
         guard let url = audioManager.localUrl else { return }
         
-        let asset = AVAsset(url: url)
-        do {
-            let playerItem = AVPlayerItem(asset: asset)
-            let duration = playerItem.asset.duration
-            let seconds = CMTimeGetSeconds(duration)
+        let seconds = AVPlayerHandler.shared.checkAudioLength(url: url)
+        
+        if seconds >= 3.0 && seconds <= 30.0 {
             
-            if seconds >= 3.0 && seconds <= 30.0 {
-                let addDetailsViewController = AddDetailsViewController()
-                
-                addDetailsViewController.localUrl = audioManager.localUrl
-                
-                navigationController?.pushViewController(addDetailsViewController, animated: true)
-            } else {
-                
-                let controller = UIAlertController(title: "Wrong audio length", message: "Only support uploading audio files from 3 to 30 seconds", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                   controller.addAction(okAction)
-                   present(controller, animated: true, completion: nil)
-            }
-//            player = AVPlayer(playerItem: playerItem)
-//            player.volume = 100.0
-//            player.play()
+            let addDetailsViewController = AddDetailsViewController()
             
-        } catch let error {
-            print(error.localizedDescription)
+            addDetailsViewController.localUrl = audioManager.localUrl
+            
+            navigationController?.pushViewController(addDetailsViewController, animated: true)
+            
+        } else {
+            
+            AlertManager.shared.showWrongLengthAlert(at: self)
         }
-                
     }
 }
 
