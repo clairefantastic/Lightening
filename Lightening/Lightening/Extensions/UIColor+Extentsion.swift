@@ -29,23 +29,23 @@ private enum Color: String {
 
 extension UIColor {
 
-    static let lightBlue = Color(.lightBlue)
+    static let lightBlue = color(.lightBlue)
 
-    static let darkBlue = Color(.darkBlue)
+    static let darkBlue = color(.darkBlue)
 
-    static let green = Color(.green)
+    static let green = color(.green)
 
-    static let beige = Color(.beige)
+    static let beige = color(.beige)
 
-    static let orange = Color(.orange)
+    static let orange = color(.orange)
     
-    static let pink = Color(.pink)
+    static let pink = color(.pink)
     
-    static let red = Color(.red)
+    static let red = color(.red)
     
-    static let yellow = Color(.yellow)
+    static let yellow = color(.yellow)
     
-    private static func Color(_ color: Color) -> UIColor? {
+    private static func color(_ color: Color) -> UIColor? {
 
         return UIColor(named: color.rawValue)
     }
