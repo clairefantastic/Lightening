@@ -21,9 +21,9 @@ class SignInViewController: BaseViewController {
     
     private let passwordTextField = UITextField()
     
-    private let logInButton = UIButton()
+    private let logInButton = BeigeTitleButton()
     
-    private let registerButton = UIButton()
+    private let registerButton = BeigeTitleButton()
     
     private let haveNoAccountLabel = UILabel()
     

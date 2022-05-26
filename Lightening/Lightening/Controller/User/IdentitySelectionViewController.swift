@@ -9,9 +9,9 @@ import UIKit
 
 class IdentitySelectionViewController: BaseViewController {
     
-    private let visuallyImpairedButton = UIButton()
+    private let visuallyImpairedButton = BeigeTitleButton()
     
-    private let volunteerButton = UIButton()
+    private let volunteerButton = BeigeTitleButton()
     
     private let rotationVinylImageView = UIImageView()
     

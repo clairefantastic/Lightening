@@ -27,7 +27,7 @@ class RegisterViewController: BaseViewController {
     
     private let checkPasswordTextField = UITextField()
     
-    private let registerButton = UIButton()
+    private let registerButton = BeigeTitleButton()
     
     private let dismissButton = UIButton()
     

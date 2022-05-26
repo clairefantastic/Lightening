@@ -11,7 +11,7 @@ class CheckAudioLengthViewController: BaseViewController {
     
     private let limitLengthLabel = DarkBlueLabel()
     
-    private let uploadButton = UIButton()
+    private let uploadButton = BeigeTitleButton()
     
     var localUrl: URL?
     

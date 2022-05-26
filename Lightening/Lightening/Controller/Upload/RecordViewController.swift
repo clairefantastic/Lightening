@@ -19,7 +19,7 @@ class RecordViewController: BaseViewController {
     
     private let resetButton = UIButton()
     
-    private let finishRecordingButton = UIButton()
+    private let finishRecordingButton = BeigeTitleButton()
     
     private let timerLabel = UILabel()
     

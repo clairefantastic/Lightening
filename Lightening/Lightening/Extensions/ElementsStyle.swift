@@ -20,12 +20,10 @@ class ElementsStyle {
         view.backgroundColor = UIColor.clear
     }
     
-    static func styleButton(_ button: UIButton, title: String) {
+    static func styleButton(_ button: BeigeTitleButton, title: String) {
         
         button.backgroundColor = UIColor.darkBlue
         button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor.beige, for: .normal)
-        button.titleLabel?.font = UIFont.bold(size: 16)
         button.layer.cornerRadius = 25
     }
     

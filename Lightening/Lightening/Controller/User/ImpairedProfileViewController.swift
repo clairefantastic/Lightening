@@ -11,10 +11,8 @@ import FirebaseAuth
 class ImpairedProfileViewController: BaseViewController {
     
     private let vinylImageView = UIImageView()
-    
+    private let settingButton = BeigeTitleButton()
     let userProfileView = UserProfileView()
-    
-    private let settingButton = UIButton()
     
     override func viewDidLoad() {
         
