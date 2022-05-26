@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		507B431CE111D2D733E5EBFB /* Pods_Lightening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */; };
+		623012BB30411083BA760B89 /* Pods_LighteningTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E890B38764ADF18DFCE457 /* Pods_LighteningTests.framework */; };
 		7E14F2B1282E55A70007C7E9 /* AudioDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E14F2B0282E55A70007C7E9 /* AudioDetailsViewController.swift */; };
 		7E14F2B3282E57810007C7E9 /* StretchyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */; };
 		7E225861281F747200FE8694 /* 16873-flying-pigeon (2).json in Resources */ = {isa = PBXBuildFile; fileRef = 7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */; };
@@ -132,7 +133,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C1EB43D64A1C53F219EA3C8 /* Pods-LighteningTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LighteningTests.release.xcconfig"; path = "Target Support Files/Pods-LighteningTests/Pods-LighteningTests.release.xcconfig"; sourceTree = "<group>"; };
 		2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightening.debug.xcconfig"; path = "Target Support Files/Pods-Lightening/Pods-Lightening.debug.xcconfig"; sourceTree = "<group>"; };
+		48977B073D6FCD88564878C3 /* Pods-LighteningTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LighteningTests.debug.xcconfig"; path = "Target Support Files/Pods-LighteningTests/Pods-LighteningTests.debug.xcconfig"; sourceTree = "<group>"; };
+		75E890B38764ADF18DFCE457 /* Pods_LighteningTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LighteningTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E14F2B0282E55A70007C7E9 /* AudioDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDetailsViewController.swift; sourceTree = "<group>"; };
 		7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyTableHeaderView.swift; sourceTree = "<group>"; };
 		7E225860281F747200FE8694 /* 16873-flying-pigeon (2).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "16873-flying-pigeon (2).json"; path = "../../../../Downloads/16873-flying-pigeon (2).json"; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				623012BB30411083BA760B89 /* Pods_LighteningTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +283,8 @@
 			children = (
 				2719F4BBA033D3CFB8227B9E /* Pods-Lightening.debug.xcconfig */,
 				CD191A29807B0D118DB8AAA3 /* Pods-Lightening.release.xcconfig */,
+				48977B073D6FCD88564878C3 /* Pods-LighteningTests.debug.xcconfig */,
+				0C1EB43D64A1C53F219EA3C8 /* Pods-LighteningTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -603,6 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				BF46B14B4F4B3FEED391E560 /* Pods_Lightening.framework */,
+				75E890B38764ADF18DFCE457 /* Pods_LighteningTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -614,9 +622,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E3501CF28365CD50090E061 /* Build configuration list for PBXNativeTarget "LighteningTests" */;
 			buildPhases = (
+				2F3289D08543D956D487017A /* [CP] Check Pods Manifest.lock */,
 				7E3501C528365CD50090E061 /* Sources */,
 				7E3501C628365CD50090E061 /* Frameworks */,
 				7E3501C728365CD50090E061 /* Resources */,
+				F789F067AD3EA45A91F69F37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -729,6 +739,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2F3289D08543D956D487017A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LighteningTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5C2ABAD03DB0FF3A2914B167 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -786,6 +818,23 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		F789F067AD3EA45A91F69F37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LighteningTests/Pods-LighteningTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LighteningTests/Pods-LighteningTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LighteningTests/Pods-LighteningTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F90AEDDD2B46DFEB60613A96 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -932,6 +981,7 @@
 /* Begin XCBuildConfiguration section */
 		7E3501D028365CD50090E061 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48977B073D6FCD88564878C3 /* Pods-LighteningTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -951,6 +1001,7 @@
 		};
 		7E3501D128365CD50090E061 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C1EB43D64A1C53F219EA3C8 /* Pods-LighteningTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
