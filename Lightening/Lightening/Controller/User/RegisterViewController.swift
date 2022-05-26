@@ -102,7 +102,7 @@ extension RegisterViewController {
         
         NSLayoutConstraint(item: nameLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        ElementsStyle.styleLabel(nameLabel, text: "DisplayName")
+        ElementsStyle.styleLabel(nameLabel, text: "Display Name")
         
         nameLabel.textAlignment = .left
     }

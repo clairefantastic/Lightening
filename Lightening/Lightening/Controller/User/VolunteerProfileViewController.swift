@@ -79,7 +79,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = .black
         
         configureVinylImageView()
-        addUserProfileView()
+        configureUserProfileView()
         configureLightImageView()
         configureButtons()
         configureSettingButton()

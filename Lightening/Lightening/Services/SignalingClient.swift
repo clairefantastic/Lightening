@@ -134,6 +134,21 @@ final class SignalingClient {
         }
         
     }
+    //If no 
+    func listenToVolunteers(completion: @escaping (Result<String, Error>) -> Void) {
+        
+        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments() { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let randomInt = Int.random(in: 0..<snapshot!.documents.count)
+                let volunteerId = snapshot!.documents[randomInt].documentID
+                completion(.success(volunteerId))
+            }
+        }
+        
+    }
+    
     
     func listenSdp(to person: String) {
         db.collection("users").document(person).collection("WebRTC").document("sdp")

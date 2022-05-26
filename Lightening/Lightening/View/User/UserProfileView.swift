@@ -32,12 +32,12 @@ class UserProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        addProfileImageView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        addProfileImageView()
     }
     
     func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
