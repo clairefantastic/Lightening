@@ -263,73 +263,122 @@ class UserManager {
         
     }
     
-    func deleteAccount(completion: @escaping (Result<String, Error>) -> Void) {
+    func deleteAccount(completion: @escaping (Result<(), Error>) -> Void) {
         
-        guard let currentUser = UserManager.shared.currentUser else { return }
+        LKProgressHUD.show()
         
-        guard let userId = currentUser.userId else { return }
+        deleteUserAudios() { result in
+            switch result {
+                case .success:
+                self.deleteUserComments() { result in
+                    switch result {
+                    case .success:
+                        self.deleteUserDocument() { result in
+                            switch result {
+                            case .success:
+                                Auth.auth().currentUser?.delete { error in
+                                    if error == nil {
+                                        completion(.success(()))
+                                    } else {
+                                        completion(.failure(DeleteAccountError.deleteFirebaseUserError))
+                                    }
+                                }
+                                
+                            case .failure:
+                                completion(.failure(DeleteAccountError.deleteUserDocumentError))
+                            }
+                        }
+                    case .failure:
+                        completion(.failure(DeleteAccountError.deleteUserCommentsError))
+                    }
+                }
+                case .failure:
+                completion(.failure(DeleteAccountError.deleteUserAudiosError))
+            }
+        }
+    }
+    
+    func deleteUserAudios(completion: @escaping (Result<String, Error>) -> Void) {
         
-        self.signOut()
+        guard let userId = UserManager.shared.currentUser?.userId else { return }
+        
+        self.db.collection("audioFiles").whereField("authorId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+            
+            if error != nil {
+                
+                completion(.failure(DeleteAccountError.getUserAudiosError))
+            } else {
+                
+                guard let documents = querySnapshot?.documents else { return }
+    
+                for document in documents {
+                    document.reference.delete()
+                }
+                
+                completion(.success("Successfully delete user audios."))
+            }
+        }
+    }
+    
+    func deleteUserComments(completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let userId = UserManager.shared.currentUser?.userId else { return }
+        
+        self.db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
+            
+            if error != nil {
+                
+                completion(.failure(DeleteAccountError.getAllAudiosError))
+                
+            } else {
+                
+                guard let documents = querySnapshot?.documents else { return }
+                
+                let documentCount = documents.count
+                
+                var count = 0
+                
+                for document in documents {
+                    
+                    count += 1
+                    
+                    document.reference.collection("comments").whereField("authorId",
+                                                                         isEqualTo: userId).getDocuments { (querySnapshot, error) in
+                        
+                        if error != nil {
+                            
+                            completion(.failure(DeleteAccountError.getUserCommentsError))
+                        } else {
+                            
+                            guard let documents = querySnapshot?.documents else { return }
+                            
+                            for document in documents {
+                                document.reference.delete()
+                            }
+                        }
+                    }
+                    
+                    if count == documentCount {
+                        
+                        completion(.success("Successfully delete user comments."))
+                    }
+                }
+            }
+        }
+    }
+    
+    func deleteUserDocument(completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let userId = UserManager.shared.currentUser?.userId else { return }
         
         db.collection("users").document(userId).delete() { error in
             
             if let error = error {
                 
-                print(error)
-                
+                completion(.failure(error))
             } else {
                 
-                self.db.collection("audioFiles").whereField("authorId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
-                    
-                    if let error = error {
-                        completion(.failure(error))
-                        
-                    } else {
-                        
-                        guard let documents = querySnapshot?.documents else { return }
-                        
-                        for document in documents {
-                            document.reference.delete()
-                        }
-                        
-                        self.db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
-                            
-                            if let error = error {
-                                
-                                completion(.failure(error))
-                                
-                            } else {
-                                
-                                guard let documents = querySnapshot?.documents else { return }
-                                
-                                for document in documents {
-                                    
-                                    document.reference.collection("comments").whereField("authorId",
-                                                                                         isEqualTo: userId).getDocuments { (querySnapshot, error) in
-                                        
-                                        if let error = error {
-                                            completion(.failure(error))
-                                            
-                                        } else {
-                                            
-                                            guard let documents = querySnapshot?.documents else { return }
-                                            
-                                            for document in documents {
-                                                document.reference.delete()
-                                            }
-                                            
-                                            completion(.success("Success"))
-                                        }
-                                        
-                                    }
-                                }
-                                
-                            }
-                            
-                        }
-                    }
-                    
-                }
+                completion(.success("Successfully delete user document."))
             }
         }
     }
