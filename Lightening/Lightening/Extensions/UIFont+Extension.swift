@@ -44,4 +44,3 @@ extension UIFont {
         return UIFont(name: font.rawValue, size: size)
     }
 }
-

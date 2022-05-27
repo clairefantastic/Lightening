@@ -147,7 +147,7 @@ class PublishManager {
         
         LKProgressHUD.show()
         
-        db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments() { (querySnapshot, error) in
+        db.collection("audioFiles").whereField("audioUrl", isEqualTo: audio.audioUrl.absoluteString).getDocuments { (querySnapshot, error) in
             
                 if let error = error {
                     completion(.failure(error))
@@ -234,7 +234,7 @@ class PublishManager {
 
         let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
 
-           document.delete() { error in
+           document.delete { error in
                 
                 if let error = error {
                     
@@ -279,12 +279,9 @@ class PublishManager {
                 storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
                     
-                    
                 } else {
 
-                    storageRef.downloadURL(completion: { (url, error) in
-
-                        print(url?.absoluteString)
+                    storageRef.downloadURL(completion: { url, error in
                         
                         guard let url = url else { return }
                         

@@ -12,5 +12,4 @@ class LocationManager: CLLocationManager {
     
     static let shared = LocationManager()
     
-    
 }

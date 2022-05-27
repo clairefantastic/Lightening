@@ -134,7 +134,7 @@ final class SignalingClient {
         }
         
     }
-    //If no 
+
     func listenToVolunteers(completion: @escaping (Result<String, Error>) -> Void) {
         
         db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments() { (snapshot, error) in
@@ -199,7 +199,7 @@ final class SignalingClient {
                 }
                 
                 querySnapshot!.documentChanges.forEach { diff in
-                    if (diff.type == .added) {
+                    if diff.type == .added {
                         do {
                             let jsonData = try JSONSerialization.data(withJSONObject: documents.first!.data(), options: .prettyPrinted)
                             let iceCandidate = try self.decoder.decode(IceCandidate.self, from: jsonData)
