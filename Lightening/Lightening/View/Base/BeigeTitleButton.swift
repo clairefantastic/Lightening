@@ -24,4 +24,3 @@ class BeigeTitleButton: UIButton {
         self.titleLabel?.font = UIFont.bold(size: 16)
     }
 }
-

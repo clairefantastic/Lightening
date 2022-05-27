@@ -399,113 +399,102 @@ extension SignInViewController {
             AlertManager.shared.showEmptyAlert(at: self, title: "Email")
             
         } else if passwordTextField.text == "" {
-        
+            
             AlertManager.shared.showEmptyAlert(at: self, title: "Password")
             
         } else {
             
             UserManager.shared.nativeSignIn(with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
                 
-                
-                if let error = error {
+                if error != nil {
                     LKProgressHUD.showFailure(text: "Firebase signIn fail")
                 } else {
                     UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
-                            switch result {
-                                
-                            case .success(let user):
-                                
-                                guard let userIdentity = user?.userIdentity else {
-                                    self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
-                                    self?.nextViewController.modalPresentationStyle = .fullScreen
-
-                                    self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-                                    return
-                                }
-                                if userIdentity == 0 {
-                                    if self?.presentingViewController == nil {
-                                        self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
-                                    }
-                                } else {
-                                    if self?.presentingViewController == nil {
-                                        self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
-                                    }
-                                   
-                                    
-                                }
-                                self?.nextViewController.modalPresentationStyle = .fullScreen
-
-                                self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-
-                            case .failure(let error):
-                                
-                                print("fetchData.failure: \(error)")
-                            }
+                        switch result {
                             
+                        case .success(let user):
+                            
+                            guard let userIdentity = user?.userIdentity else {
+                                self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+                                self?.nextViewController.modalPresentationStyle = .fullScreen
+                                
+                                self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                                return
+                            }
+                            if userIdentity == 0 {
+                                if self?.presentingViewController == nil {
+                                    self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                                }
+                            } else {
+                                if self?.presentingViewController == nil {
+                                    self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                                }
+                                
+                                
+                            }
+                            self?.nextViewController.modalPresentationStyle = .fullScreen
+                            
+                            self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                            
+                        case .failure(let error):
+                            
+                            print("fetchData.failure: \(error)")
+                        }
                     }
-                
-                      print(Auth.auth().currentUser?.email)
-            }
                 }
-                    
-            
+            }
         }
-    
     }
 }
 
 @available(iOS 13.0, *)
 extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-        
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-    // Handle error.
-        print("Sign in with Apple errored: \(error)")
+        
+        if let signInWithAppleError = error as? AccountError {
+            LKProgressHUD.showFailure(text: signInWithAppleError.errorMessage)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { authDataResult in
-            print(authDataResult as Any)
+            
+            LKProgressHUD.dismiss()
             
             UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
-                    switch result {
-                        
-                    case .success(let user):
-                        
-                        guard let userIdentity = user?.userIdentity else {
-                            self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
-                            self?.nextViewController.modalPresentationStyle = .fullScreen
-
-                            self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-                            return
-                        }
-                        if userIdentity == 0 {
-                            if self?.presentingViewController == nil {
-                                self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
-                            }
-                        } else {
-                            if self?.presentingViewController == nil {
-                                self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
-                            }
-                        }
-                        self?.nextViewController.modalPresentationStyle = .fullScreen
-
-                        self?.present(self?.nextViewController ?? UIViewController(), animated: true)
-
-                    case .failure(let error):
-                        
-                        print("fetchData.failure: \(error)")
-                    }
+                switch result {
                     
+                case .success(let user):
+                    
+                    guard let userIdentity = user?.userIdentity else {
+                        self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
+                        self?.nextViewController.modalPresentationStyle = .fullScreen
+                        self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                        return
+                    }
+                    if userIdentity == 0 {
+                        if self?.presentingViewController == nil {
+                            self?.nextViewController = (self?.visuallyImpairedTabBarController ?? UIViewController()) as UIViewController
+                        }
+                    } else {
+                        if self?.presentingViewController == nil {
+                            self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
+                        }
+                    }
+                    self?.nextViewController.modalPresentationStyle = .fullScreen
+                    self?.present(self?.nextViewController ?? UIViewController(), animated: true)
+                    
+                case .failure(let error):
+                    
+                    print("fetchData.failure: \(error)")
+                }
+                
             }
-
-                  print(Auth.auth().currentUser?.email)
-        
         }
-//        print(authorization)
     }
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
-
 }
