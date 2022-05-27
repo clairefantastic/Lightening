@@ -16,7 +16,6 @@ target 'Lightening' do
   pod 'FirebaseFirestoreSwift', '8.3.0-beta'
   pod 'IQKeyboardManagerSwift'
   pod 'Kingfisher'
-  pod 'SoundWave'
   pod ‘Firebase/Auth’
   pod 'JGProgressHUD'
   pod 'Firebase/Crashlytics'
