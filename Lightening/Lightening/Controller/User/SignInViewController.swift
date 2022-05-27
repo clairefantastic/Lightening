@@ -181,6 +181,7 @@ extension SignInViewController {
         signInWithAppleButton.layer.borderWidth = 2
         signInWithAppleButton.layer.borderColor = UIColor.black.cgColor
         signInWithAppleButton.layer.cornerRadius = 25
+        signInWithAppleButton.cornerRadius = 25
     }
     
     private func configureNoAccountLabel() {
