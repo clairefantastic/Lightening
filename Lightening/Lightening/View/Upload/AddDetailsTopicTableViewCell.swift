@@ -124,7 +124,7 @@ extension AddDetailsTopicTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let layout = selectTopicCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.scrollDirection = .horizontal
-        return CGSize(width: 130, height: 70)
+        return CGSize(width: 150, height: 70)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
