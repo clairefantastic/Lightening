@@ -283,14 +283,16 @@ extension SignInViewController {
     
     @objc func presentPrivacyPolicy() {
         
-        let privacyPolicyViewController = PrivacyPolicyViewController()
-        self.present(privacyPolicyViewController, animated: true, completion: nil)
+        let policyViewController = PolicyViewController()
+        policyViewController.url = PolicyType.privacyPolicy.url
+        self.present(policyViewController, animated: true, completion: nil)
     }
     
     @objc func presentEULA() {
-        
-        let eulaViewController = EULAViewController()
-        self.present(eulaViewController, animated: true, completion: nil)
+   
+        let policyViewController = PolicyViewController()
+        policyViewController.url = PolicyType.eula.url
+        self.present(policyViewController, animated: true, completion: nil)
     }
     
     @objc func handleNativeSignIn() {
