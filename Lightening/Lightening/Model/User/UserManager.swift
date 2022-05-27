@@ -79,7 +79,9 @@ class UserManager {
         return request
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization, completion: @escaping (AuthDataResult?) -> Void) {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization,
+                                 completion: @escaping (AuthDataResult?) -> Void) {
         
         LKProgressHUD.show()
         
@@ -169,25 +171,20 @@ class UserManager {
     
     func register(with displayName: String, with email: String, with password: String, completion: @escaping (Error?) -> Void) {
         
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authDataResult, error in
+        Auth.auth().createUser(withEmail: email, password: password) { authDataResult, error in
             
             guard
                 error == nil,
                 let user = authDataResult?.user,
-                let email = user.email,
-                let self = self
+                let email = user.email
                     
             else {
                 
                 completion(error)
-                
                 return
             }
             
-            print("user registeration success! User: \(user.uid), \(user.email)")
-            
             completion(nil)
-            
         }
     }
     
@@ -220,6 +217,11 @@ class UserManager {
             
             guard let snapshot = snapshot else { return }
             
+            if snapshot.documents.isEmpty {
+                
+                completion(.success(nil))
+            }
+            
             snapshot.documents.forEach { document in
                 
                 do {
@@ -227,15 +229,15 @@ class UserManager {
                         self.currentUser = user
                         completion(.success(self.currentUser))
                     } else {
-                        completion(.success(nil))
+                        completion(.failure(AccountError.accountGeneralError))
                     }
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(AccountError.accountGeneralError))
                 }
             }
             
-            if let error = error {
-                completion(.failure(error))
+            if error != nil {
+                completion(.failure(AccountError.accountGeneralError))
             }
             
         }
@@ -252,7 +254,7 @@ class UserManager {
         let document = db.collection("users").document(currentUser.userId ?? "")
         
         do {
-            try document.updateData([
+            document.updateData([
                 "blockList": FieldValue.arrayUnion([userId])
             ]) { error in
                 
@@ -275,13 +277,13 @@ class UserManager {
         
         LKProgressHUD.show()
         
-        deleteUserAudios() { result in
+        deleteUserAudios { result in
             switch result {
-                case .success:
-                self.deleteUserComments() { result in
+            case .success:
+                self.deleteUserComments { result in
                     switch result {
                     case .success:
-                        self.deleteUserDocument() { result in
+                        self.deleteUserDocument { result in
                             switch result {
                             case .success:
                                 Auth.auth().currentUser?.delete { error in
@@ -300,7 +302,7 @@ class UserManager {
                         completion(.failure(AccountError.deleteUserCommentsError))
                     }
                 }
-                case .failure:
+            case .failure:
                 completion(.failure(AccountError.deleteUserAudiosError))
             }
         }
@@ -310,7 +312,7 @@ class UserManager {
         
         guard let userId = UserManager.shared.currentUser?.userId else { return }
         
-        self.db.collection("audioFiles").whereField("authorId", isEqualTo: userId).getDocuments() { (querySnapshot, error) in
+        self.db.collection("audioFiles").whereField("authorId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
             
             if error != nil {
                 
@@ -318,7 +320,7 @@ class UserManager {
             } else {
                 
                 guard let documents = querySnapshot?.documents else { return }
-    
+                
                 for document in documents {
                     document.reference.delete()
                 }
@@ -332,7 +334,7 @@ class UserManager {
         
         guard let userId = UserManager.shared.currentUser?.userId else { return }
         
-        self.db.collection("audioFiles").getDocuments() { (querySnapshot, error) in
+        self.db.collection("audioFiles").getDocuments { (querySnapshot, error) in
             
             if error != nil {
                 
@@ -379,7 +381,7 @@ class UserManager {
         
         guard let userId = UserManager.shared.currentUser?.userId else { return }
         
-        db.collection("users").document(userId).delete() { error in
+        db.collection("users").document(userId).delete { error in
             
             if let error = error {
                 

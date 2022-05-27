@@ -81,8 +81,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     } else {
                         completion(volunteerTabBarController)
                     }
-                case .failure(let error):
-                    print("fetchData.failure: \(error)")
+                case .failure:
+                    completion(signInViewController)
                 }
             }
         }
