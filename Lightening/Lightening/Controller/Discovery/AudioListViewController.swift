@@ -30,10 +30,7 @@ class AudioListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        layoutTableView()
-        
-        setUpTableView()
-        
+        configureTableView()
     }
 }
 
@@ -63,15 +60,11 @@ extension AudioListViewController {
         
     }
     
-    func layoutTableView() {
+    func configureTableView() {
         
         view.stickSubView(tableView)
         
         ElementsStyle.styleClearBackground(tableView)
-    }
-    
-    func setUpTableView() {
-        
         tableView.separatorStyle = .none
         
         tableView.registerCellWithNib(identifier:
@@ -80,7 +73,6 @@ extension AudioListViewController {
         )
         
         tableView.delegate = self
-
         tableView.dataSource = self
     
     }

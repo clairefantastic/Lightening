@@ -45,6 +45,5 @@ class LottieAnimationWrapper {
         currentWindow?.addSubview(animationView)
         
     }
-    
-    
+
 }

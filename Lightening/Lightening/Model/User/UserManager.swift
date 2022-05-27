@@ -80,6 +80,9 @@ class UserManager {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization, completion: @escaping (AuthDataResult?) -> Void) {
+        
+        LKProgressHUD.show()
+        
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -98,11 +101,11 @@ class UserManager {
                                                       rawNonce: nonce)
             // Sign in with Firebase.
             Auth.auth().signIn(with: credential) { (authResult, error) in
-                if (error != nil) {
+                if error != nil {
                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                     // you're sending the SHA256-hashed nonce as a hex string with
                     // your request to Apple.
-                    print(error?.localizedDescription as Any)
+                    completion(nil)
                     return
                 }
                 // User is signed in to Firebase with Apple.
@@ -113,10 +116,11 @@ class UserManager {
         
     }
     
-    func registerAsVolunteer(name: String, user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVolunteer(name: String, user: inout User, completion: @escaping (Result<(), Error>) -> Void) {
+        
+        LKProgressHUD.show()
         
         guard let currentUser = Auth.auth().currentUser else { return }
-        
         user = User(displayName: name, email: currentUser.email, userId: currentUser.uid, userIdentity: 1)
         
         let document = db.collection("users").document(currentUser.uid)
@@ -124,20 +128,21 @@ class UserManager {
         do {
             try document.setData(from: user) { error in
                 
-                if let error = error {
+                if error != nil {
                     
-                    completion(.failure(error))
+                    completion(.failure(AccountError.registerVolunteerError))
                 } else {
                     
-                    completion(.success("Success"))
+                    completion(.success(()))
                 }
             }
         } catch {
             
+            completion(.failure(AccountError.registerVolunteerError))
         }
     }
     
-    func registerAsVisuallyImpaired(name: String, user: inout User, completion: @escaping (Result<String, Error>) -> Void) {
+    func registerAsVisuallyImpaired(name: String, user: inout User, completion: @escaping (Result<(), Error>) -> Void) {
         
         guard let currentUser = Auth.auth().currentUser else { return }
         
@@ -148,16 +153,17 @@ class UserManager {
         do {
             try document.setData(from: user) { error in
                 
-                if let error = error {
+                if error != nil {
                     
-                    completion(.failure(error))
+                    completion(.failure(AccountError.registerImpairedError))
                 } else {
                     
-                    completion(.success("Success"))
+                    completion(.success(()))
                 }
             }
         } catch {
             
+            completion(.failure(AccountError.registerImpairedError))
         }
     }
     
@@ -195,13 +201,16 @@ class UserManager {
         }
     }
     
-    func signOut() {
+    func signOut(completion: @escaping (Result<(), Error>) -> Void) {
+        
+        LKProgressHUD.show()
         
         do {
             try Auth.auth().signOut()
             UserManager.shared.currentUser = nil
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+            completion(.success(()))
+        } catch {
+            completion(.failure(AccountError.signOutError))
         }
     }
     
@@ -210,8 +219,6 @@ class UserManager {
         db.collection("users").whereField("userId", isEqualTo: userId).addSnapshotListener { snapshot, error in
             
             guard let snapshot = snapshot else { return }
-            
-            var audios = [Audio]()
             
             snapshot.documents.forEach { document in
                 
@@ -281,20 +288,20 @@ class UserManager {
                                     if error == nil {
                                         completion(.success(()))
                                     } else {
-                                        completion(.failure(DeleteAccountError.deleteFirebaseUserError))
+                                        completion(.failure(AccountError.deleteFirebaseUserError))
                                     }
                                 }
                                 
                             case .failure:
-                                completion(.failure(DeleteAccountError.deleteUserDocumentError))
+                                completion(.failure(AccountError.deleteUserDocumentError))
                             }
                         }
                     case .failure:
-                        completion(.failure(DeleteAccountError.deleteUserCommentsError))
+                        completion(.failure(AccountError.deleteUserCommentsError))
                     }
                 }
                 case .failure:
-                completion(.failure(DeleteAccountError.deleteUserAudiosError))
+                completion(.failure(AccountError.deleteUserAudiosError))
             }
         }
     }
@@ -307,7 +314,7 @@ class UserManager {
             
             if error != nil {
                 
-                completion(.failure(DeleteAccountError.getUserAudiosError))
+                completion(.failure(AccountError.getUserAudiosError))
             } else {
                 
                 guard let documents = querySnapshot?.documents else { return }
@@ -329,7 +336,7 @@ class UserManager {
             
             if error != nil {
                 
-                completion(.failure(DeleteAccountError.getAllAudiosError))
+                completion(.failure(AccountError.getAllAudiosError))
                 
             } else {
                 
@@ -348,7 +355,7 @@ class UserManager {
                         
                         if error != nil {
                             
-                            completion(.failure(DeleteAccountError.getUserCommentsError))
+                            completion(.failure(AccountError.getUserCommentsError))
                         } else {
                             
                             guard let documents = querySnapshot?.documents else { return }

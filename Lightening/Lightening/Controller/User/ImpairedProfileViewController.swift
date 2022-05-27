@@ -54,13 +54,6 @@ extension ImpairedProfileViewController {
         
         let userSettingsAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
-        // iPad specific code
-        userSettingsAlertController.popoverPresentationController?.sourceView = self.view
-        let xOrigin = self.view.bounds.width / 2
-        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-        userSettingsAlertController.popoverPresentationController?.sourceRect = popoverRect
-        userSettingsAlertController.popoverPresentationController?.permittedArrowDirections = .up
-        
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { _ in
             
             self.logOut()
@@ -74,13 +67,11 @@ extension ImpairedProfileViewController {
             let deleteAction = UIAlertAction(title: "Delete Account", style: .destructive) { _ in
                 
                 self.deleteAccount()
-                
             }
             controller.addAction(deleteAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             controller.addAction(cancelAction)
             self.present(controller, animated: true, completion: nil)
-            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -92,7 +83,6 @@ extension ImpairedProfileViewController {
             
             let privacyPolicyViewController = PrivacyPolicyViewController()
             self.present(privacyPolicyViewController, animated: true, completion: nil)
-            
         }
         
         userSettingsAlertController.addAction(logOutAction)
@@ -120,21 +110,32 @@ extension ImpairedProfileViewController {
 
     func logOut() {
         
-        UserManager.shared.signOut()
-        view.window?.rootViewController = SignInViewController()
-        view.window?.makeKeyAndVisible()
-    }
-    
-    func deleteAccount() {
-        
-        UserManager.shared.deleteAccount() { result in
+        UserManager.shared.signOut { result in
+            
             switch result {
-            case .success(_):
+            case .success:
                 LKProgressHUD.dismiss()
                 self.view.window?.rootViewController = SignInViewController()
                 self.view.window?.makeKeyAndVisible()
             case .failure(let error):
-                if let deleteAccountError = error as? DeleteAccountError {
+                if let signOutError = error as? AccountError {
+                    LKProgressHUD.showFailure(text: signOutError.errorMessage)
+                }
+            }
+        }
+        
+    }
+    
+    func deleteAccount() {
+        
+        UserManager.shared.deleteAccount { result in
+            switch result {
+            case .success:
+                LKProgressHUD.dismiss()
+                self.view.window?.rootViewController = SignInViewController()
+                self.view.window?.makeKeyAndVisible()
+            case .failure(let error):
+                if let deleteAccountError = error as? AccountError {
                     LKProgressHUD.showFailure(text: deleteAccountError.errorMessage)
                 }
             }

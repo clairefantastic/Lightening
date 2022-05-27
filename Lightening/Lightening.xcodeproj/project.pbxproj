@@ -41,7 +41,6 @@
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* VolunteerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */; };
 		7E4297C9281F27BC00649458 /* ImpairedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */; };
-		7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4297CA281F6DC600649458 /* AnimationView.swift */; };
 		7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */; };
 		7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */; };
 		7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */; };
@@ -64,7 +63,7 @@
 		7E44B7E6280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */; };
 		7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */; };
 		7E452C9E283CB99800ABCAE9 /* BeigeTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */; };
-		7E452CA0283F55EA00ABCAE9 /* DeleteAccountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9F283F55EA00ABCAE9 /* DeleteAccountError.swift */; };
+		7E452CA0283F55EA00ABCAE9 /* AccountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9F283F55EA00ABCAE9 /* AccountError.swift */; };
 		7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4702819F4FD0080476E /* AudioListViewController.swift */; };
 		7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */; };
 		7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */; };
@@ -172,7 +171,6 @@
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileViewController.swift; sourceTree = "<group>"; };
 		7E4297C8281F27BC00649458 /* ImpairedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedProfileViewController.swift; sourceTree = "<group>"; };
-		7E4297CA281F6DC600649458 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		7E44B79428090F5600CF24AC /* AddDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsViewController.swift; sourceTree = "<group>"; };
 		7E44B7A82809168100CF24AC /* AddDetailsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsBasicCell.swift; sourceTree = "<group>"; };
 		7E44B7AA2809187C00CF24AC /* AddDetailsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsContentCell.swift; sourceTree = "<group>"; };
@@ -195,7 +193,7 @@
 		7E44B7E4280C4C5500CF24AC /* SelectCoverCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCoverCollectionViewCell.xib; sourceTree = "<group>"; };
 		7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
 		7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeigeTitleButton.swift; sourceTree = "<group>"; };
-		7E452C9F283F55EA00ABCAE9 /* DeleteAccountError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountError.swift; sourceTree = "<group>"; };
+		7E452C9F283F55EA00ABCAE9 /* AccountError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountError.swift; sourceTree = "<group>"; };
 		7E48D4702819F4FD0080476E /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListTableViewCell.swift; sourceTree = "<group>"; };
 		7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListTableViewCell.xib; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 				7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */,
 				7EB3F503280D794C00C6E385 /* SectionHeaderReusableView.swift */,
 				7EA73F422811D81E0071D197 /* AudioPlayerView.swift */,
-				7E4297CA281F6DC600649458 /* AnimationView.swift */,
 				7E14F2B2282E57810007C7E9 /* StretchyTableHeaderView.swift */,
 				7E74EA46283498DD00818F19 /* VinylCloudView.swift */,
 				7E225862281FCCA900FE8694 /* DoorView.swift */,
@@ -607,7 +604,7 @@
 				7ED920F928070E4C00DD892A /* userType.swift */,
 				7EA73F732816EDA60071D197 /* User.swift */,
 				7EA73F712816A4FC0071D197 /* UserManager.swift */,
-				7E452C9F283F55EA00ABCAE9 /* DeleteAccountError.swift */,
+				7E452C9F283F55EA00ABCAE9 /* AccountError.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -897,7 +894,6 @@
 				7E44B7A92809168100CF24AC /* AddDetailsBasicCell.swift in Sources */,
 				7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
-				7E4297CB281F6DC600649458 /* AnimationView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
@@ -935,7 +931,7 @@
 				7EB9DAF02803D9AD009B89D0 /* ImpairedLobbyViewController.swift in Sources */,
 				7E44B7E5280C4C5500CF24AC /* SelectCoverCollectionViewCell.swift in Sources */,
 				7EB3F4FC280D66E900C6E385 /* AudioTopic.swift in Sources */,
-				7E452CA0283F55EA00ABCAE9 /* DeleteAccountError.swift in Sources */,
+				7E452CA0283F55EA00ABCAE9 /* AccountError.swift in Sources */,
 				7ED920FA28070E4C00DD892A /* userType.swift in Sources */,
 				7EB9DAE22803D172009B89D0 /* RTCStates.swift in Sources */,
 				7EA73F572813EBE80071D197 /* UserProfileView.swift in Sources */,

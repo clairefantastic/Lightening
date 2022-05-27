@@ -55,11 +55,8 @@ extension UIView {
         objectView.translatesAutoresizingMaskIntoConstraints = false
 
         objectView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-
         objectView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-
         objectView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-
         objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 

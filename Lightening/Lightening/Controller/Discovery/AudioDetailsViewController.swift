@@ -186,16 +186,6 @@ extension AudioDetailsViewController {
         
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
-        // iPad specific code
-        blockUserAlertController
-        let xOrigin = self.view.bounds.width / 2
-        
-        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-        
-        blockUserAlertController.popoverPresentationController?.sourceRect = popoverRect
-        
-        blockUserAlertController.popoverPresentationController?.permittedArrowDirections = .up
-        
         let shareAction = UIAlertAction(title: "Share This Audio", style: .default) { _ in
             
             let shareUrl = self.audio?.audioUrl

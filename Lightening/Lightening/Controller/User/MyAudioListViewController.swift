@@ -13,12 +13,9 @@ class MyAudioListViewController: AudioListViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "My Audios"
-        
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
         
-        layoutTableView()
-        
-        setUpTableView()
+        configureTableView()
     }
     
     func tableView(_ tableView: UITableView,
@@ -29,13 +26,9 @@ class MyAudioListViewController: AudioListViewController {
         PublishManager.shared.deleteAudio(audio: audio) { result in
                 
             switch result {
-                    
-            case.success(_):
-                
+            case.success:
                 self.audios?.remove(at: indexPath.row)
-                
-            case .failure(_):
-                
+            case .failure:
                 LKProgressHUD.showFailure(text: "Fail to delete audio")
             }
         }
