@@ -110,21 +110,32 @@ extension ImpairedProfileViewController {
 
     func logOut() {
         
-        UserManager.shared.signOut()
-        view.window?.rootViewController = SignInViewController()
-        view.window?.makeKeyAndVisible()
-    }
-    
-    func deleteAccount() {
-        
-        UserManager.shared.deleteAccount() { result in
+        UserManager.shared.signOut { result in
+            
             switch result {
-            case .success(_):
+            case .success:
                 LKProgressHUD.dismiss()
                 self.view.window?.rootViewController = SignInViewController()
                 self.view.window?.makeKeyAndVisible()
             case .failure(let error):
-                if let deleteAccountError = error as? DeleteAccountError {
+                if let signOutError = error as? AccountError {
+                    LKProgressHUD.showFailure(text: signOutError.errorMessage)
+                }
+            }
+        }
+        
+    }
+    
+    func deleteAccount() {
+        
+        UserManager.shared.deleteAccount { result in
+            switch result {
+            case .success:
+                LKProgressHUD.dismiss()
+                self.view.window?.rootViewController = SignInViewController()
+                self.view.window?.makeKeyAndVisible()
+            case .failure(let error):
+                if let deleteAccountError = error as? AccountError {
                     LKProgressHUD.showFailure(text: deleteAccountError.errorMessage)
                 }
             }
