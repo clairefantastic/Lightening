@@ -72,7 +72,9 @@ extension IdentitySelectionViewController {
                         
                     case .failure(let error):
                         
-                        LKProgressHUD.dismiss()
+                        if let accountGeneralError = error as? AccountError {
+                            LKProgressHUD.showFailure(text: accountGeneralError.errorMessage)
+                        }
                     }
                 }
                 
@@ -124,9 +126,10 @@ extension IdentitySelectionViewController {
                         
                     case .failure(let error):
                         
-                        print("fetchData.failure: \(error)")
+                        if let accountGeneralError = error as? AccountError {
+                            LKProgressHUD.showFailure(text: accountGeneralError.errorMessage)
+                        }
                     }
-                    
                 }
                 
             case .failure(let error):

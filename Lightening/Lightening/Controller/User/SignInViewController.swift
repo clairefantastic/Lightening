@@ -314,6 +314,8 @@ extension SignInViewController {
                             
                         case .success(let user):
                             
+                            LKProgressHUD.dismiss()
+                            
                             guard let userIdentity = user?.userIdentity else {
                                 self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
                                 self?.nextViewController.modalPresentationStyle = .fullScreen
@@ -329,8 +331,6 @@ extension SignInViewController {
                                 if self?.presentingViewController == nil {
                                     self?.nextViewController = (self?.volunteerTabBarController ?? UIViewController()) as UIViewController
                                 }
-                                
-                                
                             }
                             self?.nextViewController.modalPresentationStyle = .fullScreen
                             
@@ -338,7 +338,9 @@ extension SignInViewController {
                             
                         case .failure(let error):
                             
-                            print("fetchData.failure: \(error)")
+                            if let accountGeneralError = error as? AccountError {
+                                LKProgressHUD.showFailure(text: accountGeneralError.errorMessage)
+                            }
                         }
                     }
                 }
@@ -360,12 +362,12 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         UserManager.shared.authorizationController(controller: controller, didCompleteWithAuthorization: authorization) { authDataResult in
             
-            LKProgressHUD.dismiss()
-            
             UserManager.shared.fetchUserInfo(with: Auth.auth().currentUser?.uid ?? "") { [weak self] result in
                 switch result {
                     
                 case .success(let user):
+                    
+                    LKProgressHUD.dismiss()
                     
                     guard let userIdentity = user?.userIdentity else {
                         self?.nextViewController = (self?.identitySelectionViewController ?? UIViewController()) as UIViewController
@@ -387,7 +389,9 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
                     
                 case .failure(let error):
                     
-                    print("fetchData.failure: \(error)")
+                    if let accountGeneralError = error as? AccountError {
+                        LKProgressHUD.showFailure(text: accountGeneralError.errorMessage)
+                    }
                 }
                 
             }

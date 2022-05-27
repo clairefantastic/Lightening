@@ -7,6 +7,8 @@
 
 enum AccountError: Error {
     
+    case accountGeneralError
+    
     case signInWithAppleError
     
     case registerVolunteerError
@@ -32,6 +34,9 @@ enum AccountError: Error {
     var errorMessage: String {
         
         switch self {
+            
+        case .accountGeneralError:
+            return "Some error had happened. Please try again."
             
         case .signInWithAppleError:
             return "Fail to sign in with Apple. Please try again."
