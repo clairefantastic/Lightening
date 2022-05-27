@@ -103,18 +103,18 @@ class PublishManager {
      
     }
     
-    func deleteAudio(audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
+    func deleteAudio(audio: Audio, completion: @escaping (Result<(), Error>) -> Void) {
         
         let document = db.collection("audioFiles").document(audio.audioId)
     
-           document.delete() { error in
+           document.delete { error in
                 
                 if let error = error {
                     
                     completion(.failure(error))
                 } else {
                     
-                    completion(.success("Success"))
+                    completion(.success(()))
                 }
             }
         }
@@ -278,7 +278,7 @@ class PublishManager {
         if let uploadData = selectedImage.jpegData(compressionQuality: 0.5) {
                 storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
-                    print("error")
+                    
                     
                 } else {
 
@@ -292,9 +292,9 @@ class PublishManager {
                             
                             switch result {
                                 
-                            case .success(_):
+                            case .success:
                                 print("success")
-                            case .failure(_):
+                            case .failure:
                                 print("fail")
                             }
                         }
