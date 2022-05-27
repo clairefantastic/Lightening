@@ -40,8 +40,7 @@ struct AudioFileManager {
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
-    
-    
+
     static func uniqeString() -> String {
         let timestamp = Date().timeIntervalSince1970
         return timestamp.description

@@ -10,11 +10,8 @@ import UIKit
 class IdentitySelectionViewController: BaseViewController {
     
     private let visuallyImpairedButton = BeigeTitleButton()
-    
     private let volunteerButton = BeigeTitleButton()
-    
     private let rotationVinylImageView = UIImageView()
-    
     private let instructionLabel = UILabel()
     
     var name: String?
@@ -29,30 +26,116 @@ class IdentitySelectionViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        visuallyImpairedButton.layer.cornerRadius = visuallyImpairedButton.frame.height / 2
-        volunteerButton.layer.cornerRadius = volunteerButton.frame.height / 2
         rotationVinylImageView.rotate()
-        
     }
 }
 
 extension IdentitySelectionViewController {
     
-    private func configureRotationVinylImageView() {
+    private func configureVolunteerButton() {
         
-        self.view.addSubview(rotationVinylImageView)
+        self.view.addSubview(volunteerButton)
         
-        rotationVinylImageView.translatesAutoresizingMaskIntoConstraints = false
+        volunteerButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: rotationVinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 240).isActive = true
+        volunteerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        volunteerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
+        volunteerButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 2/3).isActive = true
+        volunteerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        NSLayoutConstraint(item: rotationVinylImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 240).isActive = true
+        ElementsStyle.styleButton(volunteerButton, title: "I want to be a volunteer!")
         
-        NSLayoutConstraint(item: rotationVinylImageView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
+    }
+    
+    @objc func pushVolunteerPage() {
         
-        NSLayoutConstraint(item: rotationVinylImageView, attribute: .bottom, relatedBy: .equal, toItem: instructionLabel, attribute: .top, multiplier: 1, constant: -36).isActive = true
+        var user = User(userIdentity: 1)
         
-        rotationVinylImageView.image = UIImage.asset(ImageAsset.blackVinyl)
+        UserManager.shared.registerAsVolunteer(name: name ?? "Lighty", user: &user) { result in
+            
+            switch result {
+                
+            case .success:
+                
+                guard let userId = user.userId else { return }
+                
+                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
+                    switch result {
+                        
+                    case .success:
+                        
+                        let tabBarController = VolunteerTabBarController()
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self?.present(tabBarController, animated: true, completion: nil)
+                        LKProgressHUD.dismiss()
+                        
+                    case .failure(let error):
+                        
+                        LKProgressHUD.dismiss()
+                    }
+                }
+                
+            case .failure(let error):
+                
+                if let registerVolunteerError = error as? AccountError {
+                    LKProgressHUD.showFailure(text: registerVolunteerError.errorMessage)
+                }
+            }
+        }
+    }
+    
+    private func configureVisuallyImpairedButton() {
+        
+        self.view.addSubview(visuallyImpairedButton)
+        
+        visuallyImpairedButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        visuallyImpairedButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        visuallyImpairedButton.bottomAnchor.constraint(equalTo: volunteerButton.topAnchor, constant: -24).isActive = true
+        visuallyImpairedButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 2/3).isActive = true
+        visuallyImpairedButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        ElementsStyle.styleButton(visuallyImpairedButton, title: "I need visual assistance!")
+        
+        visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
+    }
+    
+    @objc func pushVisuallyImpairedPage() {
+        
+        var user = User(userIdentity: 0)
+        
+        UserManager.shared.registerAsVisuallyImpaired(name: name ?? "Lighty", user: &user) { result in
+            
+            switch result {
+                
+            case .success:
+                
+                guard let userId = user.userId else { return }
+                
+                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
+                    switch result {
+                        
+                    case .success:
+                        
+                        let tabBarController = VisuallyImpairedTabBarController()
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self?.present(tabBarController, animated: true, completion: nil)
+                        
+                    case .failure(let error):
+                        
+                        print("fetchData.failure: \(error)")
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                
+                if let registerImpairedError = error as? AccountError {
+                    LKProgressHUD.showFailure(text: registerImpairedError.errorMessage)
+                }
+            }
+        }
     }
     
     private func configureInstructionLabel() {
@@ -61,13 +144,10 @@ extension IdentitySelectionViewController {
         
         instructionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: instructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: instructionLabel, attribute: .bottom, relatedBy: .equal, toItem: visuallyImpairedButton, attribute: .top, multiplier: 1, constant: -16).isActive = true
+        instructionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        instructionLabel.bottomAnchor.constraint(equalTo: visuallyImpairedButton.topAnchor, constant: -16).isActive = true
+        instructionLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        instructionLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         instructionLabel.text = "Please select an identity"
         instructionLabel.font = UIFont.bold(size: 20)
@@ -79,121 +159,17 @@ extension IdentitySelectionViewController {
             .defaultHigh, for: .horizontal)
     }
     
-    private func configureVisuallyImpairedButton() {
+    private func configureRotationVinylImageView() {
         
-        self.view.addSubview(visuallyImpairedButton)
+        self.view.addSubview(rotationVinylImageView)
         
-        visuallyImpairedButton.translatesAutoresizingMaskIntoConstraints = false
+        rotationVinylImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
+        rotationVinylImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        rotationVinylImageView.bottomAnchor.constraint(equalTo: instructionLabel.topAnchor, constant: -36).isActive = true
+        rotationVinylImageView.widthAnchor.constraint(equalToConstant: 240).isActive = true
+        rotationVinylImageView.heightAnchor.constraint(equalToConstant: 240).isActive = true
         
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
-        
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: visuallyImpairedButton, attribute: .bottom, relatedBy: .equal, toItem: volunteerButton, attribute: .top, multiplier: 1, constant: -24).isActive = true
-        
-        ElementsStyle.styleButton(visuallyImpairedButton, title: "I need visual assistance!")
-        
-        visuallyImpairedButton.addTarget(self, action: #selector(pushVisuallyImpairedPage), for: .touchUpInside)
-        
+        rotationVinylImageView.image = UIImage.asset(ImageAsset.blackVinyl)
     }
-    
-    @objc func pushVisuallyImpairedPage() {
-        
-        var user = User(userIdentity: 0)
-        
-        UserManager.shared.registerAsVisuallyImpaired(name: name ?? "Lighty", user: &user) { result in
-            
-            switch result {
-            
-            case .success:
-                
-                guard let userId = user.userId else { return }
-                
-                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
-                        switch result {
-                            
-                        case .success(let user):
-                            
-                            let tabBarController = VisuallyImpairedTabBarController()
-                            
-                            tabBarController.modalPresentationStyle = .fullScreen
-                            
-                            self?.present(tabBarController, animated: true, completion: nil)
-
-                        case .failure(let error):
-                            
-                            print("fetchData.failure: \(error)")
-                        }
-                        
-                }
-                
-                print("visuallyImpaired sign in success")
-
-            case .failure(let error):
-                
-                print("visuallyImpairedSignin.failure: \(error)")
-            }
-        }
-    }
-    
-    private func configureVolunteerButton() {
-        
-        self.view.addSubview(volunteerButton)
-        
-        volunteerButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: volunteerButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
-        
-        NSLayoutConstraint(item: volunteerButton, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 1).isActive = true
-        
-        NSLayoutConstraint(item: volunteerButton, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: volunteerButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -100).isActive = true
-        
-        ElementsStyle.styleButton(volunteerButton, title: "I want to be a volunteer!")
-        
-        volunteerButton.addTarget(self, action: #selector(pushVolunteerPage), for: .touchUpInside)
-        
-    }
-    
-    @objc func pushVolunteerPage() {
-    
-        var user = User(userIdentity: 1)
-        
-        UserManager.shared.registerAsVolunteer(name: name ?? "Lighty", user: &user) { result in
-            
-            switch result {
-            
-            case .success:
-                
-                guard let userId = user.userId else { return }
-                
-                UserManager.shared.fetchUserInfo(with: userId) { [weak self] result in
-                        switch result {
-                            
-                        case .success(let user):
-                            
-                            let tabBarController = VolunteerTabBarController()
-                            
-                            tabBarController.modalPresentationStyle = .fullScreen
-                            
-                            self?.present(tabBarController, animated: true, completion: nil)
-
-                        case .failure(let error):
-                            
-                            print("fetchData.failure: \(error)")
-                        }
-                }
-                
-                print("Volunteer sign in success")
-    
-            case .failure(let error):
-                
-                print("volunteerSignin.failure: \(error)")
-            }
-        }
-    }
-
 }

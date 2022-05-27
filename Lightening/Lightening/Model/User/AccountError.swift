@@ -1,11 +1,19 @@
 //
-//  DeleteAccountError.swift
+//  AccountError.swift
 //  Lightening
 //
 //  Created by claire on 2022/5/26.
 //
 
-enum DeleteAccountError: Error {
+enum AccountError: Error {
+    
+    case signInWithAppleError
+    
+    case registerVolunteerError
+    
+    case registerImpairedError
+    
+    case signOutError
     
     case getUserAudiosError
     
@@ -24,6 +32,18 @@ enum DeleteAccountError: Error {
     var errorMessage: String {
         
         switch self {
+            
+        case .signInWithAppleError:
+            return "Fail to sign in with Apple. Please try again."
+            
+        case .registerVolunteerError:
+            return "Fail to register as a volunteer. Please try again."
+            
+        case .registerImpairedError:
+            return "Fail to register as a visually impaired user. Please try again."
+            
+        case .signOutError:
+            return "Fail to sign out. Please try again."
             
         case .getUserAudiosError:
             return "Fail to get all uploaded audios by current user. Please try again."
@@ -49,4 +69,3 @@ enum DeleteAccountError: Error {
         }
     }
 }
-

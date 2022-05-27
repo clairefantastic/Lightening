@@ -11,19 +11,12 @@ import FirebaseAuth
 class VolunteerProfileViewController: ImpairedProfileViewController {
     
     private let lightImageView = UIImageView()
-    
     private let rightLightImageView = UIImageView()
-    
     private let myAudiosButton = UIButton()
-    
     private let likedAudiosButton = UIButton()
-    
     private let seeMyAudiosButton = UIButton()
-    
     private let seeLikedAudiosButton = UIButton()
-    
     private var myAudios: [Audio]?
-    
     private var myLikedAudios: [Audio]?
     
     private var hideLeftLightBeam: Bool? {
@@ -33,13 +26,10 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
             if hideLeftLightBeam == false {
                 
                 lightImageView.isHidden = false
-                
                 seeMyAudiosButton.isHidden = false
-                
             } else {
                 
                 lightImageView.isHidden = true
-                
                 seeMyAudiosButton.isHidden = true
             }
         }
@@ -52,24 +42,19 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
             if hideRightLightBeam == false {
                 
                 rightLightImageView.isHidden = false
-                
                 seeLikedAudiosButton.isHidden = false
-                
                 likedAudiosButton.tintColor = UIColor.darkBlue
                 
             } else {
                 
                 rightLightImageView.isHidden = true
-                
                 seeLikedAudiosButton.isHidden = true
-                
                 likedAudiosButton.tintColor = UIColor.beige
             }
         }
     }
     
     private var myAudiosButtonIsSelected = false
-    
     private var likedAudiosButtonIsSelected = false
     
     override func viewDidLoad() {
@@ -85,16 +70,16 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         configureSettingButton()
         ElementsStyle.styleClearBackground(lightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
         self.userProfileView.addGestureRecognizer(tapGestureRecognizer)
-        self.userProfileView.imageUrl = UserManager.shared.currentUser?.image?.absoluteString
     }
     
     @objc func editName() {
         
         let controller = UIAlertController(title: "Change Display Name", message: "Please enter a new name.", preferredStyle: .alert)
         controller.addTextField { textField in
-           textField.placeholder = "Name"
+            textField.placeholder = "Name"
             textField.keyboardType = UIKeyboardType.default
         }
         controller.textFields?[0].delegate = self
@@ -103,25 +88,21 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
             if let name = controller.textFields?[0].text {
                 PublishManager.shared.publishName(name: name) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         LKProgressHUD.dismiss()
                         self.navigationItem.title = "\(name)'s Profile"
-                    case .failure(_):
+                    case .failure:
                         LKProgressHUD.showFailure(text: "Fail to update display name!")
                     }
-                    
                 }
-
             } else {
                 return
             }
-          
         }
         controller.addAction(okAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +123,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
     
     private func fetchMyAudios() {
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
+        PublishManager.shared.fetchAudios { [weak self] result in
             
             switch result {
                 
@@ -152,9 +133,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
+            case .failure:
                 
                 LKProgressHUD.showFailure(text: "Fail to fetch my audios")
             }
@@ -162,9 +141,9 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         }
         
     }
-
+    
     private func fetchLikedAudios() {
-
+        
         PublishManager.shared.fetchLikedAudios(userId: UserManager.shared.currentUser?.userId ?? "") { [weak self] result in
             
             switch result {
@@ -175,22 +154,19 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
                     
                     self?.myLikedAudios = []
                     
-                    for likedAudio in likedAudios where blockList.contains(likedAudio.authorId ?? "") == false {
+                    for likedAudio in likedAudios where blockList.contains(likedAudio.authorId) == false {
                         
                         self?.myLikedAudios?.append(likedAudio)
-                        
                     }
                     
                 } else {
                     
                     self?.myLikedAudios = likedAudios
                 }
-            
+                
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
+            case .failure:
                 
                 LKProgressHUD.showFailure(text: "Fail to fetch liked audios")
             }
@@ -204,48 +180,34 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         
         imagePickerController.delegate = self
         
-        
-
         let imagePickerAlertController = UIAlertController(title: "Upload Profile Photo", message: "Please select a photo for your profile", preferredStyle: .actionSheet)
         
-        // iPad specific code
-        imagePickerController.popoverPresentationController?.sourceView = self.view
-        
-        let xOrigin = self.view.bounds.width / 2
-        
-        let popoverRect = CGRect(x: xOrigin, y: 0, width: 1, height: 1)
-                
-        imagePickerAlertController.popoverPresentationController?.sourceRect = popoverRect
-                
-        imagePickerAlertController.popoverPresentationController?.permittedArrowDirections = .up
-
-        let imageFromLibAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
-
+        let imageFromLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
+            
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 
                 imagePickerController.sourceType = .photoLibrary
                 self.present(imagePickerController, animated: true, completion: nil)
             }
         }
-              let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
-
-                  if UIImagePickerController.isSourceTypeAvailable(.camera) {
-
-                      imagePickerController.sourceType = .camera
-                      self.present(imagePickerController, animated: true, completion: nil)
-                  }
-              }
+        let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            }
+        }
         
-              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-
-                  imagePickerAlertController.dismiss(animated: true, completion: nil)
-              }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+            imagePickerAlertController.dismiss(animated: true, completion: nil)
+        }
         
-              imagePickerAlertController.addAction(imageFromLibAction)
-              imagePickerAlertController.addAction(imageFromCameraAction)
-              imagePickerAlertController.addAction(cancelAction)
-
-              present(imagePickerAlertController, animated: true, completion: nil)
+        imagePickerAlertController.addAction(imageFromLibraryAction)
+        imagePickerAlertController.addAction(imageFromCameraAction)
+        imagePickerAlertController.addAction(cancelAction)
+        
+        present(imagePickerAlertController, animated: true, completion: nil)
     }
 }
 
@@ -258,11 +220,8 @@ extension VolunteerProfileViewController {
         lightImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: lightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: lightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
-        
         NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
-        
         NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
         
         lightImageView.image = UIImage.asset(ImageAsset.light)
@@ -274,11 +233,8 @@ extension VolunteerProfileViewController {
         rightLightImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: rightLightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: rightLightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -80).isActive = true
-        
         NSLayoutConstraint(item: rightLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
-        
         NSLayoutConstraint(item: rightLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250).isActive = true
         
         rightLightImageView.image = UIImage.asset(ImageAsset.light)
@@ -286,7 +242,7 @@ extension VolunteerProfileViewController {
         hideLeftLightBeam = true
         
         hideRightLightBeam = true
-    
+        
     }
     
     private func configureButtons() {
@@ -296,21 +252,15 @@ extension VolunteerProfileViewController {
         myAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
-        
         NSLayoutConstraint(item: myAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -170).isActive = true
-        
         NSLayoutConstraint(item: myAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
         NSLayoutConstraint(item: myAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
         myAudiosButton.setTitle("My Audios", for: .normal)
         
         myAudiosButton.setTitleColor(UIColor.beige, for: .normal)
-        
         myAudiosButton.setTitleColor(UIColor.darkBlue, for: .selected)
-        
         myAudiosButton.titleLabel?.font = UIFont.bold(size: 16)
-        
         myAudiosButton.addTarget(self, action: #selector(selectMyAudiosButton), for: .touchUpInside)
         
         self.view.addSubview(seeMyAudiosButton)
@@ -318,19 +268,13 @@ extension VolunteerProfileViewController {
         seeMyAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: seeMyAudiosButton, attribute: .top, relatedBy: .equal, toItem: myAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: seeMyAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: myAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: seeMyAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
         NSLayoutConstraint(item: seeMyAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
         seeMyAudiosButton.setTitle("See More", for: .normal)
-        
         seeMyAudiosButton.setTitleColor(UIColor.beige, for: .normal)
-        
         seeMyAudiosButton.titleLabel?.font = UIFont.regular(size: 14)
-        
         seeMyAudiosButton.addTarget(self, action: #selector(didTapSeeMoreMyAudios), for: .touchUpInside)
         
         self.view.addSubview(likedAudiosButton)
@@ -338,17 +282,12 @@ extension VolunteerProfileViewController {
         likedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: likedAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.rightLightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
-        
         NSLayoutConstraint(item: likedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -90).isActive = true
-        
         NSLayoutConstraint(item: likedAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
         NSLayoutConstraint(item: likedAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
         likedAudiosButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
-        
         likedAudiosButton.tintColor = UIColor.beige
-        
         likedAudiosButton.addTarget(self, action: #selector(selectLikedAudiosButton), for: .touchUpInside)
         
         self.view.addSubview(seeLikedAudiosButton)
@@ -356,19 +295,13 @@ extension VolunteerProfileViewController {
         seeLikedAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .top, relatedBy: .equal, toItem: likedAudiosButton, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: likedAudiosButton, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
         NSLayoutConstraint(item: seeLikedAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
         
         seeLikedAudiosButton.setTitle("See More", for: .normal)
-        
         seeLikedAudiosButton.setTitleColor(UIColor.beige, for: .normal)
-        
         seeLikedAudiosButton.titleLabel?.font = UIFont.regular(size: 14)
-        
         seeLikedAudiosButton.addTarget(self, action: #selector(didTapSeeMoreLikedAudios), for: .touchUpInside)
     }
     
@@ -377,19 +310,13 @@ extension VolunteerProfileViewController {
         if myAudiosButtonIsSelected == false {
             
             myAudiosButton.isSelected = true
-            
             hideLeftLightBeam = false
-            
             myAudiosButtonIsSelected = true
-            
         } else {
             
             myAudiosButton.isSelected = false
-            
             hideLeftLightBeam = true
-            
             myAudiosButtonIsSelected = false
-            
         }
         
     }
@@ -400,23 +327,19 @@ extension VolunteerProfileViewController {
         myAudioListViewController.audios = myAudios
         self.navigationController?.pushViewController(myAudioListViewController, animated: true)
     }
-       
+    
     @objc func selectLikedAudiosButton() {
         
         if likedAudiosButtonIsSelected == false {
             
             likedAudiosButton.isSelected = true
-            
             hideRightLightBeam = false
-            
             likedAudiosButtonIsSelected = true
             
         } else {
             
             myAudiosButton.isSelected = false
-            
             hideRightLightBeam = true
-            
             likedAudiosButtonIsSelected = false
             
         }
@@ -441,14 +364,10 @@ extension VolunteerProfileViewController: UIImagePickerControllerDelegate, UINav
             
             selectedImageFromPicker = pickedImage
         }
-        // 當判斷有 selectedImage 時，我們會在 if 判斷式裡將圖片上傳
         if let selectedImage = selectedImageFromPicker {
             
             PublishManager.shared.getProfilePhotoUrl(selectedImage: selectedImage)
-            
             self.userProfileView.profileImageView.image = selectedImage
-            
-            print("\(selectedImage)")
         }
         
         dismiss(animated: true, completion: nil)
@@ -460,11 +379,10 @@ extension VolunteerProfileViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let countOfWords = string.count + textField.text!.count - range.length
-    
+        
         if countOfWords > 15 {
             return false
         }
-        
         return true
     }
 }
