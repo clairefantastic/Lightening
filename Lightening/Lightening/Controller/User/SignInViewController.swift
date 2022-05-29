@@ -75,14 +75,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: welcomeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        welcomeLabel.text = "Welcome, Lightening!"
-        welcomeLabel.font = UIFont.bold(size: 24)
-        welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.darkBlue
-        welcomeLabel.textAlignment = .center
-        welcomeLabel.numberOfLines = 0
-        welcomeLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        ElementsStyle.styleWelcomeLabel(welcomeLabel, text: "Welcome, Lightening!")
     }
     
     private func configureEmailLabel() {
