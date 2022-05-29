@@ -15,6 +15,8 @@ enum AccountError: Error {
     
     case registerImpairedError
     
+    case signUpError
+    
     case signOutError
     
     case getUserAudiosError
@@ -46,6 +48,9 @@ enum AccountError: Error {
             
         case .registerImpairedError:
             return "Fail to register as a visually impaired user. Please try again."
+            
+        case .signUpError:
+            return "Fail to sign up in Firebase. Please try again."
             
         case .signOutError:
             return "Fail to sign out. Please try again."

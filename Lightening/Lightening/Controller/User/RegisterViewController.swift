@@ -223,7 +223,7 @@ extension RegisterViewController {
             UserManager.shared.register(with: nameTextField.text ?? "", with: emailTextField.text ?? "", with: passwordTextField.text ?? "") { error in
                 
                 if error != nil {
-                    LKProgressHUD.showFailure(text: "Firebase signUp fail")
+                    LKProgressHUD.showFailure(text: AccountError.signUpError.errorMessage)
                 } else {
                     let identitySelectionViewController = IdentitySelectionViewController()
                     
