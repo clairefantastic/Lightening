@@ -9,24 +9,22 @@ import UIKit
 
 class AudioListViewController: BaseViewController {
     
-    let noContentLabel = DarkBlueLabel()
+    private let noContentLabel = UILabel()
+    private var tableView = UITableView()
     
-    var audios: [Audio]? {
+    var audios: [Audio] = [] {
         
         didSet {
             
             tableView.reloadData()
             
-            if audios?.isEmpty == true {
+            if audios.isEmpty == true {
                 
                 configureNoContentLabel()
-                
             }
         }
     }
-    
-    private var tableView = UITableView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,21 +41,11 @@ extension AudioListViewController {
         noContentLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
-        noContentLabel.text = "No audio files yet!"
-        noContentLabel.font = UIFont.regular(size: 20)
-        noContentLabel.adjustsFontForContentSizeCategory = true
-        noContentLabel.textAlignment = .center
-        noContentLabel.numberOfLines = 0
-        noContentLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
+        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
     }
     
     func configureTableView() {
@@ -74,7 +62,6 @@ extension AudioListViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-    
     }
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -84,13 +71,13 @@ extension AudioListViewController {
         
         let touchPoint = sender.location(in: self.tableView)
         
-        if (sender.state == UIGestureRecognizer.State.ended) {
+        if sender.state == UIGestureRecognizer.State.ended {
             
             let indexPath = self.tableView.indexPathForRow(at: touchPoint)
             
-            if indexPath != nil && self.audios?[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+            if indexPath != nil && self.audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
                 
-                showBlockUserAlert(blockUserId: self.audios?[indexPath?.row ?? 0].authorId ?? "")
+                showBlockUserAlert(blockUserId: self.audios[indexPath?.row ?? 0].authorId ?? "")
             }
         }
     }
@@ -100,7 +87,7 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return audios?.count ?? 0
+        return audios.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,7 +95,7 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultTableViewCell.self)", for: indexPath) as? SearchResultTableViewCell
         else { return UITableViewCell() }
         
-        cell.audio = audios?[indexPath.row]
+        cell.audio = audios[indexPath.row]
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
         
@@ -120,9 +107,9 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let audio = audios?[indexPath.row] {
+//        if audio = audios[indexPath.row] {
             
-            showPlayer(audio: audio)
-        }
+            showPlayer(audio: audios[indexPath.row])
+        
     }
 }
