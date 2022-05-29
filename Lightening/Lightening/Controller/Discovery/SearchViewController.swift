@@ -35,19 +35,12 @@ class SearchViewController: BaseViewController {
         configureNoContentLabel()
         
         navigationItem.leftBarButtonItem?.tintColor = .black
-        
         searchController.searchResultsUpdater = self
-        
         navigationItem.searchController = searchController
-        
         searchController.obscuresBackgroundDuringPresentation = false
-        
         navigationItem.hidesSearchBarWhenScrolling = false
     
-        layoutTableView()
-        
-        setUpTableView()
-        
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +51,7 @@ class SearchViewController: BaseViewController {
     
     private func fetchData() {
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
+        PublishManager.shared.fetchAudios { [weak self] result in
             
             switch result {
             
@@ -78,9 +71,9 @@ class SearchViewController: BaseViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
+            case .failure:
                 
-                LKProgressHUD.showFailure(text: "Fail to fetch Search Page data")
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
             
         }
@@ -90,14 +83,11 @@ class SearchViewController: BaseViewController {
 
 extension SearchViewController {
     
-    private func layoutTableView() {
+    private func configureTableView() {
         
         view.stickSubView(tableView)
         
         ElementsStyle.styleClearBackground(tableView)
-    }
-    
-    private func setUpTableView() {
         
         tableView.separatorStyle = .none
         
@@ -108,7 +98,6 @@ extension SearchViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-    
     }
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -146,7 +135,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.audio = filteredAudioFiles?[indexPath.row]
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
-        
         cell.addGestureRecognizer(longPress)
         
         return cell
@@ -173,7 +161,6 @@ extension SearchViewController: UISearchResultsUpdating {
                     self.filteredAudioFiles = []
                 }
         self.tableView.reloadData()
-                
     }
 }
 
