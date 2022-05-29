@@ -73,6 +73,8 @@ class AudioPlayerViewController: UIViewController {
                 
             case .success(let likedAudios):
                 
+                self?.isLiked = false
+                
                 guard let audio = self?.audio else {
                     return
                 }
@@ -104,18 +106,14 @@ class AudioPlayerViewController: UIViewController {
     
     private func addPlayerView() {
         
-        self.view.stickSubView(playerView)
+        view.stickSubView(playerView)
     }
     
     @objc func didTapView() {
+        
         let audioDescriptionViewController = AudioDetailsViewController()
-        
         audioDescriptionViewController.audio = audio
-        
         self.present(audioDescriptionViewController, animated: true, completion: nil)
-    
-//        navigationController?.pushViewController(audioDescriptionViewController, animated: true)
-
     }
     
     @objc func likeAudio(_ sender: UIButton) {
@@ -129,9 +127,9 @@ class AudioPlayerViewController: UIViewController {
                 
                 switch result {
             
-                case .success(_):
+                case .success:
                     print("Successfully unlike this audio!")
-                case .failure(_):
+                case .failure:
                     print("Fail to unlike this audio")
                 }
             }
@@ -144,9 +142,9 @@ class AudioPlayerViewController: UIViewController {
                 
                 switch result {
             
-                case .success(_):
+                case .success:
                     print("Successfully like this audio!")
-                case .failure(_):
+                case .failure:
                     print("Fail to like this audio")
                 }
             }

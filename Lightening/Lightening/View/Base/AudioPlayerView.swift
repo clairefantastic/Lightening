@@ -89,7 +89,7 @@ class AudioPlayerView: UIView {
             
             player = AVPlayer(playerItem: playerItem)
             player.volume = 300.0
-//            player.play()
+
         } catch let error {
             print(error.localizedDescription)
         }
