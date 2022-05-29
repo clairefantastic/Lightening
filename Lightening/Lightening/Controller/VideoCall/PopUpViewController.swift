@@ -39,11 +39,11 @@ class PopUpViewController: UIViewController {
         
         NSLayoutConstraint(item: animationView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 180).isActive = true
         
-        animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
-            self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
-                self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
-                    self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
-                        self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { (finished) in
+        animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { _ in
+            self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { _ in
+                self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { _ in
+                    self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { _ in
+                        self.animationView.play(fromProgress: 0, toProgress: 1, loopMode: .playOnce) { _ in
                             self.animationView.removeFromSuperview()
                             self.dismiss(animated: true)
                         }

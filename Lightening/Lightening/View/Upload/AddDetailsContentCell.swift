@@ -65,5 +65,17 @@ class AddDetailsContentCell: AddDetailsBasicCell, UITextViewDelegate {
         
         return true
     }
+    
+    override func layoutCell(title: String) {
+        
+        if index == 0 {
+            
+            categoryLabel.text = title
+            
+        } else if index == 1 {
+            
+            categoryLabel.text = title
+        }
+    }
 
 }

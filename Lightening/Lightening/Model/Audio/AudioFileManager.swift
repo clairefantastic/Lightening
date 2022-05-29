@@ -46,4 +46,3 @@ struct AudioFileManager {
         return timestamp.description
     }
 }
-

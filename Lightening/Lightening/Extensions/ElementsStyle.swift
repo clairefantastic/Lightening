@@ -38,6 +38,29 @@ class ElementsStyle {
             .defaultHigh, for: .horizontal)
     }
     
+    static func styleEmptyLabel(_ label: UILabel, text: String) {
+        
+        label.text = text
+        label.font = UIFont.regular(size: 20)
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
+    
+    static func styleWelcomeLabel(_ label: UILabel, text: String) {
+        
+        label.text = text
+        label.font = UIFont.bold(size: 24)
+        label.adjustsFontForContentSizeCategory = true
+        label.textColor = UIColor.darkBlue
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(
+            .defaultHigh, for: .horizontal)
+    }
+    
     static func styleTextField(_ textField: UITextField) {
         
         textField.layer.borderWidth = 2

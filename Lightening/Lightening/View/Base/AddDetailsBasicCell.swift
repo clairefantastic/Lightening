@@ -16,7 +16,7 @@ class AddDetailsBasicCell: UITableViewCell {
 
     //Implement by child class
     func layoutCell(title: String) {
-
+        
     }
     
 }

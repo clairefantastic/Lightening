@@ -12,26 +12,21 @@ import CoreLocation
 class MapViewController: BaseViewController {
     
     private let mapView = MKMapView()
-    
     private let locationManager = CLLocationManager()
-    
     private var audioAnnotations: [AudioAnnotation] = []
-    
     private var audios: [Audio] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        layoutMapView()
+        self.navigationItem.title = VolunteerTab.map.tabBarItem().title
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
+        view.stickSubView(mapView)
+        mapView.layer.cornerRadius = 10
         mapView.delegate = self
         
         determineCurrentLocation()
-        
-        self.navigationItem.title = VolunteerTab.map.tabBarItem().title
-        
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +39,7 @@ class MapViewController: BaseViewController {
     
     func notifyBlockUser() {
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
+        PublishManager.shared.fetchAudios { [weak self] result in
             
             switch result {
             
@@ -54,7 +49,7 @@ class MapViewController: BaseViewController {
                 
                 if let blockList = UserManager.shared.currentUser?.blockList {
                     
-                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                    for audio in audios where blockList.contains(audio.authorId ) == false {
                         
                         self?.audios.append(audio)
                         
@@ -144,10 +139,6 @@ extension MapViewController: MKMapViewDelegate {
           view.canShowCallout = true
           view.calloutOffset = CGPoint(x: -5, y: 5)
             
-          let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.viewLongPress))
-            
-          view.addGestureRecognizer(longPress)
-            
           let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             button.setImage(UIImage.asset(ImageAsset.blackVinyl), for: .normal)
           view.rightCalloutAccessoryView = button
@@ -164,29 +155,4 @@ extension MapViewController: MKMapViewDelegate {
         showPlayer(audio: audioFile[0])
     }
     
-}
-
-extension MapViewController {
-    
-    func layoutMapView() {
-        
-        view.addSubview(mapView)
-        
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        
-        mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
-        mapView.layer.cornerRadius = 10
-        
-    }
-    
-    @objc func viewLongPress() {
-        
-    }
 }

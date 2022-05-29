@@ -34,7 +34,7 @@ class BaseViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = UIColor.black
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
         navigationItem.rightBarButtonItem?.tintColor = .black
         
@@ -54,15 +54,17 @@ class BaseViewController: UIViewController {
         view.addSubview(audioPlayerViewController.view)
         audioPlayerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .centerX, relatedBy: .equal,
+        guard let playerView = audioPlayerViewController.view else { return }
+        
+        NSLayoutConstraint(item: playerView, attribute: .centerX, relatedBy: .equal,
                            toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .bottom, relatedBy: .equal,
+        NSLayoutConstraint(item: playerView, attribute: .bottom, relatedBy: .equal,
                            toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        NSLayoutConstraint(item: playerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
         
-        NSLayoutConstraint(item: audioPlayerViewController.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
+        NSLayoutConstraint(item: playerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
     }
     
     func showBlockUserAlert(blockUserId: String) {

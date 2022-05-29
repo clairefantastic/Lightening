@@ -37,7 +37,7 @@ class VolunteerLobbyViewController: BaseViewController {
     var remoteCandidateCount: Int = 0 {
         didSet {
             if remoteCandidateCount >= 1 {
-                NotificationCenter.default.post(name: NSNotification.Name (notificationKey1), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(notificationKey1), object: nil)
                 
                 doorView.answerVideoCallButton.layer.add(CustomAnimationHandler.setScaleAnimation(keyPath: "transform.scale", fromValue: 1.2, toValue: 0.8), forKey: nil)
                 
@@ -67,7 +67,7 @@ class VolunteerLobbyViewController: BaseViewController {
         
         self.navigationItem.title = VolunteerTab.lobby.tabBarItem().title
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
         configureDoorView()
         configureInstructionLabel()

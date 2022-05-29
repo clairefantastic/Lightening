@@ -214,7 +214,7 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
         switch AddDetailsSection.allCases[indexPath.row] {
             
-        case .title, .description:
+        case .title:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
                     
@@ -223,6 +223,20 @@ extension AddDetailsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.index = indexPath.row
             
             cell.layoutCell(title: AddDetailsSection.title.rawValue)
+            
+            cell.delegate = self
+            
+            return cell
+                
+        case .description:
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(AddDetailsContentCell.self)", for: indexPath) as? AddDetailsContentCell
+                    
+            else { return UITableViewCell() }
+            
+            cell.index = indexPath.row
+            
+            cell.layoutCell(title: AddDetailsSection.description.rawValue)
             
             cell.delegate = self
             

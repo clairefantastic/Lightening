@@ -64,7 +64,7 @@ class VideoCallViewController: UIViewController {
         containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
                                                                     options: [],
                                                                     metrics: nil,
-                                                                    views: ["view":view]))
+                                                                    views: ["view": view]))
         
         containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
                                                                     options: [],
@@ -85,7 +85,7 @@ class VideoCallViewController: UIViewController {
 
         self.webRTCClient.createPeerConnection()
         
-        NotificationCenter.default.post(name: NSNotification.Name (notificationKey2), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(notificationKey2), object: nil)
         
         self.dismiss(animated: true)
         

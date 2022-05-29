@@ -13,7 +13,8 @@ class ImpairedDiscoveryViewController: BaseViewController {
     
     var audios: [Audio] = []
     
-    private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private var collectionView = UICollectionView(frame: CGRect.zero,
+                                                  collectionViewLayout: UICollectionViewFlowLayout.init())
     
     lazy var dataSource = makeDataSource()
     
@@ -57,9 +58,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
     }
     
     func fetchData() {
-        PublishManager.shared.fetchAudios() { [weak self] result in
-            
-            // self
+        PublishManager.shared.fetchAudios { [weak self] result in
             
             switch result {
                 
@@ -69,7 +68,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
                     
                     self?.audios = []
                     
-                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                    for audio in audios where blockList.contains(audio.authorId) == false {
                         
                         self?.audios.append(audio)
                     }
@@ -90,7 +89,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(_):
+            case .failure:
                 
                 LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data.")
             }
@@ -164,9 +163,9 @@ class ImpairedDiscoveryViewController: BaseViewController {
             
             let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
             //
-            if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+            if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId != UserManager.shared.currentUser?.userId {
                 
-                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId ?? "")
+                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId)
 
             }
         }
@@ -187,7 +186,7 @@ extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
             AVPlayerHandler.shared.setPlayer(url: audio.audioUrl)
         }
         
-        DispatchQueue.main.async { // ?
+        DispatchQueue.main.async {
             LKProgressHUD.dismiss()
         }
         

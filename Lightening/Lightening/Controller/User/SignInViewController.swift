@@ -75,14 +75,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: welcomeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         NSLayoutConstraint(item: welcomeLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
-        welcomeLabel.text = "Welcome, Lightening!"
-        welcomeLabel.font = UIFont.bold(size: 24)
-        welcomeLabel.adjustsFontForContentSizeCategory = true
-        welcomeLabel.textColor = UIColor.darkBlue
-        welcomeLabel.textAlignment = .center
-        welcomeLabel.numberOfLines = 0
-        welcomeLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        ElementsStyle.styleWelcomeLabel(welcomeLabel, text: "Welcome, Lightening!")
     }
     
     private func configureEmailLabel() {
@@ -96,7 +89,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: emailLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        ElementsStyle.styleLabel(emailLabel, text: "Email")
+        ElementsStyle.styleLabel(emailLabel, text: AuthInfo.email.title)
         emailLabel.textAlignment = .left
     }
     
@@ -128,7 +121,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: passwordLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        ElementsStyle.styleLabel(passwordLabel, text: "Password")
+        ElementsStyle.styleLabel(passwordLabel, text: AuthInfo.password.title)
         passwordLabel.textAlignment = .left
     }
     
@@ -283,14 +276,16 @@ extension SignInViewController {
     
     @objc func presentPrivacyPolicy() {
         
-        let privacyPolicyViewController = PrivacyPolicyViewController()
-        self.present(privacyPolicyViewController, animated: true, completion: nil)
+        let policyViewController = PolicyViewController()
+        policyViewController.url = PolicyType.privacyPolicy.url
+        self.present(policyViewController, animated: true, completion: nil)
     }
     
     @objc func presentEULA() {
-        
-        let eulaViewController = EULAViewController()
-        self.present(eulaViewController, animated: true, completion: nil)
+   
+        let policyViewController = PolicyViewController()
+        policyViewController.url = PolicyType.eula.url
+        self.present(policyViewController, animated: true, completion: nil)
     }
     
     @objc func handleNativeSignIn() {

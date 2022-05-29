@@ -35,6 +35,10 @@ class AddDetailsCoverTableViewCell: AddDetailsBasicCell {
         selectCoverCollectionView.registerCellWithNib(identifier: String(describing: SelectCoverCollectionViewCell.self), bundle: nil)
         
     }
+    
+    override func layoutCell(title: String) {
+        categoryLabel.text = title
+    }
 }
 
 extension AddDetailsCoverTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -87,5 +91,3 @@ extension AddDetailsCoverTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
 }
-
-

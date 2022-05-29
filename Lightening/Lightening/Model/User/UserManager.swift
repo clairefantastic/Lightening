@@ -175,8 +175,7 @@ class UserManager {
             
             guard
                 error == nil,
-                let user = authDataResult?.user,
-                let email = user.email
+                let user = authDataResult?.user
                     
             else {
                 
