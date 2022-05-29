@@ -9,10 +9,11 @@ import UIKit
 
 class SearchViewController: BaseViewController {
     
-    private var audios: [Audio] = []
-    
     private let noContentLabel = UILabel()
+    private var tableView = UITableView()
+    private let searchController = UISearchController()
     
+    private var audios: [Audio] = []
     private var filteredAudioFiles: [Audio]? {
         
         didSet {
@@ -27,10 +28,6 @@ class SearchViewController: BaseViewController {
             }
         }
     }
-    
-    private var tableView = UITableView()
-    
-    private let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +66,7 @@ class SearchViewController: BaseViewController {
                 
                 if let blockList = UserManager.shared.currentUser?.blockList {
                     
-                    for audio in audios where blockList.contains(audio.authorId ?? "") == false {
+                    for audio in audios where blockList.contains(audio.authorId ) == false {
                         
                         self?.audios.append(audio)
                         
@@ -82,8 +79,6 @@ class SearchViewController: BaseViewController {
                 LKProgressHUD.dismiss()
                 
             case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
                 
                 LKProgressHUD.showFailure(text: "Fail to fetch Search Page data")
             }
@@ -112,7 +107,6 @@ extension SearchViewController {
         )
         
         tableView.delegate = self
-
         tableView.dataSource = self
     
     }
@@ -172,8 +166,8 @@ extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         if let searchText = searchController.searchBar.text,
-                   searchText.isEmpty == false  {
-            self.filteredAudioFiles = audios.filter { $0.title.localizedStandardContains(searchText) == true } ?? []
+                   searchText.isEmpty == false {
+            self.filteredAudioFiles = audios.filter { $0.title.localizedStandardContains(searchText) == true } 
                 } else {
                     self.filteredAudioFiles = []
                 }
@@ -193,21 +187,11 @@ extension SearchViewController {
         self.view.bringSubviewToFront(noContentLabel)
         
         NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
-        noContentLabel.text = "No audio files yet!"
-        noContentLabel.font = UIFont.regular(size: 20)
-        noContentLabel.adjustsFontForContentSizeCategory = true
-        noContentLabel.textColor = UIColor.darkBlue
-        noContentLabel.textAlignment = .center
-        noContentLabel.numberOfLines = 0
-        noContentLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
+        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
         
     }
 }
