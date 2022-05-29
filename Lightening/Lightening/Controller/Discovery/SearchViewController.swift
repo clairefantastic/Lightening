@@ -118,13 +118,14 @@ extension SearchViewController {
         
         let touchPoint = sender.location(in: self.tableView)
         
-        if (sender.state == UIGestureRecognizer.State.ended) {
+        if sender.state == .ended {
             
-            let indexPath = self.tableView.indexPathForRow(at: touchPoint)
-            
-            if indexPath != nil && self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+            if let selectedRow = self.tableView.indexPathForRow(at: touchPoint)?.row {
                 
-                showBlockUserAlert(blockUserId: self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "")
+                if self.filteredAudioFiles?[selectedRow].authorId != UserManager.shared.currentUser?.userId {
+                    
+                    showBlockUserAlert(blockUserId: self.filteredAudioFiles?[selectedRow].authorId ?? "")
+                }
             }
         }
     }
@@ -192,6 +193,5 @@ extension SearchViewController {
         NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
         
         ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
-        
     }
 }

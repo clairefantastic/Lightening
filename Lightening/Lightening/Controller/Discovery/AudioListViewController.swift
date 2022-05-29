@@ -71,7 +71,7 @@ extension AudioListViewController {
         
         let touchPoint = sender.location(in: self.tableView)
         
-        if sender.state == UIGestureRecognizer.State.ended {
+        if sender.state == .ended {
             
             if let selectedRow = self.tableView.indexPathForRow(at: touchPoint)?.row {
                 

@@ -160,13 +160,13 @@ class ImpairedDiscoveryViewController: BaseViewController {
         let touchPoint = sender.location(in: self.collectionView)
         
         if sender.state == .ended {
-            
-            let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
-            //
-            if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId != UserManager.shared.currentUser?.userId {
                 
-                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId)
-
+            if let selectedIndexPath = self.collectionView.indexPathForItem(at: touchPoint) {
+                
+                if self.sections[selectedIndexPath.section].audios[selectedIndexPath.item].authorId != UserManager.shared.currentUser?.userId {
+                    
+                    showBlockUserAlert(blockUserId: self.sections[selectedIndexPath.section].audios[selectedIndexPath.row].authorId)
+                }
             }
         }
     }
