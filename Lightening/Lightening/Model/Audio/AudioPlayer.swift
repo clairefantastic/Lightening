@@ -19,7 +19,7 @@ enum AudioPlayerState {
 
 class AudioPlayer: NSObject {
 
-    private var player: AVAudioPlayer? = nil
+    private var player: AVAudioPlayer?
     private var fileManager: AudioFileManager?
     private var timer: Timer?
     

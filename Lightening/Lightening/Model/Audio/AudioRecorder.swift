@@ -21,7 +21,7 @@ class AudioRecorder: NSObject {
     
     private var fileManager: AudioFileManager?
     
-    private var recorder: AVAudioRecorder? = nil
+    private var recorder: AVAudioRecorder?
     private var meterTimer: Timer! = nil
     private var currentTimeInterval: TimeInterval = 0.0
     
