@@ -59,18 +59,14 @@ class AudioManager: NSObject {
                 self.delegate?.recorderAndPlayer(self, withStates: .granted)
                 self.initialize()
             }
-            break
         case .denied:
             DispatchQueue.main.async {
                 self.delegate?.recorderAndPlayer(self, withStates: .denied)
             }
-            break
         case .undetermined:
             self.requestForRecordPermission()
-            break
         @unknown default:
             self.requestForRecordPermission()
-            break
         }
     }
     
@@ -82,7 +78,7 @@ class AudioManager: NSObject {
                 try session.setActive(true, options: .notifyOthersOnDeactivation)
                 try session.overrideOutputAudioPort(.speaker)
                 try session.setActive(true)
-                session.requestRecordPermission { [weak self] (allowed) in
+                session.requestRecordPermission { [weak self] allowed in
                     self?.checkRecordPermission()
                 }
             } catch {
@@ -105,7 +101,7 @@ class AudioManager: NSObject {
             self.delegate?.recorderAndPlayer(self.player!, withStates: state)
         }
         
-        self.recorder?.setupRecorder() { localUrl in
+        self.recorder?.setupRecorder { localUrl in
             self.localUrl = localUrl
         }
     }
@@ -147,4 +143,3 @@ class AudioManager: NSObject {
         self.player?.doStop()
     }
 }
-

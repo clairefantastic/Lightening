@@ -18,13 +18,11 @@ class UserProfileView: UIView {
             if imageUrl == nil {
                 
                 profileImageView.image = UIImage.asset(ImageAsset.blackVinyl)
-                
                 LKProgressHUD.dismiss()
                 
             } else {
                 
                 profileImageView.loadImage(imageUrl)
-                
                 LKProgressHUD.dismiss()
             }
         }
@@ -40,14 +38,17 @@ class UserProfileView: UIView {
         addProfileImageView()
     }
     
-    func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
+    func centreArcPerpendicular(text string: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, colour: UIColor, font: UIFont, clockwise: Bool) {
 
-        let characters: [String] = str.map { String($0) } // An array of single character strings, each character in str
+        let characters: [String] = string.map { String($0) }
+        // An array of single character strings, each character in string
         let letter = characters.count
         let attributes = [NSAttributedString.Key.font: font]
 
-        var arcs: [CGFloat] = [] // This will be the arcs subtended by each character
-        var totalArc: CGFloat = 0 // ... and the total arc subtended by the string
+        var arcs: [CGFloat] = []
+        // This will be the arcs subtended by each character
+        var totalArc: CGFloat = 0
+        // ... and the total arc subtended by the string
 
         // Calculate the arc subtended by each letter and their total
         for count in 0 ..< letter {
@@ -95,7 +96,6 @@ class UserProfileView: UIView {
 
         // Set the text attributes
         let attributes = [NSAttributedString.Key.foregroundColor: colour, NSAttributedString.Key.font: font]
-        //let attributes = [NSForegroundColorAttributeName: c, NSFontAttributeName: font]
         // Save the context
         context.saveGState()
         // Undo the inversion of the Y-axis (or the text goes backwards!)
@@ -107,7 +107,8 @@ class UserProfileView: UIView {
         // Calculate the width of the text
         let offset = str.size(withAttributes: attributes)
         // Move the origin by half the size of the text
-        context.translateBy(x: -offset.width / 2, y: -offset.height / 2) // Move the origin to the centre of the text (negating the y-axis manually)
+        context.translateBy(x: -offset.width / 2, y: -offset.height / 2)
+        // Move the origin to the centre of the text (negating the y-axis manually)
         // Draw the text
         str.draw(at: CGPoint(x: 0, y: 0), withAttributes: attributes)
         // Restore the context
@@ -132,14 +133,14 @@ class UserProfileView: UIView {
                                context: context, radius: 60,
                                angle: -30,
                                colour: UIColor.black,
-                               font: UIFont.regular(size: 16) ?? UIFont(),
+                               font: UIFont.regular(size: 16)!,
                                clockwise: true)
         centreArcPerpendicular(text: "C  a  r  p  e   D  i  e  m",
                                context: context,
                                radius: 60,
                                angle: 29.7,
                                colour: UIColor.black,
-                               font: UIFont.regular(size: 16) ?? UIFont(),
+                               font: UIFont.regular(size: 16)!,
                                clockwise: false)
         
     }
@@ -150,24 +151,16 @@ class UserProfileView: UIView {
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: profileImageView, attribute: .centerX, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: profileImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
-        NSLayoutConstraint(item: profileImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+        profileImageView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         profileImageView.layer.masksToBounds = true
-        
         profileImageView.layer.cornerRadius = 40
-        
         profileImageView.layer.borderColor = UIColor.black.cgColor
-        
         profileImageView.layer.borderWidth = 1
-        
         profileImageView.contentMode = .scaleAspectFill
-    
     }
     
 }

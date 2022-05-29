@@ -9,7 +9,6 @@ import UIKit
 
 class SelectCoverCollectionViewCell: UICollectionViewCell {
 
-    
     @IBOutlet weak var coverImageView: UIImageView!
     
     override func awakeFromNib() {

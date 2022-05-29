@@ -36,7 +36,6 @@
 		7E3501BF283624440090E061 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BE283624440090E061 /* UIFont+Extension.swift */; };
 		7E3501C4283637160090E061 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501C3283637160090E061 /* AlertManager.swift */; };
 		7E3501CC28365CD50090E061 /* LighteningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501CB28365CD50090E061 /* LighteningTests.swift */; };
-		7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* VolunteerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */; };
@@ -64,6 +63,9 @@
 		7E44B7EC280C94A600CF24AC /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */; };
 		7E452C9E283CB99800ABCAE9 /* BeigeTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */; };
 		7E452CA0283F55EA00ABCAE9 /* AccountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9F283F55EA00ABCAE9 /* AccountError.swift */; };
+		7E452CA4284107AB00ABCAE9 /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452CA3284107AB00ABCAE9 /* PolicyType.swift */; };
+		7E452CA828410F8500ABCAE9 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452CA728410F8500ABCAE9 /* AuthInfo.swift */; };
+		7E452CAC2843D4DC00ABCAE9 /* PublishError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452CAB2843D4DC00ABCAE9 /* PublishError.swift */; };
 		7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4702819F4FD0080476E /* AudioListViewController.swift */; };
 		7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */; };
 		7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */; };
@@ -114,11 +116,10 @@
 		7EB9DAF02803D9AD009B89D0 /* ImpairedLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAEE2803D9AD009B89D0 /* ImpairedLobbyViewController.swift */; };
 		7EB9DAF5280423F6009B89D0 /* VideoCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */; };
 		7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */; };
-		7EBB998C282A366C00B8A02C /* EULAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB998B282A366C00B8A02C /* EULAViewController.swift */; };
 		7EBB998E282B411400B8A02C /* CheckAudioLengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB998D282B411400B8A02C /* CheckAudioLengthViewController.swift */; };
 		7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */; };
 		7EC6BABE28260DFE00556429 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6BABD28260DFE00556429 /* JGProgressHUDWrapper.swift */; };
-		7EC6BAD028279D4F00556429 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */; };
+		7EC6BAD028279D4F00556429 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6BACF28279D4F00556429 /* PolicyViewController.swift */; };
 		7ED920FA28070E4C00DD892A /* userType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED920F928070E4C00DD892A /* userType.swift */; };
 		7EDBA2CA2805E93600C10FA5 /* VolunteerLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */; };
 /* End PBXBuildFile section */
@@ -166,7 +167,6 @@
 		7E3501C3283637160090E061 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		7E3501C928365CD50090E061 /* LighteningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LighteningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E3501CB28365CD50090E061 /* LighteningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTests.swift; sourceTree = "<group>"; };
-		7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserAlertController.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +194,9 @@
 		7E44B7EB280C94A600CF24AC /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
 		7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeigeTitleButton.swift; sourceTree = "<group>"; };
 		7E452C9F283F55EA00ABCAE9 /* AccountError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountError.swift; sourceTree = "<group>"; };
+		7E452CA3284107AB00ABCAE9 /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
+		7E452CA728410F8500ABCAE9 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
+		7E452CAB2843D4DC00ABCAE9 /* PublishError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishError.swift; sourceTree = "<group>"; };
 		7E48D4702819F4FD0080476E /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListTableViewCell.swift; sourceTree = "<group>"; };
 		7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListTableViewCell.xib; sourceTree = "<group>"; };
@@ -248,11 +251,10 @@
 		7EB9DAEE2803D9AD009B89D0 /* ImpairedLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpairedLobbyViewController.swift; sourceTree = "<group>"; };
 		7EB9DAF3280423F6009B89D0 /* VideoCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCallViewController.xib; sourceTree = "<group>"; };
 		7EB9DAF628042A30009B89D0 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
-		7EBB998B282A366C00B8A02C /* EULAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
 		7EBB998D282B411400B8A02C /* CheckAudioLengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAudioLengthViewController.swift; sourceTree = "<group>"; };
 		7EBDFB4A2823B909007DB7BD /* LikedAudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAudioListViewController.swift; sourceTree = "<group>"; };
 		7EC6BABD28260DFE00556429 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
-		7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		7EC6BACF28279D4F00556429 /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		7ED920F928070E4C00DD892A /* userType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userType.swift; sourceTree = "<group>"; };
 		7EDBA2C92805E93600C10FA5 /* VolunteerLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerLobbyViewController.swift; sourceTree = "<group>"; };
 		7EDBA2D12806F12000C10FA5 /* 96115-video-call.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "96115-video-call.json"; sourceTree = "<group>"; };
@@ -501,9 +503,7 @@
 				7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */,
 				7EA73F6F28168F080071D197 /* SignInViewController.swift */,
 				7EA73F7728170E160071D197 /* RegisterViewController.swift */,
-				7EC6BACF28279D4F00556429 /* PrivacyPolicyViewController.swift */,
-				7EBB998B282A366C00B8A02C /* EULAViewController.swift */,
-				7E3BE1092834E52900C8E536 /* BlockUserAlertController.swift */,
+				7EC6BACF28279D4F00556429 /* PolicyViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -524,6 +524,7 @@
 				7E3501B8283539070090E061 /* AddDetailsSection.swift */,
 				7EB3F4FB280D66E900C6E385 /* AudioTopic.swift */,
 				7E44B7B0280966A100CF24AC /* PublishManager.swift */,
+				7E452CAB2843D4DC00ABCAE9 /* PublishError.swift */,
 				7E74EA3928326FB300818F19 /* CoverImage.swift */,
 				7E272FF7280EED7B0096DB72 /* AudioManager.swift */,
 				7E272FF9280EEDA10096DB72 /* AudioRecorder.swift */,
@@ -605,6 +606,8 @@
 				7EA73F732816EDA60071D197 /* User.swift */,
 				7EA73F712816A4FC0071D197 /* UserManager.swift */,
 				7E452C9F283F55EA00ABCAE9 /* AccountError.swift */,
+				7E452CA728410F8500ABCAE9 /* AuthInfo.swift */,
+				7E452CA3284107AB00ABCAE9 /* PolicyType.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -876,7 +879,6 @@
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */,
 				7EB9DAEB2803D3EC009B89D0 /* SignalingClient.swift in Sources */,
-				7EBB998C282A366C00B8A02C /* EULAViewController.swift in Sources */,
 				7E272FFC280EEDC40096DB72 /* AudioPlayer.swift in Sources */,
 				7E74EA47283498DD00818F19 /* VinylCloudView.swift in Sources */,
 				7E498D552808175400389D1C /* VolunteerTabBarController.swift in Sources */,
@@ -885,7 +887,7 @@
 				7EA73F7828170E170071D197 /* RegisterViewController.swift in Sources */,
 				7E44B7C7280AF18600CF24AC /* KingFisherWrapper.swift in Sources */,
 				7E44B79528090F5600CF24AC /* AddDetailsViewController.swift in Sources */,
-				7EC6BAD028279D4F00556429 /* PrivacyPolicyViewController.swift in Sources */,
+				7EC6BAD028279D4F00556429 /* PolicyViewController.swift in Sources */,
 				7EA73F432811D81E0071D197 /* AudioPlayerView.swift in Sources */,
 				7E27300C281006760096DB72 /* MapViewController.swift in Sources */,
 				7E272FF8280EED7B0096DB72 /* AudioManager.swift in Sources */,
@@ -895,6 +897,7 @@
 				7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
+				7E452CA828410F8500ABCAE9 /* AuthInfo.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
 				7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */,
@@ -909,8 +912,8 @@
 				7E74EA3A28326FB300818F19 /* CoverImage.swift in Sources */,
 				7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */,
 				7EB9DAE92803D321009B89D0 /* WebRTCClient.swift in Sources */,
+				7E452CAC2843D4DC00ABCAE9 /* PublishError.swift in Sources */,
 				7EB9DADF2803D085009B89D0 /* Config.swift in Sources */,
-				7E3BE10A2834E52900C8E536 /* BlockUserAlertController.swift in Sources */,
 				7E44B7E1280C4B8300CF24AC /* AddDetailsCoverTableViewCell.swift in Sources */,
 				7E44B7B52809751300CF24AC /* UITableView+Extension.swift in Sources */,
 				7E225863281FCCA900FE8694 /* DoorView.swift in Sources */,
@@ -923,6 +926,7 @@
 				7E44B7B92809AEB800CF24AC /* Audio.swift in Sources */,
 				7E74EA432834828100818F19 /* VolunteerStatus.swift in Sources */,
 				7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */,
+				7E452CA4284107AB00ABCAE9 /* PolicyType.swift in Sources */,
 				7E498D592808188300389D1C /* UploadViewController.swift in Sources */,
 				7EB9DAF728042A30009B89D0 /* VideoCallViewController.swift in Sources */,
 				7E44B7AC2809187C00CF24AC /* AddDetailsContentCell.swift in Sources */,

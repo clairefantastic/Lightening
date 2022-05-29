@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class ImpairedProfileViewController: BaseViewController {
     
@@ -18,7 +17,7 @@ class ImpairedProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = VisuallyImpairedTab.profile.tabBarItem().title
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
         configureVinylImageView()
         configureSettingButton()
@@ -41,8 +40,10 @@ extension ImpairedProfileViewController {
         
         settingButton.translatesAutoresizingMaskIntoConstraints = false
         
-        settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                constant: -16).isActive = true
+        settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                              constant: -16).isActive = true
         settingButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
         settingButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
@@ -52,7 +53,11 @@ extension ImpairedProfileViewController {
     
     @objc func didTapSettings() {
         
-        let userSettingsAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
+        let userSettingsAlertController = UIAlertController(
+            title: "Select an action",
+            message: "Please select an action you want to execute.",
+            preferredStyle: .actionSheet
+        )
         
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { _ in
             
@@ -61,9 +66,11 @@ extension ImpairedProfileViewController {
         
         let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .destructive) { _ in
             
-            let controller = UIAlertController(title: "Are you sure?",
-                                               message: "All your information will be deleted and you cannot undo this action.",
-                                               preferredStyle: .alert)
+            let controller = UIAlertController(
+                title: "Are you sure?",
+                message: "All your information will be deleted and you cannot undo this action.",
+                preferredStyle: .alert
+            )
             let deleteAction = UIAlertAction(title: "Delete Account", style: .destructive) { _ in
                 
                 self.deleteAccount()
@@ -81,7 +88,7 @@ extension ImpairedProfileViewController {
         
         let privacyPolicyAction = UIAlertAction(title: "Privacy Policy", style: .default) { _ in
             
-            let privacyPolicyViewController = PrivacyPolicyViewController()
+            let privacyPolicyViewController = PolicyViewController()
             self.present(privacyPolicyViewController, animated: true, completion: nil)
         }
         
@@ -99,7 +106,8 @@ extension ImpairedProfileViewController {
         
         userProfileView.translatesAutoresizingMaskIntoConstraints = false
         
-        userProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        userProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                  constant: -16).isActive = true
         userProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         userProfileView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         userProfileView.widthAnchor.constraint(equalToConstant: 160).isActive = true

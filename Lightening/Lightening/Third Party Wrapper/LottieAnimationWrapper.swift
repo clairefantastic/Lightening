@@ -43,7 +43,6 @@ class LottieAnimationWrapper {
         animationView.animationSpeed = 0.5
         
         currentWindow?.addSubview(animationView)
-        
     }
 
 }

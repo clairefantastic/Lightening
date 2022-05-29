@@ -12,51 +12,22 @@ import Lottie
 class UploadViewController: BaseViewController {
     
     private let vinylImageView = UIImageView()
-    
-    private let selectFileButton = UIButton()
-    
-    private let recordButton = UIButton()
-    
+    private let selectFileButton = BeigeTitleButton()
+    private let recordButton = BeigeTitleButton()
     private var animationView = AnimationView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = VolunteerTab.upload.tabBarItem().title
-        
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
         configureVinylImageView()
-    
-        animationView = .init(name: "87530-frequencies-fork-lottie-animation")
-          
-        animationView.frame = view.bounds
-          
-        animationView.contentMode = .scaleToFill
-          
-        animationView.loopMode = .loop
-          
-        animationView.animationSpeed = 0.5
-        
-        view.addSubview(animationView)
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: animationView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .centerY, relatedBy: .equal, toItem: vinylImageView, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
-        
+        configureAnimationView()
         view.addSubview(vinylImageView)
         
-        layoutRecordButton()
-        
-        layoutSelectFileButton()
-    
-    
+        configureRecordButton()
+        configureSelectFileButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,64 +66,56 @@ extension UploadViewController {
     
     }
     
-    private func layoutSelectFileButton() {
+    private func configureAnimationView() {
+        
+        animationView = .init(name: LottieAnimation.frequency.rawValue)
+        animationView.frame = view.bounds
+        animationView.contentMode = .scaleToFill
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.5
+
+        view.addSubview(animationView)
+        
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: animationView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .centerY, relatedBy: .equal, toItem: vinylImageView, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
+    }
+    
+    private func configureSelectFileButton() {
         
         self.view.addSubview(selectFileButton)
         
         selectFileButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: selectFileButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
-        
         NSLayoutConstraint(item: selectFileButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1/3, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: selectFileButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30).isActive = true
-        
         NSLayoutConstraint(item: selectFileButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         selectFileButton.layer.borderColor = UIColor.beige?.cgColor
-        
         selectFileButton.layer.borderWidth = 1
-        
         selectFileButton.setTitle("Select File", for: .normal)
-        
-        selectFileButton.titleLabel?.font = UIFont.bold(size: 16)
-        
-        selectFileButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        selectFileButton.isEnabled = true
-        
         selectFileButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
-        
     }
     
-    private func layoutRecordButton() {
+    private func configureRecordButton() {
         
         self.view.addSubview(recordButton)
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: recordButton, attribute: .top, relatedBy: .equal, toItem: self.vinylImageView, attribute: .top, multiplier: 1, constant: 100).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1/3, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         recordButton.layer.borderColor = UIColor.beige?.cgColor
-        
         recordButton.layer.borderWidth = 1
-        
         recordButton.setTitle("Record", for: .normal)
-        
-        recordButton.titleLabel?.font = UIFont.bold(size: 16)
-        
-        recordButton.setTitleColor(UIColor.beige, for: .normal)
-        
-        recordButton.isEnabled = true
-        
         recordButton.addTarget(self, action: #selector(showRecordPage), for: .touchUpInside)
-        
     }
     
     @objc func importFile(_ sender: UIButton) {

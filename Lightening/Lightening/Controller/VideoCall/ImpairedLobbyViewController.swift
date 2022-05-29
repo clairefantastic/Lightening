@@ -48,7 +48,6 @@ class ImpairedLobbyViewController: BaseViewController {
                     
                 } else {
                     
-                    
                 }
             }
         }

@@ -87,7 +87,7 @@ class AudioRecorder: NSObject {
             try AVAudioSession.sharedInstance().setActive(true)
             recorder.record()
             currentTimeInterval = 0.0
-            meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
+            meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
            
             recorderStateChangeHandler?(.recording)
         } catch {
@@ -126,7 +126,7 @@ class AudioRecorder: NSObject {
         }
 
         recorder?.record()
-        meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:#selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
+        meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateAudioMeter(timer:)), userInfo: nil, repeats: true)
         recorderStateChangeHandler?(.recording)
     }
 }

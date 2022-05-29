@@ -14,7 +14,7 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         
         self.navigationItem.title = VolunteerTab.discovery.tabBarItem().title
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
 
         configureCollectionView()
         

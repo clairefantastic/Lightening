@@ -86,4 +86,3 @@ extension UIView {
         self.layer.add(rotation, forKey: "rotationAnimation")
     }
 }
-

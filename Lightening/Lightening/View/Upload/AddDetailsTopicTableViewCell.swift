@@ -40,31 +40,9 @@ class AddDetailsTopicTableViewCell: AddDetailsBasicCell {
         // Configure the view for the selected state
     }
     
-//    @objc func selectTopic(_ sender: UIButton) {
-//
-//        sender.isSelected = true
-//
-//        for button in topicButtonArray {
-//
-//            if button != sender {
-//                button.isSelected = false
-//            }
-//        }
-//
-//        for button in topicButtonArray {
-//
-//            if button.isSelected == true {
-//                button.layer.borderWidth = 2
-//                button.layer.borderColor = UIColor.black.cgColor
-//                button.setTitleColor(.black, for: .selected)
-//
-//            } else {
-//                button.layer.borderWidth = 0
-//            }
-//        }
-//
-//    }
-    
+    override func layoutCell(title: String) {
+        categoryLabel.text = title
+    }
 }
 
 extension AddDetailsTopicTableViewCell: SelectTopicDelegate {
