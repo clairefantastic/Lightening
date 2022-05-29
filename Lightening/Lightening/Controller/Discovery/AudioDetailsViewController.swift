@@ -9,7 +9,7 @@ import UIKit
 
 class AudioDetailsViewController: BaseViewController {
     
-    private let noCommentsLabel = DarkBlueLabel()
+    private let noCommentsLabel = UILabel()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -20,13 +20,9 @@ class AudioDetailsViewController: BaseViewController {
     }()
     
     private let sendOutTextButton = UIButton()
-    
     private let enterCommentTextField = UITextField()
-    
     private let moreButton = UIButton()
-    
     private let moreButtonView = UIView()
-    
     private let headerView = StretchyTableHeaderView(frame: CGRect(x: 0, y: 0, width: width, height: width))
     
     var comments: [Comment] = [] {
@@ -66,8 +62,7 @@ class AudioDetailsViewController: BaseViewController {
             
             guard let audio = audio else { return }
             
-            PublishManager.shared.fetchAudioID(audio: audio) {
-                [weak self] result in
+            PublishManager.shared.fetchAudioID(audio: audio) { [weak self] result in
                 
                     switch result {
                     
@@ -151,11 +146,8 @@ extension AudioDetailsViewController {
         moreButtonView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: moreButtonView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: moreButtonView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: moreButtonView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
-        
         NSLayoutConstraint(item: moreButtonView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36).isActive = true
         
         moreButtonView.backgroundColor = .white.withAlphaComponent(0.8)
@@ -167,11 +159,8 @@ extension AudioDetailsViewController {
         moreButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: moreButton, attribute: .centerY, relatedBy: .equal, toItem: moreButtonView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: moreButton, attribute: .centerX, relatedBy: .equal, toItem: moreButtonView, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: moreButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
-        
         NSLayoutConstraint(item: moreButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
         moreButton.setImage(UIImage.asset(ImageAsset.more), for: .normal)
@@ -182,7 +171,6 @@ extension AudioDetailsViewController {
     }
     
     @objc func tapMoreButton() {
-        
         
         let blockUserAlertController = UIAlertController(title: "Select an action", message: "Please select an action you want to execute.", preferredStyle: .actionSheet)
         
@@ -203,10 +191,10 @@ extension AudioDetailsViewController {
                 
                 UserManager.shared.blockUser(userId: self.audio?.authorId ?? "") { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         LKProgressHUD.dismiss()
                         self.navigationController?.popToRootViewController(animated: true)
-                    case .failure(_):
+                    case .failure:
                         LKProgressHUD.showFailure(text: "Fail to block this user!")
                     }
                     
@@ -280,21 +268,11 @@ extension AudioDetailsViewController {
         self.view.bringSubviewToFront(noCommentsLabel)
         
         NSLayoutConstraint(item: noCommentsLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: noCommentsLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noCommentsLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: noCommentsLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: width + 60).isActive = true
         
-        noCommentsLabel.text = "No comments yet!"
-        noCommentsLabel.font = UIFont.regular(size: 20)
-        noCommentsLabel.adjustsFontForContentSizeCategory = true
-        noCommentsLabel.textAlignment = .center
-        noCommentsLabel.numberOfLines = 0
-        noCommentsLabel.setContentCompressionResistancePriority(
-            .defaultHigh, for: .horizontal)
-        
+        ElementsStyle.styleEmptyLabel(noCommentsLabel, text: "No comments yet!")
     }
     
     private func configureSendOutTextButton() {
@@ -304,11 +282,8 @@ extension AudioDetailsViewController {
         sendOutTextButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: sendOutTextButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -24).isActive = true
-        
         NSLayoutConstraint(item: sendOutTextButton, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: -24).isActive = true
-        
         NSLayoutConstraint(item: sendOutTextButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
-        
         NSLayoutConstraint(item: sendOutTextButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24).isActive = true
         
         sendOutTextButton.setImage(UIImage.systemAsset(ImageAsset.send), for: .normal)
@@ -330,11 +305,11 @@ extension AudioDetailsViewController {
             
             switch result {
                 
-            case .success(_):
+            case .success:
                 
                 self?.enterCommentTextField.text = ""
                 
-            case .failure(_):
+            case .failure:
                 
                 LKProgressHUD.showFailure(text: "Fail to publish comments")
             }
@@ -350,11 +325,8 @@ extension AudioDetailsViewController {
         enterCommentTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: enterCommentTextField, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: enterCommentTextField, attribute: .trailing, relatedBy: .equal, toItem: sendOutTextButton, attribute: .leading, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: enterCommentTextField, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: enterCommentTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
         
         enterCommentTextField.layer.borderWidth = 2
