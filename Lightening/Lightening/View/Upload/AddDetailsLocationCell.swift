@@ -12,17 +12,12 @@ import CoreLocation
 class AddDetailsLocationCell: AddDetailsBasicCell, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var categoryLabel: UILabel!
     
     private let locationManager = CLLocationManager()
-    
     private var currentPlace: CLPlacemark?
     
-    var currentLocationStr = "Current location"
-    
     var locationHandler: ((Location) -> Void)?
-    
     var location: Location?
     
     override func awakeFromNib() {
