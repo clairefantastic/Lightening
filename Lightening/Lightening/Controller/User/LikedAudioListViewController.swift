@@ -13,7 +13,7 @@ class LikedAudioListViewController: AudioListViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Liked Audios"
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         
         configureTableView()
     }
