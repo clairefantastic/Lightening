@@ -78,17 +78,13 @@ class VideoCallViewController: UIViewController {
         self.connectedHandler?(false)
         
         self.signalClient.deleteSdpAndCandidateAndSender(for: "\(currentPerson)")
-        
         self.signalClient.deleteSdpAndCandidateAndSender(for: "\(oppositePerson)")
         
         self.webRTCClient.closePeerConnection()
-
         self.webRTCClient.createPeerConnection()
         
         NotificationCenter.default.post(name: NSNotification.Name(notificationKey2), object: nil)
         
         self.dismiss(animated: true)
-        
     }
-    
 }

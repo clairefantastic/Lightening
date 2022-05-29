@@ -78,7 +78,7 @@ class AudioManager: NSObject {
                 try session.setActive(true, options: .notifyOthersOnDeactivation)
                 try session.overrideOutputAudioPort(.speaker)
                 try session.setActive(true)
-                session.requestRecordPermission { [weak self] allowed in
+                session.requestRecordPermission { [weak self] _ in
                     self?.checkRecordPermission()
                 }
             } catch {
