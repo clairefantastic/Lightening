@@ -92,24 +92,17 @@ class AudioDetailsViewController: BaseViewController {
                                 
                                 LKProgressHUD.dismiss()
                                 
-                            case .failure(let error):
-                                print("fetchData.failure: \(error)")
-                                
-                                LKProgressHUD.showFailure(text: "Fail to fetch comments")
-                                
+                            case .failure:
+            
+                                LKProgressHUD.showFailure(text: PublishError.fetchCommentsError.errorMessage)
                             }
-                            
                         }
                         
-                    case .failure(let error):
+                    case .failure:
                         
-                        print("fetchData.failure: \(error)")
-                        
-                        LKProgressHUD.showFailure(text: "Fail to fetch Audio Description Page data")
-            
+                        LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
                 }
             }
-        
         }
     }
     
@@ -340,7 +333,6 @@ extension AudioDetailsViewController {
         enterCommentTextField.rightView = UIView(frame: CGRect(x: enterCommentTextField.frame.width - 15, y: 0, width: 15, height: enterCommentTextField.frame.height))
         
         enterCommentTextField.leftViewMode = .always
-        
         enterCommentTextField.rightViewMode = .always
         
         enterCommentTextField.font = UIFont.regular(size: 16)
