@@ -106,18 +106,18 @@ class PublishManager {
     func deleteAudio(audio: Audio, completion: @escaping (Result<(), Error>) -> Void) {
         
         let document = db.collection("audioFiles").document(audio.audioId)
-    
-           document.delete { error in
+        
+        document.delete { error in
+            
+            if let error = error {
                 
-                if let error = error {
-                    
-                    completion(.failure(error))
-                } else {
-                    
-                    completion(.success(()))
-                }
+                completion(.failure(error))
+            } else {
+                
+                completion(.success(()))
             }
         }
+    }
     
     func fetchAudios(completion: @escaping (Result<[Audio], Error>) -> Void) {
         
@@ -211,7 +211,7 @@ class PublishManager {
     
     func publishLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId)
         
         do {
            try document.setData(from: audio) { error in
@@ -232,7 +232,7 @@ class PublishManager {
     
     func deleteLikedAudio(userId: String, audio: Audio, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId ?? "")
+        let document = db.collection("users").document(userId).collection("likedAudios").document(audio.audioId)
 
            document.delete { error in
                 

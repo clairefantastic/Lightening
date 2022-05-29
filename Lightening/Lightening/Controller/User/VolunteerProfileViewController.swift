@@ -115,7 +115,7 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
             self.navigationItem.title = "Lighty's Profile"
         }
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         fetchMyAudios()
         fetchLikedAudios()
         
@@ -324,7 +324,7 @@ extension VolunteerProfileViewController {
     @objc func didTapSeeMoreMyAudios() {
         
         let myAudioListViewController = MyAudioListViewController()
-        myAudioListViewController.audios = myAudios
+        myAudioListViewController.audios = myAudios ?? []
         self.navigationController?.pushViewController(myAudioListViewController, animated: true)
     }
     
@@ -349,7 +349,7 @@ extension VolunteerProfileViewController {
     @objc func didTapSeeMoreLikedAudios() {
         
         let likedAudioListViewController = LikedAudioListViewController()
-        likedAudioListViewController.audios = myLikedAudios
+        likedAudioListViewController.audios = myLikedAudios ?? []
         self.navigationController?.pushViewController(likedAudioListViewController, animated: true)
     }
 }

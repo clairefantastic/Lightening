@@ -31,7 +31,7 @@ final class SignalingClient {
     
     func deleteSdpAndCandidateAndSender(for person: String) {
         
-        db.collection("users").document(person).collection("WebRTC").document("sdp").delete() { error in
+        db.collection("users").document(person).collection("WebRTC").document("sdp").delete { error in
             
             if let error = error {
                 
@@ -57,7 +57,7 @@ final class SignalingClient {
             }
         }
         
-        db.collection("users").document(person).collection("WebRTC").document("sender").delete() { error in
+        db.collection("users").document(person).collection("WebRTC").document("sender").delete { error in
             if let error = error {
                 print("Error removing firestore sender: \(error)")
             } else {
@@ -122,7 +122,7 @@ final class SignalingClient {
     
     func listenVolunteers() {
         
-        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments() { (snapshot, error) in
+        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -137,7 +137,7 @@ final class SignalingClient {
 
     func listenToVolunteers(completion: @escaping (Result<String, Error>) -> Void) {
         
-        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments() { (snapshot, error) in
+        db.collection("users").whereField("userIdentity", isEqualTo: 1).whereField("status", isEqualTo: 0).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {

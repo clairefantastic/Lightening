@@ -39,4 +39,3 @@ extension UITableViewHeaderFooterView {
         return String(describing: self)
     }
 }
-

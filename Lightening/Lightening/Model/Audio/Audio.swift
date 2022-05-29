@@ -35,7 +35,7 @@ struct Audio: Codable, Hashable {
     
     var authorId = ""
     
-    static func ==(lhs: Audio, rhs: Audio) -> Bool {
+    static func== (lhs: Audio, rhs: Audio) -> Bool {
         return lhs.uuid == rhs.uuid
     }
 
