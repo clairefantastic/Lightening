@@ -64,6 +64,7 @@
 		7E452C9E283CB99800ABCAE9 /* BeigeTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */; };
 		7E452CA0283F55EA00ABCAE9 /* AccountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452C9F283F55EA00ABCAE9 /* AccountError.swift */; };
 		7E452CA4284107AB00ABCAE9 /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452CA3284107AB00ABCAE9 /* PolicyType.swift */; };
+		7E452CA828410F8500ABCAE9 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E452CA728410F8500ABCAE9 /* AuthInfo.swift */; };
 		7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4702819F4FD0080476E /* AudioListViewController.swift */; };
 		7E48D4742819F83B0080476E /* AudioListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */; };
 		7E48D4752819F83B0080476E /* AudioListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */; };
@@ -193,6 +194,7 @@
 		7E452C9D283CB99800ABCAE9 /* BeigeTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeigeTitleButton.swift; sourceTree = "<group>"; };
 		7E452C9F283F55EA00ABCAE9 /* AccountError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountError.swift; sourceTree = "<group>"; };
 		7E452CA3284107AB00ABCAE9 /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
+		7E452CA728410F8500ABCAE9 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
 		7E48D4702819F4FD0080476E /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		7E48D4722819F83B0080476E /* AudioListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListTableViewCell.swift; sourceTree = "<group>"; };
 		7E48D4732819F83B0080476E /* AudioListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioListTableViewCell.xib; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				7EA73F732816EDA60071D197 /* User.swift */,
 				7EA73F712816A4FC0071D197 /* UserManager.swift */,
 				7E452C9F283F55EA00ABCAE9 /* AccountError.swift */,
+				7E452CA728410F8500ABCAE9 /* AuthInfo.swift */,
 				7E452CA3284107AB00ABCAE9 /* PolicyType.swift */,
 			);
 			path = User;
@@ -891,6 +894,7 @@
 				7E74EA45283493E600818F19 /* CustomAnimationHandler.swift in Sources */,
 				7EB3F504280D794C00C6E385 /* SectionHeaderReusableView.swift in Sources */,
 				7EA73F722816A4FC0071D197 /* UserManager.swift in Sources */,
+				7E452CA828410F8500ABCAE9 /* AuthInfo.swift in Sources */,
 				7E48D4712819F4FD0080476E /* AudioListViewController.swift in Sources */,
 				7E272FF6280EB55F0096DB72 /* RecordViewController.swift in Sources */,
 				7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */,

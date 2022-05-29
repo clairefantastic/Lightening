@@ -96,7 +96,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: emailLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         NSLayoutConstraint(item: emailLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        ElementsStyle.styleLabel(emailLabel, text: "Email")
+        ElementsStyle.styleLabel(emailLabel, text: AuthInfo.email.title)
         emailLabel.textAlignment = .left
     }
     
@@ -128,7 +128,7 @@ extension SignInViewController {
         NSLayoutConstraint(item: passwordLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
         NSLayoutConstraint(item: passwordLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20).isActive = true
         
-        ElementsStyle.styleLabel(passwordLabel, text: "Password")
+        ElementsStyle.styleLabel(passwordLabel, text: AuthInfo.password.title)
         passwordLabel.textAlignment = .left
     }
     
