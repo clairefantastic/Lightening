@@ -21,15 +21,15 @@ class MyAudioListViewController: AudioListViewController {
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             
-        guard let audio = audios?[indexPath.row] else { return }
+        let audio = audios[indexPath.row]
             
         PublishManager.shared.deleteAudio(audio: audio) { result in
                 
             switch result {
             case.success:
-                self.audios?.remove(at: indexPath.row)
+                self.audios.remove(at: indexPath.row)
             case .failure:
-                LKProgressHUD.showFailure(text: "Fail to delete audio")
+                LKProgressHUD.showFailure(text: PublishError.deleteAudioError.errorMessage)
             }
         }
     }
