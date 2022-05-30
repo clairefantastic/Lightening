@@ -52,7 +52,6 @@ class MapViewController: BaseViewController {
                     for audio in audios where blockList.contains(audio.authorId ) == false {
                         
                         self?.audios.append(audio)
-                        
                     }
                 } else {
                     
@@ -63,9 +62,8 @@ class MapViewController: BaseViewController {
                 
                 self?.audios.forEach { audio in
                     
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName,
                         coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
-                    
                 }
                 
                 self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
