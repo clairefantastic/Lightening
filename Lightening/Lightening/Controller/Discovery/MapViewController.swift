@@ -70,11 +70,9 @@ class MapViewController: BaseViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-                
-                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
+            case .failure:
+
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
             
         }
