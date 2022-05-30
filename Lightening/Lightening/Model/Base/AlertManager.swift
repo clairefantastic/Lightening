@@ -37,8 +37,4 @@ class AlertManager {
         alertController.addAction(action)
         controller.present(alertController, animated: true, completion: nil)
     }
-    
-    func showSettingsAlertSheet(at controller: UIViewController) {
-        
-    }
 }

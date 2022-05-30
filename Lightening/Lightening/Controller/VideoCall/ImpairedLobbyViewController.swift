@@ -14,13 +14,11 @@ import FirebaseFirestore
 class ImpairedLobbyViewController: BaseViewController {
     
     private let signalClient: SignalingClient
-    
     private let webRTCClient: WebRTCClient
     
     private let videoCallButton = UIButton()
     
     private var oppositePerson = ""
-    
     private var deletePerson = ""
     
     init(signalClient: SignalingClient, webRTCClient: WebRTCClient ) {
@@ -35,18 +33,20 @@ class ImpairedLobbyViewController: BaseViewController {
     
     private var signalingConnected: Bool = false {
         didSet {
+            
             DispatchQueue.main.async {
                 if self.signalingConnected {
                     
-                    let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-                    vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
-                    vc.oppositePerson = self.oppositePerson
-                    vc.oppositePerson = self.deletePerson
+                    let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
+                    videoCallViewController.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+                    videoCallViewController.oppositePerson = self.oppositePerson
+                    videoCallViewController.oppositePerson = self.deletePerson
                     
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    videoCallViewController.modalPresentationStyle = .fullScreen
+                    self.present(videoCallViewController, animated: true, completion: nil)
                     
                 } else {
+                    
                     
                 }
             }
@@ -85,7 +85,6 @@ class ImpairedLobbyViewController: BaseViewController {
         vc.connectedHandler? = {(connectedStatus) in
             
             self.signalingConnected = connectedStatus
-            
         }
     }
     
@@ -127,23 +126,17 @@ extension ImpairedLobbyViewController: WebRTCClientDelegate {
     }
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
-        let textColor: UIColor
         
         switch state {
         case .connected, .completed:
-            //      textColor = .green
             self.signalingConnected = true
         case .disconnected:
-            //        textColor = .orange
             self.signalingConnected = false
         case .failed, .closed:
-            //      textColor = .red
             self.signalingConnected = false
         case .new, .checking, .count:
-            textColor = .black
             self.signalingConnected = false
         @unknown default:
-            textColor = .black
             self.signalingConnected = false
         }
     }

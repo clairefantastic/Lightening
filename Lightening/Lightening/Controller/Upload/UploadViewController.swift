@@ -57,11 +57,8 @@ extension UploadViewController {
         vinylImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: vinylImageView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: vinylImageView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: vinylImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 600).isActive = true
-        
         NSLayoutConstraint(item: vinylImageView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 300).isActive = true
     
     }
@@ -159,14 +156,9 @@ extension UploadViewController: UIDocumentPickerDelegate {
             DispatchQueue.main.async {
                 
                 let checkAudioLengthViewController = CheckAudioLengthViewController()
-                
                 checkAudioLengthViewController.localUrl = localUrl
-                
                 self?.navigationController?.pushViewController(checkAudioLengthViewController, animated: true)
             }
-            
         }
-        
     }
-                
 }

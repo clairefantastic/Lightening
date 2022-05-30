@@ -25,7 +25,6 @@
 		7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */; };
 		7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */; };
 		7E27300C281006760096DB72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300B281006750096DB72 /* MapViewController.swift */; };
-		7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300E28100FD30096DB72 /* LocationManager.swift */; };
 		7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2730102810271E0096DB72 /* AudioAnnotation.swift */; };
 		7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2730122810E6260096DB72 /* SearchViewController.swift */; };
 		7E27301628114B620096DB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */; };
@@ -35,7 +34,6 @@
 		7E3501BD2835EACE0090E061 /* AVPlayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BC2835EACE0090E061 /* AVPlayerHandler.swift */; };
 		7E3501BF283624440090E061 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501BE283624440090E061 /* UIFont+Extension.swift */; };
 		7E3501C4283637160090E061 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501C3283637160090E061 /* AlertManager.swift */; };
-		7E3501CC28365CD50090E061 /* LighteningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3501CB28365CD50090E061 /* LighteningTests.swift */; };
 		7E40931E281D892D0027D8B5 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931D281D892D0027D8B5 /* PopUpViewController.swift */; };
 		7E409320281E262C0027D8B5 /* ElementsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40931F281E262C0027D8B5 /* ElementsStyle.swift */; };
 		7E409322281E32160027D8B5 /* VolunteerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */; };
@@ -155,7 +153,6 @@
 		7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsLocationCell.xib; sourceTree = "<group>"; };
 		7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		7E27300B281006750096DB72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		7E27300E28100FD30096DB72 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7E2730102810271E0096DB72 /* AudioAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnnotation.swift; sourceTree = "<group>"; };
 		7E2730122810E6260096DB72 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,7 +163,6 @@
 		7E3501BE283624440090E061 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		7E3501C3283637160090E061 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		7E3501C928365CD50090E061 /* LighteningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LighteningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E3501CB28365CD50090E061 /* LighteningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LighteningTests.swift; sourceTree = "<group>"; };
 		7E40931D281D892D0027D8B5 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		7E40931F281E262C0027D8B5 /* ElementsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyle.swift; sourceTree = "<group>"; };
 		7E409321281E32160027D8B5 /* VolunteerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileViewController.swift; sourceTree = "<group>"; };
@@ -296,7 +292,6 @@
 		7E27300D28100FB90096DB72 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				7E27300E28100FD30096DB72 /* LocationManager.swift */,
 				7E2730102810271E0096DB72 /* AudioAnnotation.swift */,
 			);
 			path = Map;
@@ -308,14 +303,6 @@
 				7E3501C3283637160090E061 /* AlertManager.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		7E3501CA28365CD50090E061 /* LighteningTests */ = {
-			isa = PBXGroup;
-			children = (
-				7E3501CB28365CD50090E061 /* LighteningTests.swift */,
-			);
-			path = LighteningTests;
 			sourceTree = "<group>";
 		};
 		7E409323281E64530027D8B5 /* Recovered References */ = {
@@ -445,7 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				7EA0234D2800452A00C73205 /* Lightening */,
-				7E3501CA28365CD50090E061 /* LighteningTests */,
 				7EA0234C2800452A00C73205 /* Products */,
 				2FAC819CF43EB4034E4E8714 /* Pods */,
 				B6494955E2310280A84E8C75 /* Frameworks */,
@@ -866,7 +852,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3501CC28365CD50090E061 /* LighteningTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,7 +859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */,
 				7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */,
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */,

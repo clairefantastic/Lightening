@@ -12,17 +12,11 @@ import AVFoundation
 class RecordViewController: BaseViewController {
     
     private let limitLengthLabel = DarkBlueLabel()
-    
     private let recordButton = UIButton()
-    
     private let playButton = UIButton()
-    
     private let resetButton = UIButton()
-    
     private let finishRecordingButton = BeigeTitleButton()
-    
     private let timerLabel = UILabel()
-    
     private var animationView = AnimationView()
     
     var localUrl: URL?
@@ -36,39 +30,13 @@ class RecordViewController: BaseViewController {
         audioManager.checkRecordPermission()
         
         configureLimitLengthLabel()
-        
-        animationView = .init(name: "7054-soundcloud-social-media-icon")
-          
-        animationView.frame = view.bounds
-          
-        animationView.contentMode = .scaleAspectFit
-          
-        animationView.loopMode = .loop
-          
-        animationView.animationSpeed = 0.5
-          
-        view.addSubview(animationView)
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: animationView, attribute: .top, relatedBy: .equal, toItem: limitLengthLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
-        
-        NSLayoutConstraint(item: animationView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        configureAnimationView()
         
         layoutTimeLabel()
-        
         layoutRecordButton()
-        
         layoutPlayerButton()
-        
         layoutResetButton()
-        
         layoutFinishRecordingButton()
-    
     }
     
     override func viewDidLayoutSubviews() {
@@ -109,23 +77,15 @@ class RecordViewController: BaseViewController {
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: timerLabel, attribute: .top, relatedBy: .equal, toItem: animationView, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
-        
         NSLayoutConstraint(item: timerLabel, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: timerLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40).isActive = true
-        
         NSLayoutConstraint(item: timerLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         timerLabel.text = "00:00"
-        
         timerLabel.font = UIFont.bold(size: 20)
-        
         timerLabel.textColor = UIColor.beige
-        
         timerLabel.textAlignment = .center
-        
         timerLabel.isHidden = true
-
     }
     
     private func layoutRecordButton() {
@@ -135,21 +95,14 @@ class RecordViewController: BaseViewController {
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: recordButton, attribute: .top, relatedBy: .equal, toItem: timerLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: recordButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         recordButton.backgroundColor = UIColor.red
-        
         recordButton.setImage(UIImage.asset(ImageAsset.record), for: .normal)
-        
         recordButton.isEnabled = true
-        
         recordButton.addTarget(self, action: #selector(recordAudio), for: .touchUpInside)
-        
     }
     
     @objc func recordAudio(_ sender: UIButton) {
@@ -176,21 +129,15 @@ class RecordViewController: BaseViewController {
         playButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: playButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: playButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: playButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: playButton, attribute: .trailing, relatedBy: .equal, toItem: recordButton, attribute: .leading, multiplier: 1, constant: -36).isActive = true
         
         playButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
-        
         playButton.setImage(UIImage.asset(ImageAsset.recordPlay), for: .normal)
-        
         playButton.isEnabled = true
-        
         playButton.addTarget(self, action: #selector(playAudio), for: .touchUpInside)
-        
+
     }
     
     @objc func playAudio(_ sender: UIButton) {
@@ -210,21 +157,14 @@ class RecordViewController: BaseViewController {
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: resetButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: resetButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: resetButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        
         NSLayoutConstraint(item: resetButton, attribute: .leading, relatedBy: .equal, toItem: recordButton, attribute: .trailing, multiplier: 1, constant: 36).isActive = true
         
         resetButton.backgroundColor = UIColor.yellow?.withAlphaComponent(0.6)
-        
         resetButton.setImage(UIImage.asset(ImageAsset.replay), for: .normal)
-        
         resetButton.isEnabled = true
-        
         resetButton.addTarget(self, action: #selector(resetAudio), for: .touchUpInside)
-        
     }
     
     @objc func resetAudio(_ sender: UIButton) {
@@ -243,11 +183,8 @@ class RecordViewController: BaseViewController {
         finishRecordingButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: finishRecordingButton, attribute: .top, relatedBy: .equal, toItem: recordButton, attribute: .bottom, multiplier: 1, constant: 36).isActive = true
-        
         NSLayoutConstraint(item: finishRecordingButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: finishRecordingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
-        
         NSLayoutConstraint(item: finishRecordingButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         ElementsStyle.styleButton(finishRecordingButton, title: "Finish Recording")
@@ -354,5 +291,28 @@ extension RecordViewController: AudioManagerDelegate {
     
     func audioRecorderTime(currentTime timeInterval: TimeInterval, formattedString: String) {
         
+    }
+}
+
+extension RecordViewController {
+    
+    private func configureAnimationView() {
+        
+        animationView = .init(name: LottieAnimation.record.rawValue)
+        animationView.frame = view.bounds
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.5
+          
+        view.addSubview(animationView)
+        
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: animationView, attribute: .top, relatedBy: .equal, toItem: limitLengthLabel, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
+        NSLayoutConstraint(item: animationView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
+        
+        NSLayoutConstraint(item: animationView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 180).isActive = true
+        
+        NSLayoutConstraint(item: animationView, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     }
 }

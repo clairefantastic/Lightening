@@ -31,6 +31,23 @@ enum AuthInfo {
         case .checkPassword:
             return "Check Password"
         }
+    }
     
+    var alert: String {
+        
+        switch self {
+            
+        case .displayName:
+            return "Display Name"
+            
+        case .email:
+            return "Email"
+            
+        case .password:
+            return "Password"
+            
+        case .checkPassword:
+            return "Check Password should be same as Password"
+        }
     }
 }

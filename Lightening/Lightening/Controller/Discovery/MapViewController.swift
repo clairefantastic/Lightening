@@ -52,7 +52,6 @@ class MapViewController: BaseViewController {
                     for audio in audios where blockList.contains(audio.authorId ) == false {
                         
                         self?.audios.append(audio)
-                        
                     }
                 } else {
                     
@@ -63,20 +62,17 @@ class MapViewController: BaseViewController {
                 
                 self?.audios.forEach { audio in
                     
-                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName ?? "Lighty",
+                    self?.audioAnnotations.append(AudioAnnotation(title: audio.title, locationName: audio.author?.displayName,
                         coordinate: CLLocationCoordinate2DMake(audio.location?.latitude ?? 0.0, audio.location?.longitude ?? 0.0), audioUrl: audio.audioUrl))
-                    
                 }
                 
                 self?.mapView.addAnnotations(self?.audioAnnotations ?? [])
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-                
-                LKProgressHUD.showFailure(text: "Fail to fetch Map Page data")
+            case .failure:
+
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
             
         }
@@ -119,20 +115,19 @@ extension MapViewController: MKMapViewDelegate {
         viewFor annotation: MKAnnotation
       ) -> MKAnnotationView? {
           
-        // 2
         guard let annotation = annotation as? AudioAnnotation else {
           return nil
         }
-        // 3
+          
         let identifier = "audio"
         var view: MKMarkerAnnotationView
-        // 4
+
         if let dequeuedView = mapView.dequeueReusableAnnotationView(
           withIdentifier: identifier) as? MKMarkerAnnotationView {
           dequeuedView.annotation = annotation
           view = dequeuedView
         } else {
-          // 5
+
           view = MKMarkerAnnotationView(
             annotation: annotation,
             reuseIdentifier: identifier)

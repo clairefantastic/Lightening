@@ -40,10 +40,10 @@ extension AudioListViewController {
         
         noContentLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        noContentLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        noContentLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
+        noContentLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        noContentLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
     }
@@ -71,13 +71,14 @@ extension AudioListViewController {
         
         let touchPoint = sender.location(in: self.tableView)
         
-        if sender.state == UIGestureRecognizer.State.ended {
+        if sender.state == .ended {
             
-            let indexPath = self.tableView.indexPathForRow(at: touchPoint)
-            
-            if indexPath != nil && self.audios[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+            if let selectedRow = self.tableView.indexPathForRow(at: touchPoint)?.row {
                 
-                showBlockUserAlert(blockUserId: self.audios[indexPath?.row ?? 0].authorId ?? "")
+                if self.audios[selectedRow].audioId != UserManager.shared.currentUser?.userId {
+                    
+                    showBlockUserAlert(blockUserId: self.audios[selectedRow].authorId)
+                }
             }
         }
     }
@@ -87,7 +88,7 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return audios.count ?? 0
+        return audios.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,18 +99,13 @@ extension AudioListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.audio = audios[indexPath.row]
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
-        
         cell.addGestureRecognizer(longPress)
         
         return cell
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if audio = audios[indexPath.row] {
-            
-            showPlayer(audio: audios[indexPath.row])
-        
+        showPlayer(audio: audios[indexPath.row])
     }
 }

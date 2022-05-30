@@ -19,7 +19,7 @@ class PopUpViewController: UIViewController {
         
         self.definesPresentationContext = true
         
-        animationView = .init(name: "16873-flying-pigeon (2)")
+        animationView = .init(name: LottieAnimation.pigeon.rawValue)
           
         animationView.frame = view.bounds
           

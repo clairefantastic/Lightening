@@ -11,13 +11,9 @@ import WebRTC
 class VolunteerLobbyViewController: BaseViewController {
     
     private let statusSwitch = UISwitch()
-    
     private let switchInstructionLabel = DarkBlueLabel()
-    
     private let birdInstructionLabel = DarkBlueLabel()
-    
     private let doorView = DoorView()
-    
     private let vinylCloudView = VinylCloudView()
     
     private let signalClient: SignalingClient
@@ -27,8 +23,6 @@ class VolunteerLobbyViewController: BaseViewController {
     let notificationKey1 = "com.volunteer.receiveCall"
     
     private var signalingConnected = false
-    
-    private var hasLocalSdp = false
     
     private var localCandidateCount = 0
     
@@ -84,20 +78,17 @@ class VolunteerLobbyViewController: BaseViewController {
         
         LKProgressHUD.dismiss()
     }
-
 }
 
 extension VolunteerLobbyViewController: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
-        print("Received remote sdp")
-        self.webRTCClient.set(remoteSdp: sdp) { (error) in
+
+        self.webRTCClient.set(remoteSdp: sdp) { _ in
             self.hasRemoteSdp = true
         }
         
-        print("Received sender")
         self.oppositePerson = sender ?? ""
-        
     }
     
     func signalClientDidConnect(_ signalClient: SignalingClient) {
@@ -109,11 +100,10 @@ extension VolunteerLobbyViewController: SignalClientDelegate {
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
-        print("Received remote candidate")
+
         self.remoteCandidateCount += 1
         
         self.webRTCClient.set(remoteCandidate: candidate)
-        
     }
 }
 
@@ -127,22 +117,6 @@ extension VolunteerLobbyViewController: WebRTCClientDelegate {
     }
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
-        let textColor: UIColor
-        switch state {
-        case .connected, .completed:
-            textColor = .brown
-//            textColor = .green
-        case .disconnected:
-            textColor = .gray
-//            textColor = .orange
-        case .failed, .closed:
-            textColor = .black
-        case .new, .checking, .count:
-            textColor = .black
-        @unknown default:
-            textColor = .black
-        }
-        
     }
     
     func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
@@ -164,11 +138,8 @@ extension VolunteerLobbyViewController {
         switchInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: switchInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
-        
         NSLayoutConstraint(item: switchInstructionLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 3/4, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: switchInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: switchInstructionLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
         
         ElementsStyle.styleLabel(switchInstructionLabel, text: "Switch for receiving calls or not")
@@ -180,11 +151,8 @@ extension VolunteerLobbyViewController {
         birdInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .leading, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
         
         ElementsStyle.styleLabel(birdInstructionLabel, text: "Call will be notified by a bird")
@@ -256,16 +224,13 @@ extension VolunteerLobbyViewController {
     @objc func answerVideoCall() {
         
         self.webRTCClient.answer { (localSdp) in
-            self.hasLocalSdp = true
             
             self.signalClient.send(sdp: localSdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
         }
         
         let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
-        
         videoCallViewController.currentPerson = UserManager.shared.currentUser?.userId ?? ""
         videoCallViewController.oppositePerson = self.oppositePerson
-        
         videoCallViewController.modalPresentationStyle = .fullScreen
         self.present(videoCallViewController, animated: true, completion: nil)
     }

@@ -38,8 +38,6 @@ class PublishManager {
 //                    completion(destinationUrl)
                         // after downloading your file you need to move it to your destination url
                     try FileManager.default.moveItem(at: location, to: destinationUrl)
-
-                    print("File moved to documents folder")
                     
                     completion(destinationUrl)
                
@@ -67,7 +65,6 @@ class PublishManager {
                       return
                     }
                     completion(downloadURL)
-                    print(downloadURL)
                 }
             }
         }

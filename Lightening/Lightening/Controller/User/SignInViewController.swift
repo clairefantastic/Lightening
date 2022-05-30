@@ -21,27 +21,18 @@ class SignInViewController: BaseViewController {
     private let haveNoAccountLabel = UILabel()
     private let welcomeLabel = UILabel()
     private var nextViewController = UIViewController()
-    private let volunteerTabBarController = VolunteerTabBarController()
-    private let visuallyImpairedTabBarController = VisuallyImpairedTabBarController()
-    private let identitySelectionViewController = IdentitySelectionViewController()
     private let agreementLabel = UILabel()
     private let privacyPolicyButton = UIButton()
     private let endUserLicenseAgreementButton = UIButton()
     
+    private let volunteerTabBarController = VolunteerTabBarController()
+    private let visuallyImpairedTabBarController = VisuallyImpairedTabBarController()
+    private let identitySelectionViewController = IdentitySelectionViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureWelcomeLabel()
-        configureEmailLabel()
-        configureEmailTextField()
-        configurePasswordLabel()
-        configurePasswordTextField()
-        configureLogInButton()
-        configureSignInWithAppleButton()
-        configureNoAccountLabel()
-        configureRegisterButton()
-        configureAgreementLabel()
-        configureAgreementButtons()
+        setUpUI()
     }
     
     @available(iOS 13, *)
@@ -63,6 +54,21 @@ class SignInViewController: BaseViewController {
 }
 
 extension SignInViewController {
+    
+    private func setUpUI() {
+        
+        configureWelcomeLabel()
+        configureEmailLabel()
+        configureEmailTextField()
+        configurePasswordLabel()
+        configurePasswordTextField()
+        configureLogInButton()
+        configureSignInWithAppleButton()
+        configureNoAccountLabel()
+        configureRegisterButton()
+        configureAgreementLabel()
+        configureAgreementButtons()
+    }
     
     private func configureWelcomeLabel() {
         
@@ -252,10 +258,8 @@ extension SignInViewController {
         NSLayoutConstraint(item: privacyPolicyButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
         NSLayoutConstraint(item: privacyPolicyButton, attribute: .leading, relatedBy: .equal, toItem: agreementLabel, attribute: .leading, multiplier: 1, constant: -4).isActive = true
         
-        privacyPolicyButton.setTitle("Privacy Policy &", for: .normal)
-        privacyPolicyButton.titleLabel?.font = UIFont.regular(size: 12)
-        privacyPolicyButton.setTitleColor(UIColor.beige, for: .normal)
-        privacyPolicyButton.isEnabled = true
+        ElementsStyle.stylePolicyButton(privacyPolicyButton, title: "Privacy Policy &")
+        
         privacyPolicyButton.addTarget(self, action: #selector(presentPrivacyPolicy), for: .touchUpInside)
         
         view.addSubview(endUserLicenseAgreementButton)
@@ -267,10 +271,8 @@ extension SignInViewController {
         NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16).isActive = true
         NSLayoutConstraint(item: endUserLicenseAgreementButton, attribute: .leading, relatedBy: .equal, toItem: privacyPolicyButton, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         
-        endUserLicenseAgreementButton.setTitle("End User License Agreements", for: .normal)
-        endUserLicenseAgreementButton.titleLabel?.font = UIFont.regular(size: 12)
-        endUserLicenseAgreementButton.setTitleColor(UIColor.beige, for: .normal)
-        endUserLicenseAgreementButton.isEnabled = true
+        ElementsStyle.stylePolicyButton(endUserLicenseAgreementButton, title: "End User License Agreements")
+    
         endUserLicenseAgreementButton.addTarget(self, action: #selector(presentEULA), for: .touchUpInside)
     }
     
@@ -292,11 +294,11 @@ extension SignInViewController {
         
         if emailTextField.text == "" {
             
-            AlertManager.shared.showEmptyAlert(at: self, title: "Email")
+            AlertManager.shared.showEmptyAlert(at: self, title: AuthInfo.email.alert)
             
         } else if passwordTextField.text == "" {
             
-            AlertManager.shared.showEmptyAlert(at: self, title: "Password")
+            AlertManager.shared.showEmptyAlert(at: self, title: AuthInfo.password.alert)
             
         } else {
             

@@ -8,18 +8,14 @@
 import UIKit
 
 class ImpairedDiscoveryViewController: BaseViewController {
-
-    var sections = DiscoverySection.allSections
-    
-    var audios: [Audio] = []
     
     private var collectionView = UICollectionView(frame: CGRect.zero,
                                                   collectionViewLayout: UICollectionViewFlowLayout.init())
     
+    var audios: [Audio] = []
+    var sections = DiscoverySection.allSections
     lazy var dataSource = makeDataSource()
-    
     typealias DataSource = UICollectionViewDiffableDataSource<DiscoverySection, Audio>
-    
     typealias Snapshot = NSDiffableDataSourceSnapshot<DiscoverySection, Audio>
     
     override func viewDidLoad() {
@@ -28,7 +24,6 @@ class ImpairedDiscoveryViewController: BaseViewController {
         self.navigationItem.title = VisuallyImpairedTab.discovery.tabBarItem().title
         
         configureCollectionView()
-        
         configureLayout()
     }
     
@@ -53,7 +48,6 @@ class ImpairedDiscoveryViewController: BaseViewController {
         collectionView.delegate = self
         
         collectionView.isAccessibilityElement = false
-        
         collectionView.shouldGroupAccessibilityChildren = true
     }
     
@@ -91,19 +85,19 @@ class ImpairedDiscoveryViewController: BaseViewController {
                 
             case .failure:
                 
-                LKProgressHUD.showFailure(text: "Fail to fetch Discovery Page data.")
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
             
         }
     }
     
     private func makeDataSource() -> DataSource {
-        // 1
+        
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { (collectionView, indexPath, audio) ->
                 UICollectionViewCell? in
-                // 2
+            
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: String(describing: VinylCollectionViewCell.self),
                     for: indexPath) as? VinylCollectionViewCell
@@ -140,15 +134,12 @@ class ImpairedDiscoveryViewController: BaseViewController {
     }
     
     private func applySnapshot(animatingDifferences: Bool = true) {
-        // 2 //
+        
         var snapshot = Snapshot()
-        // 3
         snapshot.appendSections(sections)
-        // 4
         sections.forEach { section in
             snapshot.appendItems(section.audios, toSection: section)
         }
-        // 5
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
@@ -160,13 +151,13 @@ class ImpairedDiscoveryViewController: BaseViewController {
         let touchPoint = sender.location(in: self.collectionView)
         
         if sender.state == .ended {
-            
-            let indexPath = self.collectionView.indexPathForItem(at: touchPoint)
-            //
-            if indexPath != nil && self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId != UserManager.shared.currentUser?.userId {
                 
-                showBlockUserAlert(blockUserId: self.sections[indexPath?.section ?? 0].audios[indexPath?.row ?? 0].authorId)
-
+            if let selectedIndexPath = self.collectionView.indexPathForItem(at: touchPoint) {
+                
+                if self.sections[selectedIndexPath.section].audios[selectedIndexPath.item].authorId != UserManager.shared.currentUser?.userId {
+                    
+                    showBlockUserAlert(blockUserId: self.sections[selectedIndexPath.section].audios[selectedIndexPath.row].authorId)
+                }
             }
         }
     }
@@ -174,7 +165,7 @@ class ImpairedDiscoveryViewController: BaseViewController {
 
 extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
     
-    func collectionView( _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let audio = dataSource.itemIdentifier(for: indexPath) else { return }
         
@@ -189,7 +180,6 @@ extension ImpairedDiscoveryViewController: UICollectionViewDelegate {
         DispatchQueue.main.async {
             LKProgressHUD.dismiss()
         }
-        
     }
 }
 
@@ -199,7 +189,7 @@ extension ImpairedDiscoveryViewController {
         collectionView.register(SectionHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier)
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (_, layoutEnvironment) -> NSCollectionLayoutSection? in
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             let size = NSCollectionLayoutSize(
                 widthDimension: NSCollectionLayoutDimension.fractionalWidth(2/5),
