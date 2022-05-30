@@ -24,6 +24,14 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpUI()
+    }
+}
+
+extension RegisterViewController {
+    
+    private func setUpUI() {
+        
         configureWelcomeLabel()
         configureNameLabel()
         configureNameTextField()
@@ -36,9 +44,6 @@ class RegisterViewController: BaseViewController {
         configureRegisterButton()
         configureDismissButton()
     }
-}
-
-extension RegisterViewController {
     
     private func configureWelcomeLabel() {
     
@@ -204,19 +209,19 @@ extension RegisterViewController {
         
         if nameTextField.text == "" {
             
-            AlertManager.shared.showEmptyAlert(at: self, title: "Display Name")
+            AlertManager.shared.showEmptyAlert(at: self, title: AuthInfo.displayName.alert)
             
         } else if emailTextField.text == "" {
             
-            AlertManager.shared.showEmptyAlert(at: self, title: "Email")
+            AlertManager.shared.showEmptyAlert(at: self, title: AuthInfo.email.alert)
             
         } else if passwordTextField.text == "" {
             
-            AlertManager.shared.showEmptyAlert(at: self, title: "Password")
+            AlertManager.shared.showEmptyAlert(at: self, title: AuthInfo.password.alert)
             
         } else if checkPasswordTextField.text != passwordTextField.text {
             
-            AlertManager.shared.showIncorrectAlert(at: self, message: "Check Password should be same as Password")
+            AlertManager.shared.showIncorrectAlert(at: self, message: AuthInfo.checkPassword.alert)
             
         } else {
             
@@ -226,18 +231,13 @@ extension RegisterViewController {
                     LKProgressHUD.showFailure(text: AccountError.signUpError.errorMessage)
                 } else {
                     let identitySelectionViewController = IdentitySelectionViewController()
-                    
                     identitySelectionViewController.name = self.nameTextField.text ?? ""
-                    
                     identitySelectionViewController.modalPresentationStyle = .fullScreen
                     
                     self.present(identitySelectionViewController, animated: true)
                 }
-                            
             }
-            
         }
-        
     }
     
     private func configureDismissButton() {
