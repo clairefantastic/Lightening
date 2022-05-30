@@ -96,11 +96,8 @@ class AddDetailsViewController: BaseViewController {
         uploadButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 2/3, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: uploadButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50).isActive = true
-        
         NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         
         uploadButton.backgroundColor = UIColor.darkBlue
@@ -112,7 +109,6 @@ class AddDetailsViewController: BaseViewController {
         uploadButton.setTitleColor(UIColor.beige, for: .normal)
         
         uploadButton.addTarget(self, action: #selector(uploadFile), for: .touchUpInside)
-        
     }
     
     @objc func uploadFile(_ sender: UIButton) {
@@ -185,13 +181,9 @@ class AddDetailsViewController: BaseViewController {
     private func configureAnimationView() {
         
         animationView = .init(name: LottieAnimation.upload.rawValue)
-        
         animationView.frame = self.view.bounds
-        
         animationView.contentMode = .scaleAspectFit
-        
         animationView.loopMode = .loop
-        
         animationView.animationSpeed = 1
     }
 }
