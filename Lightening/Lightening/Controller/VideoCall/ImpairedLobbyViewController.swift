@@ -33,18 +33,20 @@ class ImpairedLobbyViewController: BaseViewController {
     
     private var signalingConnected: Bool = false {
         didSet {
+            
             DispatchQueue.main.async {
                 if self.signalingConnected {
                     
-                    let vc = VideoCallViewController(webRTCClient: self.webRTCClient)
-                    vc.currentPerson = UserManager.shared.currentUser?.userId ?? ""
-                    vc.oppositePerson = self.oppositePerson
-                    vc.oppositePerson = self.deletePerson
+                    let videoCallViewController = VideoCallViewController(webRTCClient: self.webRTCClient)
+                    videoCallViewController.currentPerson = UserManager.shared.currentUser?.userId ?? ""
+                    videoCallViewController.oppositePerson = self.oppositePerson
+                    videoCallViewController.oppositePerson = self.deletePerson
                     
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    videoCallViewController.modalPresentationStyle = .fullScreen
+                    self.present(videoCallViewController, animated: true, completion: nil)
                     
                 } else {
+                    
                     
                 }
             }
