@@ -25,7 +25,6 @@
 		7E273007280FB06C0096DB72 /* AddDetailsLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */; };
 		7E27300A280FDB5F0096DB72 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */; };
 		7E27300C281006760096DB72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300B281006750096DB72 /* MapViewController.swift */; };
-		7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27300E28100FD30096DB72 /* LocationManager.swift */; };
 		7E2730112810271E0096DB72 /* AudioAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2730102810271E0096DB72 /* AudioAnnotation.swift */; };
 		7E2730132810E6260096DB72 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2730122810E6260096DB72 /* SearchViewController.swift */; };
 		7E27301628114B620096DB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */; };
@@ -154,7 +153,6 @@
 		7E273005280FB06C0096DB72 /* AddDetailsLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDetailsLocationCell.xib; sourceTree = "<group>"; };
 		7E273009280FDB5F0096DB72 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		7E27300B281006750096DB72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		7E27300E28100FD30096DB72 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7E2730102810271E0096DB72 /* AudioAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnnotation.swift; sourceTree = "<group>"; };
 		7E2730122810E6260096DB72 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7E27301428114B620096DB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
@@ -294,7 +292,6 @@
 		7E27300D28100FB90096DB72 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				7E27300E28100FD30096DB72 /* LocationManager.swift */,
 				7E2730102810271E0096DB72 /* AudioAnnotation.swift */,
 			);
 			path = Map;
@@ -862,7 +859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E27300F28100FD30096DB72 /* LocationManager.swift in Sources */,
 				7EA73F7028168F090071D197 /* SignInViewController.swift in Sources */,
 				7EB9DAE62803D27F009B89D0 /* IceCandidate.swift in Sources */,
 				7EBDFB4B2823B909007DB7BD /* LikedAudioListViewController.swift in Sources */,
