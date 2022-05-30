@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class VolunteerProfileViewController: ImpairedProfileViewController {
     
-    private let lightImageView = UIImageView()
+    private let leftLightImageView = UIImageView()
     private let rightLightImageView = UIImageView()
     private let myAudiosButton = UIButton()
     private let likedAudiosButton = UIButton()
@@ -25,11 +25,11 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
             
             if hideLeftLightBeam == false {
                 
-                lightImageView.isHidden = false
+                leftLightImageView.isHidden = false
                 seeMyAudiosButton.isHidden = false
             } else {
                 
-                lightImageView.isHidden = true
+                leftLightImageView.isHidden = true
                 seeMyAudiosButton.isHidden = true
             }
         }
@@ -65,10 +65,9 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         
         configureVinylImageView()
         configureUserProfileView()
-        configureLightImageView()
-        configureButtons()
+        setUpUI()
         configureSettingButton()
-        ElementsStyle.styleClearBackground(lightImageView)
+        ElementsStyle.styleClearBackground(leftLightImageView)
         ElementsStyle.styleViewBackground(userProfileView)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView))
@@ -118,7 +117,6 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
         fetchMyAudios()
         fetchLikedAudios()
-        
     }
     
     private func fetchMyAudios() {
@@ -135,9 +133,8 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
                 
             case .failure:
                 
-                LKProgressHUD.showFailure(text: "Fail to fetch my audios")
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
-            
         }
         
     }
@@ -168,9 +165,8 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
                 
             case .failure:
                 
-                LKProgressHUD.showFailure(text: "Fail to fetch liked audios")
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
-            
         }
     }
     
@@ -213,20 +209,33 @@ class VolunteerProfileViewController: ImpairedProfileViewController {
 
 extension VolunteerProfileViewController {
     
-    private func configureLightImageView() {
+    private func setUpUI() {
         
-        self.view.addSubview(lightImageView)
+        configureLeftLightImageView()
+        configureRightLightImageView()
+        configureMyAudiosButton()
+        configureSeeMyAudiosButton()
+        configureLikedAudiosButton()
+        configureSeeLikedAudiosButton()
+    }
+    
+    private func configureLeftLightImageView() {
         
-        lightImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(leftLightImageView)
         
-        NSLayoutConstraint(item: lightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: lightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
-        NSLayoutConstraint(item: lightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
-        NSLayoutConstraint(item: lightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
+        leftLightImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        lightImageView.image = UIImage.asset(ImageAsset.light)
+        NSLayoutConstraint(item: leftLightImageView, attribute: .top, relatedBy: .equal, toItem: self.userProfileView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: leftLightImageView, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -150).isActive = true
+        NSLayoutConstraint(item: leftLightImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height / 2).isActive = true
+        NSLayoutConstraint(item: leftLightImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 400).isActive = true
+        
+        leftLightImageView.image = UIImage.asset(ImageAsset.light)
         
         hideLeftLightBeam = true
+    }
+    
+    private func configureRightLightImageView() {
         
         self.view.addSubview(rightLightImageView)
         
@@ -239,19 +248,16 @@ extension VolunteerProfileViewController {
         
         rightLightImageView.image = UIImage.asset(ImageAsset.light)
         
-        hideLeftLightBeam = true
-        
         hideRightLightBeam = true
-        
     }
     
-    private func configureButtons() {
+    private func configureMyAudiosButton() {
         
         self.view.addSubview(myAudiosButton)
         
         myAudiosButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.lightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
+        NSLayoutConstraint(item: myAudiosButton, attribute: .bottom, relatedBy: .equal, toItem: self.leftLightImageView, attribute: .bottom, multiplier: 1, constant: -60).isActive = true
         NSLayoutConstraint(item: myAudiosButton, attribute: .centerX, relatedBy: .equal, toItem: self.userProfileView, attribute: .centerX, multiplier: 1, constant: -170).isActive = true
         NSLayoutConstraint(item: myAudiosButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60).isActive = true
         NSLayoutConstraint(item: myAudiosButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
@@ -262,6 +268,9 @@ extension VolunteerProfileViewController {
         myAudiosButton.setTitleColor(UIColor.darkBlue, for: .selected)
         myAudiosButton.titleLabel?.font = UIFont.bold(size: 16)
         myAudiosButton.addTarget(self, action: #selector(selectMyAudiosButton), for: .touchUpInside)
+    }
+    
+    private func configureSeeMyAudiosButton() {
         
         self.view.addSubview(seeMyAudiosButton)
         
@@ -276,6 +285,9 @@ extension VolunteerProfileViewController {
         seeMyAudiosButton.setTitleColor(UIColor.beige, for: .normal)
         seeMyAudiosButton.titleLabel?.font = UIFont.regular(size: 14)
         seeMyAudiosButton.addTarget(self, action: #selector(didTapSeeMoreMyAudios), for: .touchUpInside)
+    }
+    
+    private func configureLikedAudiosButton() {
         
         self.view.addSubview(likedAudiosButton)
         
@@ -289,6 +301,9 @@ extension VolunteerProfileViewController {
         likedAudiosButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
         likedAudiosButton.tintColor = UIColor.beige
         likedAudiosButton.addTarget(self, action: #selector(selectLikedAudiosButton), for: .touchUpInside)
+    }
+    
+    private func configureSeeLikedAudiosButton() {
         
         self.view.addSubview(seeLikedAudiosButton)
         

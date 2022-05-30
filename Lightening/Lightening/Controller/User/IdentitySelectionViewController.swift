@@ -39,8 +39,10 @@ extension IdentitySelectionViewController {
         volunteerButton.translatesAutoresizingMaskIntoConstraints = false
         
         volunteerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        volunteerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
-        volunteerButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 2/3).isActive = true
+        volunteerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                constant: -100).isActive = true
+        volunteerButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
+                                               multiplier: 2/3).isActive = true
         volunteerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         ElementsStyle.styleButton(volunteerButton, title: "I want to be a volunteer!")

@@ -9,7 +9,7 @@ import Foundation
 
 struct User: Codable, Hashable {
     
-    var displayName: String?
+    var displayName = "Lighty"
     
     var email: String?
     
@@ -17,7 +17,7 @@ struct User: Codable, Hashable {
     
     var userId: String?
     
-    var userIdentity : Int
+    var userIdentity: Int
     
     var image: URL?
     

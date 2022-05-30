@@ -149,7 +149,6 @@ final class SignalingClient {
         
     }
     
-    
     func listenSdp(to person: String) {
         db.collection("users").document(person).collection("WebRTC").document("sdp")
             .addSnapshotListener { documentSnapshot, error in

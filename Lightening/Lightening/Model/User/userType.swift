@@ -12,5 +12,4 @@ enum UserType {
     case visuallyImpaired
     
     case volunteer
-    
 }

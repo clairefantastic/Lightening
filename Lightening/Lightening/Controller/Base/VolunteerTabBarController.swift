@@ -149,8 +149,7 @@ class VolunteerTabBarController: UITabBarController {
         
         let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
-            print("成功建立通知...")
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { _ in
         })
 
     }

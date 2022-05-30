@@ -19,7 +19,6 @@ class CheckAudioLengthViewController: BaseViewController {
         super.viewDidLoad()
         
         configureLimitLengthLabel()
-        
         configureUploadButton()
     }
     

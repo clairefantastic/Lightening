@@ -51,5 +51,4 @@ extension UIImage {
 
         return UIImage(named: asset.rawValue)
     }
-    
 }

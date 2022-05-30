@@ -14,5 +14,4 @@ enum VolunteerStatus: Int {
     case inCall
     
     case unavailable
-    
 }

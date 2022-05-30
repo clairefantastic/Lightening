@@ -58,12 +58,9 @@ class BaseViewController: UIViewController {
         
         NSLayoutConstraint(item: playerView, attribute: .centerX, relatedBy: .equal,
                            toItem: self.view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: playerView, attribute: .bottom, relatedBy: .equal,
                            toItem: self.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         NSLayoutConstraint(item: playerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
         NSLayoutConstraint(item: playerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width).isActive = true
     }
     
@@ -80,11 +77,11 @@ class BaseViewController: UIViewController {
                 
                 UserManager.shared.blockUser(userId: blockUserId) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         LKProgressHUD.dismiss()
                         self.navigationController?.popToRootViewController(animated: true)
                         self.dismiss(animated: true)
-                    case .failure(_):
+                    case .failure:
                         LKProgressHUD.showFailure(text: "Fail to block this user!")
                     }
                     

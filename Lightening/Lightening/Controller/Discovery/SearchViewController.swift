@@ -33,21 +33,8 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         
         configureNoContentLabel()
-        
-        navigationItem.leftBarButtonItem?.tintColor = .black
-        
-        searchController.searchResultsUpdater = self
-        
-        navigationItem.searchController = searchController
-        
-        searchController.obscuresBackgroundDuringPresentation = false
-        
-        navigationItem.hidesSearchBarWhenScrolling = false
-    
-        layoutTableView()
-        
-        setUpTableView()
-        
+        configureNavigationItem()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +45,7 @@ class SearchViewController: BaseViewController {
     
     private func fetchData() {
         
-        PublishManager.shared.fetchAudios() { [weak self] result in
+        PublishManager.shared.fetchAudios { [weak self] result in
             
             switch result {
             
@@ -78,9 +65,9 @@ class SearchViewController: BaseViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
+            case .failure:
                 
-                LKProgressHUD.showFailure(text: "Fail to fetch Search Page data")
+                LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
             }
             
         }
@@ -90,14 +77,36 @@ class SearchViewController: BaseViewController {
 
 extension SearchViewController {
     
-    private func layoutTableView() {
+    private func configureNoContentLabel() {
+        
+        self.view.addSubview(noContentLabel)
+        
+        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.bringSubviewToFront(noContentLabel)
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        
+        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
+    }
+    
+    private func configureNavigationItem() {
+        
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    private func configureTableView() {
         
         view.stickSubView(tableView)
         
         ElementsStyle.styleClearBackground(tableView)
-    }
-    
-    private func setUpTableView() {
         
         tableView.separatorStyle = .none
         
@@ -108,7 +117,6 @@ extension SearchViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-    
     }
     
     @objc func cellLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -118,13 +126,14 @@ extension SearchViewController {
         
         let touchPoint = sender.location(in: self.tableView)
         
-        if (sender.state == UIGestureRecognizer.State.ended) {
+        if sender.state == .ended {
             
-            let indexPath = self.tableView.indexPathForRow(at: touchPoint)
-            
-            if indexPath != nil && self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "" != UserManager.shared.currentUser?.userId {
+            if let selectedRow = self.tableView.indexPathForRow(at: touchPoint)?.row {
                 
-                showBlockUserAlert(blockUserId: self.filteredAudioFiles?[indexPath?.row ?? 0].authorId ?? "")
+                if self.filteredAudioFiles?[selectedRow].authorId != UserManager.shared.currentUser?.userId {
+                    
+                    showBlockUserAlert(blockUserId: self.filteredAudioFiles?[selectedRow].authorId ?? "")
+                }
             }
         }
     }
@@ -145,7 +154,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.audio = filteredAudioFiles?[indexPath.row]
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPress))
-        
         cell.addGestureRecognizer(longPress)
         
         return cell
@@ -172,26 +180,5 @@ extension SearchViewController: UISearchResultsUpdating {
                     self.filteredAudioFiles = []
                 }
         self.tableView.reloadData()
-                
-    }
-}
-
-extension SearchViewController {
-    
-    private func configureNoContentLabel() {
-        
-        self.view.addSubview(noContentLabel)
-        
-        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.bringSubviewToFront(noContentLabel)
-        
-        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
-        
-        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
-        
     }
 }

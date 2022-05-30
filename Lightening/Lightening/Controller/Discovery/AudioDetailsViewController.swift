@@ -92,24 +92,17 @@ class AudioDetailsViewController: BaseViewController {
                                 
                                 LKProgressHUD.dismiss()
                                 
-                            case .failure(let error):
-                                print("fetchData.failure: \(error)")
-                                
-                                LKProgressHUD.showFailure(text: "Fail to fetch comments")
-                                
+                            case .failure:
+            
+                                LKProgressHUD.showFailure(text: PublishError.fetchCommentsError.errorMessage)
                             }
-                            
                         }
                         
-                    case .failure(let error):
+                    case .failure:
                         
-                        print("fetchData.failure: \(error)")
-                        
-                        LKProgressHUD.showFailure(text: "Fail to fetch Audio Description Page data")
-            
+                        LKProgressHUD.showFailure(text: PublishError.fetchAudiosError.errorMessage)
                 }
             }
-        
         }
     }
     
@@ -329,22 +322,9 @@ extension AudioDetailsViewController {
         NSLayoutConstraint(item: enterCommentTextField, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
         NSLayoutConstraint(item: enterCommentTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
         
-        enterCommentTextField.layer.borderWidth = 2
-        
-        enterCommentTextField.layer.borderColor = UIColor.darkBlue?.cgColor
-        
-        enterCommentTextField.backgroundColor = UIColor.beige
-        
-        enterCommentTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: enterCommentTextField.frame.height))
-        
-        enterCommentTextField.rightView = UIView(frame: CGRect(x: enterCommentTextField.frame.width - 15, y: 0, width: 15, height: enterCommentTextField.frame.height))
-        
-        enterCommentTextField.leftViewMode = .always
-        
-        enterCommentTextField.rightViewMode = .always
+        ElementsStyle.styleTextField(enterCommentTextField)
         
         enterCommentTextField.font = UIFont.regular(size: 16)
-        
         enterCommentTextField.layer.cornerRadius = 24
     }
 }

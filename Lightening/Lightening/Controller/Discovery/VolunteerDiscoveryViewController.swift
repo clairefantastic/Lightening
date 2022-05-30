@@ -17,10 +17,8 @@ class VolunteerDiscoveryViewController: ImpairedDiscoveryViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.bold(size: 20) as Any]
 
         configureCollectionView()
-        
         configureLayout()
-        
-        layoutBarItem()
+        configureBarItem()
     }
 }
 
@@ -54,10 +52,9 @@ extension VolunteerDiscoveryViewController {
 
 extension VolunteerDiscoveryViewController {
     
-    private func layoutBarItem() {
+    private func configureBarItem() {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.systemAsset(ImageAsset.search), style: UIBarButtonItem.Style.plain, target: self, action: #selector(pushSearchPage))
-        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.systemAsset(ImageAsset.random), style: UIBarButtonItem.Style.plain, target: self, action: #selector(dailyPicks))
     }
     

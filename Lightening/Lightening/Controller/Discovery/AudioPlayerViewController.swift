@@ -23,7 +23,6 @@ class AudioPlayerViewController: UIViewController {
                 
                 playerView.likeButton.setImage(UIImage.systemAsset(ImageAsset.heart), for: .normal)
             }
-            
         }
     }
     
@@ -36,23 +35,11 @@ class AudioPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.green
-        playerView.layoutImageView()
-        playerView.configureTitleLabel()
-        playerView.configureAuthorLabel()
-        playerView.layoutDismissButton()
-        playerView.setUpDismissButton()
         playerView.dismissButton.addTarget(self, action: #selector(dismissAudioPlayer), for: .touchUpInside)
-        playerView.layoutPlayPauseButton()
-        playerView.setUpPlayPauseButton()
-        playerView.layoutProgressSlider()
-        playerView.layoutLikeButton()
-        playerView.setUpLikeButton()
-//        playerView.setupUI()//
-        addPlayerView()
         playerView.likeButton.addTarget(self, action: #selector(likeAudio), for: .touchUpInside)
+        addPlayerView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.view.addGestureRecognizer(tapGestureRecognizer)
-        
     }
     
     @objc func dismissAudioPlayer() {
@@ -94,9 +81,7 @@ class AudioPlayerViewController: UIViewController {
                 
                 LKProgressHUD.dismiss()
                 
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
+            case .failure:
                 
                 LKProgressHUD.showFailure(text: "Fail to fetch like status")
             }
@@ -122,9 +107,8 @@ class AudioPlayerViewController: UIViewController {
         
         if isLiked {
             
-            PublishManager.shared.deleteLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) {
-                [weak self] result in
-                
+            PublishManager.shared.deleteLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) { result in
+
                 switch result {
             
                 case .success:
@@ -137,8 +121,7 @@ class AudioPlayerViewController: UIViewController {
             isLiked = false
         } else {
             
-            PublishManager.shared.publishLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) {
-                [weak self] result in
+            PublishManager.shared.publishLikedAudio(userId: UserManager.shared.currentUser?.userId ?? "", audio: audio) { result in
                 
                 switch result {
             
@@ -150,8 +133,6 @@ class AudioPlayerViewController: UIViewController {
             }
             
             isLiked = true
-
         }
     }
-    
 }

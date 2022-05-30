@@ -27,6 +27,13 @@ class ElementsStyle {
         button.layer.cornerRadius = 25
     }
     
+    static func stylePolicyButton(_ button: UIButton, title: String) {
+        
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont.regular(size: 12)
+        button.setTitleColor(UIColor.beige, for: .normal)
+    }
+    
     static func styleLabel(_ label: UILabel, text: String) {
         
         label.text = text
