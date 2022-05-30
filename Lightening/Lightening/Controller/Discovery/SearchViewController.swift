@@ -33,13 +33,7 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         
         configureNoContentLabel()
-        
-        navigationItem.leftBarButtonItem?.tintColor = .black
-        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
-        searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.hidesSearchBarWhenScrolling = false
-    
+        configureNavigationItem()
         configureTableView()
     }
     
@@ -82,6 +76,31 @@ class SearchViewController: BaseViewController {
 }
 
 extension SearchViewController {
+    
+    private func configureNoContentLabel() {
+        
+        self.view.addSubview(noContentLabel)
+        
+        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.bringSubviewToFront(noContentLabel)
+        
+        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
+        
+        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
+    }
+    
+    private func configureNavigationItem() {
+        
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
     
     private func configureTableView() {
         
@@ -161,24 +180,5 @@ extension SearchViewController: UISearchResultsUpdating {
                     self.filteredAudioFiles = []
                 }
         self.tableView.reloadData()
-    }
-}
-
-extension SearchViewController {
-    
-    private func configureNoContentLabel() {
-        
-        self.view.addSubview(noContentLabel)
-        
-        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.bringSubviewToFront(noContentLabel)
-        
-        NSLayoutConstraint(item: noContentLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 48).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .width, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noContentLabel, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 60).isActive = true
-        
-        ElementsStyle.styleEmptyLabel(noContentLabel, text: "No audio files yet!")
     }
 }
