@@ -24,8 +24,6 @@ class VolunteerLobbyViewController: BaseViewController {
     
     private var signalingConnected = false
     
-    private var hasLocalSdp = false
-    
     private var localCandidateCount = 0
     
     private var hasRemoteSdp = false
@@ -80,18 +78,16 @@ class VolunteerLobbyViewController: BaseViewController {
         
         LKProgressHUD.dismiss()
     }
-
 }
 
 extension VolunteerLobbyViewController: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, didReceiveSender sender: String?) {
-        print("Received remote sdp")
-        self.webRTCClient.set(remoteSdp: sdp) { (error) in
+
+        self.webRTCClient.set(remoteSdp: sdp) { _ in
             self.hasRemoteSdp = true
         }
         
-        print("Received sender")
         self.oppositePerson = sender ?? ""
     }
     
@@ -104,11 +100,10 @@ extension VolunteerLobbyViewController: SignalClientDelegate {
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
-        print("Received remote candidate")
+
         self.remoteCandidateCount += 1
         
         self.webRTCClient.set(remoteCandidate: candidate)
-        
     }
 }
 
@@ -156,11 +151,8 @@ extension VolunteerLobbyViewController {
         birdInstructionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .trailing, relatedBy: .equal, toItem: doorView, attribute: .leading, multiplier: 1, constant: -16).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 16).isActive = true
-        
         NSLayoutConstraint(item: birdInstructionLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -36).isActive = true
         
         ElementsStyle.styleLabel(birdInstructionLabel, text: "Call will be notified by a bird")
@@ -232,7 +224,6 @@ extension VolunteerLobbyViewController {
     @objc func answerVideoCall() {
         
         self.webRTCClient.answer { (localSdp) in
-            self.hasLocalSdp = true
             
             self.signalClient.send(sdp: localSdp, from: UserManager.shared.currentUser?.userId ?? "", to: self.oppositePerson)
         }
