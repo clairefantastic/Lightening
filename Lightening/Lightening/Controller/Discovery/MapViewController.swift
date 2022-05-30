@@ -117,20 +117,19 @@ extension MapViewController: MKMapViewDelegate {
         viewFor annotation: MKAnnotation
       ) -> MKAnnotationView? {
           
-        // 2
         guard let annotation = annotation as? AudioAnnotation else {
           return nil
         }
-        // 3
+          
         let identifier = "audio"
         var view: MKMarkerAnnotationView
-        // 4
+
         if let dequeuedView = mapView.dequeueReusableAnnotationView(
           withIdentifier: identifier) as? MKMarkerAnnotationView {
           dequeuedView.annotation = annotation
           view = dequeuedView
         } else {
-          // 5
+
           view = MKMarkerAnnotationView(
             annotation: annotation,
             reuseIdentifier: identifier)
