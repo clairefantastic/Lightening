@@ -27,7 +27,9 @@ final class SignalingClient {
     private let db = Firestore.firestore()
     weak var delegate: SignalClientDelegate?
     
-    var getVolunteerHandler : ((String) -> Void)?
+    init() { }
+    
+    var getVolunteerHandler: ((String) -> Void)?
     
     func deleteSdpAndCandidateAndSender(for person: String) {
         
