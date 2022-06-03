@@ -23,6 +23,8 @@ class LottieAnimationWrapper {
     
     static let shared = LottieAnimationWrapper()
     
+    private init() { }
+    
     private var animationView = AnimationView()
     
     private let currentWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow })

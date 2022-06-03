@@ -14,6 +14,8 @@ class PublishManager {
     
     static let shared = PublishManager()
     
+    private init() { }
+    
     lazy var db = Firestore.firestore()
     
     func getSelectedFileLocalUrl(audioUrl: URL, completion: @escaping (URL)-> Void ) {

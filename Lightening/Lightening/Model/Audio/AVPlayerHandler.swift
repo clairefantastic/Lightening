@@ -11,6 +11,8 @@ class AVPlayerHandler {
     
     static let shared = AVPlayerHandler()
     
+    private init() { }
+    
     var player: AVPlayer!
     
 //    let url = URL(string: urlString)!

@@ -15,6 +15,8 @@ class UserManager {
     
     static let shared = UserManager()
     
+    private init() { }
+    
     lazy var db = Firestore.firestore()
     
     fileprivate var currentNonce: String?

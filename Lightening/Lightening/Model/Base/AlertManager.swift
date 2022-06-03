@@ -11,6 +11,8 @@ class AlertManager {
     
     static let shared = AlertManager()
     
+    private init() { }
+    
     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     
     func showEmptyAlert(at controller: UIViewController, title: String) {
